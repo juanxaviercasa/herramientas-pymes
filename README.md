@@ -62,4 +62,4 @@ python -m http.server 8000
 
 ---
 
-Desarrollado con ❤️ para impulsar a las Pymes.
+Desarrollado por [Xavier Cabello](https://juan.cabellosalirrosas.com) con ❤️ para impulsar a las Pymes.
