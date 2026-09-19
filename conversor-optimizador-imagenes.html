@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <title>WebP Forge â€” Conversor y optimizador de imÃ¡genes</title>
+  <script type="module" crossorigin="" src="./js/conversor-optimizador-imagenes.js"></script>
+  <link rel="stylesheet" crossorigin="" href="./css/conversor-optimizador-imagenes.css">
+</head>
+<body>
+  <div id="root">
+    <div class="min-h-screen bg-ink">
+      
+      <!-- Encabezado -->
+      <header class="mx-auto flex max-w-6xl items-center justify-between px-5 py-6">
+        <div class="flex items-center gap-2.5">
+          <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-cta font-display text-lg font-bold text-white">
+            W
+          </div>
+          <span class="font-display text-lg font-semibold text-white">
+            <span class="text-cta">Forja</span> WebP
+          </span>
+        </div>
+        <a href="#curso" class="rounded-full border border-line px-4 py-2 text-sm font-medium text-sky transition-colors hover:border-brand hover:text-white">
+          Curso WPO gratis
+        </a>
+      </header>
+
+      <main class="bg-grid">
+        
+        <!-- Hero Section -->
+        <section class="mx-auto max-w-6xl px-5 pb-16 pt-10 sm:pt-16">
+          <div class="mx-auto max-w-3xl text-center animate-fade-up">
+            <span class="inline-flex items-center gap-2 rounded-full border border-line bg-ink-2/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-sky">
+              Conversor Â· Optimizador Â· WPO
+            </span>
+            <h1 class="mt-6 font-display text-4xl font-bold leading-[1.08] text-white sm:text-6xl">
+              Convierte imÃ¡genes a <span class="text-cta">WebP</span> y aligera tu web
+            </h1>
+            <p class="mx-auto mt-5 max-w-xl text-lg text-sky/80">
+              Arrastra varios JPG o PNG, aplica una marca de agua, ajusta la calidad y descarga todo en WebP â€”incluso empaquetado en ZIPâ€”. Todo el proceso ocurre en tu navegador.
+            </p>
+            <div class="mt-8 flex items-center justify-center gap-2 text-sm text-sky/60">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down h-4 w-4 animate-bounce">
+                <path d="M12 5v14"></path>
+                <path d="m19 12-7 7-7-7"></path>
+              </svg>
+              Empieza soltando tus imÃ¡genes aquÃ­
+            </div>
+          </div>
+          
+          <!-- Dropzone -->
+          <div class="mt-10">
+            <div class="rounded-3xl border border-line bg-ink-2/40 p-4 shadow-2xl shadow-black/40 backdrop-blur sm:p-6">
+              <div role="button" tabindex="0" class="group relative flex cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed text-center transition-all duration-300 px-6 py-16 border-line bg-ink-2/60 hover:border-brand hover:bg-ink-3/50">
+                <input accept="image/jpeg,image/png" multiple="" class="hidden" type="file">
+                <div class="relative mb-5">
+                  <span class="absolute inset-0 rounded-full bg-cta/40"></span>
+                  <div class="relative flex items-center justify-center rounded-full transition-colors h-20 w-20 bg-brand/15 text-sky group-hover:bg-brand/25">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-upload h-9 w-9">
+                      <path d="M12 13v8"></path>
+                      <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
+                      <path d="m8 17 4-4 4 4"></path>
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="font-display font-semibold text-white text-xl">Arrastra tus imÃ¡genes o haz clic</h3>
+                <p class="mt-2 max-w-sm text-sm text-sky/70">
+                  Sube varias a la vez Â· JPG o PNG Â· hasta 5 MB cada una Â· procesado 100% en tu navegador
+                </p>
+                <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-cta px-5 py-2.5 text-sm font-semibold text-white transition-transform group-hover:scale-105">
+                  Seleccionar imÃ¡genes
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Features -->
+        <section class="mx-auto max-w-6xl px-5 pb-20">
+          <div class="grid gap-5 md:grid-cols-3">
+            <div class="rounded-2xl border border-line bg-ink-2/40 p-6 transition-colors hover:border-brand/60">
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand/15 text-sky">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check h-5 w-5">
+                  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+              </div>
+              <h3 class="mt-4 font-display text-lg font-semibold text-white">100% en tu navegador</h3>
+              <p class="mt-2 text-sm leading-relaxed text-sky/70">
+                Tus imÃ¡genes nunca salen de tu dispositivo. ConversiÃ³n con la API Canvas, sin subir a servidores.
+              </p>
+            </div>
+            
+            <div class="rounded-2xl border border-line bg-ink-2/40 p-6 transition-colors hover:border-brand/60">
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand/15 text-sky">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layers h-5 w-5">
+                  <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path>
+                  <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path>
+                  <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path>
+                </svg>
+              </div>
+              <h3 class="mt-4 font-display text-lg font-semibold text-white">Por lotes + ZIP</h3>
+              <p class="mt-2 text-sm leading-relaxed text-sky/70">
+                Arrastra varias imÃ¡genes a la vez, conviÃ©rtelas todas y descÃ¡rgalas empaquetadas en un Ãºnico archivo .zip.
+              </p>
+            </div>
+            
+            <div class="rounded-2xl border border-line bg-ink-2/40 p-6 transition-colors hover:border-brand/60">
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand/15 text-sky">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stamp h-5 w-5">
+                  <path d="M5 22h14"></path>
+                  <path d="M19.27 13.73A2.5 2.5 0 0 0 17.5 13h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1.5c0-.66-.26-1.3-.73-1.77Z"></path>
+                  <path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-3-3c-1.66 0-3 1-3 3s1 2 1 3.5V13"></path>
+                </svg>
+              </div>
+              <h3 class="mt-4 font-display text-lg font-semibold text-white">Marca de agua</h3>
+              <p class="mt-2 text-sm leading-relaxed text-sky/70">
+                Superpone tu texto o logo al 50% de opacidad en cada imagen antes de exportarla a WebP.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Lead Capture Section -->
+        <section class="mx-auto max-w-6xl px-5 pb-20">
+          <section id="curso" class="relative overflow-hidden rounded-3xl border border-line bg-ink-2 p-8 sm:p-12">
+            <div class="relative grid gap-10 lg:grid-cols-2 lg:items-center">
+              <div>
+                <span class="inline-flex items-center gap-2 rounded-full bg-cta/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rocket h-3.5 w-3.5">
+                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                    <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                    <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                  </svg>
+                  FormaciÃ³n gratuita
+                </span>
+                <h2 class="mt-4 font-display text-3xl font-bold leading-tight text-white sm:text-4xl">
+                  Curso de OptimizaciÃ³n WordPress
+                </h2>
+                <p class="mt-4 text-sky/80">
+                  Convertir imÃ¡genes es solo el primer paso. Aprende a dejar tu web volando con un plan de WPO completo. DÃ©janos tu correo y te enviamos el acceso.
+                </p>
+                <ul class="mt-6 space-y-3">
+                  <li class="flex items-start gap-3 text-sm text-mist">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check mt-0.5 h-5 w-5 shrink-0 text-brand">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                    Automatiza la conversiÃ³n de imÃ¡genes a WebP en WordPress
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-mist">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check mt-0.5 h-5 w-5 shrink-0 text-brand">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                    Configura cachÃ©, CDN y Core Web Vitals paso a paso
+                  </li>
+                  <li class="flex items-start gap-3 text-sm text-mist">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check mt-0.5 h-5 w-5 shrink-0 text-brand">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="m9 12 2 2 4-4"></path>
+                    </svg>
+                    Plantillas y checklist de auditorÃ­a WPO descargables
+                  </li>
+                </ul>
+              </div>
+              
+              <!-- Formulario Lead Capture -->
+              <div class="rounded-2xl border border-line bg-ink/60 p-6 backdrop-blur">
+                <form id="lead-form" class="space-y-4">
+                  <div>
+                    <label for="email" class="mb-1.5 block text-sm font-medium text-sky">Correo electrÃ³nico *</label>
+                    <input id="email" required="" placeholder="tucorreo@dominio.com" class="w-full rounded-xl border border-line bg-ink-2 px-4 py-3 text-white placeholder:text-sky/40 focus:border-brand" type="email" value="">
+                  </div>
+                  <div>
+                    <label for="url" class="mb-1.5 block text-sm font-medium text-sky">URL de tu web <span class="text-sky/40">(opcional)</span></label>
+                    <input id="url" placeholder="https://tusitio.com" class="w-full rounded-xl border border-line bg-ink-2 px-4 py-3 text-white placeholder:text-sky/40 focus:border-brand" type="url" value="">
+                  </div>
+                  <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-cta px-5 py-3.5 font-semibold text-white shadow-lg shadow-cta/25 transition-all hover:bg-cta-600 disabled:cursor-not-allowed disabled:opacity-70">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send h-5 w-5">
+                      <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
+                      <path d="m21.854 2.147-10.94 10.939"></path>
+                    </svg>
+                    Quiero el curso gratis
+                  </button>
+                  <p class="text-center text-xs text-sky/40">Sin spam. Cancela cuando quieras.</p>
+                </form>
+              </div>
+            </div>
+          </section>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="border-t border-line">
+        <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-8 text-sm text-sky/50 sm:flex-row">
+          <span>WebPForge â€” OptimizaciÃ³n de imÃ¡genes para la web.</span>
+          <span>Hecho para amantes del rendimiento web.</span>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT DE CAPTURA DE LEADS Y CURSO WPO -->
+  <script>
+    function registrarLeadCurso(event) {
+      event.preventDefault();
+      
+      const emailInput = document.getElementById('email');
+      const urlInput = document.getElementById('url');
+      
+      if (!emailInput) return;
+      
+      const email = emailInput.value;
+      const urlWeb = urlInput ? urlInput.value : '';
+      
+      if (!email) {
+        console.warn('El correo es obligatorio.');
+        return;
+      }
+
+      // Reemplaza esta URL con la URL final de tu Web App de Google Apps Script
+      const scriptURL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+
+      // Estructuramos la carga Ãºtil agregando la fuente y la URL opcional
+      const payload = {
+        email: email,
+        url: urlWeb,
+        origen: 'WebPForge - Curso WPO'
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        console.log('Lead para curso registrado con Ã©xito.');
+        // Limpiar el formulario y/o mostrar mensaje de Ã©xito
+        event.target.reset();
+      })
+      .catch(error => {
+        console.error('Error al registrar el lead:', error);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const leadForm = document.getElementById('lead-form');
+      if (leadForm) {
+        leadForm.addEventListener('submit', registrarLeadCurso);
+      }
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,506 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Comparador Avanzado de CampaÃ±as</title>
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/content/location/location.js" id="eppiocemhmnlbhjplcgkofciiegomcon"></script>
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script>
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script>
+  <script type="module" crossorigin="" src="./js/comparador-campanas-avanzado.js"></script>
+  <link rel="stylesheet" crossorigin="" href="./css/comparador-campanas-avanzado.css">
+  
+  <script>
+    (() => {
+      let e = new URLSearchParams(window.location.search).get("sgv");
+      if (!e) return;
+      function t(t) {
+        try {
+          if (!t) return t;
+          let n = window.location.origin, r = new URL(String(t), n);
+          return r.origin === n && r.searchParams.get("sgv") !== e ? (r.searchParams.set("sgv", e), r.href) : t;
+        } catch {
+          return t;
+        }
+      }
+      let n = window.open;
+      window.open = function(...e) {
+        return e[0] &&= t(e[0]), n.apply(this, e);
+      };
+      let r = window.location.assign.bind(window.location);
+      window.location.assign = function(e) {
+        r(t(e));
+      };
+      let i = window.location.replace.bind(window.location);
+      window.location.replace = function(e) {
+        i(t(e));
+      };
+      let a = history.pushState;
+      history.pushState = function(...e) {
+        return e[2] &&= t(e[2]), a.apply(this, e);
+      };
+      let o = history.replaceState;
+      history.replaceState = function(...e) {
+        return e[2] &&= t(e[2]), o.apply(this, e);
+      }, document.addEventListener("click", (e) => {
+        let n = e.target?.closest("a");
+        if (!n || !n.href || n.href.startsWith("mailto:") || n.href.startsWith("tel:") || n.href.startsWith("javascript:")) return;
+        let r = t(n.href), i = typeof r == "string" ? r : String(r);
+        n.href !== i && (n.href = i);
+      }, !0), document.addEventListener("submit", (t) => {
+        let n = t.target;
+        if (!n) return;
+        let r = n.querySelector("input[name=\"sgv\"]");
+        r || (r = document.createElement("input"), r.type = "hidden", r.name = "sgv", n.appendChild(r)), r.value = e;
+      });
+      let s = () => {
+        document.querySelectorAll("a").forEach((e) => {
+          if (e.href && !e.href.startsWith("javascript")) {
+            let n = t(e.href);
+            e.href = typeof n == "string" ? n : String(n);
+          }
+        });
+      };
+      document.readyState === "complete" || document.readyState === "interactive" ? s() : document.addEventListener("DOMContentLoaded", s);
+    })();
+  </script>
+  
+  <script type="text/javascript" charset="utf-8" nonce="" data-dynamic-id="adac7a0e-8974-4ce6-a36f-2b4cba916a30" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/200.js"></script>
+  <script type="text/javascript" charset="utf-8" nonce="" data-dynamic-id="adac7a0e-8974-4ce6-a36f-2b4cba916a30" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/101.js"></script>
+  
+  <script>
+    (function(){var e=`sg-preview`;function t(e){"@babel/helpers - typeof";return t=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},t(e)}function n(e,n){if(t(e)!=`object`||!e)return e;var r=e[Symbol.toPrimitive];if(r!==void 0){var i=r.call(e,n||`default`);if(t(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(e)}function r(e){var r=n(e,`string`);return t(r)==`symbol`?r:r+``}function i(e,t,n){return(t=r(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=class{constructor(e){if(i(this,`source`,void 0),i(this,`allowedOrigins`,void 0),i(this,`targetOrigin`,void 0),i(this,`debug`,void 0),i(this,`messageHandlers`,new Map),!e.allowedOrigins?.length)throw Error(`[EventCommunicator] allowedOrigins is required`);this.source=e.source,this.allowedOrigins=e.allowedOrigins,this.targetOrigin=e.targetOrigin||`*`,this.debug=e.debug||!1,e.messageHandlers&&this.registerMessageHandlers(e.messageHandlers),e.domEvents&&this.registerDOMEvents(e.domEvents),this.initMessageListener()}log(...e){this.debug&&console.log(`[EventCommunicator]`,...e)}formatEventType(t){return`${e}:${t}`}parseEventType(t){let n=`${e}:`;return t.startsWith(n)?t.slice(n.length):null}isOriginAllowed(e){return this.allowedOrigins.some(t=>t===`*`?!0:e===t||e.endsWith(t))}initMessageListener(){window.addEventListener(`message`,e=>{if(this.log(`Message received from:`,e.origin),!this.isOriginAllowed(e.origin)){console.warn(`[EventCommunicator] Wrong origin:`,e.origin);return}let t=e.data;if(!t?.type)return;let n=this.parseEventType(t.type);if(!n)return;this.log(`Parsed event type:`,n);let r=this.messageHandlers.get(n);r?r(t.payload):this.log(`No handler for:`,n)})}registerMessageHandlers(e){Object.entries(e).forEach(([e,t])=>{this.messageHandlers.set(e,t)})}registerDOMEvents(e){e.forEach(({event:e,handler:t,options:n})=>{window.addEventListener(e,t,n)})}getTargetWindow(){try{if(window.parent&&window.parent!==window)return window.parent;if(window.top&&window.top!==window)return window.top;if(window.opener)return window.opener}catch{if(window.parent&&window.parent!==window)return window.parent}return null}send(e,t){let n=this.getTargetWindow();if(!n)return;let r={type:this.formatEventType(e),source:this.source,payload:t??null,timestamp:new Date().toISOString()};n.postMessage(r,this.targetOrigin)}},o=`visual-editor`,s={ACTIVATE_INSPECTOR:`ACTIVATE_INSPECTOR`,DEACTIVATE_INSPECTOR:`DEACTIVATE_INSPECTOR`,MAKE_EDITABLE:`MAKE_EDITABLE`,APPLY_STYLE:`APPLY_STYLE`,CHANGE_TEXT_TYPE:`CHANGE_TEXT_TYPE`,ADD_LINK:`ADD_LINK`,INSERT_EMOJI:`INSERT_EMOJI`,CHANGE_IMAGE_SRC:`CHANGE_IMAGE_SRC`,SET_ALT_TEXT:`SET_ALT_TEXT`,SHOW_IMAGE_LOADING:`SHOW_IMAGE_LOADING`,HIDE_IMAGE_LOADING:`HIDE_IMAGE_LOADING`,TOGGLE_DEBUG:`TOGGLE_DEBUG`,CLEAR_SELECTION:`CLEAR_SELECTION`,UNDO:`UNDO`,REDO:`REDO`},c={ELEMENT_SELECTED:`ELEMENT_SELECTED`,ELEMENT_RECT_UPDATED:`ELEMENT_RECT_UPDATED`,SELECTION_CLEARED:`SELECTION_CLEARED`,CONTENT_CHANGED:`CONTENT_CHANGED`,STYLE_APPLIED:`STYLE_APPLIED`,TEXT_TYPE_CHANGE_REQUESTED:`TEXT_TYPE_CHANGE_REQUESTED`,LINK_CHANGE_REQUESTED:`LINK_CHANGE_REQUESTED`,EMOJI_INSERTED:`EMOJI_INSERTED`,IMAGE_SRC_CHANGED:`IMAGE_SRC_CHANGED`,ALT_TEXT_SET:`ALT_TEXT_SET`,EDITING_TEXT:`EDITING_TEXT`,HISTORY_STATE_CHANGED:`HISTORY_STATE_CHANGED`},l={LOC:`data-visual-edit-loc`,COMPONENT:`data-visual-edit-component`,EDITABLE:`data-visual-edit-editable`,OVERLAY:`data-visual-edit-overlay`,LABEL:`data-visual-edit-label`,LABEL_POSITION:`data-visual-edit-label-position`,DIMENSIONS:`data-visual-edit-dimensions`},u={BOLD:`bold`,ITALIC:`italic`,UNDERLINE:`underline`,LINE_THROUGH:`line-through`,COLOR:`color`,BACKGROUND_COLOR:`backgroundColor`,TEXT_ALIGN:`textAlign`,FONT_SIZE:`fontSize`},d={HOVER:`hover`,SELECTED:`selected`,LOADING:`loading`},f={SPAN:`span`,IMG:`img`,BUTTON:`button`,A:`a`},ee=[`h1`,`h2`,`h3`,`h4`,`h5`,`h6`,`p`,f.SPAN,`label`,`b`,`i`,`strong`,`em`,`small`,`mark`,`del`,`ins`,`sub`,`sup`,`div`,`li`,`dt`,`dd`],p=!1,m=`%c[Visual Editor]`,h=`color: #7c3aed; font-weight: bold;`,g={CONTENT_CHANGED:`âœï¸`,EMOJI_INSERTED:`ðŸ˜€`,STYLE_APPLIED:`ðŸŽ¨`,TEXT_TYPE_CHANGE_REQUESTED:`ðŸ”¤`,LINK_CHANGE_REQUESTED:`ðŸ”—`,IMAGE_SRC_CHANGED:`ðŸ–¼ï¸`,ALT_TEXT_SET:`ðŸ·ï¸`},_={CONTENT_CHANGED:`#059669`,EMOJI_INSERTED:`#d97706`,STYLE_APPLIED:`#2563eb`,TEXT_TYPE_CHANGE_REQUESTED:`#7c3aed`,LINK_CHANGE_REQUESTED:`#0891b2`,IMAGE_SRC_CHANGED:`#be185d`,ALT_TEXT_SET:`#be185d`},v=(e,t)=>{switch(e){case`STYLE_APPLIED`:{let e=t.style||t.after,n=t.before,r=t.after;return e===`fontSize`||t.fontSize?`fontSize: ${n} â†’ ${r} (preview: inline style)`:`${e}: ${n} â†’ ${r}`}case`TEXT_TYPE_CHANGE_REQUESTED`:{let e=t[`tag before`],n=t[`tag after`],r=t.fontSize,i=`<${e}> â†’ <${n}>`;return r?`${i} (preview: inline ${r})`:i}case`CONTENT_CHANGED`:return`"${String(t.after||``).slice(0,40)}"`;case`EMOJI_INSERTED`:return`${t.emoji} added`;default:return Object.entries(t).slice(0,2).map(([e,t])=>`${e}: ${t}`).join(`, `)}},y=()=>{p=!p,console.log(m+(p?` %cðŸŸ¢ Debug mode ENABLED`:` %cðŸ”´ Debug mode DISABLED`),h,`color: ${p?`#16a34a`:`#dc2626`}; font-weight: bold;`)},b=(e,t,n,r)=>{if(!p)return;let i=_[e]??`#6b7280`,a=g[e]??`ðŸ“`,o=n.tagName.toLowerCase(),s=v(e,r);console.groupCollapsed(`${m} %c${a} PREVIEW ${e}%c  <${o}>  %c${s}`,h,`color: ${i}; font-weight: bold;`,`color: #6b7280; font-weight: normal;`,`color: #0891b2; font-weight: normal;`),console.log(`%cLocation`,`font-weight: bold;`,t),console.log(`%cElement`,`font-weight: bold;`,`<${o}>`,n.className?`class="${n.className}"`:`(no class)`),console.log(`%cDetails`,`font-weight: bold;`,r),console.groupEnd()},x=e=>{let t=document.createElement(`div`);return t.innerHTML=`
+    <svg xmlns="http://www.w3.org/2000/svg" class="sg-icon-loader-circular" viewBox="25 25 50 50" style="width: ${e}px; height: ${e}px;">
+      <circle class="sg-icon-loader-path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+    </svg>
+  `,t},S=()=>`
+  .sg-icon-loader-circular {
+    animation: sg-preview-rotate 2s linear infinite;
+    transform-origin: center center;
+  }
+  .sg-icon-loader-path {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    animation: sg-preview-dash 1.5s ease-in-out infinite, sg-preview-color 6s ease-in-out infinite;
+    stroke-linecap: round;
+  }
+  @keyframes sg-preview-rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes sg-preview-dash {
+    0% {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -35px;
+    }
+    100% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -124px;
+    }
+  }
+  @keyframes sg-preview-color {
+    100%,
+    0% {
+      stroke: #ff7061;
+    }
+    40% {
+      stroke: #21ab61;
+    }
+    66% {
+      stroke: #4343F0;
+    }
+    80%,
+    90% {
+      stroke: #ff7061;
+    }
+  }
+`,C=new Map,w=(e,t,n)=>{E(t);let r=e.getBoundingClientRect(),i=window.getComputedStyle(e),a=document.createElement(`div`),o={position:`fixed`,top:`${r.top}px`,left:`${r.left}px`,width:`${r.width}px`,height:`${r.height}px`,pointerEvents:`none`,boxSizing:`border-box`,zIndex:`999999`,borderRadius:i.borderRadius||`0px`};if(t===`loading`){Object.assign(a.style,{...o,zIndex:`2147483647`,backdropFilter:`blur(4px)`,background:`rgba(255, 255, 255, 0.5)`,display:`flex`,flexDirection:`column`,alignItems:`center`,justifyContent:`center`,gap:`8px`});let e=0,t=`12px`,i=!1;if(r.width>=240&&r.height>=240?(e=80,t=`14px`,i=!0):r.width>=80&&r.height>=80?(e=52,t=`12px`,i=!0):r.width>=40&&r.height>=40?(e=24,i=!1):(e=0,i=!1),e>0){let t=x(e);a.appendChild(t)}if(i&&n?.text){let e=document.createElement(`div`);e.textContent=n.text,e.style.fontFamily=`Inter, sans-serif`,e.style.fontSize=t,e.style.fontWeight=`400`,e.style.color=`#212121`,a.appendChild(e)}}else Object.assign(a.style,{...o,boxShadow:`inset 0 0 0 1px #6164FF, 0 0 0 1px #4343F0`});if(a.setAttribute(l.OVERLAY,t),t===`hover`){let t=e.getAttribute(l.COMPONENT);if(t&&(a.setAttribute(l.LABEL,t),a.setAttribute(l.LABEL_POSITION,r.top<30?`bottom`:`top`)),e.tagName===f.IMG.toUpperCase()){let{width:e,height:t}=r;e>=100&&t>=100&&a.setAttribute(l.DIMENSIONS,`${Math.round(e)} x ${Math.round(t)} px`)}}document.body.appendChild(a),C.set(t,a)},T=(e,t)=>{let n=C.get(t);if(!n||!e)return;let r=e.getBoundingClientRect(),i=window.getComputedStyle(e);Object.assign(n.style,{top:`${r.top}px`,left:`${r.left}px`,width:`${r.width}px`,height:`${r.height}px`,borderRadius:i.borderRadius||`0px`})},E=e=>{let t=C.get(e);t?.parentNode?.removeChild(t),C.delete(e)},D=()=>{document.querySelectorAll(`[${l.OVERLAY}]`).forEach(e=>e.remove()),C.clear()},te=()=>{let e=document.createElement(`style`);e.textContent=`
+    .sg-cursor-text * {
+      cursor: text !important;
+    }
+    .sg-cursor-pointer * {
+      cursor: pointer !important;
+    }
+    [contenteditable="true"] {
+      outline: none !important;
+    }
+    [${l.OVERLAY}='hover']::before {
+      content: attr(${l.LABEL});
+      position: absolute;
+      left: 0;
+      background: #4343F0;
+      border-radius: 4px;
+      color: white;
+      padding: 2px 4px;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+    }
+    [${l.OVERLAY}='hover'][${l.LABEL_POSITION}='top']::before {
+      bottom: calc(100% + 4px);
+    }
+    [${l.OVERLAY}='hover'][${l.LABEL_POSITION}='bottom']::before {
+      top: calc(100% + 4px);
+    }
+    [${l.OVERLAY}='hover'][${l.DIMENSIONS}]::after {
+      content: attr(${l.DIMENSIONS});
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: #4343F0;
+      border-radius: 4px;
+      color: white;
+      padding: 2px 4px;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+    }
+    ${S()}
+  `,document.head.appendChild(e)},O=()=>{},k=()=>{},A=(e,t)=>{O=e,k=t},j=e=>e?.closest(`[${l.LOC}]`),M=e=>document.querySelector(`[${l.LOC}="${e}"]`),N=e=>{let t=e.getBoundingClientRect();return{top:t.top,left:t.left,width:t.width,height:t.height}},P=e=>{let t=e.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);if(!t)return e;let n=parseInt(t[1],10),r=parseInt(t[2],10),i=parseInt(t[3],10);return`#${((1<<24)+(n<<16)+(r<<8)+i).toString(16).slice(1)}`},F=e=>{let t=e.tagName.toLowerCase(),n=t===f.A?e:e.closest(f.A),r=e.hasAttribute(`href`)||!!n,i=e.getAttribute(`href`)||n?.getAttribute(`href`)||void 0,a=e.getAttribute(`target`)||n?.getAttribute(`target`)||void 0,o=e.getAttribute(`rel`)||n?.getAttribute(`rel`)||void 0,s=e.hasAttribute(`onclick`)||e.getAttribute(`type`)===`submit`,c=t===f.BUTTON?e.getAttribute(`type`)||`button`:void 0,u=e.getAttribute(l.EDITABLE)===`true`,d=window.getComputedStyle(e),p=P(d.color),m=P(d.backgroundColor),h=d.fontSize,g=e.getAttribute(`class`)||``,_=t===f.IMG?e.getAttribute(`alt`)||``:void 0,v=ee.includes(t),y=e.outerHTML,b=y.indexOf(`>`);return{hasHref:r,href:i,target:a,rel:o,hasOnClick:s,buttonType:c,isEditable:u,isTextElement:v,computedColor:p,computedBackgroundColor:m,computedFontSize:h,classNames:g,openingTag:b>=0?y.slice(0,b+1):y,alt:_}},I=(e,t)=>{if(e.children.length>0){let n=null;for(let t of Array.from(e.childNodes))if(t.nodeType===Node.TEXT_NODE&&(t.textContent||``).trim()!==``){n=t;break}n?n.textContent=t:e.appendChild(document.createTextNode(t))}else e.innerText=t},L=100,R=new class{constructor(){i(this,`past`,[]),i(this,`future`,[]),i(this,`emitFn`,void 0)}setEmitter(e){this.emitFn=e,this.notify()}notify(){this.emitFn?.(this.past.length>0,this.future.length>0)}push(e){this.past.push(e),this.future=[],L>0&&this.past.length>L&&this.past.shift(),this.notify()}undo(){let e=this.past.pop();e&&(e.undo(),this.future.push(e),this.notify())}redo(){let e=this.future.pop();e&&(e.redo(),this.past.push(e),this.notify())}clear(){this.past=[],this.future=[],this.notify()}},z=(e,t,n,r)=>{let i=t=>{let n=M(e);n&&(I(n,t),O(c.CONTENT_CHANGED,{loc:e,newContent:t,remainingIconCount:r}),k(n))};R.push({undo:()=>i(t),redo:()=>i(n)})},B=e=>{let{loc:t}=e,n=M(t);if(!n)return;let r=n.innerText.trim();if(Array.from(n.children).some(e=>e.tagName?.toLowerCase()!==`br`)){let e=null;for(let t of Array.from(n.childNodes))if(t.nodeType===Node.TEXT_NODE&&(t.textContent||``).trim()){e=t;break}if(!e){let t=document.createTextNode(``);n.appendChild(t),e=t}let r=e.textContent||``,i=document.createElement(f.SPAN);i.textContent=r,i.contentEditable=`true`,i.style.cssText=`outline:none;display:inline;min-width:2px;caret-color:auto;`,e.parentNode?.replaceChild(i,e);let a=document.createRange();a.selectNodeContents(i);let o=window.getSelection();o?.removeAllRanges(),o?.addRange(a),i.focus();let s=[];i.addEventListener(`keydown`,e=>{if(e.key===` `&&n.tagName===f.BUTTON.toUpperCase()){e.preventDefault(),document.execCommand(`insertText`,!1,` `);return}if((e.ctrlKey||e.metaKey)&&e.key===`z`&&s.length>0){e.preventDefault(),s.pop()?.();return}if(e.key===`Backspace`){let t=window.getSelection();if(t?.isCollapsed&&t?.anchorOffset===0){e.preventDefault();let t=i.previousElementSibling;if(t){let e=t.parentNode,n=t.nextSibling;s.push(()=>{n?e?.insertBefore(t,n):e?.appendChild(t)}),t.remove()}}}}),i.addEventListener(`input`,()=>{let e=(i.textContent||``)!==r;O(c.EDITING_TEXT,{loc:t,isDirty:e}),k(n)}),i.addEventListener(`blur`,()=>{let e=Array.from(n.children).filter(e=>e!==i&&e.tagName?.toLowerCase()!==`br`).length,a=i.innerText.trim(),o=document.createTextNode(i.innerText.trim());i.parentNode?.replaceChild(o,i),a!==r&&(b(c.CONTENT_CHANGED,t,n,{before:r,after:a}),O(c.CONTENT_CHANGED,{loc:t,newContent:a,remainingIconCount:e}),z(t,r,a,e)),O(c.EDITING_TEXT,{loc:t,isDirty:!1}),requestAnimationFrame(()=>k(n))},{once:!0});return}n.setAttribute(`contenteditable`,`true`),n.style.caretColor=`auto`,n.focus();let i=e=>{e.key===` `&&n.tagName===f.BUTTON.toUpperCase()&&(e.preventDefault(),document.execCommand(`insertText`,!1,` `))};n.addEventListener(`keydown`,i);let a=()=>{n.removeAttribute(`contenteditable`),n.style.caretColor=``,n.removeEventListener(`blur`,a),n.removeEventListener(`keydown`,i);let e=n.innerText.trim();e!==r&&(b(c.CONTENT_CHANGED,t,n,{before:r,after:e}),O(c.CONTENT_CHANGED,{loc:t,newContent:e}),z(t,r,e)),O(c.EDITING_TEXT,{loc:t,isDirty:!1}),requestAnimationFrame(()=>k(n))};n.addEventListener(`blur`,a)},V=(e,t)=>{let n=/[A-Z]/.test(t)?e.tagName.toLowerCase():t,r=document.createElement(n);for(let t of Array.from(e.attributes))r.setAttribute(t.name,t.value);return r.innerHTML=e.innerHTML,e.replaceWith(r),r},ne=e=>{let{loc:t,tag:n,fontSize:r}=e,i=M(t);if(!i)return;let a=i.getAttribute(l.COMPONENT)||i.tagName.toLowerCase(),o=i.tagName.toLowerCase(),s=window.getComputedStyle(i).fontSize;i.setAttribute(l.COMPONENT,n);let u=V(i,n);r&&(u.style.fontSize=r),b(c.TEXT_TYPE_CHANGE_REQUESTED,t,u,{"tag before":a,"tag after":n,fontSize:r??`(unchanged)`}),O(c.TEXT_TYPE_CHANGE_REQUESTED,{loc:t,tag:n,fontSize:r,classNames:u.className}),k(u);let d=(e,n,r)=>{let i=M(t);if(!i)return;i.setAttribute(l.COMPONENT,n);let a=V(i,e);r?a.style.fontSize=r:a.style.fontSize=``,O(c.TEXT_TYPE_CHANGE_REQUESTED,{loc:t,tag:n,fontSize:r,classNames:a.className}),k(a)};R.push({undo:()=>d(o,a,s),redo:()=>d(n,n,r)})},H=(e,t,n)=>{switch(t){case u.BOLD:e.style.fontWeight=n||``;break;case u.ITALIC:e.style.fontStyle=n||``;break;case u.UNDERLINE:case u.LINE_THROUGH:e.style.textDecoration=n||``;break;case u.COLOR:if(n){let t=[];Array.from(e.children).forEach(e=>{let n=e;n.style.color||t.push([n,window.getComputedStyle(n).color])}),e.style.color=n,t.forEach(([e,t])=>{e.style.color=t})}else e.style.color=``;break;case u.BACKGROUND_COLOR:e.style.backgroundColor=n||``;break;case u.TEXT_ALIGN:e.style.textAlign=n||``;break;case u.FONT_SIZE:e.style.fontSize=n||``;break}},re=e=>{let{style:t,value:n,loc:r}=e,i=M(r);if(!i)return;let a=window.getComputedStyle(i),o=n,s;switch(t){case u.BOLD:s=a.fontWeight,o=parseInt(a.fontWeight,10)>=700?`normal`:`bold`,H(i,t,o);break;case u.ITALIC:s=a.fontStyle,o=a.fontStyle===`italic`?`normal`:`italic`,H(i,t,o);break;case u.UNDERLINE:s=a.textDecoration,o=a.textDecoration.includes(`underline`)?`none`:`underline`,H(i,t,o);break;case u.LINE_THROUGH:s=a.textDecoration,o=a.textDecoration.includes(`line-through`)?`none`:`line-through`,H(i,t,o);break;case u.COLOR:s=a.color,n&&H(i,t,n);break;case u.BACKGROUND_COLOR:s=a.backgroundColor,n&&H(i,t,n);break;case u.TEXT_ALIGN:s=a.textAlign,n&&H(i,t,n);break;case u.FONT_SIZE:s=a.fontSize,n&&H(i,t,n);break}b(c.STYLE_APPLIED,r,i,{style:t,before:s??`(unknown)`,after:o??`(unchanged)`}),O(c.STYLE_APPLIED,{loc:r,style:t,value:o}),k(i);let l=e=>{let n=M(r);n&&(H(n,t,e),O(c.STYLE_APPLIED,{loc:r,style:t,value:e}),k(n))};R.push({undo:()=>l(s),redo:()=>l(o)})},ie=e=>{let{loc:t,href:n,target:r,rel:i}=e,a=M(t);if(!a)return;let o=a.closest(f.A)||(a.tagName.toLowerCase()===f.A?a:null),s=o?o.href:`(none)`,l=o?.getAttribute(`target`)??`(none)`,u=o?.getAttribute(`rel`)??`(none)`;if(o)o.href=n,r&&o.setAttribute(`target`,r),i&&o.setAttribute(`rel`,i);else{let e=document.createElement(f.A);e.href=n,r&&e.setAttribute(`target`,r),i&&e.setAttribute(`rel`,i),a.parentNode?.insertBefore(e,a),e.appendChild(a)}b(c.LINK_CHANGE_REQUESTED,t,a,{"href before":s,"href after":n,"target before":l,"target after":r??`(none)`,rel:i??`(none)`}),O(c.LINK_CHANGE_REQUESTED,{loc:t,href:n,target:r,rel:i});let d=(e,n,r,i)=>{let a=M(t);if(!a)return;let o=a.closest(f.A)||(a.tagName.toLowerCase()===f.A?a:null);if(e===`(none)`||!i&&e===`(none)`)if(o&&o!==a&&o.parentNode){for(;o.firstChild;)o.parentNode.insertBefore(o.firstChild,o);o.remove()}else o===a&&(o.removeAttribute(`href`),o.removeAttribute(`target`),o.removeAttribute(`rel`));else o||(o=document.createElement(f.A),a.parentNode&&(a.parentNode.insertBefore(o,a),o.appendChild(a))),o.href=e,n&&n!==`(none)`?o.setAttribute(`target`,n):o.removeAttribute(`target`),r&&r!==`(none)`?o.setAttribute(`rel`,r):o.removeAttribute(`rel`);O(c.LINK_CHANGE_REQUESTED,{loc:t,href:e===`(none)`?void 0:e,target:n===`(none)`?void 0:n,rel:r===`(none)`?void 0:r})};R.push({undo:()=>d(s,l,u,!!o),redo:()=>d(n,r,i,!!o)})},ae=e=>{let{loc:t,emoji:n}=e,r=M(t);if(!r)return;let i=r.innerText,a=r.querySelector(`[contenteditable="true"]`)||(r.isContentEditable?r:null);if(a){let e=window.getSelection();if(e&&e.rangeCount>0&&a.contains(e.anchorNode)){let t=e.getRangeAt(0);t.deleteContents();let r=document.createTextNode(n);t.insertNode(r),t.setStartAfter(r),t.collapse(!0),e.removeAllRanges(),e.addRange(t)}else a.appendChild(document.createTextNode(n));a.dispatchEvent(new Event(`input`,{bubbles:!0}))}else r.appendChild(document.createTextNode(n));let o=r.innerText;b(c.EMOJI_INSERTED,t,r,{emoji:n,before:i,after:o}),O(c.EMOJI_INSERTED,{loc:t,emoji:n,newContent:o}),k(r),B({loc:t});let s=e=>{let n=M(t);n&&(I(n,e),O(c.CONTENT_CHANGED,{loc:t,newContent:e}),k(n))};R.push({undo:()=>s(i),redo:()=>s(o)})},oe=e=>{let{loc:t,src:n}=e,r=M(t);if(!r)return;let i=r.tagName.toLowerCase()===f.IMG?r.src:`(not an img)`;r.tagName.toLowerCase()===f.IMG&&(r.src=n),b(c.IMAGE_SRC_CHANGED,t,r,{"src before":i,"src after":n}),O(c.IMAGE_SRC_CHANGED,{loc:t,src:n})},U=e=>{let{loc:t,alt:n}=e,r=M(t);if(!r)return;let i=r.tagName.toLowerCase()===f.IMG?r.alt:`(not an img)`;r.tagName.toLowerCase()===f.IMG&&(r.alt=n),b(c.ALT_TEXT_SET,t,r,{"alt before":i,"alt after":n}),O(c.ALT_TEXT_SET,{loc:t,alt:n});let a=e=>{let n=M(t);!n||n.tagName.toLowerCase()!==f.IMG||(n.alt=e,O(c.ALT_TEXT_SET,{loc:t,alt:e}))};R.push({undo:()=>a(i),redo:()=>a(n)})},W=!1,G=null,K=null,q=null,J=null,Y=e=>{document.body.classList.remove(`sg-cursor-text`,`sg-cursor-pointer`),e&&document.body.classList.add(`sg-cursor-${e}`)},X=(e,t)=>{J?.send(e,t)},se=e=>{if(e!==G)if(G&&!document.contains(G))G=e;else return;requestAnimationFrame(()=>{T(e,d.SELECTED),X(c.ELEMENT_RECT_UPDATED,{rect:N(e)})})},ce=()=>{W=!0,Y(`pointer`)},le=()=>{W=!1,Y(``),G=null,K=null,D(),R.clear()},ue=e=>{G=e,E(d.HOVER),K=null,w(e,d.SELECTED);let t=e.getAttribute(l.LOC)||``,n=t?document.querySelectorAll(`[${l.LOC}="${CSS.escape(t)}"]`):[],r=n.length>1,i=F(e),a=r?!1:i.isEditable;J.send(c.ELEMENT_SELECTED,{sourceLocation:t,componentName:e.getAttribute(l.COMPONENT)||``,elementType:e.tagName.toLowerCase(),textContent:(e.innerText||``).trim(),rect:N(e),...i,isEditable:a,...r&&{instanceIndex:Array.from(n).indexOf(e),totalInstances:n.length}});let o=a&&e.children.length===0,s=a&&e.children.length>0;(o||s)&&t&&(B({loc:t}),requestAnimationFrame(()=>T(e,d.SELECTED)))},Z=()=>{E(d.SELECTED),G=null,X(c.SELECTION_CLEARED)},de=e=>{let t=window.getComputedStyle(e);if(e.tagName===f.IMG.toUpperCase()){let e=t.filter||``,n=parseFloat(t.opacity);return e.includes(`blur`)||n<.5}let n=(e.innerText||``).trim()===``&&e.children.length===0,r=(t.backgroundImage||``).includes(`gradient`);return n&&r},Q=e=>{let t=document.elementsFromPoint(e.clientX,e.clientY),n=new Set;for(let e of t){let t=e.closest(`[${l.LOC}]`);if(!(!t||n.has(t))&&(n.add(t),!de(t)))return t}return j(e.target)},fe=()=>{D(),G=null,K=null},pe=e=>{if(!e){Y(`pointer`);return}let{isEditable:t,isTextElement:n}=F(e);Y(t&&n?`text`:`pointer`)},me=e=>{if(!W)return;let t=Q(e);if(pe(t),!t||t===G){E(d.HOVER),K=null;return}t!==K&&(K=t,w(t,d.HOVER))},he=e=>{W&&j(e.target)===K&&(E(d.HOVER),K=null,Y(`pointer`))},ge=e=>{if(!W||!J)return;let t=e,n=Q(t);if(n){if(t.preventDefault(),t.stopPropagation(),n===G)return;ue(n)}else G&&Z()},$=()=>{K&&T(K,d.HOVER),G&&(T(G,d.SELECTED),X(c.ELEMENT_RECT_UPDATED,{rect:N(G)})),q&&T(q,d.LOADING)},_e=e=>{if(G){q=G;let{text:t}=e||{};w(G,d.LOADING,{text:t||`Uploading...`})}},ve=()=>{q=null,E(d.LOADING)};function ye(e){if(J)return;J=new a({source:o,allowedOrigins:e,messageHandlers:{[s.ACTIVATE_INSPECTOR]:ce,[s.DEACTIVATE_INSPECTOR]:le,[s.MAKE_EDITABLE]:B,[s.APPLY_STYLE]:re,[s.CLEAR_SELECTION]:fe,[s.CHANGE_TEXT_TYPE]:ne,[s.ADD_LINK]:ie,[s.INSERT_EMOJI]:ae,[s.CHANGE_IMAGE_SRC]:oe,[s.SET_ALT_TEXT]:U,[s.SHOW_IMAGE_LOADING]:_e,[s.HIDE_IMAGE_LOADING]:ve,[s.TOGGLE_DEBUG]:y,[s.UNDO]:()=>R.undo(),[s.REDO]:()=>R.redo()},domEvents:[{event:`mouseover`,handler:me,options:!0},{event:`mouseout`,handler:he,options:!0},{event:`click`,handler:ge,options:!0},{event:`scroll`,handler:$,options:!0},{event:`resize`,handler:$,options:!0},{event:`input`,handler:$,options:!0}]}),A(X,se),te(),R.setEmitter((e,t)=>{X(c.HISTORY_STATE_CHANGED,{canUndo:e,canRedo:t})});let t=window.location.pathname,n=()=>{window.location.pathname!==t&&(t=window.location.pathname,R.clear(),Z())},r=history.pushState;history.pushState=function(...e){let t=r.apply(this,e);return n(),t};let i=history.replaceState;history.replaceState=function(...e){let t=i.apply(this,e);return n(),t},window.addEventListener(`popstate`,n)}ye([`.siteground.ai`,`.sgdev.eu`])})();
+  </script>
+  
+  <style>
+    .sg-cursor-text * {
+      cursor: text !important;
+    }
+    .sg-cursor-pointer * {
+      cursor: pointer !important;
+    }
+    [contenteditable="true"] {
+      outline: none !important;
+    }
+    [data-visual-edit-overlay='hover']::before {
+      content: attr(data-visual-edit-label);
+      position: absolute;
+      left: 0;
+      background: #4343F0;
+      border-radius: 4px;
+      color: white;
+      padding: 2px 4px;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+    }
+    [data-visual-edit-overlay='hover'][data-visual-edit-label-position='top']::before {
+      bottom: calc(100% + 4px);
+    }
+    [data-visual-edit-overlay='hover'][data-visual-edit-label-position='bottom']::before {
+      top: calc(100% + 4px);
+    }
+    [data-visual-edit-overlay='hover'][data-visual-edit-dimensions]::after {
+      content: attr(data-visual-edit-dimensions);
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: #4343F0;
+      border-radius: 4px;
+      color: white;
+      padding: 2px 4px;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+    }
+    .sg-icon-loader-circular {
+      animation: sg-preview-rotate 2s linear infinite;
+      transform-origin: center center;
+    }
+    .sg-icon-loader-path {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+      animation: sg-preview-dash 1.5s ease-in-out infinite, sg-preview-color 6s ease-in-out infinite;
+      stroke-linecap: round;
+    }
+    @keyframes sg-preview-rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes sg-preview-dash {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+      }
+      100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+      }
+    }
+    @keyframes sg-preview-color {
+      100%,
+      0% {
+        stroke: #ff7061;
+      }
+      40% {
+        stroke: #21ab61;
+      }
+      66% {
+        stroke: #4343F0;
+      }
+      80%,
+      90% {
+        stroke: #ff7061;
+      }
+    }
+  </style>
+  
+  <script>
+    (function(){var e=`sg-preview`;function t(e){"@babel/helpers - typeof";return t=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},t(e)}function n(e,n){if(t(e)!=`object`||!e)return e;var r=e[Symbol.toPrimitive];if(r!==void 0){var i=r.call(e,n||`default`);if(t(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(e)}function r(e){var r=n(e,`string`);return t(r)==`symbol`?r:r+``}function i(e,t,n){return(t=r(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=class{constructor(e){if(i(this,`source`,void 0),i(this,`allowedOrigins`,void 0),i(this,`targetOrigin`,void 0),i(this,`debug`,void 0),i(this,`messageHandlers`,new Map),!e.allowedOrigins?.length)throw Error(`[EventCommunicator] allowedOrigins is required`);this.source=e.source,this.allowedOrigins=e.allowedOrigins,this.targetOrigin=e.targetOrigin||`*`,this.debug=e.debug||!1,e.messageHandlers&&this.registerMessageHandlers(e.messageHandlers),e.domEvents&&this.registerDOMEvents(e.domEvents),this.initMessageListener()}log(...e){this.debug&&console.log(`[EventCommunicator]`,...e)}formatEventType(t){return`${e}:${t}`}parseEventType(t){let n=`${e}:`;return t.startsWith(n)?t.slice(n.length):null}isOriginAllowed(e){return this.allowedOrigins.some(t=>t===`*`?!0:e===t||e.endsWith(t))}initMessageListener(){window.addEventListener(`message`,e=>{if(this.log(`Message received from:`,e.origin),!this.isOriginAllowed(e.origin)){console.warn(`[EventCommunicator] Wrong origin:`,e.origin);return}let t=e.data;if(!t?.type)return;let n=this.parseEventType(t.type);if(!n)return;this.log(`Parsed event type:`,n);let r=this.messageHandlers.get(n);r?r(t.payload):this.log(`No handler for:`,n)})}registerMessageHandlers(e){Object.entries(e).forEach(([e,t])=>{this.messageHandlers.set(e,t)})}registerDOMEvents(e){e.forEach(({event:e,handler:t,options:n})=>{window.addEventListener(e,t,n)})}getTargetWindow(){try{if(window.parent&&window.parent!==window)return window.parent;if(window.top&&window.top!==window)return window.top;if(window.opener)return window.opener}catch{if(window.parent&&window.parent!==window)return window.parent}return null}send(e,t){let n=this.getTargetWindow();if(!n)return;let r={type:this.formatEventType(e),source:this.source,payload:t??null,timestamp:new Date().toISOString()};n.postMessage(r,this.targetOrigin)}},o=null;function s(e,t,n){return e.includes(`Failed to fetch dynamically imported module`)?`module-load-error`:e===`Script error.`?`script-origin-error`:e.includes(`ResizeObserver loop limit exceeded`)?`resize-observer-error`:e.includes(`ReferenceError`)?`react-reference-error`:e.includes(`TypeError`)?`react-type-error`:e.includes(`is not defined`)?`react-reference-error`:e.includes(`Cannot read prop`)?`react-property-error`:e.includes(`Cannot access before initialization`)?`react-initialization-error`:e.includes(`is not a function`)?`react-function-error`:n&&n.includes(`ErrorBoundary`)?`react-boundary-error`:t&&t.includes(`renderWithHooks`)?`react-render-error`:t&&t.includes(`updateFunctionComponent`)?`react-component-error`:t&&t.includes(`@react-refresh`)?`react-hmr-error`:`react-runtime-error`}function c(e){if(!e)return{file:null,line:null,column:null};for(let t of[/at\s+.*?\s+\(([^:]+):(\d+):(\d+)\)/,/([^:@\s]+\.(?:tsx?|jsx?)):(\d+):(\d+)/,/\(([^:]+):(\d+):(\d+)\)/,/(\w+)?@([^:]+):(\d+):(\d+)/]){let n=e.match(t);if(n)return{file:n[1]||n[2],line:parseInt(n[2]||n[3],10),column:parseInt(n[3]||n[4],10)}}return{file:null,line:null,column:null}}function l(e){if(!o)return;let t=c(e.stack),n={type:s(e.message,e.stack,e.componentStack),message:e.message,file:t.file,line:t.line,column:t.column,stack:e.stack,componentStack:e.componentStack,environment:`development`,errorSource:e.source,userAgent:navigator.userAgent,url:window.location.href};o.send(`RUNTIME_ERROR`,n)}var u=e=>{try{let t=e.target;if(t&&t instanceof HTMLElement){let e=t.tagName.toUpperCase(),n=t.src||t.href||`unknown`;l({message:`Failed to load resource: `+e+` from `+n,source:`resource-loader`,stack:null,componentStack:null})}else{let t=e;l({message:t.message||`Runtime error`,source:`window-onerror`,stack:t.error?t.error.stack:null,componentStack:null})}}catch(e){console.error(`[SG Preview - Reporter] Internal error in onerror handler:`,e)}},d=e=>{try{let t=e.reason;l({message:t?.message||t||`Unhandled promise rejection`,source:`unhandled-rejection`,stack:t?.stack,componentStack:null})}catch(e){console.error(`[SG Preview - Reporter] Internal error in unhandledrejection handler:`,e)}},f=console.error;function p(e=[`*`]){o||(o=new a({source:`error-reporter`,allowedOrigins:e,domEvents:[{event:`error`,handler:u,options:!0},{event:`unhandledrejection`,handler:d}]}),console.error=function(...e){try{let t=e.join(` `);if(t.includes(`Error handled by React Router default ErrorBoundary`)||t.includes(`React will try to recreate this component tree`)||t.includes(`The above error occurred in the`)||t.includes(`React Router caught the following error during render`)||/Minified React error #\d+/.test(t)||t.includes(`ResizeObserver loop limit exceeded`)){let n=e.find(e=>e instanceof Error),r=e.find(e=>typeof e==`object`&&e&&`componentStack`in e);l({message:n?n.message:t,source:`console-error`,stack:n?n.stack:null,componentStack:r?.componentStack??null})}}catch(e){console.error(`[SG Preview - Reporter] Internal error in console.error wrapper:`,e)}f.apply(console,e)},console.log(`[SG Preview - Runtime Reporter] Initialized.`))}p([`*`])})();
+  </script>
+  
+  <script>
+    (function(){var e=`sg-preview`;function t(e){"@babel/helpers - typeof";return t=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},t(e)}function n(e,n){if(t(e)!=`object`||!e)return e;var r=e[Symbol.toPrimitive];if(r!==void 0){var i=r.call(e,n||`default`);if(t(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(e)}function r(e){var r=n(e,`string`);return t(r)==`symbol`?r:r+``}function i(e,t,n){return(t=r(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=class{constructor(e){if(i(this,`source`,void 0),i(this,`allowedOrigins`,void 0),i(this,`targetOrigin`,void 0),i(this,`debug`,void 0),i(this,`messageHandlers`,new Map),!e.allowedOrigins?.length)throw Error(`[EventCommunicator] allowedOrigins is required`);this.source=e.source,this.allowedOrigins=e.allowedOrigins,this.targetOrigin=e.targetOrigin||`*`,this.debug=e.debug||!1,e.messageHandlers&&this.registerMessageHandlers(e.messageHandlers),e.domEvents&&this.registerDOMEvents(e.domEvents),this.initMessageListener()}log(...e){this.debug&&console.log(`[EventCommunicator]`,...e)}formatEventType(t){return`${e}:${t}`}parseEventType(t){let n=`${e}:`;return t.startsWith(n)?t.slice(n.length):null}isOriginAllowed(e){return this.allowedOrigins.some(t=>t===`*`?!0:e===t||e.endsWith(t))}initMessageListener(){window.addEventListener(`message`,e=>{if(this.log(`Message received from:`,e.origin),!this.isOriginAllowed(e.origin)){console.warn(`[EventCommunicator] Wrong origin:`,e.origin);return}let t=e.data;if(!t?.type)return;let n=this.parseEventType(t.type);if(!n)return;this.log(`Parsed event type:`,n);let r=this.messageHandlers.get(n);r?r(t.payload):this.log(`No handler for:`,n)})}registerMessageHandlers(e){Object.entries(e).forEach(([e,t])=>{this.messageHandlers.set(e,t)})}registerDOMEvents(e){e.forEach(({event:e,handler:t,options:n})=>{window.addEventListener(e,t,n)})}getTargetWindow(){try{if(window.parent&&window.parent!==window)return window.parent;if(window.top&&window.top!==window)return window.top;if(window.opener)return window.opener}catch{if(window.parent&&window.parent!==window)return window.parent}return null}send(e,t){let n=this.getTargetWindow();if(!n)return;let r={type:this.formatEventType(e),source:this.source,payload:t??null,timestamp:new Date().toISOString()};n.postMessage(r,this.targetOrigin)}},o=`STRIPE_CHECKOUT_BLOCKED`,s=`checkout.stripe.com`,c=/https:\/\/checkout\.stripe\.com\/[^\s"'<>\\]+/g,l=[`url`,`checkoutUrl`,`checkout_url`,`redirectUrl`,`redirect_url`,`sessionUrl`,`session_url`],u=null,d=e=>{if(typeof e!=`string`||!e)return!1;try{return new URL(e,window.location.origin).host===s}catch{return!1}},f=(e,t=0)=>{if(t>4||!e||typeof e!=`object`)return null;let n=e;for(let e of l){let t=n[e];if(typeof t==`string`&&d(t))return t}for(let e of Object.keys(n)){let r=f(n[e],t+1);if(r)return r}return null},p=e=>{if(!e||e.indexOf(`checkout.stripe.com`)===-1)return null;try{let t=f(JSON.parse(e));if(t)return t}catch{}let t=e.match(c);return t?t[0]:null},m=e=>{try{let t=typeof e==`string`?e:e instanceof URL?e.href:e.url,n=new URL(t,window.location.origin).pathname;return n===`/api/checkout`||n.endsWith(`/api/checkout`)}catch{return!1}},h=()=>{let e=window.fetch.bind(window);window.fetch=async function(t,n){let r=window.location.href,i=await e(t,n);try{let e=m(t),n=(i.headers.get(`content-type`)||``).toLowerCase(),a=n.includes(`json`)||n.startsWith(`text/`);if(e||a){let t=p(await i.clone().text());if(t){let n=e?`fetch-api-checkout`:`fetch-response`;u?.send(o,{url:t,source:n,pageUrl:r})}}}catch(e){console.log(e)}return i}};function g(e=[`*`]){window.self!==window.top&&(u||(u=new a({source:`stripe-interceptor`,allowedOrigins:e}),h(),console.log(`[SG Stripe] Initialized.`)))}g([`*`])})();
+  </script>
+  
+  <script>
+    window.__SG_PREVIEW_ROUTES = {"isSPA":true,"routes":["/"]};
+  </script>
+  
+  <script>
+    (function(){var e=`sg-preview`;function t(e){"@babel/helpers - typeof";return t=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},t(e)}function n(e,n){if(t(e)!=`object`||!e)return e;var r=e[Symbol.toPrimitive];if(r!==void 0){var i=r.call(e,n||`default`);if(t(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(e)}function r(e){var r=n(e,`string`);return t(r)==`symbol`?r:r+``}function i(e,t,n){return(t=r(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=class{constructor(e){if(i(this,`source`,void 0),i(this,`allowedOrigins`,void 0),i(this,`targetOrigin`,void 0),i(this,`debug`,void 0),i(this,`messageHandlers`,new Map),!e.allowedOrigins?.length)throw Error(`[EventCommunicator] allowedOrigins is required`);this.source=e.source,this.allowedOrigins=e.allowedOrigins,this.targetOrigin=e.targetOrigin||`*`,this.debug=e.debug||!1,e.messageHandlers&&this.registerMessageHandlers(e.messageHandlers),e.domEvents&&this.registerDOMEvents(e.domEvents),this.initMessageListener()}log(...e){this.debug&&console.log(`[EventCommunicator]`,...e)}formatEventType(t){return`${e}:${t}`}parseEventType(t){let n=`${e}:`;return t.startsWith(n)?t.slice(n.length):null}isOriginAllowed(e){return this.allowedOrigins.some(t=>t===`*`?!0:e===t||e.endsWith(t))}initMessageListener(){window.addEventListener(`message`,e=>{if(this.log(`Message received from:`,e.origin),!this.isOriginAllowed(e.origin)){console.warn(`[EventCommunicator] Wrong origin:`,e.origin);return}let t=e.data;if(!t?.type)return;let n=this.parseEventType(t.type);if(!n)return;this.log(`Parsed event type:`,n);let r=this.messageHandlers.get(n);r?r(t.payload):this.log(`No handler for:`,n)})}registerMessageHandlers(e){Object.entries(e).forEach(([e,t])=>{this.messageHandlers.set(e,t)})}registerDOMEvents(e){e.forEach(({event:e,handler:t,options:n})=>{window.addEventListener(e,t,n)})}getTargetWindow(){try{if(window.parent&&window.parent!==window)return window.parent;if(window.top&&window.top!==window)return window.top;if(window.opener)return window.opener}catch{if(window.parent&&window.parent!==window)return window.parent}return null}send(e,t){let n=this.getTargetWindow();if(!n)return;let r={type:this.formatEventType(e),source:this.source,payload:t??null,timestamp:new Date().toISOString()};n.postMessage(r,this.targetOrigin)}},o=`sg-preview-plugin`,s={ROUTES_DISCOVERED:`ROUTES_DISCOVERED`,NAVIGATE_TO:`NAVIGATE_TO`,ROUTE_CHANGED:`ROUTE_CHANGED`},c=e=>{let t=window.history.pushState;window.history.pushState=function(...n){t.apply(this,n),e()};let n=window.history.replaceState;window.history.replaceState=function(...t){n.apply(this,t),e()},window.addEventListener(`popstate`,e),window.addEventListener(`hashchange`,e)},l=(e,t,n=!1)=>{let r=e;try{let t=new URL(e,window.location.origin);new URLSearchParams(window.location.search).forEach((e,n)=>{t.searchParams.has(n)||t.searchParams.set(n,e)}),r=`${t.pathname}${t.search}${t.hash}`}catch(e){console.warn(`[route-manager] Failed to merge URL parameters:`,e)}t&&!n?(window.history.pushState(null,``,r),window.dispatchEvent(new Event(`popstate`))):window.location.assign(r)},u=(e,t)=>{let n=e?.route,r=e?.hardReload;if(!n){console.error(`[route-manager] Invalid navigation payload received:`,e);return}l(n,t,r)},d=!1;(async e=>{if(!d){d=!0;try{let t=window.__SG_PREVIEW_ROUTES,n=!!t?.isSPA,r=t?.routes||[],i=new a({source:o,allowedOrigins:e,messageHandlers:{[s.NAVIGATE_TO]:e=>u(e,n)}});i.send(s.ROUTES_DISCOVERED,r);let l=()=>{i.send(s.ROUTE_CHANGED,{route:window.location.pathname})};l(),c(l)}catch(e){console.error(`[route-manager] Failed to fetch routes or initialize communicator:`,e)}}})([`.siteground.ai`,`.sgdev.eu`])})();
+  </script>
+</head>
+<body>
+  <div id="root">
+    <main class="min-h-screen w-full px-5 py-10 sm:px-8 sm:py-14" data-visual-edit-loc="src/pages/Index.tsx:138:4" data-visual-edit-component="main" data-visual-edit-editable="false">
+      <div class="mx-auto max-w-6xl" data-visual-edit-loc="src/pages/Index.tsx:139:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+        
+        <header class="mb-10 flex flex-wrap items-center justify-between gap-4" data-visual-edit-loc="src/pages/Index.tsx:140:8" data-visual-edit-component="header" data-visual-edit-editable="false">
+          <div class="flex items-center gap-4" data-visual-edit-loc="src/pages/Index.tsx:141:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+            <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-accent text-white" data-visual-edit-loc="src/pages/Index.tsx:142:12" data-visual-edit-component="span" data-visual-edit-editable="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up" data-visual-edit-loc="src/pages/Index.tsx:143:14" data-visual-edit-component="TrendingUp" data-visual-edit-editable="false">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                <polyline points="16 7 22 7 22 13"></polyline>
+              </svg>
+            </span>
+            <div data-visual-edit-loc="src/pages/Index.tsx:145:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <h1 class="text-2xl font-extrabold leading-tight text-ink sm:text-3xl" data-visual-edit-loc="src/pages/Index.tsx:146:14" data-visual-edit-component="h1" data-visual-edit-editable="true">
+                Comparador Avanzado de CampaÃ±as
+              </h1>
+              <p class="text-sm text-muted" data-visual-edit-loc="src/pages/Index.tsx:149:14" data-visual-edit-component="p" data-visual-edit-editable="true">
+                Compara, simula, guarda escenarios y genera informes.
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-3" data-visual-edit-loc="src/pages/Index.tsx:154:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+            <div class="relative" data-visual-edit-loc="src/components/ScenarioManager.tsx:58:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <button type="button" class="flex items-center gap-2 rounded-xl bg-surface px-4 py-2.5 text-sm font-semibold text-ink ring-1 ring-line transition-colors hover:text-accent" data-visual-edit-loc="src/components/ScenarioManager.tsx:59:6" data-visual-edit-component="button" data-visual-edit-editable="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open" data-visual-edit-loc="src/components/ScenarioManager.tsx:64:8" data-visual-edit-component="FolderOpen" data-visual-edit-editable="false">
+                  <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"></path>
+                </svg>
+                Escenarios
+              </button>
+            </div>
+            <button type="button" aria-label="Activar modo oscuro" class="flex h-10 w-10 items-center justify-center rounded-xl bg-surface text-ink ring-1 ring-line transition-colors hover:text-accent" data-visual-edit-loc="src/components/ThemeToggle.tsx:10:2" data-visual-edit-component="button" data-visual-edit-editable="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon" data-visual-edit-loc="src/components/ThemeToggle.tsx:16:44" data-visual-edit-component="Moon" data-visual-edit-editable="false">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <div class="grid gap-8" data-visual-edit-loc="src/pages/Index.tsx:160:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+          <form class="rounded-2xl bg-surface p-6 ring-1 ring-line sm:p-8" data-visual-edit-loc="src/components/CampaignForm.tsx:51:4" data-visual-edit-component="form" data-visual-edit-editable="false">
+            <h2 class="mb-6 text-lg font-semibold text-ink" data-visual-edit-loc="src/components/CampaignForm.tsx:52:6" data-visual-edit-component="h2" data-visual-edit-editable="true">
+              Agregar campaÃ±a
+            </h2>
+            <div class="mb-5 grid gap-4 sm:grid-cols-2" data-visual-edit-loc="src/components/CampaignForm.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <div data-visual-edit-loc="src/components/CampaignForm.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <label for="name" class="mb-2 block text-sm font-medium text-muted" data-visual-edit-loc="src/components/CampaignForm.tsx:56:10" data-visual-edit-component="label" data-visual-edit-editable="true">
+                  Nombre de la campaÃ±a
+                </label>
+                <input id="name" required="" placeholder="Ej. Rebajas de verano" class="w-full rounded-xl bg-panel px-4 py-3 text-ink placeholder:text-muted/60 outline-none focus:ring-2 focus:ring-accent" data-visual-edit-loc="src/components/CampaignForm.tsx:59:10" data-visual-edit-component="input" data-visual-edit-editable="false" type="text" value="">
+              </div>
+              <div data-visual-edit-loc="src/components/CampaignForm.tsx:69:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <label for="platform" class="mb-2 block text-sm font-medium text-muted" data-visual-edit-loc="src/components/CampaignForm.tsx:70:10" data-visual-edit-component="label" data-visual-edit-editable="true">
+                  Plataforma
+                </label>
+                <select id="platform" class="w-full rounded-xl bg-panel px-4 py-3 text-ink outline-none focus:ring-2 focus:ring-accent" data-visual-edit-loc="src/components/CampaignForm.tsx:73:10" data-visual-edit-component="select" data-visual-edit-editable="false">
+                  <option value="Meta Ads" data-visual-edit-loc="src/components/CampaignForm.tsx:80:14" data-visual-edit-component="option" data-visual-edit-editable="false">Meta Ads</option>
+                  <option value="Google Ads" data-visual-edit-loc="src/components/CampaignForm.tsx:80:14" data-visual-edit-component="option" data-visual-edit-editable="false">Google Ads</option>
+                  <option value="TikTok Ads" data-visual-edit-loc="src/components/CampaignForm.tsx:80:14" data-visual-edit-component="option" data-visual-edit-editable="false">TikTok Ads</option>
+                  <option value="LinkedIn Ads" data-visual-edit-loc="src/components/CampaignForm.tsx:80:14" data-visual-edit-component="option" data-visual-edit-editable="false">LinkedIn Ads</option>
+                  <option value="Otro" data-visual-edit-loc="src/components/CampaignForm.tsx:80:14" data-visual-edit-component="option" data-visual-edit-editable="false">Otro</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="grid gap-4 sm:grid-cols-2" data-visual-edit-loc="src/components/CampaignForm.tsx:88:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <div data-visual-edit-loc="src/components/CampaignForm.tsx:90:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <label for="budget" class="mb-2 block text-sm font-medium text-muted" data-visual-edit-loc="src/components/CampaignForm.tsx:91:12" data-visual-edit-component="label" data-visual-edit-editable="false">
+                  Presupuesto Invertido
+                </label>
+                <div class="flex items-center rounded-xl bg-panel focus-within:ring-2 focus-within:ring-accent" data-visual-edit-loc="src/components/CampaignForm.tsx:94:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="pl-4 font-semibold text-soft" data-visual-edit-loc="src/components/CampaignForm.tsx:95:27" data-visual-edit-component="span" data-visual-edit-editable="false">$</span>
+                  <input id="budget" min="0" step="any" inputmode="decimal" required="" placeholder="1000" class="w-full bg-transparent px-4 py-3 text-ink placeholder:text-muted/60 outline-none" data-visual-edit-loc="src/components/CampaignForm.tsx:96:14" data-visual-edit-component="input" data-visual-edit-editable="false" type="number" value="">
+                </div>
+              </div>
+              
+              <div data-visual-edit-loc="src/components/CampaignForm.tsx:90:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <label for="clicks" class="mb-2 block text-sm font-medium text-muted" data-visual-edit-loc="src/components/CampaignForm.tsx:91:12" data-visual-edit-component="label" data-visual-edit-editable="false">
+                  Clics Obtenidos
+                </label>
+                <div class="flex items-center rounded-xl bg-panel focus-within:ring-2 focus-within:ring-accent" data-visual-edit-loc="src/components/CampaignForm.tsx:94:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <input id="clicks" min="0" step="any" inputmode="decimal" required="" placeholder="500" class="w-full bg-transparent px-4 py-3 text-ink placeholder:text-muted/60 outline-none" data-visual-edit-loc="src/components/CampaignForm.tsx:96:14" data-visual-edit-component="input" data-visual-edit-editable="false" type="number" value="">
+                </div>
+              </div>
+              
+              <div data-visual-edit-loc="src/components/CampaignForm.tsx:90:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <label for="conversions" class="mb-2 block text-sm font-medium text-muted" data-visual-edit-loc="src/components/CampaignForm.tsx:91:12" data-visual-edit-component="label" data-visual-edit-editable="false">
+                  Conversiones / Ventas
+                </label>
+                <div class="flex items-center rounded-xl bg-panel focus-within:ring-2 focus-within:ring-accent" data-visual-edit-loc="src/components/CampaignForm.tsx:94:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <input id="conversions" min="0" step="any" inputmode="decimal" required="" placeholder="20" class="w-full bg-transparent px-4 py-3 text-ink placeholder:text-muted/60 outline-none" data-visual-edit-loc="src/components/CampaignForm.tsx:96:14" data-visual-edit-component="input" data-visual-edit-editable="false" type="number" value="">
+                </div>
+              </div>
+              
+              <div data-visual-edit-loc="src/components/CampaignForm.tsx:90:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <label for="ticket" class="mb-2 block text-sm font-medium text-muted" data-visual-edit-loc="src/components/CampaignForm.tsx:91:12" data-visual-edit-component="label" data-visual-edit-editable="false">
+                  Ticket Promedio
+                </label>
+                <div class="flex items-center rounded-xl bg-panel focus-within:ring-2 focus-within:ring-accent" data-visual-edit-loc="src/components/CampaignForm.tsx:94:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="pl-4 font-semibold text-soft" data-visual-edit-loc="src/components/CampaignForm.tsx:95:27" data-visual-edit-component="span" data-visual-edit-editable="false">$</span>
+                  <input id="ticket" min="0" step="any" inputmode="decimal" required="" placeholder="150" class="w-full bg-transparent px-4 py-3 text-ink placeholder:text-muted/60 outline-none" data-visual-edit-loc="src/components/CampaignForm.tsx:96:14" data-visual-edit-component="input" data-visual-edit-editable="false" type="number" value="">
+                </div>
+              </div>
+              
+              <div data-visual-edit-loc="src/components/CampaignForm.tsx:90:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <label for="margin" class="mb-2 block text-sm font-medium text-muted" data-visual-edit-loc="src/components/CampaignForm.tsx:91:12" data-visual-edit-component="label" data-visual-edit-editable="false">
+                  Margen de Beneficio
+                </label>
+                <div class="flex items-center rounded-xl bg-panel focus-within:ring-2 focus-within:ring-accent" data-visual-edit-loc="src/components/CampaignForm.tsx:94:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <input id="margin" min="0" step="any" inputmode="decimal" required="" placeholder="100" class="w-full bg-transparent px-4 py-3 text-ink placeholder:text-muted/60 outline-none" data-visual-edit-loc="src/components/CampaignForm.tsx:96:14" data-visual-edit-component="input" data-visual-edit-editable="false" type="number" value="100">
+                  <span class="pr-4 font-semibold text-soft" data-visual-edit-loc="src/components/CampaignForm.tsx:108:27" data-visual-edit-component="span" data-visual-edit-editable="false">%</span>
+                </div>
+              </div>
+            </div>
+            
+            <button type="submit" class="mt-7 flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-4 text-base font-bold text-white transition-colors hover:bg-accent-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent" data-visual-edit-loc="src/components/CampaignForm.tsx:114:6" data-visual-edit-component="button" data-visual-edit-editable="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" data-visual-edit-loc="src/components/CampaignForm.tsx:118:8" data-visual-edit-component="Plus" data-visual-edit-editable="false">
+                <path d="M5 12h14"></path>
+                <path d="M12 5v14"></path>
+              </svg>
+              Agregar a la comparativa
+            </button>
+          </form>
+
+          <section data-visual-edit-loc="src/pages/Index.tsx:167:10" data-visual-edit-component="section" data-visual-edit-editable="false">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-3" data-visual-edit-loc="src/pages/Index.tsx:168:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <h2 class="text-lg font-semibold text-ink" data-visual-edit-loc="src/pages/Index.tsx:169:14" data-visual-edit-component="h2" data-visual-edit-editable="true">
+                Tabla comparativa
+              </h2>
+            </div>
+            <div class="rounded-2xl bg-surface p-10 text-center text-muted ring-1 ring-line" data-visual-edit-loc="src/components/ComparisonTable.tsx:14:6" data-visual-edit-component="div" data-visual-edit-editable="true">
+              AÃºn no has agregado campaÃ±as. Complete el formulario para comenzar a comparar.
+            </div>
+          </section>
+
+          <section data-visual-edit-loc="src/pages/Index.tsx:183:10" data-visual-edit-component="section" data-visual-edit-editable="false">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-3" data-visual-edit-loc="src/pages/Index.tsx:184:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <h2 class="text-lg font-semibold text-ink" data-visual-edit-loc="src/pages/Index.tsx:185:14" data-visual-edit-component="h2" data-visual-edit-editable="true">
+                Presupuesto vs. Ingresos
+              </h2>
+            </div>
+            <div class="relative" data-visual-edit-loc="src/components/EmailGate.tsx:27:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <div class="pointer-events-none select-none blur-md brightness-90" aria-hidden="true" data-visual-edit-loc="src/components/EmailGate.tsx:28:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <div class="rounded-2xl bg-surface p-6 ring-1 ring-line sm:p-8" data-visual-edit-loc="src/pages/Index.tsx:202:14" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <p class="py-16 text-center text-muted" data-visual-edit-loc="src/pages/Index.tsx:206:18" data-visual-edit-component="p" data-visual-edit-editable="true">
+                    Agrega campaÃ±as para visualizar el grÃ¡fico comparativo.
+                  </p>
+                </div>
+              </div>
+              <div class="absolute inset-0 flex items-center justify-center p-4" data-visual-edit-loc="src/components/EmailGate.tsx:36:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <div class="w-full max-w-md rounded-2xl bg-surface/95 p-8 text-center ring-1 ring-line" data-visual-edit-loc="src/components/EmailGate.tsx:37:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-panel text-accent" data-visual-edit-loc="src/components/EmailGate.tsx:38:12" data-visual-edit-component="span" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock" data-visual-edit-loc="src/components/EmailGate.tsx:39:14" data-visual-edit-component="Lock" data-visual-edit-editable="false">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </span>
+                  <h3 class="text-lg font-bold text-ink" data-visual-edit-loc="src/components/EmailGate.tsx:41:12" data-visual-edit-component="h3" data-visual-edit-editable="true">
+                    Funciones avanzadas bloqueadas
+                  </h3>
+                  <p class="mt-2 text-sm text-muted" data-visual-edit-loc="src/components/EmailGate.tsx:42:12" data-visual-edit-component="p" data-visual-edit-editable="true">
+                    Ingresa tu correo para desbloquear el grÃ¡fico comparativo y la exportaciÃ³n a CSV.
+                  </p>
+                  
+                  <form class="mt-6 space-y-3" data-visual-edit-loc="src/components/EmailGate.tsx:46:12" data-visual-edit-component="form" data-visual-edit-editable="false">
+                    <input id="input-correo" required="" placeholder="tu@correo.com" class="w-full rounded-xl bg-panel px-4 py-3 text-center text-ink placeholder:text-muted/60 outline-none focus:ring-2 focus:ring-accent" data-visual-edit-loc="src/components/EmailGate.tsx:47:14" data-visual-edit-component="input" data-visual-edit-editable="false" type="email" value="">
+                    <button id="btn-enviar-lead" type="submit" class="w-full rounded-xl bg-accent py-3.5 font-bold text-white transition-colors hover:bg-accent-strong focus:outline-none focus-visible:ring-2 focus-visible:ring-accent" data-visual-edit-loc="src/components/EmailGate.tsx:61:14" data-visual-edit-component="button" data-visual-edit-editable="true">
+                      Desbloquear funciones
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script>
+    function registrarLead(event) {
+      event.preventDefault();
+      
+      const emailInput = document.getElementById('input-correo');
+      if (!emailInput) return;
+      
+      const email = emailInput.value;
+      if (!email) return;
+
+      // Reemplaza esta URL con la URL final de tu Web App de Google Apps Script
+      const scriptURL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors', // Fundamental para peticiones a Apps Script desde el frontend
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email })
+      })
+      .then(() => {
+        console.log('Lead registrado con Ã©xito.');
+        // Puedes agregar lÃ³gica aquÃ­ para ocultar el formulario o mostrar un mensaje
+      })
+      .catch(error => {
+        console.error('Error al registrar el lead:', error);
+      });
+    }
+
+    // Inicializar el evento asegurando que el DOM ha cargado
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnEnviar = document.getElementById('btn-enviar-lead');
+      if (btnEnviar) {
+        const leadForm = btnEnviar.closest('form');
+        if (leadForm) {
+          leadForm.addEventListener('submit', registrarLead);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

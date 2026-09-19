@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#1E3A8A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NubeParaPymes">
+  <link rel="apple-touch-icon" href="./favicon.png">
+  <title>Nube para Pymes — Portal de Herramientas</title>
+  <script src="./js/pwa-install.js"></script>
+  <script type="module" crossorigin="" src="./assets/index.js"></script>
+  <link rel="stylesheet" crossorigin="" href="./assets/index.css">
+</head>
+<body>
+  <div id="root">
+    <div class="min-h-screen bg-canvas">
+      
+      <!-- Encabezado Principal -->
+      <header class="console-grid relative overflow-hidden bg-header text-white">
+        <div class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand/20 blur-3xl"></div>
+        <div class="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-royal/30 blur-3xl"></div>
+        
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
+          <nav class="flex flex-col gap-4 py-5 sm:flex-row sm:items-center sm:justify-between">
+            <a href="./" class="flex items-center gap-2.5">
+              <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud h-5 w-5" aria-hidden="true">
+                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                </svg>
+              </span>
+              <span class="font-display text-xl font-bold tracking-tight">Nube<span class="text-brand-soft">ParaPymes</span></span>
+            </a>
+            
+            <div class="flex items-center gap-3">
+              <div class="relative w-full sm:w-72">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search pointer-events-none absolute left-3.5 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-brand-soft" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <input placeholder="Buscar herramienta..." aria-label="Buscar herramienta" class="w-full rounded-lg border border-white/15 bg-white/5 py-2.5 pl-10 pr-11 text-sm text-white placeholder:text-brand-soft/70 outline-none transition focus:border-brand focus:bg-white/10 focus:ring-2 focus:ring-brand/40" type="search" value="">
+                <button type="button" aria-label="Buscar por voz" aria-pressed="false" class="absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full transition-colors">
+                  <span class="relative flex h-7 w-7 items-center justify-center rounded-full transition-colors text-brand-soft hover:bg-white/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mic h-4 w-4" aria-hidden="true">
+                      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                      <line x1="12" x2="12" y1="19" y2="22"></line>
+                    </svg>
+                  </span>
+                </button>
+              </div>
+              
+              <button type="button" class="inline-flex shrink-0 items-center gap-2 rounded-lg bg-brand px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-royal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-download h-4 w-4" aria-hidden="true">
+                  <path d="M12 13v8l-4-4"></path>
+                  <path d="m12 21 4-4"></path>
+                  <path d="M4.393 15.269A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.436 8.284"></path>
+                </svg>
+                <span class="hidden sm:inline">Instalar App</span>
+              </button>
+              
+              <button type="button" role="switch" aria-checked="false" aria-label="Alternar modo oscuro" class="relative inline-flex h-9 w-16 shrink-0 items-center rounded-full border border-white/15 bg-white/10 px-1 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun absolute left-2 h-4 w-4 text-brand-soft" aria-hidden="true">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M12 2v2"></path>
+                  <path d="M12 20v2"></path>
+                  <path d="m4.93 4.93 1.41 1.41"></path>
+                  <path d="m17.66 17.66 1.41 1.41"></path>
+                  <path d="M2 12h2"></path>
+                  <path d="M20 12h2"></path>
+                  <path d="m6.34 17.66-1.41 1.41"></path>
+                  <path d="m19.07 4.93-1.41 1.41"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon absolute right-2 h-4 w-4 text-brand-soft" aria-hidden="true">
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+                <span class="z-10 flex h-7 w-7 items-center justify-center rounded-full bg-cta shadow transition-transform duration-300 translate-x-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun h-4 w-4 text-white" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2"></path>
+                    <path d="M12 20v2"></path>
+                    <path d="m4.93 4.93 1.41 1.41"></path>
+                    <path d="m17.66 17.66 1.41 1.41"></path>
+                    <path d="M2 12h2"></path>
+                    <path d="M20 12h2"></path>
+                    <path d="m6.34 17.66-1.41 1.41"></path>
+                    <path d="m19.07 4.93-1.41 1.41"></path>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </nav>
+          
+          <div class="max-w-3xl py-14 sm:py-20">
+            <span class="inline-flex items-center gap-2 rounded-full border border-brand-soft/30 bg-brand/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-soft">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal h-3.5 w-3.5" aria-hidden="true">
+                <line x1="21" x2="14" y1="4" y2="4"></line>
+                <line x1="10" x2="3" y1="4" y2="4"></line>
+                <line x1="21" x2="12" y1="12" y2="12"></line>
+                <line x1="8" x2="3" y1="12" y2="12"></line>
+                <line x1="21" x2="16" y1="20" y2="20"></line>
+                <line x1="12" x2="3" y1="20" y2="20"></line>
+                <line x1="14" x2="14" y1="2" y2="6"></line>
+                <line x1="8" x2="8" y1="10" y2="14"></line>
+                <line x1="16" x2="16" y1="18" y2="22"></line>
+              </svg>
+              22 herramientas gratuitas
+            </span>
+            <h1 class="mt-6 font-display text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl">
+              Potencia tu Pyme con nuestras <span class="text-brand-soft">Herramientas Gratuitas</span>
+            </h1>
+            <p class="mt-5 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
+              Un solo panel de control con todo lo que necesitas para calcular, vender, optimizar y hacer crecer tu negocio. Elige una herramienta y empieza en segundos.
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Panel y Directorio -->
+      <main class="mx-auto max-w-7xl space-y-8 px-5 py-10 sm:px-8">
+        
+        <!-- Mi Actividad -->
+        <section class="rounded-panel border border-line bg-surface shadow-[0_1px_2px_rgba(10,25,47,0.05)]">
+          <button type="button" aria-expanded="false" class="flex w-full items-center justify-between gap-4 px-5 py-4 sm:px-6">
+            <span class="flex items-center gap-3">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand/10 text-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity h-5 w-5" aria-hidden="true">
+                  <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"></path>
+                </svg>
+              </span>
+              <span class="text-left">
+                <span class="block font-display text-base font-bold text-fg">Mi Actividad</span>
+                <span class="block text-xs text-fg-muted">0 clics Â· 0 herramientas usadas</span>
+              </span>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-5 w-5 shrink-0 text-fg-muted transition-transform duration-300" aria-hidden="true">
+              <path d="m6 9 6 6 6-6"></path>
+            </svg>
+          </button>
+        </section>
+
+        <div>
+          <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 class="font-display text-2xl font-bold text-fg">Directorio de herramientas</h2>
+              <p class="mt-1 text-sm text-fg-muted">22 resultados</p>
+            </div>
+          </div>
+          
+          <!-- Filtros de CategorÃ­as -->
+          <div>
+            <div class="flex flex-wrap gap-2" role="tablist" aria-label="Filtrar por categorÃ­a">
+              <button type="button" role="tab" aria-selected="true" class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand border-brand bg-brand text-white shadow-[0_8px_20px_-10px_rgba(59,130,246,0.8)]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid h-4 w-4" aria-hidden="true">
+                  <rect width="7" height="7" x="3" y="3" rx="1"></rect>
+                  <rect width="7" height="7" x="14" y="3" rx="1"></rect>
+                  <rect width="7" height="7" x="14" y="14" rx="1"></rect>
+                  <rect width="7" height="7" x="3" y="14" rx="1"></rect>
+                </svg>
+                Todas
+                <span class="rounded-full px-1.5 text-xs bg-white/20 text-white">22</span>
+              </button>
+              <button type="button" role="tab" aria-selected="false" class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand border-line bg-surface text-fg-muted hover:border-brand hover:text-brand">
+                Marketing
+                <span class="rounded-full px-1.5 text-xs bg-elevated text-fg-muted">5</span>
+              </button>
+              <button type="button" role="tab" aria-selected="false" class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand border-line bg-surface text-fg-muted hover:border-brand hover:text-brand">
+                Finanzas
+                <span class="rounded-full px-1.5 text-xs bg-elevated text-fg-muted">4</span>
+              </button>
+              <button type="button" role="tab" aria-selected="false" class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand border-line bg-surface text-fg-muted hover:border-brand hover:text-brand">
+                Ventas
+                <span class="rounded-full px-1.5 text-xs bg-elevated text-fg-muted">4</span>
+              </button>
+              <button type="button" role="tab" aria-selected="false" class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand border-line bg-surface text-fg-muted hover:border-brand hover:text-brand">
+                Legal
+                <span class="rounded-full px-1.5 text-xs bg-elevated text-fg-muted">3</span>
+              </button>
+              <button type="button" role="tab" aria-selected="false" class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand border-line bg-surface text-fg-muted hover:border-brand hover:text-brand">
+                Operaciones
+                <span class="rounded-full px-1.5 text-xs bg-elevated text-fg-muted">2</span>
+              </button>
+              <button type="button" role="tab" aria-selected="false" class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand border-line bg-surface text-fg-muted hover:border-brand hover:text-brand">
+                Productividad
+                <span class="rounded-full px-1.5 text-xs bg-elevated text-fg-muted">4</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid de Herramientas -->
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          
+          <!-- Card 1 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-search h-6 w-6" aria-hidden="true">
+                    <path d="M21 6H3"></path>
+                    <path d="M10 12H3"></path>
+                    <path d="M10 18H3"></path>
+                    <circle cx="17" cy="15" r="3"></circle>
+                    <path d="m21 19-1.9-1.9"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Analizador de Titulares a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Marketing</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Analizador de Titulares</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">EvalÃºa el impacto psicolÃ³gico y SEO de tus titulares antes de publicarlos para maximizar tus clics.</p>
+              <a href="./analizador-titulares.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 2 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-check h-6 w-6" aria-hidden="true">
+                    <path d="m8 11 2 2 4-4"></path>
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Auditor SEO BÃ¡sico a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Marketing</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Auditor SEO BÃ¡sico</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Escanea tu web y verifica al instante si tus tÃ­tulos y metaetiquetas estÃ¡n optimizados para Google.</p>
+              <a href="./auditor-seo-basico.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 3 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ticket-percent h-6 w-6" aria-hidden="true">
+                    <path d="M2 9a3 3 0 1 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 1 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path>
+                    <path d="M9 9h.01"></path>
+                    <path d="m15 9-6 6"></path>
+                    <path d="M15 15h.01"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Calculadora de Descuentos a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Finanzas</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Calculadora de Descuentos</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Simula la rentabilidad de tus campaÃ±as promocionales y descubre tu punto de equilibrio exacto.</p>
+              <a href="./calculadora-descuentos-promociones.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 4 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck h-6 w-6" aria-hidden="true">
+                    <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+                    <path d="M15 18H9"></path>
+                    <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+                    <circle cx="17" cy="18" r="2"></circle>
+                    <circle cx="7" cy="18" r="2"></circle>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Calculadora de Flete Local a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Operaciones</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Calculadora de Flete Local</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Calcula los costos de despacho logÃ­stico al instante comparando peso real vs. volumÃ©trico.</p>
+              <a href="./calculadora-flete-envio-local.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 5 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt-text h-6 w-6" aria-hidden="true">
+                    <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path>
+                    <path d="M14 8H8"></path>
+                    <path d="M16 12H8"></path>
+                    <path d="M13 16H8"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Calculadora de Precios con IGV a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Finanzas</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Calculadora de Precios con IGV</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Fija los precios de tus productos correctamente y calcula tu margen de ganancia neto separando impuestos.</p>
+              <a href="./calculadora-precios-venta-igv.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 6 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-landmark h-6 w-6" aria-hidden="true">
+                    <line x1="3" x2="21" y1="22" y2="22"></line>
+                    <line x1="6" x2="6" y1="18" y2="11"></line>
+                    <line x1="10" x2="10" y1="18" y2="11"></line>
+                    <line x1="14" x2="14" y1="18" y2="11"></line>
+                    <line x1="18" x2="18" y1="18" y2="11"></line>
+                    <polygon points="12 2 20 7 4 7"></polygon>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Calculadora de PrÃ©stamos a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Finanzas</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Calculadora de PrÃ©stamos</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Proyecta pagos mensuales, simula pagos anticipados y descubre cuÃ¡nto ahorrarÃ¡s en intereses.</p>
+              <a href="./calculadora-prestamos-amortizaciones.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 7 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-cog h-6 w-6" aria-hidden="true">
+                    <circle cx="18" cy="15" r="3"></circle>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M10 15H6a4 4 0 0 0-4 4v2"></path>
+                    <path d="m21.7 16.4-.9-.3"></path>
+                    <path d="m15.2 13.9-.9-.3"></path>
+                    <path d="m16.6 18.7.3-.9"></path>
+                    <path d="m19.1 12.2.3-.9"></path>
+                    <path d="m19.6 18.7-.4-1"></path>
+                    <path d="m16.8 12.3-.4-1"></path>
+                    <path d="m14.3 16.6 1-.4"></path>
+                    <path d="m20.7 13.8 1-.4"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Calculadora de Sobrecostos Laborales a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Finanzas</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Calculadora de Sobrecostos Laborales</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Calcula el costo real de contratar personal proyectando gratificaciones, CTS y aportes de ley.</p>
+              <a href="./calculadora-sobrecostos-laborales.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 8 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column h-6 w-6" aria-hidden="true">
+                    <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                    <path d="M18 17V9"></path>
+                    <path d="M13 17V5"></path>
+                    <path d="M8 17v-3"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Comparador de CampaÃ±as a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Marketing</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Comparador de CampaÃ±as</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Mide y compara el rendimiento (ROI, CPA, CTR) de tus campaÃ±as de marketing en un solo panel interactivo.</p>
+              <a href="./comparador-campanas-avanzado.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 9 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard h-6 w-6" aria-hidden="true">
+                    <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                    <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                    <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                    <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Consola de CampaÃ±as UTM a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Marketing</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Consola de CampaÃ±as UTM</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Organiza, etiqueta y supervisa todos tus enlaces de seguimiento en un solo lugar.</p>
+              <a href="./consola-campanas.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 10 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-down h-6 w-6" aria-hidden="true">
+                    <path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21"></path>
+                    <path d="m14 19 3 3v-5.5"></path>
+                    <path d="m17 22 3-3"></path>
+                    <circle cx="9" cy="9" r="2"></circle>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Optimizador de ImÃ¡genes WebP a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Productividad</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Optimizador de ImÃ¡genes WebP</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Reduce el peso de tus fotos sin perder calidad para que tu web cargue a la velocidad del rayo.</p>
+              <a href="./conversor-optimizador-imagenes.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 11 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-6 w-6" aria-hidden="true">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                    <path d="M10 9H8"></path>
+                    <path d="M16 13H8"></path>
+                    <path d="M16 17H8"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Creador de Facturas Proforma a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Ventas</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Creador de Facturas Proforma</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Genera cotizaciones rÃ¡pidas, gestiona tu catÃ¡logo y envÃ­a propuestas profesionales al instante.</p>
+              <a href="./creador-facturas-proforma.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 12 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-check h-6 w-6" aria-hidden="true">
+                    <path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8"></path>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    <path d="m16 19 2 2 4-4"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Firma de Correo en HTML a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Productividad</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Firma de Correo en HTML</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">DiseÃ±a una firma de email corporativa y profesional compatible con Gmail y Outlook.</p>
+              <a href="./firma-correo-html.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 13 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-qr-code h-6 w-6" aria-hidden="true">
+                    <rect width="5" height="5" x="3" y="3" rx="1"></rect>
+                    <rect width="5" height="5" x="16" y="3" rx="1"></rect>
+                    <rect width="5" height="5" x="3" y="16" rx="1"></rect>
+                    <path d="M21 16h-3a2 2 0 0 0-2 2v3"></path>
+                    <path d="M21 21v.01"></path>
+                    <path d="M12 7v3a2 2 0 0 1-2 2H7"></path>
+                    <path d="M3 12h.01"></path>
+                    <path d="M12 3h.01"></path>
+                    <path d="M12 16v.01"></path>
+                    <path d="M16 12h1"></path>
+                    <path d="M21 12v.01"></path>
+                    <path d="M12 21v-1"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Enlaces y QR para WhatsApp a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Ventas</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Enlaces y QR para WhatsApp</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Crea links directos y cÃ³digos QR escaneables para que tus clientes inicien chats rÃ¡pidamente.</p>
+              <a href="./generador-codigos-qr.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 14 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-spreadsheet h-6 w-6" aria-hidden="true">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                    <path d="M8 13h2"></path>
+                    <path d="M14 13h2"></path>
+                    <path d="M8 17h2"></path>
+                    <path d="M14 17h2"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Generador de Cotizaciones a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Ventas</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Generador de Cotizaciones</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Arma propuestas comerciales estructuradas y envÃ­alas en formato PDF con la identidad de tu marca.</p>
+              <a href="./generador-cotizaciones.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 15 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette h-6 w-6" aria-hidden="true">
+                    <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+                    <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                    <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                    <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Paletas Corporativas a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Productividad</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Paletas Corporativas</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Extrae o genera esquemas de color profesionales para tu marca y asegura la armonÃ­a visual.</p>
+              <a href="./generador-paletas-corporativas.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 16 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-check h-6 w-6" aria-hidden="true">
+                    <path d="m16 16 2 2 4-4"></path>
+                    <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"></path>
+                    <path d="m7.5 4.27 9 5.15"></path>
+                    <polyline points="3.29 7 12 12 20.71 7"></polyline>
+                    <line x1="12" x2="12" y1="22" y2="12"></line>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar PolÃ­ticas de DevoluciÃ³n a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Legal</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">PolÃ­ticas de DevoluciÃ³n</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Redacta textos claros sobre garantÃ­as y reembolsos basados en el tipo de producto que vendes.</p>
+              <a href="./generador-politicas-devolucion.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 17 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scale h-6 w-6" aria-hidden="true">
+                    <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                    <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                    <path d="M7 21h10"></path>
+                    <path d="M12 3v18"></path>
+                    <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar PolÃ­ticas y TÃ©rminos a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Legal</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">PolÃ­ticas y TÃ©rminos</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Crea los documentos legales obligatorios (Privacidad y Aviso Legal) para tu web o tienda online.</p>
+              <a href="./generador-politicas-terminos.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 18 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-messages-square h-6 w-6" aria-hidden="true">
+                    <path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"></path>
+                    <path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Guiones para Objeciones a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Ventas</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Guiones para Objeciones</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Equipa a tu equipo de ventas con las mejores respuestas ante cualquier cliente difÃ­cil.</p>
+              <a href="./guiones-manejo-objeciones.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 19 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-range h-6 w-6" aria-hidden="true">
+                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                    <path d="M16 2v4"></path>
+                    <path d="M3 10h18"></path>
+                    <path d="M8 2v4"></path>
+                    <path d="M17 14h-6"></path>
+                    <path d="M13 18H7"></path>
+                    <path d="M7 14h.01"></path>
+                    <path d="M17 18h.01"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Matriz de Contenidos a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Marketing</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Matriz de Contenidos</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Planifica, estructura y recicla las publicaciones de tus redes sociales en un tablero interactivo.</p>
+              <a href="./organizador-matriz-contenidos.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+          <!-- Card 20 -->
+          <div>
+            <article class="group flex h-full flex-col rounded-panel border border-line bg-surface p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:shadow-[0_18px_40px_-18px_rgba(30,58,138,0.35)]">
+              <div class="mb-5 flex items-start justify-between">
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-royal transition-colors duration-300 group-hover:bg-brand group-hover:text-white dark:text-brand-soft">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-cog h-6 w-6" aria-hidden="true">
+                    <circle cx="12" cy="17" r="3"></circle>
+                    <path d="M4.2 15.1A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.2"></path>
+                    <path d="m15.7 18.4-.9-.3"></path>
+                    <path d="m9.2 15.9-.9-.3"></path>
+                    <path d="m10.6 20.7.3-.9"></path>
+                    <path d="m13.1 14.2.3-.9"></path>
+                    <path d="m13.6 20.7-.4-1"></path>
+                    <path d="m10.8 14.3-.4-1"></path>
+                    <path d="m8.3 18.6 1-.4"></path>
+                    <path d="m14.7 15.8 1-.4"></path>
+                  </svg>
+                </div>
+                <button type="button" aria-pressed="false" aria-label="Agregar Simulador TCO: FÃ­sico vs Nube a favoritos" class="rounded-lg p-1.5 text-fg-muted transition-colors hover:bg-cta/10 hover:text-cta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all scale-100" aria-hidden="true">
+                    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="mb-2 text-xs font-semibold uppercase tracking-widest text-brand">Operaciones</span>
+              <h3 class="font-display text-lg font-bold leading-snug text-fg">Simulador TCO: FÃ­sico vs Nube</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-fg-muted">Compara los costos totales entre comprar infraestructura fÃ­sica o alquilar servicios Cloud.</p>
+              <a href="./simulador-tco-fisico-nube.html" class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+                Abrir Herramienta
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </article>
+          </div>
+
+        </div>
+
+      </main>
+
+      <!-- Footer -->
+      <footer class="border-t border-line bg-surface">
+        <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 py-8 sm:flex-row sm:px-8">
+          <div class="flex items-center gap-2.5">
+            <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud h-4 w-4" aria-hidden="true">
+                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+              </svg>
+            </span>
+            <span class="font-display font-bold text-fg">NubeParaPymes</span>
+          </div>
+          <p class="text-sm text-fg-muted">Â© 2026 NubeParaPymes Â· Herramientas gratuitas para tu negocio.</p>
+        </div>
+      </footer>
+
+      <!-- BotÃ³n Flotante Settings -->
+      <button type="button" aria-label="Configuraciones globales" class="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-cta text-white shadow-[0_12px_30px_-8px_rgba(249,115,22,0.7)] transition-transform hover:scale-105 hover:bg-cta-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cta">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings h-6 w-6" aria-hidden="true">
+          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </button>
+
+      <!-- Modal Tour / Onboarding -->
+      <!-- Nota: Se puede ocultar aÃ±adiendo clases como 'hidden' mediante JS -->
+      <div class="fixed inset-0 z-[60]" id="tour-modal">
+        <div class="absolute inset-0 bg-navy-950/40 backdrop-blur-[2px]"></div>
+        
+        <!-- Foco simulado del Tour (PosiciÃ³n estÃ¡tica para demostraciÃ³n, se manejarÃ­a con JS) -->
+        <div class="pointer-events-none absolute rounded-xl ring-2 ring-brand transition-all duration-300 hidden md:block" style="top: 12px; left: 769px; width: 304px; height: 58px; box-shadow: rgba(6, 13, 26, 0.78) 0px 0px 0px 9999px;"></div>
+        
+        <!-- Tooltip del Tour -->
+        <div class="absolute w-[320px] max-w-[calc(100vw-32px)] rounded-xl border border-line bg-surface p-4 shadow-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:translate-x-0 md:translate-y-0 md:top-[84px] md:left-[769px]">
+          <div class="mb-1 flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-widest text-brand">Paso 1 de 3</span>
+            <button type="button" class="text-xs font-medium text-fg-muted hover:text-fg" onclick="document.getElementById('tour-modal').classList.add('hidden')">Saltar Tour</button>
+          </div>
+          <h3 class="font-display text-base font-bold text-fg">Buscador inteligente</h3>
+          <p class="mt-1 text-sm leading-relaxed text-fg-muted">Escribe el nombre de una herramienta. Tolera errores de tipeo y resalta las coincidencias al instante.</p>
+          <div class="mt-3 flex gap-1.5">
+            <span class="h-1.5 rounded-full transition-all w-5 bg-brand"></span>
+            <span class="h-1.5 rounded-full transition-all w-1.5 bg-line"></span>
+            <span class="h-1.5 rounded-full transition-all w-1.5 bg-line"></span>
+          </div>
+          <div class="mt-4 flex items-center justify-between gap-2">
+            <button type="button" disabled="" class="rounded-lg px-3 py-2 text-sm font-semibold text-fg-muted transition-colors hover:bg-elevated disabled:opacity-40">AtrÃ¡s</button>
+            <button type="button" class="rounded-lg bg-cta px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-cta-strong" onclick="document.getElementById('tour-modal').classList.add('hidden')">Siguiente</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
+

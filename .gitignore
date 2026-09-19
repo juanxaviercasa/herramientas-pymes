@@ -1,0 +1,6 @@
+# Local environment wrapper
+powershell.cmd
+
+# OS generated files
+.DS_Store
+Thumbs.db

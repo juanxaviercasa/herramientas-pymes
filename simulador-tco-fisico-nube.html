@@ -1,0 +1,563 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Simulador TCO Â· FÃ­sico vs. Nube</title>
+    <script type="module" crossorigin="" src="./js/simulador-tco-fisico-nube.js"></script>
+    <link rel="stylesheet" crossorigin="" href="./css/simulador-tco-fisico-nube.css">
+</head>
+<body>
+    <div id="root">
+        <div class="min-h-screen">
+            <header class="border-b border-border bg-surface">
+                <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5">
+                    <div class="flex items-center gap-3">
+                        <span class="grid h-11 w-11 place-items-center rounded-xl bg-navy text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layers">
+                                <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"></path>
+                                <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"></path>
+                                <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"></path>
+                            </svg>
+                        </span>
+                        <div>
+                            <h1 class="font-display text-xl font-bold text-navy">Simulador Empresa de Infraestructura TI</h1>
+                            <p class="text-sm text-blue-light">TCO Multi-Nodo Â· FÃ­sico vs. Cloud Â· AnÃ¡lisis de Sensibilidad</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-navy-soft transition hover:border-blue hover:text-blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save">
+                                <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                                <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"></path>
+                                <path d="M7 3v4a1 1 0 0 0 1 1h7"></path>
+                            </svg>
+                            Guardar Escenario
+                        </button>
+                        <button class="flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-navy-soft transition hover:border-blue hover:text-blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share2">
+                                <circle cx="18" cy="5" r="3"></circle>
+                                <circle cx="6" cy="12" r="3"></circle>
+                                <circle cx="18" cy="19" r="3"></circle>
+                                <line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
+                                <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
+                            </svg>
+                            Compartir
+                        </button>
+                        <button class="flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-navy-soft transition hover:border-blue hover:text-blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" x2="12" y1="15" y2="3"></line>
+                            </svg>
+                            CSV
+                        </button>
+                        <button class="flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-strong">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                <path d="M10 9H8"></path>
+                                <path d="M16 13H8"></path>
+                                <path d="M16 17H8"></path>
+                            </svg>
+                            Informe en PDF
+                        </button>
+                    </div>
+                </div>
+                <div class="mx-auto max-w-6xl px-5 pb-4">
+                    <div class="inline-flex gap-1 rounded-xl border border-border bg-canvas p-1">
+                        <button class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition bg-navy text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal">
+                                <line x1="21" x2="14" y1="4" y2="4"></line>
+                                <line x1="10" x2="3" y1="4" y2="4"></line>
+                                <line x1="21" x2="12" y1="12" y2="12"></line>
+                                <line x1="8" x2="3" y1="12" y2="12"></line>
+                                <line x1="21" x2="16" y1="20" y2="20"></line>
+                                <line x1="12" x2="3" y1="20" y2="20"></line>
+                                <line x1="14" x2="14" y1="2" y2="6"></line>
+                                <line x1="8" x2="8" y1="10" y2="14"></line>
+                                <line x1="16" x2="16" y1="18" y2="22"></line>
+                            </svg> 
+                            Simulador
+                        </button>
+                        <button class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition text-navy-soft hover:text-navy">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-columns2">
+                                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                <path d="M12 3v18"></path>
+                            </svg> 
+                            Comparador (0)
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <main class="mx-auto max-w-6xl space-y-8 px-5 py-8">
+                <!-- KPI Cards -->
+                <div class="grid gap-4 sm:grid-cols-3">
+                    <div class="rounded-2xl border border-border bg-surface p-5">
+                        <div class="flex items-center gap-2 text-navy-soft">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-server">
+                                <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                                <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                                <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                                <line x1="6" x2="6.01" y1="18" y2="18"></line>
+                            </svg>
+                            <span class="text-[13px] font-medium">TCO FÃ­sico a 3 AÃ±os</span>
+                        </div>
+                        <p class="tnum mt-3 text-3xl font-semibold text-navy">45,500 USD</p>
+                        <div class="mt-2 h-1 w-10 rounded-full bg-accent"></div>
+                    </div>
+                    <div class="rounded-2xl border border-border bg-surface p-5">
+                        <div class="flex items-center gap-2 text-navy-soft">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud">
+                                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                            </svg>
+                            <span class="text-[13px] font-medium">TCO Cloud a 3 AÃ±os</span>
+                        </div>
+                        <p class="tnum mt-3 text-3xl font-semibold text-navy">38,957 USD</p>
+                        <div class="mt-2 h-1 w-10 rounded-full bg-blue"></div>
+                    </div>
+                    <div class="relative overflow-hidden rounded-2xl bg-navy p-5 text-white">
+                        <div class="flex items-center gap-2 text-blue-light">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-down">
+                                <polyline points="22 17 13.5 8.5 8.5 13.5 2 7"></polyline>
+                                <polyline points="16 17 22 17 22 11"></polyline>
+                            </svg>
+                            <span class="text-[13px] font-medium">Ahorro Total (3 AÃ±os)</span>
+                        </div>
+                        <p class="tnum mt-3 text-3xl font-semibold text-accent">6,543 USD</p>
+                        <p class="mt-2 text-xs text-blue-light">OpciÃ³n mÃ¡s econÃ³mica: <span class="font-semibold text-white">Infraestructura Cloud</span></p>
+                        <div class="pointer-events-none absolute -right-6 -bottom-6 h-24 w-24 rounded-full bg-accent/15"></div>
+                    </div>
+                </div>
+
+                <!-- Executive Summary -->
+                <section class="overflow-hidden rounded-2xl bg-navy p-6 text-white">
+                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="grid h-10 w-10 place-items-center rounded-lg bg-accent/20 text-accent">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles">
+                                    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                                    <path d="M20 3v4"></path>
+                                    <path d="M22 5h-4"></path>
+                                    <path d="M4 17v2"></path>
+                                    <path d="M5 18H3"></path>
+                                </svg>
+                            </span>
+                            <div>
+                                <h2 class="font-display text-lg font-semibold">Resumen Ejecutivo Inteligente</h2>
+                                <p class="text-xs text-blue-light">RecomendaciÃ³n generada a partir del anÃ¡lisis heurÃ­stico</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud">
+                                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                            </svg>
+                            Recomendado: Infraestructura Nube
+                        </div>
+                    </div>
+                    <p class="mt-4 text-[15px] leading-relaxed text-blue-pale">SegÃºn la simulaciÃ³n del clÃºster proyectado a 3 aÃ±os, recomendamos optar por la infraestructura Cloud, ya que representa un ahorro del 14% (6,543 USD) frente a la alternativa. La opciÃ³n recomendada se mantiene como la mÃ¡s rentable durante todo el horizonte de 36 meses, sin punto de quietud en el periodo analizado. El anÃ¡lisis de sensibilidad muestra que, bajo un escenario pesimista de crecimiento de uso (15%/aÃ±o), el TCO de la Nube a 3 aÃ±os ascenderÃ­a a 41,670 USD, mientras que en un escenario optimista (4%/aÃ±o) serÃ­a de 37,459 USD. Aun considerando la variabilidad, el Cloud ofrece la mejor relaciÃ³n costo-flexibilidad.</p>
+                </section>
+
+                <!-- Input Panel -->
+                <div class="space-y-5">
+                    <div class="grid gap-5 lg:grid-cols-2">
+                        <!-- Physical Cluster -->
+                        <section class="rounded-2xl border border-border bg-surface p-6">
+                            <header class="mb-4 flex items-center gap-3 border-b border-border pb-4">
+                                <span class="grid h-10 w-10 place-items-center rounded-lg bg-accent/10 text-accent-strong">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-server">
+                                        <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                                        <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                                        <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                                        <line x1="6" x2="6.01" y1="18" y2="18"></line>
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h2 class="font-display text-lg font-semibold text-navy">ClÃºster FÃ­sico</h2>
+                                    <p class="text-xs text-blue-light">1 nodo(s) Â· costos sumados</p>
+                                </div>
+                            </header>
+                            <div class="space-y-4">
+                                <div class="rounded-xl border border-border bg-canvas p-4">
+                                    <div class="mb-3 flex items-center gap-2">
+                                        <input placeholder="Nombre del nodo" class="min-w-0 flex-1 rounded-lg border border-border bg-surface px-3 py-2 text-sm font-medium text-navy outline-none transition focus:border-blue" value="Servidor Principal">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <label class="block">
+                                            <span class="text-[13px] font-medium text-navy-soft">Cantidad</span>
+                                            <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                                <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px] pl-3" type="number" value="1">
+                                                <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">nodos</span>
+                                            </div>
+                                        </label>
+                                        <label class="block">
+                                            <span class="text-[13px] font-medium text-navy-soft">Hardware inicial</span>
+                                            <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                                <span class="pl-3 pr-1 text-sm text-blue-light font-mono">$</span>
+                                                <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px]" type="number" value="12000">
+                                                <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">USD</span>
+                                            </div>
+                                        </label>
+                                        <label class="block">
+                                            <span class="text-[13px] font-medium text-navy-soft">EnergÃ­a / mes</span>
+                                            <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                                <span class="pl-3 pr-1 text-sm text-blue-light font-mono">$</span>
+                                                <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px]" type="number" value="220">
+                                                <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">USD</span>
+                                            </div>
+                                        </label>
+                                        <label class="block">
+                                            <span class="text-[13px] font-medium text-navy-soft">Internet / mes</span>
+                                            <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                                <span class="pl-3 pr-1 text-sm text-blue-light font-mono">$</span>
+                                                <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px]" type="number" value="180">
+                                                <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">USD</span>
+                                            </div>
+                                        </label>
+                                        <label class="block">
+                                            <span class="text-[13px] font-medium text-navy-soft">Mantenimiento / aÃ±o</span>
+                                            <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                                <span class="pl-3 pr-1 text-sm text-blue-light font-mono">$</span>
+                                                <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px]" type="number" value="3000">
+                                                <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">USD</span>
+                                            </div>
+                                        </label>
+                                        <label class="block">
+                                            <span class="text-[13px] font-medium text-navy-soft">Licencias / aÃ±o</span>
+                                            <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                                <span class="pl-3 pr-1 text-sm text-blue-light font-mono">$</span>
+                                                <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px]" type="number" value="2400">
+                                                <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">USD</span>
+                                            </div>
+                                        </label>
+                                        <label class="block">
+                                            <span class="text-[13px] font-medium text-navy-soft">Tiempo de inactividad / mes</span>
+                                            <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                                <span class="pl-3 pr-1 text-sm text-blue-light font-mono">$</span>
+                                                <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px]" type="number" value="150">
+                                                <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">USD</span>
+                                            </div>
+                                        </label>
+                                        <label class="block">
+                                            <span class="text-[13px] font-medium text-navy-soft">Valor de Rescate</span>
+                                            <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                                <span class="pl-3 pr-1 text-sm text-blue-light font-mono">$</span>
+                                                <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px]" type="number" value="2500">
+                                                <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">USD</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-blue/50 py-2.5 text-sm font-medium text-blue transition hover:bg-blue/5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus">
+                                    <path d="M5 12h14"></path>
+                                    <path d="M12 5v14"></path>
+                                </svg>
+                                Agregar Servidor
+                            </button>
+                        </section>
+
+                        <!-- Cloud Cluster -->
+                        <section class="rounded-2xl border border-border bg-surface p-6">
+                            <header class="mb-4 flex items-center gap-3 border-b border-border pb-4">
+                                <span class="grid h-10 w-10 place-items-center rounded-lg bg-blue/10 text-blue">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud">
+                                        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                                    </svg>
+                                </span>
+                                <div>
+                                    <h2 class="font-display text-lg font-semibold text-navy">ClÃºster Cloud</h2>
+                                    <p class="text-xs text-blue-light">1 instancia(s) Â· AWS Â· Azure Â· GCP</p>
+                                </div>
+                            </header>
+                            <div class="space-y-4">
+                                <div class="rounded-xl border border-border bg-canvas p-4">
+                                    <div class="mb-3 flex items-center gap-2">
+                                        <input placeholder="Nombre de la instancia" class="min-w-0 flex-1 rounded-lg border border-border bg-surface px-3 py-2 text-sm font-medium text-navy outline-none transition focus:border-blue" value="Instancia Principal">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <label class="block">
+                                            <span class="text-[13px] font-medium text-navy-soft">Cantidad</span>
+                                            <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                                <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px] pl-3" type="number" value="1">
+                                                <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">instancias</span>
+                                            </div>
+                                        </label>
+                                        <label class="block">
+                                            <span class="text-[13px] font-medium text-navy-soft">SuscripciÃ³n / mes</span>
+                                            <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                                <span class="pl-3 pr-1 text-sm text-blue-light font-mono">$</span>
+                                                <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px]" type="number" value="850">
+                                                <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">USD</span>
+                                            </div>
+                                        </label>
+                                        <label class="block">
+                                            <span class="text-[13px] font-medium text-navy-soft">Transferencia / mes</span>
+                                            <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                                <span class="pl-3 pr-1 text-sm text-blue-light font-mono">$</span>
+                                                <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px]" type="number" value="150">
+                                                <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">USD</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-blue/50 py-2.5 text-sm font-medium text-blue transition hover:bg-blue/5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus">
+                                    <path d="M5 12h14"></path>
+                                    <path d="M12 5v14"></path>
+                                </svg>
+                                Agregar instancia
+                            </button>
+                        </section>
+                    </div>
+
+                    <!-- Sensitivity Setting -->
+                    <section class="rounded-2xl border border-border bg-surface p-6">
+                        <header class="mb-4 flex items-center gap-3 border-b border-border pb-4">
+                            <span class="grid h-10 w-10 place-items-center rounded-lg bg-navy/5 text-navy">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up">
+                                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                                    <polyline points="16 7 22 7 22 13"></polyline>
+                                </svg>
+                            </span>
+                            <div>
+                                <h2 class="font-display text-lg font-semibold text-navy">AnÃ¡lisis de Sensibilidad Â· Crecimiento del Cloud</h2>
+                                <p class="text-xs text-blue-light">Tasa anual aplicada al Mes 13 y Mes 25 por escenario</p>
+                            </div>
+                        </header>
+                        <div class="grid gap-4 sm:grid-cols-3">
+                            <label class="block">
+                                <span class="text-[13px] font-medium text-navy-soft">Optimista (uso bajo)</span>
+                                <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                    <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px] pl-3" type="number" value="4">
+                                    <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">%</span>
+                                </div>
+                            </label>
+                            <label class="block">
+                                <span class="text-[13px] font-medium text-navy-soft">Realista (base)</span>
+                                <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                    <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px] pl-3" type="number" value="8">
+                                    <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">%</span>
+                                </div>
+                            </label>
+                            <label class="block">
+                                <span class="text-[13px] font-medium text-navy-soft">Pesimista (uso acelerado)</span>
+                                <div class="mt-1.5 flex items-center rounded-lg border border-border bg-canvas focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/20 transition">
+                                    <input min="0" inputmode="decimal" class="tnum w-full bg-transparent py-2.5 pr-2 text-navy outline-none text-[15px] pl-3" type="number" value="15">
+                                    <span class="pr-3 text-[11px] uppercase tracking-wide text-blue-light">%</span>
+                                </div>
+                            </label>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="flex justify-center">
+                    <button class="flex items-center gap-2 rounded-xl bg-accent px-8 py-3.5 font-display text-[15px] font-semibold text-white shadow-sm transition hover:bg-accent-strong active:scale-[0.98]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator">
+                            <rect width="16" height="20" x="4" y="2" rx="2"></rect>
+                            <line x1="8" x2="16" y1="6" y2="6"></line>
+                            <line x1="16" x2="16" y1="14" y2="18"></line>
+                            <path d="M16 10h.01"></path>
+                            <path d="M12 10h.01"></path>
+                            <path d="M8 10h.01"></path>
+                            <path d="M12 14h.01"></path>
+                            <path d="M8 14h.01"></path>
+                            <path d="M12 18h.01"></path>
+                            <path d="M8 18h.01"></path>
+                        </svg>
+                        Costos simultÃ¡neos
+                    </button>
+                </div>
+
+                <!-- Break-Even Banner -->
+                <div class="flex items-start gap-3 rounded-2xl border p-5 border-border bg-surface">
+                    <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-blue/10 text-blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-compare-arrows">
+                            <circle cx="5" cy="6" r="3"></circle>
+                            <path d="M12 6h5a2 2 0 0 1 2 2v7"></path>
+                            <path d="m15 9-3-3 3-3"></path>
+                            <circle cx="19" cy="18" r="3"></circle>
+                            <path d="M12 18H7a2 2 0 0 1-2-2V9"></path>
+                            <path d="m9 15 3 3-3 3"></path>
+                        </svg>
+                    </span>
+                    <div>
+                        <p class="text-[13px] font-semibold uppercase tracking-wide text-blue-light">Punto de Quiebre (Break-Even)</p>
+                        <p class="mt-1 font-display text-lg font-semibold text-navy">El Cloud se mantiene mÃ¡s econÃ³mico durante los 36 meses.</p>
+                    </div>
+                </div>
+
+                <!-- Chart: Cumulative Cost -->
+                <section class="rounded-2xl border border-border bg-surface p-6">
+                    <div class="mb-5">
+                        <h2 class="font-display text-lg font-semibold text-navy">Costo Acumulado del ClÃºster por Mes</h2>
+                        <p class="text-xs text-blue-light">Eje X: Mes 1 â†’ 36 Â· Eje Y: Costo acumulado Â· LÃ­nea naranja punteada = punto de quiebre</p>
+                    </div>
+                    <div class="h-[380px] w-full">
+                        <canvas width="1062" height="380" style="display: block; box-sizing: border-box; height: 380px; width: 1062px;"></canvas>
+                    </div>
+                </section>
+
+                <!-- Sensitivity Cards & Chart -->
+                <section class="space-y-4">
+                    <div>
+                        <h2 class="font-display text-lg font-semibold text-navy">AnÃ¡lisis de Sensibilidad de la Nube</h2>
+                        <p class="text-xs text-blue-light">Impacto del crecimiento de uso: Optimista Â· Realista Â· Pesimista</p>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-3">
+                        <div class="rounded-2xl border border-border bg-surface p-5">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[13px] font-semibold text-navy">Optimista</span>
+                                <span class="tnum rounded-full bg-blue-pale/70 px-2 py-0.5 text-xs text-navy-soft">+ 4 % / aÃ±o</span>
+                            </div>
+                            <p class="mt-3 text-[11px] uppercase tracking-wide text-blue-light">TCO Cloud a 3 aÃ±os</p>
+                            <p class="tnum text-2xl font-semibold text-navy">37,459 USD</p>
+                            <div class="mt-2 h-1 w-10 rounded-full bg-blue"></div>
+                            <p class="mt-3 text-xs text-navy-soft">Ahorro vs. FÃ­sico: <span class="tnum font-semibold text-blue">8,041 USD</span></p>
+                            <p class="mt-1 text-xs text-blue-light">Sin cruce en 36 meses</p>
+                        </div>
+                        <div class="rounded-2xl border border-border bg-surface p-5">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[13px] font-semibold text-navy">Realista</span>
+                                <span class="tnum rounded-full bg-blue-pale/70 px-2 py-0.5 text-xs text-navy-soft">+ 8 % / aÃ±o</span>
+                            </div>
+                            <p class="mt-3 text-[11px] uppercase tracking-wide text-blue-light">TCO Cloud a 3 aÃ±os</p>
+                            <p class="tnum text-2xl font-semibold text-navy">38,957 USD</p>
+                            <div class="mt-2 h-1 w-10 rounded-full bg-blue"></div>
+                            <p class="mt-3 text-xs text-navy-soft">Ahorro vs. FÃ­sico: <span class="tnum font-semibold text-blue">6,543 USD</span></p>
+                            <p class="mt-1 text-xs text-blue-light">Sin cruce en 36 meses</p>
+                        </div>
+                        <div class="rounded-2xl border border-border bg-surface p-5">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[13px] font-semibold text-navy">Pesimista</span>
+                                <span class="tnum rounded-full bg-blue-pale/70 px-2 py-0.5 text-xs text-navy-soft">+ 15 % / aÃ±o</span>
+                            </div>
+                            <p class="mt-3 text-[11px] uppercase tracking-wide text-blue-light">TCO Cloud a 3 aÃ±os</p>
+                            <p class="tnum text-2xl font-semibold text-navy">41,670 USD</p>
+                            <div class="mt-2 h-1 w-10 rounded-full bg-accent"></div>
+                            <p class="mt-3 text-xs text-navy-soft">Ahorro vs. FÃ­sico: <span class="tnum font-semibold text-blue">3,830 USD</span></p>
+                            <p class="mt-1 text-xs text-blue-light">Sin cruce en 36 meses</p>
+                        </div>
+                    </div>
+                    <div class="rounded-2xl border border-border bg-surface p-6">
+                        <div class="h-[340px] w-full">
+                            <canvas width="1062" height="340" style="display: block; box-sizing: border-box; height: 340px; width: 1062px;"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Projection Detail Table -->
+                <section class="space-y-3">
+                    <h2 class="font-display text-lg font-semibold text-navy">Detalle de la ProyecciÃ³n</h2>
+                    <div class="overflow-hidden rounded-2xl border border-border bg-surface">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="bg-blue-pale/60 text-left text-navy-soft">
+                                    <th class="px-5 py-3 font-medium">Horizonte</th>
+                                    <th class="px-5 py-3 text-right font-medium">TCO FÃ­sico</th>
+                                    <th class="px-5 py-3 text-right font-medium">TCO Cloud</th>
+                                    <th class="px-5 py-3 text-right font-medium">Diferencia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-border">
+                                    <td class="px-5 py-3 font-medium text-navy">AÃ±o 1</td>
+                                    <td class="tnum px-5 py-3 text-right text-navy-soft">24,000 USD</td>
+                                    <td class="tnum px-5 py-3 text-right text-navy-soft">12,000 USD</td>
+                                    <td class="tnum px-5 py-3 text-right font-semibold text-accent-strong">âˆ’ 12,000 USD</td>
+                                </tr>
+                                <tr class="border-t border-border">
+                                    <td class="px-5 py-3 font-medium text-navy">AÃ±o 2</td>
+                                    <td class="tnum px-5 py-3 text-right text-navy-soft">36,000 USD</td>
+                                    <td class="tnum px-5 py-3 text-right text-navy-soft">24,960 USD</td>
+                                    <td class="tnum px-5 py-3 text-right font-semibold text-accent-strong">âˆ’ 11,040 USD</td>
+                                </tr>
+                                <tr class="border-t border-border">
+                                    <td class="px-5 py-3 font-medium text-navy">AÃ±o 3</td>
+                                    <td class="tnum px-5 py-3 text-right text-navy-soft">45,500 USD</td>
+                                    <td class="tnum px-5 py-3 text-right text-navy-soft">38,957 USD</td>
+                                    <td class="tnum px-5 py-3 text-right font-semibold text-accent-strong">âˆ’ 6,543 USD</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-blue-light">TCO FÃ­sico a 3 aÃ±os 45,500 USD Â· TCO Cloud a 3 aÃ±os 38,957 USD</p>
+                </section>
+
+                <!-- Formulario de Captura de Leads Inyectado -->
+                <section class="mt-12 rounded-2xl border border-border bg-surface p-8 shadow-sm">
+                    <div class="mx-auto max-w-2xl text-center">
+                        <h2 class="font-display text-2xl font-bold text-navy">Â¿Quieres guardar este escenario?</h2>
+                        <p class="mt-2 text-sm text-blue-light">Ingresa tu correo para enviarte el reporte detallado y los resultados de tu simulaciÃ³n en PDF.</p>
+                        <form class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row" onsubmit="registrarLead(event)">
+                            <div class="w-full sm:max-w-xs">
+                                <label for="input-correo" class="sr-only">Correo electrÃ³nico</label>
+                                <input type="email" id="input-correo" required placeholder="tu@correo.com" class="w-full rounded-lg border border-border bg-canvas px-4 py-3 text-sm text-navy outline-none transition focus:border-blue focus:ring-2 focus:ring-blue/20">
+                            </div>
+                            <button type="submit" id="btn-enviar-lead" class="w-full rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:bg-accent-strong sm:w-auto">
+                                Enviar Reporte
+                            </button>
+                        </form>
+                    </div>
+                </section>
+                
+            </main>
+            
+            <footer class="border-t border-border py-6 text-center text-xs text-blue-light">
+                Simulador de TCO Â· Los valores son estimaciones basadas en los parÃ¡metros ingresados.
+            </footer>
+        </div>
+    </div>
+
+    <!-- Script Nativo de Captura de Leads (UbicaciÃ³n Validada) -->
+    <script>
+        function registrarLead(event) {
+            event.preventDefault();
+            
+            const inputCorreo = document.getElementById('input-correo');
+            const btnEnviar = document.getElementById('btn-enviar-lead');
+            
+            if (!inputCorreo || !inputCorreo.value) return;
+            
+            const correo = inputCorreo.value;
+            const textoOriginal = btnEnviar.innerText;
+            
+            // UI State Change
+            btnEnviar.innerText = 'Enviando...';
+            btnEnviar.disabled = true;
+            
+            // Configura aquÃ­ tu URL de Google Apps Script 
+            const scriptURL = 'https://script.google.com/macros/s/TU_ID_DE_SCRIPT/exec';
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: correo })
+            })
+            .then(() => {
+                alert('Â¡Gracias! El reporte ha sido enviado con Ã©xito a ' + correo);
+                inputCorreo.value = '';
+                btnEnviar.innerText = textoOriginal;
+                btnEnviar.disabled = false;
+            })
+            .catch(error => {
+                console.error('Error al registrar el lead:', error);
+                alert('Hubo un problema al enviar tu reporte. Por favor, intenta nuevamente.');
+                btnEnviar.innerText = textoOriginal;
+                btnEnviar.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
+

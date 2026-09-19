@@ -1,0 +1,641 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Genera contratos de prestaciÃ³n de servicios profesionales en segundos, con previsualizaciÃ³n en vivo y exportaciÃ³n a PDF.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Generador de Contratos de PrestaciÃ³n de Servicios</title>
+
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/content/location/location.js" id="eppiocemhmnlbhjplcgkofciiegomcon"></script>
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script>
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script>
+
+  <script type="module" crossorigin="" src="./js/generador-contratos-servicios.js"></script>
+  <link rel="stylesheet" crossorigin="" href="./css/generador-contratos-servicios.css">
+
+  <script>
+    (() => {
+      let e = new URLSearchParams(window.location.search).get("sgv");
+      if (!e) return;
+      function t(t) {
+        try {
+          if (!t) return t;
+          let n = window.location.origin, r = new URL(String(t), n);
+          return r.origin === n && r.searchParams.get("sgv") !== e ? (r.searchParams.set("sgv", e), r.href) : t;
+        } catch {
+          return t;
+        }
+      }
+      let n = window.open;
+      window.open = function(...e) {
+        return e[0] &&= t(e[0]), n.apply(this, e);
+      };
+      let r = window.location.assign.bind(window.location);
+      window.location.assign = function(e) {
+        r(t(e));
+      };
+      let i = window.location.replace.bind(window.location);
+      window.location.replace = function(e) {
+        i(t(e));
+      };
+      let a = history.pushState;
+      history.pushState = function(...e) {
+        return e[2] &&= t(e[2]), a.apply(this, e);
+      };
+      let o = history.replaceState;
+      history.replaceState = function(...e) {
+        return e[2] &&= t(e[2]), o.apply(this, e);
+      }, document.addEventListener("click", (e) => {
+        let n = e.target?.closest("a");
+        if (!n || !n.href || n.href.startsWith("mailto:") || n.href.startsWith("tel:") || n.href.startsWith("javascript:")) return;
+        let r = t(n.href), i = typeof r == "string" ? r : String(r);
+        n.href !== i && (n.href = i);
+      }, !0), document.addEventListener("submit", (t) => {
+        let n = t.target;
+        if (!n) return;
+        let r = n.querySelector("input[name=\"sgv\"]");
+        r || (r = document.createElement("input"), r.type = "hidden", r.name = "sgv", n.appendChild(r)), r.value = e;
+      });
+      let s = () => {
+        document.querySelectorAll("a").forEach((e) => {
+          if (e.href && !e.href.startsWith("javascript")) {
+            let n = t(e.href);
+            e.href = typeof n == "string" ? n : String(n);
+          }
+        });
+      };
+      document.readyState === "complete" || document.readyState === "interactive" ? s() : document.addEventListener("DOMContentLoaded", s);
+    })();
+  </script>
+  
+  <script type="text/javascript" charset="utf-8" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/200.js"></script>
+  <script type="text/javascript" charset="utf-8" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/101.js"></script>
+  
+  <script>
+    (function(){var e=`sg-preview`;function t(e){"@babel/helpers - typeof";return t=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},t(e)}function n(e,n){if(t(e)!=`object`||!e)return e;var r=e[Symbol.toPrimitive];if(r!==void 0){var i=r.call(e,n||`default`);if(t(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(e)}function r(e){var r=n(e,`string`);return t(r)==`symbol`?r:r+``}function i(e,t,n){return(t=r(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=class{constructor(e){if(i(this,`source`,void 0),i(this,`allowedOrigins`,void 0),i(this,`targetOrigin`,void 0),i(this,`debug`,void 0),i(this,`messageHandlers`,new Map),!e.allowedOrigins?.length)throw Error(`[EventCommunicator] allowedOrigins is required`);this.source=e.source,this.allowedOrigins=e.allowedOrigins,this.targetOrigin=e.targetOrigin||`*`,this.debug=e.debug||!1,e.messageHandlers&&this.registerMessageHandlers(e.messageHandlers),e.domEvents&&this.registerDOMEvents(e.domEvents),this.initMessageListener()}log(...e){this.debug&&console.log(`[EventCommunicator]`,...e)}formatEventType(t){return`${e}:${t}`}parseEventType(t){let n=`${e}:`;return t.startsWith(n)?t.slice(n.length):null}isOriginAllowed(e){return this.allowedOrigins.some(t=>t===`*`?!0:e===t||e.endsWith(t))}initMessageListener(){window.addEventListener(`message`,e=>{if(this.log(`Message received from:`,e.origin),!this.isOriginAllowed(e.origin)){console.warn(`[EventCommunicator] Wrong origin:`,e.origin);return}let t=e.data;if(!t?.type)return;let n=this.parseEventType(t.type);if(!n)return;this.log(`Parsed event type:`,n);let r=this.messageHandlers.get(n);r?r(t.payload):this.log(`No handler for:`,n)})}registerMessageHandlers(e){Object.entries(e).forEach(([e,t])=>{this.messageHandlers.set(e,t)})}registerDOMEvents(e){e.forEach(({event:e,handler:t,options:n})=>{window.addEventListener(e,t,n)})}getTargetWindow(){try{if(window.parent&&window.parent!==window)return window.parent;if(window.top&&window.top!==window)return window.top;if(window.opener)return window.opener}catch{if(window.parent&&window.parent!==window)return window.parent}return null}send(e,t){let n=this.getTargetWindow();if(!n)return;let r={type:this.formatEventType(e),source:this.source,payload:t??null,timestamp:new Date().toISOString()};n.postMessage(r,this.targetOrigin)}},o=`visual-editor`,s={ACTIVATE_INSPECTOR:`ACTIVATE_INSPECTOR`,DEACTIVATE_INSPECTOR:`DEACTIVATE_INSPECTOR`,MAKE_EDITABLE:`MAKE_EDITABLE`,APPLY_STYLE:`APPLY_STYLE`,CHANGE_TEXT_TYPE:`CHANGE_TEXT_TYPE`,ADD_LINK:`ADD_LINK`,INSERT_EMOJI:`INSERT_EMOJI`,CHANGE_IMAGE_SRC:`CHANGE_IMAGE_SRC`,SET_ALT_TEXT:`SET_ALT_TEXT`,SHOW_IMAGE_LOADING:`SHOW_IMAGE_LOADING`,HIDE_IMAGE_LOADING:`HIDE_IMAGE_LOADING`,TOGGLE_DEBUG:`TOGGLE_DEBUG`,CLEAR_SELECTION:`CLEAR_SELECTION`,UNDO:`UNDO`,REDO:`REDO`},c={ELEMENT_SELECTED:`ELEMENT_SELECTED`,ELEMENT_RECT_UPDATED:`ELEMENT_RECT_UPDATED`,SELECTION_CLEARED:`SELECTION_CLEARED`,CONTENT_CHANGED:`CONTENT_CHANGED`,STYLE_APPLIED:`STYLE_APPLIED`,TEXT_TYPE_CHANGE_REQUESTED:`TEXT_TYPE_CHANGE_REQUESTED`,LINK_CHANGE_REQUESTED:`LINK_CHANGE_REQUESTED`,EMOJI_INSERTED:`EMOJI_INSERTED`,IMAGE_SRC_CHANGED:`IMAGE_SRC_CHANGED`,ALT_TEXT_SET:`ALT_TEXT_SET`,EDITING_TEXT:`EDITING_TEXT`,HISTORY_STATE_CHANGED:`HISTORY_STATE_CHANGED`},l={LOC:`data-visual-edit-loc`,COMPONENT:`data-visual-edit-component`,EDITABLE:`data-visual-edit-editable`,OVERLAY:`data-visual-edit-overlay`,LABEL:`data-visual-edit-label`,LABEL_POSITION:`data-visual-edit-label-position`,DIMENSIONS:`data-visual-edit-dimensions`},u={BOLD:`bold`,ITALIC:`italic`,UNDERLINE:`underline`,LINE_THROUGH:`line-through`,COLOR:`color`,BACKGROUND_COLOR:`backgroundColor`,TEXT_ALIGN:`textAlign`,FONT_SIZE:`fontSize`},d={HOVER:`hover`,SELECTED:`selected`,LOADING:`loading`},f={SPAN:`span`,IMG:`img`,BUTTON:`button`,A:`a`},ee=[`h1`,`h2`,`h3`,`h4`,`h5`,`h6`,`p`,f.SPAN,`label`,`b`,`i`,`strong`,`em`,`small`,`mark`,`del`,`ins`,`sub`,`sup`,`div`,`li`,`dt`,`dd`],p=!1,m=`%c[Visual Editor]`,h=`color: #7c3aed; font-weight: bold;`,g={CONTENT_CHANGED:`âœï¸`,EMOJI_INSERTED:`ðŸ˜€`,STYLE_APPLIED:`ðŸŽ¨`,TEXT_TYPE_CHANGE_REQUESTED:`ðŸ”¤`,LINK_CHANGE_REQUESTED:`ðŸ”—`,IMAGE_SRC_CHANGED:`ðŸ–¼ï¸`,ALT_TEXT_SET:`ðŸ·ï¸`},_={CONTENT_CHANGED:`#059669`,EMOJI_INSERTED:`#d97706`,STYLE_APPLIED:`#2563eb`,TEXT_TYPE_CHANGE_REQUESTED:`#7c3aed`,LINK_CHANGE_REQUESTED:`#0891b2`,IMAGE_SRC_CHANGED:`#be185d`,ALT_TEXT_SET:`#be185d`},v=(e,t)=>{switch(e){case`STYLE_APPLIED`:{let e=t.style||t.after,n=t.before,r=t.after;return e===`fontSize`||t.fontSize?`fontSize: ${n} â†’ ${r} (preview: inline style)`:`${e}: ${n} â†’ ${r}`}case`TEXT_TYPE_CHANGE_REQUESTED`:{let e=t[`tag before`],n=t[`tag after`],r=t.fontSize,i=`<${e}> â†’ <${n}>`;return r?`${i} (preview: inline ${r})`:i}case`CONTENT_CHANGED`:return`"${String(t.after||``).slice(0,40)}"`;case`EMOJI_INSERTED`:return`${t.emoji} added`;default:return Object.entries(t).slice(0,2).map(([e,t])=>`${e}: ${t}`).join(`, `)}},y=()=>{p=!p,console.log(m+(p?` %cðŸŸ¢ Debug mode ENABLED`:` %cðŸ”´ Debug mode DISABLED`),h,`color: ${p?`#16a34a`:`#dc2626`}; font-weight: bold;`)},b=(e,t,n,r)=>{if(!p)return;let i=_[e]??`#6b7280`,a=g[e]??`ðŸ“`,o=n.tagName.toLowerCase(),s=v(e,r);console.groupCollapsed(`${m} %c${a} PREVIEW ${e}%c  <${o}>  %c${s}`,h,`color: ${i}; font-weight: bold;`,`color: #6b7280; font-weight: normal;`,`color: #0891b2; font-weight: normal;`),console.log(`%cLocation`,`font-weight: bold;`,t),console.log(`%cElement`,`font-weight: bold;`,`<${o}>`,n.className?`class="${n.className}"`:`(no class)`),console.log(`%cDetails`,`font-weight: bold;`,r),console.groupEnd()},x=e=>{let t=document.createElement(`div`);return t.innerHTML=`
+    <svg xmlns="http://www.w3.org/2000/svg" class="sg-icon-loader-circular" viewBox="25 25 50 50" style="width: ${e}px; height: ${e}px;">
+      <circle class="sg-icon-loader-path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+    </svg>
+  `,t},S=()=>`
+  .sg-icon-loader-circular {
+    animation: sg-preview-rotate 2s linear infinite;
+    transform-origin: center center;
+  }
+  .sg-icon-loader-path {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    animation: sg-preview-dash 1.5s ease-in-out infinite, sg-preview-color 6s ease-in-out infinite;
+    stroke-linecap: round;
+  }
+  @keyframes sg-preview-rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes sg-preview-dash {
+    0% {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -35px;
+    }
+    100% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -124px;
+    }
+  }
+  @keyframes sg-preview-color {
+    100%,
+    0% {
+      stroke: #ff7061;
+    }
+    40% {
+      stroke: #21ab61;
+    }
+    66% {
+      stroke: #4343F0;
+    }
+    80%,
+    90% {
+      stroke: #ff7061;
+    }
+  }
+`,C=new Map,w=(e,t,n)=>{E(t);let r=e.getBoundingClientRect(),i=window.getComputedStyle(e),a=document.createElement(`div`),o={position:`fixed`,top:`${r.top}px`,left:`${r.left}px`,width:`${r.width}px`,height:`${r.height}px`,pointerEvents:`none`,boxSizing:`border-box`,zIndex:`999999`,borderRadius:i.borderRadius||`0px`};if(t===`loading`){Object.assign(a.style,{...o,zIndex:`2147483647`,backdropFilter:`blur(4px)`,background:`rgba(255, 255, 255, 0.5)`,display:`flex`,flexDirection:`column`,alignItems:`center`,justifyContent:`center`,gap:`8px`});let e=0,t=`12px`,i=!1;if(r.width>=240&&r.height>=240?(e=80,t=`14px`,i=!0):r.width>=80&&r.height>=80?(e=52,t=`12px`,i=!0):r.width>=40&&r.height>=40?(e=24,i=!1):(e=0,i=!1),e>0){let t=x(e);a.appendChild(t)}if(i&&n?.text){let e=document.createElement(`div`);e.textContent=n.text,e.style.fontFamily=`Inter, sans-serif`,e.style.fontSize=t,e.style.fontWeight=`400`,e.style.color=`#212121`,a.appendChild(e)}}else Object.assign(a.style,{...o,boxShadow:`inset 0 0 0 1px #6164FF, 0 0 0 1px #4343F0`});if(a.setAttribute(l.OVERLAY,t),t===`hover`){let t=e.getAttribute(l.COMPONENT);if(t&&(a.setAttribute(l.LABEL,t),a.setAttribute(l.LABEL_POSITION,r.top<30?`bottom`:`top`)),e.tagName===f.IMG.toUpperCase()){let{width:e,height:t}=r;e>=100&&t>=100&&a.setAttribute(l.DIMENSIONS,`${Math.round(e)} x ${Math.round(t)} px`)}}document.body.appendChild(a),C.set(t,a)},T=(e,t)=>{let n=C.get(t);if(!n||!e)return;let r=e.getBoundingClientRect(),i=window.getComputedStyle(e);Object.assign(n.style,{top:`${r.top}px`,left:`${r.left}px`,width:`${r.width}px`,height:`${r.height}px`,borderRadius:i.borderRadius||`0px`})},E=e=>{let t=C.get(e);t?.parentNode?.removeChild(t),C.delete(e)},D=()=>{document.querySelectorAll(`[${l.OVERLAY}]`).forEach(e=>e.remove()),C.clear()},te=()=>{let e=document.createElement(`style`);e.textContent=`
+    .sg-cursor-text * {
+      cursor: text !important;
+    }
+    .sg-cursor-pointer * {
+      cursor: pointer !important;
+    }
+    [contenteditable="true"] {
+      outline: none !important;
+    }
+    [${l.OVERLAY}='hover']::before {
+      content: attr(${l.LABEL});
+      position: absolute;
+      left: 0;
+      background: #4343F0;
+      border-radius: 4px;
+      color: white;
+      padding: 2px 4px;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+    }
+    [${l.OVERLAY}='hover'][${l.LABEL_POSITION}='top']::before {
+      bottom: calc(100% + 4px);
+    }
+    [${l.OVERLAY}='hover'][${l.LABEL_POSITION}='bottom']::before {
+      top: calc(100% + 4px);
+    }
+    [${l.OVERLAY}='hover'][${l.DIMENSIONS}]::after {
+      content: attr(${l.DIMENSIONS});
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: #4343F0;
+      border-radius: 4px;
+      color: white;
+      padding: 2px 4px;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+    }
+    ${S()}
+  `,document.head.appendChild(e)},O=()=>{},k=()=>{},A=(e,t)=>{O=e,k=t},j=e=>e?.closest(`[${l.LOC}]`),M=e=>document.querySelector(`[${l.LOC}="${e}"]`),N=e=>{let t=e.getBoundingClientRect();return{top:t.top,left:t.left,width:t.width,height:t.height}},P=e=>{let t=e.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);if(!t)return e;let n=parseInt(t[1],10),r=parseInt(t[2],10),i=parseInt(t[3],10);return`#${((1<<24)+(n<<16)+(r<<8)+i).toString(16).slice(1)}`},F=e=>{let t=e.tagName.toLowerCase(),n=t===f.A?e:e.closest(f.A),r=e.hasAttribute(`href`)||!!n,i=e.getAttribute(`href`)||n?.getAttribute(`href`)||void 0,a=e.getAttribute(`target`)||n?.getAttribute(`target`)||void 0,o=e.getAttribute(`rel`)||n?.getAttribute(`rel`)||void 0,s=e.hasAttribute(`onclick`)||e.getAttribute(`type`)===`submit`,c=t===f.BUTTON?e.getAttribute(`type`)||`button`:void 0,u=e.getAttribute(l.EDITABLE)===`true`,d=window.getComputedStyle(e),p=P(d.color),m=P(d.backgroundColor),h=d.fontSize,g=e.getAttribute(`class`)||``,_=t===f.IMG?e.getAttribute(`alt`)||``:void 0,v=ee.includes(t),y=e.outerHTML,b=y.indexOf(`>`);return{hasHref:r,href:i,target:a,rel:o,hasOnClick:s,buttonType:c,isEditable:u,isTextElement:v,computedColor:p,computedBackgroundColor:m,computedFontSize:h,classNames:g,openingTag:b>=0?y.slice(0,b+1):y,alt:_}},I=(e,t)=>{if(e.children.length>0){let n=null;for(let t of Array.from(e.childNodes))if(t.nodeType===Node.TEXT_NODE&&(t.textContent||``).trim()!==``){n=t;break}n?n.textContent=t:e.appendChild(document.createTextNode(t))}else e.innerText=t},L=100,R=new class{constructor(){i(this,`past`,[]),i(this,`future`,[]),i(this,`emitFn`,void 0)}setEmitter(e){this.emitFn=e,this.notify()}notify(){this.emitFn?.(this.past.length>0,this.future.length>0)}push(e){this.past.push(e),this.future=[],L>0&&this.past.length>L&&this.past.shift(),this.notify()}undo(){let e=this.past.pop();e&&(e.undo(),this.future.push(e),this.notify())}redo(){let e=this.future.pop();e&&(e.redo(),this.past.push(e),this.notify())}clear(){this.past=[],this.future=[],this.notify()}},z=(e,t,n,r)=>{let i=t=>{let n=M(e);n&&(I(n,t),O(c.CONTENT_CHANGED,{loc:e,newContent:t,remainingIconCount:r}),k(n))};R.push({undo:()=>i(t),redo:()=>i(n)})},B=e=>{let{loc:t}=e,n=M(t);if(!n)return;let r=n.innerText.trim();if(Array.from(n.children).some(e=>e.tagName?.toLowerCase()!==`br`)){let e=null;for(let t of Array.from(n.childNodes))if(t.nodeType===Node.TEXT_NODE&&(t.textContent||``).trim()){e=t;break}if(!e){let t=document.createTextNode(``);n.appendChild(t),e=t}let r=e.textContent||``,i=document.createElement(f.SPAN);i.textContent=r,i.contentEditable=`true`,i.style.cssText=`outline:none;display:inline;min-width:2px;caret-color:auto;`,e.parentNode?.replaceChild(i,e);let a=document.createRange();a.selectNodeContents(i);let o=window.getSelection();o?.removeAllRanges(),o?.addRange(a),i.focus();let s=[];i.addEventListener(`keydown`,e=>{if(e.key===` `&&n.tagName===f.BUTTON.toUpperCase()){e.preventDefault(),document.execCommand(`insertText`,!1,` `);return}if((e.ctrlKey||e.metaKey)&&e.key===`z`&&s.length>0){e.preventDefault(),s.pop()?.();return}if(e.key===`Backspace`){let t=window.getSelection();if(t?.isCollapsed&&t?.anchorOffset===0){e.preventDefault();let t=i.previousElementSibling;if(t){let e=t.parentNode,n=t.nextSibling;s.push(()=>{n?e?.insertBefore(t,n):e?.appendChild(t)}),t.remove()}}}}),i.addEventListener(`input`,()=>{let e=(i.textContent||``)!==r;O(c.EDITING_TEXT,{loc:t,isDirty:e}),k(n)}),i.addEventListener(`blur`,()=>{let e=Array.from(n.children).filter(e=>e!==i&&e.tagName?.toLowerCase()!==`br`).length,a=i.innerText.trim(),o=document.createTextNode(i.innerText.trim());i.parentNode?.replaceChild(o,i),a!==r&&(b(c.CONTENT_CHANGED,t,n,{before:r,after:a}),O(c.CONTENT_CHANGED,{loc:t,newContent:a,remainingIconCount:e}),z(t,r,a,e)),O(c.EDITING_TEXT,{loc:t,isDirty:!1}),requestAnimationFrame(()=>k(n))},{once:!0});return}n.setAttribute(`contenteditable`,`true`),n.style.caretColor=`auto`,n.focus();let i=e=>{e.key===` `&&n.tagName===f.BUTTON.toUpperCase()&&(e.preventDefault(),document.execCommand(`insertText`,!1,` `))};n.addEventListener(`keydown`,i);let a=()=>{n.removeAttribute(`contenteditable`),n.style.caretColor=``,n.removeEventListener(`blur`,a),n.removeEventListener(`keydown`,i);let e=n.innerText.trim();e!==r&&(b(c.CONTENT_CHANGED,t,n,{before:r,after:e}),O(c.CONTENT_CHANGED,{loc:t,newContent:e}),z(t,r,e)),O(c.EDITING_TEXT,{loc:t,isDirty:!1}),requestAnimationFrame(()=>k(n))};n.addEventListener(`blur`,a)},V=(e,t)=>{let n=/[A-Z]/.test(t)?e.tagName.toLowerCase():t,r=document.createElement(n);for(let t of Array.from(e.attributes))r.setAttribute(t.name,t.value);return r.innerHTML=e.innerHTML,e.replaceWith(r),r},ne=e=>{let{loc:t,tag:n,fontSize:r}=e,i=M(t);if(!i)return;let a=i.getAttribute(l.COMPONENT)||i.tagName.toLowerCase(),o=i.tagName.toLowerCase(),s=window.getComputedStyle(i).fontSize;i.setAttribute(l.COMPONENT,n);let u=V(i,n);r&&(u.style.fontSize=r),b(c.TEXT_TYPE_CHANGE_REQUESTED,t,u,{"tag before":a,"tag after":n,fontSize:r??`(unchanged)`}),O(c.TEXT_TYPE_CHANGE_REQUESTED,{loc:t,tag:n,fontSize:r,classNames:u.className}),k(u);let d=(e,n,r)=>{let i=M(t);if(!i)return;i.setAttribute(l.COMPONENT,n);let a=V(i,e);r?a.style.fontSize=r:a.style.fontSize=``,O(c.TEXT_TYPE_CHANGE_REQUESTED,{loc:t,tag:n,fontSize:r,classNames:a.className}),k(a)};R.push({undo:()=>d(o,a,s),redo:()=>d(n,n,r)})},H=(e,t,n)=>{switch(t){case u.BOLD:e.style.fontWeight=n||``;break;case u.ITALIC:e.style.fontStyle=n||``;break;case u.UNDERLINE:case u.LINE_THROUGH:e.style.textDecoration=n||``;break;case u.COLOR:if(n){let t=[];Array.from(e.children).forEach(e=>{let n=e;n.style.color||t.push([n,window.getComputedStyle(n).color])}),e.style.color=n,t.forEach(([e,t])=>{e.style.color=t})}else e.style.color=``;break;case u.BACKGROUND_COLOR:e.style.backgroundColor=n||``;break;case u.TEXT_ALIGN:e.style.textAlign=n||``;break;case u.FONT_SIZE:e.style.fontSize=n||``;break}},re=e=>{let{style:t,value:n,loc:r}=e,i=M(r);if(!i)return;let a=window.getComputedStyle(i),o=n,s;switch(t){case u.BOLD:s=a.fontWeight,o=parseInt(a.fontWeight,10)>=700?`normal`:`bold`,H(i,t,o);break;case u.ITALIC:s=a.fontStyle,o=a.fontStyle===`italic`?`normal`:`italic`,H(i,t,o);break;case u.UNDERLINE:s=a.textDecoration,o=a.textDecoration.includes(`underline`)?`none`:`underline`,H(i,t,o);break;case u.LINE_THROUGH:s=a.textDecoration,o=a.textDecoration.includes(`line-through`)?`none`:`line-through`,H(i,t,o);break;case u.COLOR:s=a.color,n&&H(i,t,n);break;case u.BACKGROUND_COLOR:s=a.backgroundColor,n&&H(i,t,n);break;case u.TEXT_ALIGN:s=a.textAlign,n&&H(i,t,n);break;case u.FONT_SIZE:s=a.fontSize,n&&H(i,t,n);break}b(c.STYLE_APPLIED,r,i,{style:t,before:s??`(unknown)`,after:o??`(unchanged)`}),O(c.STYLE_APPLIED,{loc:r,style:t,value:o}),k(i);let l=e=>{let n=M(r);n&&(H(n,t,e),O(c.STYLE_APPLIED,{loc:r,style:t,value:e}),k(n))};R.push({undo:()=>l(s),redo:()=>l(o)})},ie=e=>{let{loc:t,href:n,target:r,rel:i}=e,a=M(t);if(!a)return;let o=a.closest(f.A)||(a.tagName.toLowerCase()===f.A?a:null),s=o?o.href:`(none)`,l=o?.getAttribute(`target`)??`(none)`,u=o?.getAttribute(`rel`)??`(none)`;if(o)o.href=n,r&&o.setAttribute(`target`,r),i&&o.setAttribute(`rel`,i);else{let e=document.createElement(f.A);e.href=n,r&&e.setAttribute(`target`,r),i&&e.setAttribute(`rel`,i),a.parentNode?.insertBefore(e,a),e.appendChild(a)}b(c.LINK_CHANGE_REQUESTED,t,a,{"href before":s,"href after":n,"target before":l,"target after":r??`(none)`,rel:i??`(none)`}),O(c.LINK_CHANGE_REQUESTED,{loc:t,href:n,target:r,rel:i});let d=(e,n,r,i)=>{let a=M(t);if(!a)return;let o=a.closest(f.A)||(a.tagName.toLowerCase()===f.A?a:null);if(e===`(none)`||!i&&e===`(none)`)if(o&&o!==a&&o.parentNode){for(;o.firstChild;)o.parentNode.insertBefore(o.firstChild,o);o.remove()}else o===a&&(o.removeAttribute(`href`),o.removeAttribute(`target`),o.removeAttribute(`rel`));else o||(o=document.createElement(f.A),a.parentNode&&(a.parentNode.insertBefore(o,a),o.appendChild(a))),o.href=e,n&&n!==`(none)`?o.setAttribute(`target`,n):o.removeAttribute(`target`),r&&r!==`(none)`?o.setAttribute(`rel`,r):o.removeAttribute(`rel`);O(c.LINK_CHANGE_REQUESTED,{loc:t,href:e===`(none)`?void 0:e,target:n===`(none)`?void 0:n,rel:r===`(none)`?void 0:r})};R.push({undo:()=>d(s,l,u,!!o),redo:()=>d(n,r,i,!!o)})},ae=e=>{let{loc:t,emoji:n}=e,r=M(t);if(!r)return;let i=r.innerText,a=r.querySelector(`[contenteditable="true"]`)||(r.isContentEditable?r:null);if(a){let e=window.getSelection();if(e&&e.rangeCount>0&&a.contains(e.anchorNode)){let t=e.getRangeAt(0);t.deleteContents();let r=document.createTextNode(n);t.insertNode(r),t.setStartAfter(r),t.collapse(!0),e.removeAllRanges(),e.addRange(t)}else a.appendChild(document.createTextNode(n));a.dispatchEvent(new Event(`input`,{bubbles:!0}))}else r.appendChild(document.createTextNode(n));let o=r.innerText;b(c.EMOJI_INSERTED,t,r,{emoji:n,before:i,after:o}),O(c.EMOJI_INSERTED,{loc:t,emoji:n,newContent:o}),k(r),B({loc:t});let s=e=>{let n=M(t);n&&(I(n,e),O(c.CONTENT_CHANGED,{loc:t,newContent:e}),k(n))};R.push({undo:()=>s(i),redo:()=>s(o)})},oe=e=>{let{loc:t,src:n}=e,r=M(t);if(!r)return;let i=r.tagName.toLowerCase()===f.IMG?r.src:`(not an img)`;r.tagName.toLowerCase()===f.IMG&&(r.src=n),b(c.IMAGE_SRC_CHANGED,t,r,{"src before":i,"src after":n}),O(c.IMAGE_SRC_CHANGED,{loc:t,src:n})},U=e=>{let{loc:t,alt:n}=e,r=M(t);if(!r)return;let i=r.tagName.toLowerCase()===f.IMG?r.alt:`(not an img)`;r.tagName.toLowerCase()===f.IMG&&(r.alt=n),b(c.ALT_TEXT_SET,t,r,{"alt before":i,"alt after":n}),O(c.ALT_TEXT_SET,{loc:t,alt:n});let a=e=>{let n=M(t);!n||n.tagName.toLowerCase()!==f.IMG||(n.alt=e,O(c.ALT_TEXT_SET,{loc:t,alt:e}))};R.push({undo:()=>a(i),redo:()=>a(n)})},W=!1,G=null,K=null,q=null,J=null,Y=e=>{document.body.classList.remove(`sg-cursor-text`,`sg-cursor-pointer`),e&&document.body.classList.add(`sg-cursor-${e}`)},X=(e,t)=>{J?.send(e,t)},se=e=>{if(e!==G)if(G&&!document.contains(G))G=e;else return;requestAnimationFrame(()=>{T(e,d.SELECTED),X(c.ELEMENT_RECT_UPDATED,{rect:N(e)})})},ce=()=>{W=!0,Y(`pointer`)},le=()=>{W=!1,Y(``),G=null,K=null,D(),R.clear()},ue=e=>{G=e,E(d.HOVER),K=null,w(e,d.SELECTED);let t=e.getAttribute(l.LOC)||``,n=t?document.querySelectorAll(`[${l.LOC}="${CSS.escape(t)}"]`):[],r=n.length>1,i=F(e),a=r?!1:i.isEditable;J.send(c.ELEMENT_SELECTED,{sourceLocation:t,componentName:e.getAttribute(l.COMPONENT)||``,elementType:e.tagName.toLowerCase(),textContent:(e.innerText||``).trim(),rect:N(e),...i,isEditable:a,...r&&{instanceIndex:Array.from(n).indexOf(e),totalInstances:n.length}});let o=a&&e.children.length===0,s=a&&e.children.length>0;(o||s)&&t&&(B({loc:t}),requestAnimationFrame(()=>T(e,d.SELECTED)))},Z=()=>{E(d.SELECTED),G=null,X(c.SELECTION_CLEARED)},de=e=>{let t=window.getComputedStyle(e);if(e.tagName===f.IMG.toUpperCase()){let e=t.filter||``,n=parseFloat(t.opacity);return e.includes(`blur`)||n<.5}let n=(e.innerText||``).trim()===``&&e.children.length===0,r=(t.backgroundImage||``).includes(`gradient`);return n&&r},Q=e=>{let t=document.elementsFromPoint(e.clientX,e.clientY),n=new Set;for(let e of t){let t=e.closest(`[${l.LOC}]`);if(!(!t||n.has(t))&&(n.add(t),!de(t)))return t}return j(e.target)},fe=()=>{D(),G=null,K=null},pe=e=>{if(!e){Y(`pointer`);return}let{isEditable:t,isTextElement:n}=F(e);Y(t&&n?`text`:`pointer`)},me=e=>{if(!W)return;let t=Q(e);if(pe(t),!t||t===G){E(d.HOVER),K=null;return}t!==K&&(K=t,w(t,d.HOVER))},he=e=>{W&&j(e.target)===K&&(E(d.HOVER),K=null,Y(`pointer`))},ge=e=>{if(!W||!J)return;let t=e,n=Q(t);if(n){if(t.preventDefault(),t.stopPropagation(),n===G)return;ue(n)}else G&&Z()},$=()=>{K&&T(K,d.HOVER),G&&(T(G,d.SELECTED),X(c.ELEMENT_RECT_UPDATED,{rect:N(G)})),q&&T(q,d.LOADING)},_e=e=>{if(G){q=G;let{text:t}=e||{};w(G,d.LOADING,{text:t||`Uploading...`})}},ve=()=>{q=null,E(d.LOADING)};function ye(e){if(J)return;J=new a({source:o,allowedOrigins:e,messageHandlers:{[s.ACTIVATE_INSPECTOR]:ce,[s.DEACTIVATE_INSPECTOR]:le,[s.MAKE_EDITABLE]:B,[s.APPLY_STYLE]:re,[s.CLEAR_SELECTION]:fe,[s.CHANGE_TEXT_TYPE]:ne,[s.ADD_LINK]:ie,[s.INSERT_EMOJI]:ae,[s.CHANGE_IMAGE_SRC]:oe,[s.SET_ALT_TEXT]:U,[s.SHOW_IMAGE_LOADING]:_e,[s.HIDE_IMAGE_LOADING]:ve,[s.TOGGLE_DEBUG]:y,[s.UNDO]:()=>R.undo(),[s.REDO]:()=>R.redo()},domEvents:[{event:`mouseover`,handler:me,options:!0},{event:`mouseout`,handler:he,options:!0},{event:`click`,handler:ge,options:!0},{event:`scroll`,handler:$,options:!0},{event:`resize`,handler:$,options:!0},{event:`input`,handler:$,options:!0}]}),A(X,se),te(),R.setEmitter((e,t)=>{X(c.HISTORY_STATE_CHANGED,{canUndo:e,canRedo:t})});let t=window.location.pathname,n=()=>{window.location.pathname!==t&&(t=window.location.pathname,R.clear(),Z())},r=history.pushState;history.pushState=function(...e){let t=r.apply(this,e);return n(),t};let i=history.replaceState;history.replaceState=function(...e){let t=i.apply(this,e);return n(),t},window.addEventListener(`popstate`,n)}ye([`.siteground.ai`,`.sgdev.eu`])})();</script>
+  <style>
+    .sg-cursor-text * {
+      cursor: text !important;
+    }
+    .sg-cursor-pointer * {
+      cursor: pointer !important;
+    }
+    [contenteditable="true"] {
+      outline: none !important;
+    }
+    [data-visual-edit-overlay='hover']::before {
+      content: attr(data-visual-edit-label);
+      position: absolute;
+      left: 0;
+      background: #4343F0;
+      border-radius: 4px;
+      color: white;
+      padding: 2px 4px;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+    }
+    [data-visual-edit-overlay='hover'][data-visual-edit-label-position='top']::before {
+      bottom: calc(100% + 4px);
+    }
+    [data-visual-edit-overlay='hover'][data-visual-edit-label-position='bottom']::before {
+      top: calc(100% + 4px);
+    }
+    [data-visual-edit-overlay='hover'][data-visual-edit-dimensions]::after {
+      content: attr(data-visual-edit-dimensions);
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: #4343F0;
+      border-radius: 4px;
+      color: white;
+      padding: 2px 4px;
+      font-family: Inter;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+    }
+    
+    .sg-icon-loader-circular {
+      animation: sg-preview-rotate 2s linear infinite;
+      transform-origin: center center;
+    }
+    .sg-icon-loader-path {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+      animation: sg-preview-dash 1.5s ease-in-out infinite, sg-preview-color 6s ease-in-out infinite;
+      stroke-linecap: round;
+    }
+    @keyframes sg-preview-rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes sg-preview-dash {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+      }
+      100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+      }
+    }
+    @keyframes sg-preview-color {
+      100%,
+      0% {
+        stroke: #ff7061;
+      }
+      40% {
+        stroke: #21ab61;
+      }
+      66% {
+        stroke: #4343F0;
+      }
+      80%,
+      90% {
+        stroke: #ff7061;
+      }
+    }
+  </style>
+
+  <script>(function(){var e=`sg-preview`;function t(e){"@babel/helpers - typeof";return t=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},t(e)}function n(e,n){if(t(e)!=`object`||!e)return e;var r=e[Symbol.toPrimitive];if(r!==void 0){var i=r.call(e,n||`default`);if(t(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(e)}function r(e){var r=n(e,`string`);return t(r)==`symbol`?r:r+``}function i(e,t,n){return(t=r(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=class{constructor(e){if(i(this,`source`,void 0),i(this,`allowedOrigins`,void 0),i(this,`targetOrigin`,void 0),i(this,`debug`,void 0),i(this,`messageHandlers`,new Map),!e.allowedOrigins?.length)throw Error(`[EventCommunicator] allowedOrigins is required`);this.source=e.source,this.allowedOrigins=e.allowedOrigins,this.targetOrigin=e.targetOrigin||`*`,this.debug=e.debug||!1,e.messageHandlers&&this.registerMessageHandlers(e.messageHandlers),e.domEvents&&this.registerDOMEvents(e.domEvents),this.initMessageListener()}log(...e){this.debug&&console.log(`[EventCommunicator]`,...e)}formatEventType(t){return`${e}:${t}`}parseEventType(t){let n=`${e}:`;return t.startsWith(n)?t.slice(n.length):null}isOriginAllowed(e){return this.allowedOrigins.some(t=>t===`*`?!0:e===t||e.endsWith(t))}initMessageListener(){window.addEventListener(`message`,e=>{if(this.log(`Message received from:`,e.origin),!this.isOriginAllowed(e.origin)){console.warn(`[EventCommunicator] Wrong origin:`,e.origin);return}let t=e.data;if(!t?.type)return;let n=this.parseEventType(t.type);if(!n)return;this.log(`Parsed event type:`,n);let r=this.messageHandlers.get(n);r?r(t.payload):this.log(`No handler for:`,n)})}registerMessageHandlers(e){Object.entries(e).forEach(([e,t])=>{this.messageHandlers.set(e,t)})}registerDOMEvents(e){e.forEach(({event:e,handler:t,options:n})=>{window.addEventListener(e,t,n)})}getTargetWindow(){try{if(window.parent&&window.parent!==window)return window.parent;if(window.top&&window.top!==window)return window.top;if(window.opener)return window.opener}catch{if(window.parent&&window.parent!==window)return window.parent}return null}send(e,t){let n=this.getTargetWindow();if(!n)return;let r={type:this.formatEventType(e),source:this.source,payload:t??null,timestamp:new Date().toISOString()};n.postMessage(r,this.targetOrigin)}},o=null;function s(e,t,n){return e.includes(`Failed to fetch dynamically imported module`)?`module-load-error`:e===`Script error.`?`script-origin-error`:e.includes(`ResizeObserver loop limit exceeded`)?`resize-observer-error`:e.includes(`ReferenceError`)?`react-reference-error`:e.includes(`TypeError`)?`react-type-error`:e.includes(`is not defined`)?`react-reference-error`:e.includes(`Cannot read prop`)?`react-property-error`:e.includes(`Cannot access before initialization`)?`react-initialization-error`:e.includes(`is not a function`)?`react-function-error`:n&&n.includes(`ErrorBoundary`)?`react-boundary-error`:t&&t.includes(`renderWithHooks`)?`react-render-error`:t&&t.includes(`updateFunctionComponent`)?`react-component-error`:t&&t.includes(`@react-refresh`)?`react-hmr-error`:`react-runtime-error`}function c(e){if(!e)return{file:null,line:null,column:null};for(let t of[/at\s+.*?\s+\(([^:]+):(\d+):(\d+)\)/,/([^:@\s]+\.(?:tsx?|jsx?)):(\d+):(\d+)/,/\(([^:]+):(\d+):(\d+)\)/,/(\w+)?@([^:]+):(\d+):(\d+)/]){let n=e.match(t);if(n)return{file:n[1]||n[2],line:parseInt(n[2]||n[3],10),column:parseInt(n[3]||n[4],10)}}return{file:null,line:null,column:null}}function l(e){if(!o)return;let t=c(e.stack),n={type:s(e.message,e.stack,e.componentStack),message:e.message,file:t.file,line:t.line,column:t.column,stack:e.stack,componentStack:e.componentStack,environment:`development`,errorSource:e.source,userAgent:navigator.userAgent,url:window.location.href};o.send(`RUNTIME_ERROR`,n)}var u=e=>{try{let t=e.target;if(t&&t instanceof HTMLElement){let e=t.tagName.toUpperCase(),n=t.src||t.href||`unknown`;l({message:`Failed to load resource: `+e+` from `+n,source:`resource-loader`,stack:null,componentStack:null})}else{let t=e;l({message:t.message||`Runtime error`,source:`window-onerror`,stack:t.error?t.error.stack:null,componentStack:null})}}catch(e){console.error(`[SG Preview - Reporter] Internal error in onerror handler:`,e)}},d=e=>{try{let t=e.reason;l({message:t?.message||t||`Unhandled promise rejection`,source:`unhandled-rejection`,stack:t?.stack,componentStack:null})}catch(e){console.error(`[SG Preview - Reporter] Internal error in unhandledrejection handler:`,e)}},f=console.error;function p(e=[`*`]){o||(o=new a({source:`error-reporter`,allowedOrigins:e,domEvents:[{event:`error`,handler:u,options:!0},{event:`unhandledrejection`,handler:d}]}),console.error=function(...e){try{let t=e.join(` `);if(t.includes(`Error handled by React Router default ErrorBoundary`)||t.includes(`React will try to recreate this component tree`)||t.includes(`The above error occurred in the`)||t.includes(`React Router caught the following error during render`)||/Minified React error #\d+/.test(t)||t.includes(`ResizeObserver loop limit exceeded`)){let n=e.find(e=>e instanceof Error),r=e.find(e=>typeof e==`object`&&e&&`componentStack`in e);l({message:n?n.message:t,source:`console-error`,stack:n?n.stack:null,componentStack:r?.componentStack??null})}}catch(e){console.error(`[SG Preview - Reporter] Internal error in console.error wrapper:`,e)}f.apply(console,e)},console.log(`[SG Preview - Runtime Reporter] Initialized.`))}p([`*`])})();</script>
+  <script>(function(){var e=`sg-preview`;function t(e){"@babel/helpers - typeof";return t=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},t(e)}function n(e,n){if(t(e)!=`object`||!e)return e;var r=e[Symbol.toPrimitive];if(r!==void 0){var i=r.call(e,n||`default`);if(t(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(e)}function r(e){var r=n(e,`string`);return t(r)==`symbol`?r:r+``}function i(e,t,n){return(t=r(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=class{constructor(e){if(i(this,`source`,void 0),i(this,`allowedOrigins`,void 0),i(this,`targetOrigin`,void 0),i(this,`debug`,void 0),i(this,`messageHandlers`,new Map),!e.allowedOrigins?.length)throw Error(`[EventCommunicator] allowedOrigins is required`);this.source=e.source,this.allowedOrigins=e.allowedOrigins,this.targetOrigin=e.targetOrigin||`*`,this.debug=e.debug||!1,e.messageHandlers&&this.registerMessageHandlers(e.messageHandlers),e.domEvents&&this.registerDOMEvents(e.domEvents),this.initMessageListener()}log(...e){this.debug&&console.log(`[EventCommunicator]`,...e)}formatEventType(t){return`${e}:${t}`}parseEventType(t){let n=`${e}:`;return t.startsWith(n)?t.slice(n.length):null}isOriginAllowed(e){return this.allowedOrigins.some(t=>t===`*`?!0:e===t||e.endsWith(t))}initMessageListener(){window.addEventListener(`message`,e=>{if(this.log(`Message received from:`,e.origin),!this.isOriginAllowed(e.origin)){console.warn(`[EventCommunicator] Wrong origin:`,e.origin);return}let t=e.data;if(!t?.type)return;let n=this.parseEventType(t.type);if(!n)return;this.log(`Parsed event type:`,n);let r=this.messageHandlers.get(n);r?r(t.payload):this.log(`No handler for:`,n)})}registerMessageHandlers(e){Object.entries(e).forEach(([e,t])=>{this.messageHandlers.set(e,t)})}registerDOMEvents(e){e.forEach(({event:e,handler:t,options:n})=>{window.addEventListener(e,t,n)})}getTargetWindow(){try{if(window.parent&&window.parent!==window)return window.parent;if(window.top&&window.top!==window)return window.top;if(window.opener)return window.opener}catch{if(window.parent&&window.parent!==window)return window.parent}return null}send(e,t){let n=this.getTargetWindow();if(!n)return;let r={type:this.formatEventType(e),source:this.source,payload:t??null,timestamp:new Date().toISOString()};n.postMessage(r,this.targetOrigin)}},o=`STRIPE_CHECKOUT_BLOCKED`,s=`checkout.stripe.com`,c=/https:\/\/checkout\.stripe\.com\/[^\s"'<>\\]+/g,l=[`url`,`checkoutUrl`,`checkout_url`,`redirectUrl`,`redirect_url`,`sessionUrl`,`session_url`],u=null,d=e=>{if(typeof e!=`string`||!e)return!1;try{return new URL(e,window.location.origin).host===s}catch{return!1}},f=(e,t=0)=>{if(t>4||!e||typeof e!=`object`)return null;let n=e;for(let e of l){let t=n[e];if(typeof t==`string`&&d(t))return t}for(let e of Object.keys(n)){let r=f(n[e],t+1);if(r)return r}return null},p=e=>{if(!e||e.indexOf(`checkout.stripe.com`)===-1)return null;try{let t=f(JSON.parse(e));if(t)return t}catch{}let t=e.match(c);return t?t[0]:null},m=e=>{try{let t=typeof e==`string`?e:e instanceof URL?e.href:e.url,n=new URL(t,window.location.origin).pathname;return n===`/api/checkout`||n.endsWith(`/api/checkout`)}catch{return!1}},h=()=>{let e=window.fetch.bind(window);window.fetch=async function(t,n){let r=window.location.href,i=await e(t,n);try{let e=m(t),n=(i.headers.get(`content-type`)||``).toLowerCase(),a=n.includes(`json`)||n.startsWith(`text/`);if(e||a){let t=p(await i.clone().text());if(t){let n=e?`fetch-api-checkout`:`fetch-response`;u?.send(o,{url:t,source:n,pageUrl:r})}}}catch(e){console.log(e)}return i}};function g(e=[`*`]){window.self!==window.top&&(u||(u=new a({source:`stripe-interceptor`,allowedOrigins:e}),h(),console.log(`[SG Stripe] Initialized.`)))}g([`*`])})();</script>
+  <script>(function(){var e=`sg-preview-banner`,t=`56px`,n=`Youâ€™re in Preview mode`,r=`CODERICK AI`,i=`#E0E0E0`,a=`#212121`,o=`<svg xmlns="http://www.w3.org/2000/svg" width="105" height="22" viewBox="0 0 105 22" fill="none">
+<path d="M22.8725 4.42256C21.4307 1.7274 18.1457 3.26233 18.8494 6.369C19.7879 10.5616 24.3475 11.572 26.0265 15.2802C26.965 17.339 26.3615 19.3617 24.9535 20.2583C23.5454 21.155 21.0643 21.5297 19.5561 20.2958C18.8186 19.6595 18.8518 19.2105 18.4831 20.3708C18.3491 20.7448 18.1481 21.157 17.7118 20.7448C17.2754 20.3326 17.0751 18.162 18.1813 17.3384C19.2876 16.5147 19.3546 17.151 19.9919 17.8623C21.5677 19.3223 23.5792 18.8726 24.082 17.6749C24.5847 16.4772 24.082 15.691 23.4115 14.8647C22.7409 14.0383 20.9304 12.6185 19.6563 10.9718C18.3823 9.32512 16.7371 6.44394 17.5772 4.04786C18.4173 1.65179 20.3576 0.0432528 22.8055 1.42964C24.2473 2.25332 25.6553 4.08734 24.8502 5.95884C24.2805 7.23014 22.5707 7.64298 21.7656 6.33287C20.9605 5.02276 23.2744 5.1713 22.8725 4.42256Z" fill="#212121"/>
+<path d="M30.1287 8.55103C30.209 10.6739 27.4702 10.5348 27.3935 8.4815C27.3745 8.196 27.4828 7.91536 27.6948 7.70042C27.9068 7.48549 28.2054 7.35358 28.526 7.33331H28.7604C29.0777 7.3762 29.3754 7.49654 29.6205 7.68096C29.7643 7.78755 29.8806 7.92041 29.9616 8.07054C30.0427 8.22066 30.0864 8.38453 30.09 8.55103H30.1287Z" fill="#212121"/>
+<path d="M27.3154 14.1187L27.205 14.1905C26.1032 14.801 26.4332 13.5799 27.0211 12.8613C27.6091 12.1428 28.123 11.8556 28.5641 11.9274C28.7488 11.9458 28.924 12.0169 29.0677 12.1319C29.2114 12.2469 29.3173 12.4007 29.3723 12.5742C29.6659 13.9751 28.0496 17.8914 29.7764 18.9333C29.9302 19.035 30.1173 19.0766 30.3009 19.05C30.4845 19.0234 30.6513 18.9306 30.7684 18.7897C31.0991 18.4308 31.1355 17.8196 31.5402 17.7122C31.945 17.6048 31.8709 17.7484 31.9443 18.2154C32.0547 19.6163 31.4298 21.6285 29.4463 20.9461C27.4629 20.2638 27.7566 16.85 27.7929 15.0539C27.7929 14.9459 27.7559 13.8684 27.3154 14.12V14.1187Z" fill="#212121"/>
+<path d="M40.0837 11.4171C40.025 11.2399 39.9117 11.0862 39.7603 10.9786C39.609 10.871 39.4275 10.8151 39.2424 10.819L37.1945 10.9307L34.8906 11.0423L35.256 7.69618C35.5851 4.46171 35.6219 2.45403 35.2928 1.71104C34.9637 0.968045 34.599 0.746743 34.1968 1.04514C33.3924 1.194 33.1732 2.64343 33.1001 5.32034C33.1001 7.32801 33.1732 9.29847 33.3562 11.3055L32.1858 11.6378C31.8553 11.7226 31.5362 11.8474 31.2353 12.0093C31.1652 12.0484 31.1095 12.1093 31.0765 12.1829C31.0435 12.2566 31.035 12.339 31.0523 12.418C31.0565 12.6767 31.1191 12.931 31.2353 13.1616L32.6979 16.5822L34.0507 19.7057C34.4529 20.6361 34.965 21.1186 35.6233 21.0814C36.2815 21.0441 36.5738 20.9697 36.5376 20.8581C36.4577 20.5537 36.4088 20.242 36.3915 19.9277C35.8419 18.6807 35.4487 17.3693 35.2211 16.024C35.1176 14.9861 35.0689 13.9435 35.0749 12.9005C37.0859 12.4173 38.4393 12.5682 39.6091 12.2312H39.6828C40.1219 11.9335 39.8658 12.0824 40.0481 11.9335C40.0844 11.9022 40.1141 11.8639 40.1356 11.8209C40.1571 11.7778 40.1698 11.7309 40.1731 11.6828C40.1764 11.6348 40.1702 11.5865 40.1549 11.5409C40.1395 11.4953 40.1153 11.4532 40.0837 11.4171ZM34.05 17.7372L33.9769 17.8117H33.867L33.7209 17.4794C33.6109 17.2189 33.1357 15.5833 33.1357 15.5833C33.1357 15.5833 32.7335 14.0588 32.6604 13.9106C32.6423 13.8696 32.6329 13.8252 32.6329 13.7804C32.6329 13.7355 32.6423 13.6911 32.6604 13.6501C32.696 13.5677 32.7454 13.4922 32.8065 13.4268C32.9454 13.3158 33.1082 13.2393 33.2818 13.2035H33.3917L33.4648 13.3152V13.6474L33.5747 14.4283L33.9401 16.7331L34.05 17.5884V17.7372Z" fill="#212121"/>
+<path d="M47.3568 18.4849C46.0034 20.0602 44.0933 21.5233 41.9833 20.9602C40.7495 20.5477 39.9535 19.4221 39.5559 18.0345C39.1916 16.6836 39.1644 15.2715 39.4764 13.909C39.9543 11.8085 41.307 10.0833 42.8595 10.0833C43.5148 10.1343 44.1451 10.3431 44.6902 10.6895C45.2353 11.036 45.6768 11.5086 45.9724 12.062C46.2681 12.6155 46.4079 13.2312 46.3786 13.8502C46.3493 14.4691 46.1517 15.0707 45.8049 15.5971C44.9688 16.7976 43.2178 17.3972 42.3824 17.8097C41.547 18.2223 41.825 18.0345 41.8651 18.5977C41.9847 19.9852 44.4917 19.9852 46.0837 16.8725C46.2427 16.5727 47.2379 15.3722 47.8748 15.7098C49.2268 16.4978 47.5159 18.2972 47.3568 18.4849ZM41.188 16.5721C42.9391 16.0467 44.4121 14.5842 44.5311 13.7963C44.7696 12.296 42.3422 11.0205 41.4667 13.4587C41.2339 14.4683 41.1403 15.502 41.188 16.5342V16.5721Z" fill="#212121"/>
+<path d="M57.6021 13.0745C57.4982 14.3059 59.2268 20.7619 57.9823 20.874C56.7378 20.986 56.7726 21.0234 56.5997 20.5751C56.4267 20.1268 57.1528 16.8435 56.5306 17.8508C56.3924 18.0749 56.4267 18.1123 56.1852 18.5225C54.1461 22.4783 51.346 21.433 49.7213 18.2237C48.6243 15.8968 48.1914 13.2749 48.4767 10.6857C48.926 6.09551 50.7579 0.0497835 55.044 1.02038C58.4316 1.8042 56.0807 6.69055 54.9059 5.4231C52.1057 -1.18098 46.5409 14.7895 52.6938 18.6313C54.4914 19.7506 56.0122 16.131 55.632 14.5261C55.2518 12.9211 55.3209 13.3693 54.8026 13.5188C54.2842 13.6682 53.0397 14.937 52.6247 14.5261C52.2096 14.1151 51.8985 12.1379 52.8319 12.1006C53.7653 12.0632 54.5947 12.4341 55.9083 10.7197C57.2219 9.00531 58.0862 9.6377 57.8784 11.3201C57.7745 12.0665 57.6021 12.4768 57.533 13.0365L57.6021 13.0745Z" fill="#212121"/>
+<path d="M66.7641 10.259C65.5366 9.49446 64.0522 9.11213 62.5477 9.17297C60.3152 9.39004 58.207 10.6938 58.4548 12.7582C58.5374 13.6271 58.6616 17.3929 59.0337 18.9508C59.0723 19.2124 59.1932 19.4593 59.383 19.664C59.5728 19.8688 59.824 20.0231 60.1083 20.1098C60.3999 20.1957 60.7175 20.184 60.9998 20.077C61.2822 19.97 61.5093 19.7753 61.6376 19.5303C62.0096 18.7696 61.5959 18.0819 61.3897 17.43C61.0178 16.0365 60.769 14.62 60.6456 13.193C60.3978 10.8756 64.4073 10.5855 65.3167 11.9258C64.6551 12.8312 65.6062 13.4107 66.846 12.5776C68.0857 11.7445 67.5075 10.7674 66.7217 10.2238L66.7641 10.259Z" fill="#212121"/>
+<path d="M71.5509 21.0022C76.1423 20.1138 77.8897 12.1208 72.2016 9.37905C66.2748 7.21638 66.0003 22.3154 71.5509 21.0022ZM69.4605 14.5149C70.0089 8.2202 73.6751 11.1552 74.1544 15.2483C74.6336 19.3415 68.6723 21.7746 69.4605 14.5149Z" fill="#212121"/>
+<path d="M78.7463 12.7002C77.9887 14.4865 78.2776 21.71 81.7395 18.2933C82.497 17.5557 82.6048 15.1472 82.3165 13.0889C82.1625 12.3018 81.9699 11.5239 81.7395 10.7587C81.708 10.4286 81.7795 10.0967 81.9428 9.81534C82.1061 9.53399 82.3518 9.31929 82.6411 9.2052C82.9043 9.13271 83.1829 9.16319 83.4272 9.29123C83.6715 9.41926 83.8656 9.63653 83.9751 9.90434C84.336 10.8363 84.0835 12.3513 84.0472 12.9722C83.9387 14.8361 83.6505 17.0887 84.2633 18.2926C84.5158 18.7974 84.8761 18.875 84.9125 19.2246C84.9488 20.5837 83.4337 21.4772 82.893 20.6228C82.7489 20.39 82.8566 20.0404 82.6405 19.8461C79.792 22.6035 76.6548 20.4285 76.7268 16.5063C76.6519 15.3375 76.7125 14.1632 76.9073 13.0106C77.1955 11.7675 77.2675 11.1467 77.7369 10.6419C77.8076 10.5598 77.8927 10.4936 77.9874 10.4471C78.082 10.4006 78.1842 10.3748 78.2882 10.3712C78.3921 10.3675 78.4957 10.3861 78.593 10.4259C78.6902 10.4656 78.7792 10.5258 78.8547 10.6028C79.0709 10.758 78.9631 12.0395 78.7463 12.7002Z" fill="#212121"/>
+<path d="M91.2906 19.0189C91.7973 17.2331 92.4121 14.3299 92.0142 13.2514C91.6163 12.1729 89.2646 11.0562 88.2154 12.6934C87.5641 13.6982 87.5283 17.3074 88.3599 19.4282C88.3991 19.5748 88.4095 19.728 88.3906 19.8788C88.3717 20.0296 88.3238 20.175 88.2498 20.3066C88.1757 20.4382 88.0769 20.5533 87.9592 20.6453C87.8415 20.7373 87.7072 20.8042 87.5641 20.8423C85.1766 21.6609 87.0216 14.8517 85.6468 12.6559C85.3576 12.1722 84.9955 12.1347 84.9232 11.7998C84.7786 10.5344 86.2257 9.75334 86.877 10.5344C87.0581 10.7575 86.9493 11.0924 87.2026 11.2411C89.8435 8.71103 93.7869 10.6088 94.0409 14.218C94.0761 16.0989 93.7568 17.969 93.1005 19.725C92.9545 20.1363 92.7335 20.5151 92.4492 20.841C92.3004 20.9897 92.103 21.0759 91.8956 21.0829C91.6882 21.0898 91.4857 21.0169 91.3278 20.8785C90.8934 20.5811 91.1109 19.5763 91.2913 19.0183L91.2906 19.0189Z" fill="#212121"/>
+<path d="M102.238 10.5851C102.459 8.70674 101.648 3.17952 100.174 3.03489C99.7689 2.99873 99.6953 2.05923 99.9533 1.48132C100.211 0.90342 100.875 0.722623 101.944 1.15847C103.638 1.84485 103.786 8.16693 103.823 10.0453C103.765 11.9867 103.839 13.9298 104.044 15.8618C104.13 16.4101 104.291 16.9448 104.523 17.4515C104.817 18.1379 105.149 18.6073 104.928 19.0051C104.707 19.4028 103.16 20.197 102.717 19.7638C102.358 19.3658 102.173 18.8474 102.201 18.3187C99.6581 22.2923 95.567 19.1859 95.015 15.32C94.4631 11.4542 97.8895 7.3004 102.238 10.5154V10.5851ZM98.2212 17.9183C101.427 20.1944 102.459 14.3056 100.838 12.1018C99.2163 9.89806 93.9098 14.6311 98.2212 17.9183Z" fill="#212121"/>
+<path d="M11.1219 5.70174C13.0878 4.98185 13.8158 2.66966 13.7431 1.03941C6.35322 -2.59868 -1.07265 3.92032 0.128519 11.1978C0.331031 12.5304 0.867849 13.7847 1.6854 14.8356C2.50295 15.8864 3.57264 16.6971 4.78771 17.1868C4.60554 17.3766 4.27789 17.8687 4.13241 18.0585C6.4987 18.5893 8.20969 18.5133 9.70247 17.9446C10.8896 17.5003 11.9438 16.7425 12.7601 15.7463C13.443 14.942 13.9298 13.9802 14.1795 12.9413C14.2162 12.8274 13.9613 12.5624 14.3617 12.7515C14.762 12.9406 14.2522 14.5329 14.1067 14.9119C13.9081 15.3904 13.6642 15.8474 13.3787 16.2764C12.6017 17.4469 11.5658 18.4085 10.3571 19.0814C8.50065 20.1429 5.29753 20.408 3.29493 19.3464C1.29233 18.2849 0.273996 20.105 2.16716 21.1285C12.5412 25.5251 21.0228 12.1835 11.1219 5.70174ZM12.6507 14.3058C10.4665 18.0205 6.13501 17.1868 3.73202 14.6448C1.32903 12.1028 1.5846 8.5047 3.36833 5.96814C4.33201 4.64161 5.57996 3.56433 7.01411 2.82098C8.44826 2.07763 10.0295 1.68846 11.6336 1.68405C11.6751 1.9211 11.6987 2.16109 11.7044 2.40191C11.7411 2.9309 11.6619 3.46164 11.4728 3.95458C11.2837 4.44752 10.9894 4.88996 10.612 5.24893L10.0295 5.7797C12.8328 7.59704 14.2889 11.5388 12.6507 14.3058Z" fill="#96CB4C"/>
+<path d="M3.69365 9.93747C4.23283 4.44229 10.2732 3.3507 12.5031 10.6903C14.733 18.0298 2.86642 16.5622 3.69365 9.93747ZM8.61943 13.551C13.4015 13.7394 11.1005 8.62025 7.97215 7.4914C4.84386 6.36255 3.11822 13.551 8.61943 13.551Z" fill="#212121"/>
+</svg>`,s=`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" viewBox="0 0 16 22" fill="none">
+<path d="M11.1219 5.70174C13.0878 4.98185 13.8158 2.66966 13.7431 1.03941C6.35322 -2.59868 -1.07265 3.92032 0.128519 11.1978C0.331031 12.5304 0.867849 13.7847 1.6854 14.8356C2.50295 15.8864 3.57264 16.6971 4.78771 17.1868C4.60554 17.3766 4.27789 17.8687 4.13241 18.0585C6.4987 18.5893 8.20969 18.5133 9.70247 17.9446C10.8896 17.5003 11.9438 16.7425 12.7601 15.7463C13.443 14.942 13.9298 13.9802 14.1795 12.9413C14.2162 12.8274 13.9613 12.5624 14.3617 12.7515C14.762 12.9406 14.2522 14.5329 14.1067 14.9119C13.9081 15.3904 13.6642 15.8474 13.3787 16.2764C12.6017 17.4469 11.5658 18.4085 10.3571 19.0814C8.50065 20.1429 5.29753 20.408 3.29493 19.3464C1.29233 18.2849 0.273996 20.105 2.16716 21.1285C12.5412 25.5251 21.0228 12.1835 11.1219 5.70174ZM12.6507 14.3058C10.4665 18.0205 6.13501 17.1868 3.73202 14.6448C1.32903 12.1028 1.5846 8.5047 3.36833 5.96814C4.33201 4.64161 5.57996 3.56433 7.01411 2.82098C8.44826 2.07763 10.0295 1.68846 11.6336 1.68405C11.6751 1.9211 11.6987 2.16109 11.7044 2.40191C11.7411 2.9309 11.6619 3.46164 11.4728 3.95458C11.2837 4.44752 10.9894 4.88996 10.612 5.24893L10.0295 5.7797C12.8328 7.59704 14.2889 11.5388 12.6507 14.3058Z" fill="#96CB4C"/>
+<path d="M3.69375 9.93747C4.23294 4.44229 10.2733 3.3507 12.5032 10.6903C14.7331 18.0298 2.86653 16.5622 3.69375 9.93747ZM8.61954 13.551C13.4016 13.7394 11.1006 8.62025 7.97226 7.4914C4.84397 6.36255 3.11832 13.551 8.61954 13.551Z" fill="#212121"/>
+</svg>`,c=`<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 15.75C3.3375 15.75 2.98438 15.6031 2.69063 15.3094C2.39687 15.0156 2.25 14.6625 2.25 14.25V3.75C2.25 3.3375 2.39687 2.98438 2.69063 2.69063C2.98438 2.39687 3.3375 2.25 3.75 2.25H9V3.75H3.75V14.25H14.25V9H15.75V14.25C15.75 14.6625 15.6031 15.0156 15.3094 15.3094C15.0156 15.6031 14.6625 15.75 14.25 15.75H3.75ZM7.275 11.775L6.225 10.725L13.2 3.75H10.5V2.25H15.75V7.5H14.25V4.8L7.275 11.775Z" fill="#212121"/></svg>`,l=()=>`
+  #${e} {
+    position: relative;
+    width: 100%;
+    height: ${t};
+    background-color: var(--color-background, #FFFFFF);
+    border-bottom: 1px solid ${i};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-sizing: border-box;
+    z-index: 99999;
+    font-family: var(--font-family-body, 'Inter', sans-serif);
+    color: var(--color-text, ${a});
+  }
+
+  .sg-preview__left-group,
+  .sg-preview__right-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .sg-preview__center-group {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .sg-preview__separator {
+    width: 1px;
+    height: 24px;
+    background-color: ${i};
+  }
+
+  .sg-preview__logo svg {
+    width: 105px;
+    height: 22px;
+  }
+
+  .sg-preview__logo--mobile svg {
+    width: 15.522px;
+    height: 22px;
+  }
+
+  .sg-preview__label,
+  .sg-preview__title {
+    white-space: nowrap;
+  }
+
+  .sg-preview__label {
+    color: var(--color-typography-primary, ${a});
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+
+  .sg-preview__title {
+    color: var(--color-typography-primary, ${a});
+    font-size: var(--font-size-lg, 16px);
+    font-weight: 400;
+    line-height: var(--font-line-height-lg, 24px);
+  }
+
+  .sg-preview__link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--color-typography-primary, ${a});
+    text-decoration: none;
+    font-size: var(--font-size-md, 14px);
+    font-weight: 400;
+    line-height: var(--font-line-height-md, 22px);
+    max-width: 200px;
+  }
+
+  @media (min-width: 951px) {
+    .u-hide-desktop {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 950px) {
+    .u-hide-tablet {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .u-hide-mobile {
+      display: none !important;
+    }
+  }
+
+  .sg-preview__link:hover {
+    text-decoration: underline;
+  }
+
+  .sg-preview__link-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sg-preview__redirect-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .sg-preview__redirect-icon svg path {
+    fill: ${a};
+  }
+
+  .sg-preview-iframe-wrapper {
+    flex: 1;
+    padding: 16px;
+    background: #F9F9F9;
+    box-sizing: border-box;
+  }
+
+  #sg-preview-iframe {
+    border: 1px solid #DDD;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: block;
+  }
+
+  @media (max-width: 600px) {
+    .sg-preview-iframe-wrapper {
+      padding: 8px;
+    }
+  }
+
+  @media (max-width: 950px) {
+    #${e} {
+      padding: 12px 16px;
+    }
+
+    .sg-preview__left-group {
+      gap: 8px;
+    }
+
+    .sg-preview__redirect-icon {
+      width: 15px;
+      height: 15px;
+    }
+
+    .sg-preview__redirect-icon svg path {
+      fill: var(--color-primary-main, #4343F0);
+    }
+  }
+`,u=function(e){return e.Div=`div`,e.Span=`span`,e.A=`a`,e.Style=`style`,e.Iframe=`iframe`,e}({}),d=({tag:e,className:t,props:n})=>{let r=document.createElement(e);return t&&(r.className=t),n&&Object.assign(r,n),r},f=({liveUrl:e,visibilityClass:t,iconOnly:n=!1})=>{let r=d({tag:u.A,className:`sg-preview__link ${t}`});if(r.href=`https://${e}`,r.target=`_blank`,r.rel=`noopener noreferrer`,!n){let t=d({tag:u.Span,className:`sg-preview__link-text`});t.textContent=e,t.title=e,r.appendChild(t)}let i=d({tag:u.Div,className:`sg-preview__redirect-icon`});return i.innerHTML=c,i.title=`Live version`,r.appendChild(i),r},p=e=>[{className:`sg-preview__left-group`,children:[d({tag:u.Div,className:`sg-preview__logo u-hide-mobile`,props:{innerHTML:o}}),d({tag:u.Div,className:`sg-preview__logo--mobile u-hide-desktop u-hide-tablet`,props:{innerHTML:s}}),d({tag:u.Div,className:`sg-preview__separator u-hide-mobile`}),d({tag:u.Div,className:`sg-preview__label u-hide-mobile`,props:{textContent:r}}),...e?[d({tag:u.Div,className:`sg-preview__separator u-hide-tablet u-hide-mobile`}),f({liveUrl:e,visibilityClass:`u-hide-tablet u-hide-mobile`,iconOnly:!1})]:[]]},{className:`sg-preview__center-group`,children:[d({tag:u.Div,className:`sg-preview__title`,props:{textContent:n}})]},{className:`sg-preview__right-group`,children:e?[f({liveUrl:e,visibilityClass:`u-hide-desktop`,iconOnly:!0})]:[]}],m=()=>{let e=d({tag:u.Style});e.textContent=l(),document.head.appendChild(e)},h=t=>{let n=d({tag:u.Div,props:{id:e}});return p(t).forEach(({className:e,children:t})=>{let r=d({tag:u.Div,className:e});t.forEach(e=>r.appendChild(e)),n.appendChild(r)}),n},g=`sg-preview:STRIPE_CHECKOUT_BLOCKED`,_=e=>{if(typeof e!=`string`||!e)return!1;try{let t=new URL(e);return t.protocol===`https:`&&t.host===`checkout.stripe.com`}catch{return!1}},v=()=>{let e=new URLSearchParams(window.location.search).get(`d`);if(document.getElementById(`sg-preview-banner`))return;let t=document.head.querySelector(`title`),n=t?t.outerHTML:`<title>Preview Mode</title>`,r=Array.from(document.head.querySelectorAll(`link[rel*='icon'], meta[name='theme-color']`)).map(e=>e.outerHTML).join(`
+`);document.documentElement.style.display=``,document.documentElement.style.height=`100%`,document.documentElement.style.width=`100%`,document.head&&(document.head.innerHTML=`<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      ${n}
+      ${r}`),document.body&&(document.body.innerHTML=``,document.body.style.margin=`0`,document.body.style.padding=`0`,document.body.style.overflow=`hidden`,document.body.style.height=`100%`,document.body.style.width=`100%`,document.body.style.display=`flex`,document.body.style.flexDirection=`column`,document.body.style.backgroundColor=`var(--color-background-inverse, #363636)`),m(),document.body.appendChild(h(e));let i=document.createElement(u.Div);i.className=`sg-preview-iframe-wrapper`;let a=document.createElement(u.Iframe);a.id=`sg-preview-iframe`,a.src=window.location.href,i.appendChild(a),document.body.appendChild(i),window.addEventListener(`message`,e=>{if(e.origin===window.location.origin){if(e.data?.type===g){let t=e.data?.payload?.url;if(!_(t))return;window.location.href=t;return}if(e.data?.type===`sg-preview-nav`&&e.data?.url){let t=new URLSearchParams(window.location.search),n=t.get(`p`),r=t.get(`d`),i=e.data.url;try{let e=new URL(i,window.location.origin);n&&e.searchParams.get(`p`)!==n&&e.searchParams.set(`p`,n),r&&e.searchParams.get(`d`)!==r&&e.searchParams.set(`d`,r),i=e.href.replace(e.origin,``)}catch{}window.location.pathname+window.location.search+window.location.hash!==i&&(e.data.action===`push`?window.history.pushState(null,``,i):window.history.replaceState(null,``,i))}}}),window.addEventListener(`popstate`,()=>{a.contentWindow&&a.contentWindow.location.replace(window.location.href)})},y=()=>{function e(e){try{if(!e||typeof e!=`string`&&!(e instanceof URL))return e;let t=window.location.origin,n=new URL(String(e),t);if(n.origin===t){let e=new URLSearchParams(window.location.search),t=e.get(`p`),r=e.get(`d`);return t&&n.searchParams.get(`p`)!==t&&n.searchParams.set(`p`,t),r&&n.searchParams.get(`d`)!==r&&n.searchParams.set(`d`,r),n.href.replace(n.origin,``)}return e}catch{return e}}let t=(e=`replace`)=>{try{if(window.parent===window)return;let t=window.location.pathname+window.location.search+window.location.hash;window.parent.postMessage({type:`sg-preview-nav`,url:t,action:e},window.location.origin)}catch{}},n=window.open;window.open=function(...t){return t[0]&&(t[0]=e(t[0])),n.apply(this,t)};let r=history.pushState;history.pushState=function(...n){n[2]&&(n[2]=e(n[2]));let i=r.apply(this,n);return setTimeout(()=>t(`push`),10),i};let i=history.replaceState;history.replaceState=function(...n){n[2]&&(n[2]=e(n[2]));let r=i.apply(this,n);return setTimeout(()=>t(`replace`),10),r},document.addEventListener(`click`,t=>{let n=t.target?.closest(`a`);if(!n||!n.href||n.href.startsWith(`mailto:`)||n.href.startsWith(`tel:`)||n.href.startsWith(`javascript:`))return;let r=e(n.href),i=typeof r==`string`?r:String(r);n.href!==i&&(n.href=i)},!0),window.addEventListener(`popstate`,()=>{setTimeout(()=>t(`replace`),10)}),window.addEventListener(`hashchange`,()=>{setTimeout(()=>t(`replace`),10)}),t(`replace`)};new URLSearchParams(window.location.search).get(`p`)===`1`&&(window===window.top?(document.documentElement.style.display=`none`,document.readyState===`loading`?document.addEventListener(`DOMContentLoaded`,v):v()):document.readyState===`loading`?document.addEventListener(`DOMContentLoaded`,y):y())})();</script>
+  <script>window.__SG_PREVIEW_ROUTES = {"isSPA":true,"routes":["/"]};</script>
+  <script>(function(){var e=`sg-preview`;function t(e){"@babel/helpers - typeof";return t=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},t(e)}function n(e,n){if(t(e)!=`object`||!e)return e;var r=e[Symbol.toPrimitive];if(r!==void 0){var i=r.call(e,n||`default`);if(t(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(e)}function r(e){var r=n(e,`string`);return t(r)==`symbol`?r:r+``}function i(e,t,n){return(t=r(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=class{constructor(e){if(i(this,`source`,void 0),i(this,`allowedOrigins`,void 0),i(this,`targetOrigin`,void 0),i(this,`debug`,void 0),i(this,`messageHandlers`,new Map),!e.allowedOrigins?.length)throw Error(`[EventCommunicator] allowedOrigins is required`);this.source=e.source,this.allowedOrigins=e.allowedOrigins,this.targetOrigin=e.targetOrigin||`*`,this.debug=e.debug||!1,e.messageHandlers&&this.registerMessageHandlers(e.messageHandlers),e.domEvents&&this.registerDOMEvents(e.domEvents),this.initMessageListener()}log(...e){this.debug&&console.log(`[EventCommunicator]`,...e)}formatEventType(t){return`${e}:${t}`}parseEventType(t){let n=`${e}:`;return t.startsWith(n)?t.slice(n.length):null}isOriginAllowed(e){return this.allowedOrigins.some(t=>t===`*`?!0:e===t||e.endsWith(t))}initMessageListener(){window.addEventListener(`message`,e=>{if(this.log(`Message received from:`,e.origin),!this.isOriginAllowed(e.origin)){console.warn(`[EventCommunicator] Wrong origin:`,e.origin);return}let t=e.data;if(!t?.type)return;let n=this.parseEventType(t.type);if(!n)return;this.log(`Parsed event type:`,n);let r=this.messageHandlers.get(n);r?r(t.payload):this.log(`No handler for:`,n)})}registerMessageHandlers(e){Object.entries(e).forEach(([e,t])=>{this.messageHandlers.set(e,t)})}registerDOMEvents(e){e.forEach(({event:e,handler:t,options:n})=>{window.addEventListener(e,t,n)})}getTargetWindow(){try{if(window.parent&&window.parent!==window)return window.parent;if(window.top&&window.top!==window)return window.top;if(window.opener)return window.opener}catch{if(window.parent&&window.parent!==window)return window.parent}return null}send(e,t){let n=this.getTargetWindow();if(!n)return;let r={type:this.formatEventType(e),source:this.source,payload:t??null,timestamp:new Date().toISOString()};n.postMessage(r,this.targetOrigin)}},o=`sg-preview-plugin`,s={ROUTES_DISCOVERED:`ROUTES_DISCOVERED`,NAVIGATE_TO:`NAVIGATE_TO`,ROUTE_CHANGED:`ROUTE_CHANGED`},c=e=>{let t=window.history.pushState;window.history.pushState=function(...n){t.apply(this,n),e()};let n=window.history.replaceState;window.history.replaceState=function(...t){n.apply(this,t),e()},window.addEventListener(`popstate`,e),window.addEventListener(`hashchange`,e)},l=(e,t,n=!1)=>{let r=e;try{let t=new URL(e,window.location.origin);new URLSearchParams(window.location.search).forEach((e,n)=>{t.searchParams.has(n)||t.searchParams.set(n,e)}),r=`${t.pathname}${t.search}${t.hash}`}catch(e){console.warn(`[route-manager] Failed to merge URL parameters:`,e)}t&&!n?(window.history.pushState(null,``,r),window.dispatchEvent(new Event(`popstate`))):window.location.assign(r)},u=(e,t)=>{let n=e?.route,r=e?.hardReload;if(!n){console.error(`[route-manager] Invalid navigation payload received:`,e);return}l(n,t,r)},d=!1;(async e=>{if(!d){d=!0;try{let t=window.__SG_PREVIEW_ROUTES,n=!!t?.isSPA,r=t?.routes||[],i=new a({source:o,allowedOrigins:e,messageHandlers:{[s.NAVIGATE_TO]:e=>u(e,n)}});i.send(s.ROUTES_DISCOVERED,r);let l=()=>{i.send(s.ROUTE_CHANGED,{route:window.location.pathname})};l(),c(l)}catch(e){console.error(`[route-manager] Failed to fetch routes or initialize communicator:`,e)}}})([`.siteground.ai`,`.sgdev.eu`])})();</script>
+</head>
+<body>
+  <div id="root">
+    <div class="min-h-screen bg-navy-950" data-visual-edit-loc="src/components/Welcome.tsx:29:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+      <div class="mx-auto grid min-h-screen max-w-[1500px] items-center gap-10 px-6 py-12 lg:grid-cols-2 lg:gap-16 lg:px-12" data-visual-edit-loc="src/components/Welcome.tsx:30:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+        
+        <div class="animate-fade-up" data-visual-edit-loc="src/components/Welcome.tsx:32:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+          <div class="mb-6 inline-flex items-center gap-2 rounded-full bg-navy-800 px-3 py-1.5 text-xs font-medium text-blue-300" data-visual-edit-loc="src/components/Welcome.tsx:33:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-pen-line h-3.5 w-3.5 text-orange-500" data-visual-edit-loc="src/components/Welcome.tsx:34:12" data-visual-edit-component="FileSignature" data-visual-edit-editable="false">
+              <path d="m18 5-2.414-2.414A2 2 0 0 0 14.172 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"></path>
+              <path d="M21.378 12.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"></path>
+              <path d="M8 18h1"></path>
+            </svg>
+            Documentos legales en minutos
+          </div>
+          <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl" data-visual-edit-loc="src/components/Welcome.tsx:38:10" data-visual-edit-component="h1" data-visual-edit-editable="false">
+            Genera contratos de servicios <span class="text-blue-500" data-visual-edit-loc="src/components/Welcome.tsx:40:12" data-visual-edit-component="span" data-visual-edit-editable="true">profesionales</span> sin esfuerzo.
+          </h1>
+          <p class="mt-4 max-w-lg text-sm leading-relaxed text-blue-300/80 sm:text-base" data-visual-edit-loc="src/components/Welcome.tsx:43:10" data-visual-edit-component="p" data-visual-edit-editable="true">
+            Completa un formulario guiado y observa cÃ³mo tu documento toma forma al instante. DescÃ¡rgalo en PDF, listo para firmar. Explora primero el ejemplo de la derecha para ver la calidad del resultado.
+          </p>
+          
+          <ul class="mt-8 space-y-3" data-visual-edit-loc="src/components/Welcome.tsx:49:10" data-visual-edit-component="ul" data-visual-edit-editable="false">
+            <li class="flex items-center gap-3 text-sm text-blue-100/90" data-visual-edit-loc="src/components/Welcome.tsx:51:14" data-visual-edit-component="li" data-visual-edit-editable="false">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy-800 text-blue-500" data-visual-edit-loc="src/components/Welcome.tsx:52:16" data-visual-edit-component="span" data-visual-edit-editable="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye h-4 w-4" data-visual-edit-loc="src/components/Welcome.tsx:53:18" data-visual-edit-editable="false">
+                  <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </span>
+              PrevisualizaciÃ³n A4 en tiempo real mientras escribes
+            </li>
+            <li class="flex items-center gap-3 text-sm text-blue-100/90" data-visual-edit-loc="src/components/Welcome.tsx:51:14" data-visual-edit-component="li" data-visual-edit-editable="false">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy-800 text-blue-500" data-visual-edit-loc="src/components/Welcome.tsx:52:16" data-visual-edit-component="span" data-visual-edit-editable="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check h-4 w-4" data-visual-edit-loc="src/components/Welcome.tsx:53:18" data-visual-edit-editable="false">
+                  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+              </span>
+              Plantillas de Contrato de Servicios y Acuerdo NDA
+            </li>
+            <li class="flex items-center gap-3 text-sm text-blue-100/90" data-visual-edit-loc="src/components/Welcome.tsx:51:14" data-visual-edit-component="li" data-visual-edit-editable="false">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy-800 text-blue-500" data-visual-edit-loc="src/components/Welcome.tsx:52:16" data-visual-edit-component="span" data-visual-edit-editable="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-tool h-4 w-4" data-visual-edit-loc="src/components/Welcome.tsx:53:18" data-visual-edit-editable="false">
+                  <path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"></path>
+                  <path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"></path>
+                  <path d="m2.3 2.3 7.286 7.286"></path>
+                  <circle cx="11" cy="11" r="2"></circle>
+                </svg>
+              </span>
+              Firma digital dibujada a mano, incrustada en el PDF
+            </li>
+            <li class="flex items-center gap-3 text-sm text-blue-100/90" data-visual-edit-loc="src/components/Welcome.tsx:51:14" data-visual-edit-component="li" data-visual-edit-editable="false">
+              <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy-800 text-blue-500" data-visual-edit-loc="src/components/Welcome.tsx:52:16" data-visual-edit-component="span" data-visual-edit-editable="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-down h-4 w-4" data-visual-edit-loc="src/components/Welcome.tsx:53:18" data-visual-edit-editable="false">
+                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                  <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                  <path d="M12 18v-6"></path>
+                  <path d="m9 15 3 3 3-3"></path>
+                </svg>
+              </span>
+              ExportaciÃ³n profesional a PDF con un solo clic
+            </li>
+          </ul>
+
+          <form id="form-captura-lead" class="mt-8 space-y-4">
+            <div>
+              <label for="input-correo" class="mb-2 block text-sm font-medium text-blue-300">
+                Correo electrÃ³nico
+              </label>
+              <input id="input-correo" type="email" required placeholder="tu@correo.com" class="w-full max-w-sm rounded-lg border border-navy-700 bg-navy-900 px-4 py-2 text-white placeholder:text-blue-300/40 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+            </div>
+            <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap" data-visual-edit-loc="src/components/Welcome.tsx:60:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <button id="btn-enviar-lead" type="submit" class="flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 text-sm font-semibold text-navy-950 transition-all hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/20 active:scale-[0.99]" data-visual-edit-loc="src/components/Welcome.tsx:61:12" data-visual-edit-component="button" data-visual-edit-editable="true">
+                Crear mi documento
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4" data-visual-edit-loc="src/components/Welcome.tsx:66:14" data-visual-edit-component="ArrowRight" data-visual-edit-editable="false">
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </button>
+              <button type="button" class="flex items-center justify-center gap-2 rounded-lg border border-blue-300/25 px-6 py-3 text-sm font-semibold text-blue-100 transition-colors hover:border-blue-500 hover:bg-navy-800" data-visual-edit-loc="src/components/Welcome.tsx:68:12" data-visual-edit-component="button" data-visual-edit-editable="true">
+                Empezar con el ejemplo
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="hidden lg:block" data-visual-edit-loc="src/components/Welcome.tsx:91:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+          <div class="mb-3 flex items-center gap-2 text-xs font-medium text-blue-300/60" data-visual-edit-loc="src/components/Welcome.tsx:92:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye h-4 w-4" data-visual-edit-loc="src/components/Welcome.tsx:93:12" data-visual-edit-component="Eye" data-visual-edit-editable="false">
+              <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            Ejemplo de resultado Â· Formato A4
+          </div>
+          <div class="paper-shadow relative h-[560px] overflow-hidden rounded-sm" data-visual-edit-loc="src/components/Welcome.tsx:96:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+            <div class="pointer-events-none select-none" data-visual-edit-loc="src/components/Welcome.tsx:97:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <div class="doc-highlights mx-auto w-full max-w-[794px] bg-paper px-10 py-12 font-serif text-[13px] leading-relaxed text-navy-950 sm:px-14 sm:py-16" data-visual-edit-loc="src/components/ContractPreview.tsx:194:4" data-visual-edit-component="div" data-visual-edit-editable="false" style="min-height: 1123px;">
+                <div class="mb-8 border-b-2 border-navy-700 pb-4 text-center" data-visual-edit-loc="src/components/ContractPreview.tsx:199:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <h1 class="text-xl font-bold uppercase tracking-wide text-navy-950" data-visual-edit-loc="src/components/ContractPreview.tsx:200:8" data-visual-edit-component="h1" data-visual-edit-editable="false">Contrato de PrestaciÃ³n de Servicios</h1>
+                  <p class="mt-1 text-xs text-navy-800/70" data-visual-edit-loc="src/components/ContractPreview.tsx:203:8" data-visual-edit-component="p" data-visual-edit-editable="false"><span class="doc-var" data-visual-edit-loc="src/components/ContractPreview.tsx:27:2" data-visual-edit-component="span" data-visual-edit-editable="false">Madrid</span> , a 26 de julio de 2026</p>
+                </div>
+                <p class="mb-5 text-justify" data-visual-edit-loc="src/components/ContractPreview.tsx:208:6" data-visual-edit-component="p" data-visual-edit-editable="false">Conste por el presente documento el Contrato de PrestaciÃ³n de Servicios Profesionales que celebran, de una parte <span class="doc-var" data-visual-edit-loc="src/components/ContractPreview.tsx:27:2" data-visual-edit-component="span" data-visual-edit-editable="false">Estudio Creativo Nova S.L.</span>, identificado(a) con documento N.Â° <span class="doc-var" data-visual-edit-loc="src/components/ContractPreview.tsx:27:2" data-visual-edit-component="span" data-visual-edit-editable="false">B-12345678</span>, a quien en adelante se le denominarÃ¡ <strong data-visual-edit-loc="src/components/ContractPreview.tsx:214:43" data-visual-edit-component="strong" data-visual-edit-editable="false">EL CONTRATISTA</strong>; y de la otra parte <span class="doc-var" data-visual-edit-loc="src/components/ContractPreview.tsx:27:2" data-visual-edit-component="span" data-visual-edit-editable="false">Comercial Vega S.A.</span>, identificado(a) con documento N.Â° <span class="doc-var" data-visual-edit-loc="src/components/ContractPreview.tsx:27:2" data-visual-edit-component="span" data-visual-edit-editable="false">A-87654321</span>, a quien en adelante se le denominarÃ¡ <strong data-visual-edit-loc="src/components/ContractPreview.tsx:217:37" data-visual-edit-component="strong" data-visual-edit-editable="false">EL CLIENTE</strong>; en los tÃ©rminos y condiciones siguientes:</p>
+                <div class="mb-4 text-justify" data-visual-edit-loc="src/components/ContractPreview.tsx:222:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <h2 class="mb-1 font-bold text-navy-700" data-visual-edit-loc="src/components/ContractPreview.tsx:223:10" data-visual-edit-component="h2" data-visual-edit-editable="false">ClÃ¡usula Primera: Objeto del contrato</h2>
+                  <p data-visual-edit-loc="src/components/ContractPreview.tsx:226:10" data-visual-edit-component="p" data-visual-edit-editable="false">EL CONTRATISTA se obliga a prestar a favor de EL CLIENTE los siguientes servicios: <span class="doc-var" data-visual-edit-loc="src/components/ContractPreview.tsx:27:2" data-visual-edit-component="span" data-visual-edit-editable="false">DiseÃ±o e implementaciÃ³n de la identidad visual de marca, incluyendo logotipo, manual de estilo y un paquete de plantillas para redes sociales.</span></p>
+                </div>
+                <div class="mb-4 text-justify" data-visual-edit-loc="src/components/ContractPreview.tsx:222:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <h2 class="mb-1 font-bold text-navy-700" data-visual-edit-loc="src/components/ContractPreview.tsx:223:10" data-visual-edit-component="h2" data-visual-edit-editable="false">ClÃ¡usula Segunda: ContraprestaciÃ³n</h2>
+                  <p data-visual-edit-loc="src/components/ContractPreview.tsx:226:10" data-visual-edit-component="p" data-visual-edit-editable="false">Como contraprestaciÃ³n por los servicios descritos, EL CLIENTE pagarÃ¡ a EL CONTRATISTA la suma total de <span class="doc-var" data-visual-edit-loc="src/components/ContractPreview.tsx:27:2" data-visual-edit-component="span" data-visual-edit-editable="false">3500,00&nbsp;â‚¬</span>. La forma de pago acordada es la siguiente: <span class="doc-var" data-visual-edit-loc="src/components/ContractPreview.tsx:27:2" data-visual-edit-component="span" data-visual-edit-editable="false">50% al inicio del proyecto y 50% contra la entrega final.</span></p>
+                </div>
+                <div class="mb-4 text-justify" data-visual-edit-loc="src/components/ContractPreview.tsx:222:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <h2 class="mb-1 font-bold text-navy-700" data-visual-edit-loc="src/components/ContractPreview.tsx:223:10" data-visual-edit-component="h2" data-visual-edit-editable="false">ClÃ¡usula Tercera: Plazo de entrega</h2>
+                  <p data-visual-edit-loc="src/components/ContractPreview.tsx:226:10" data-visual-edit-component="p" data-visual-edit-editable="false">EL CONTRATISTA se compromete a entregar los servicios objeto del presente contrato a mÃ¡s tardar el dÃ­a <span class="doc-var" data-visual-edit-loc="src/components/ContractPreview.tsx:27:2" data-visual-edit-component="span" data-visual-edit-editable="false">25 de agosto de 2026</span>.</p>
+                </div>
+                <div class="mb-4 text-justify" data-visual-edit-loc="src/components/ContractPreview.tsx:222:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <h2 class="mb-1 font-bold text-navy-700" data-visual-edit-loc="src/components/ContractPreview.tsx:223:10" data-visual-edit-component="h2" data-visual-edit-editable="false">ClÃ¡usula Cuarta: Obligaciones de las partes</h2>
+                  <p data-visual-edit-loc="src/components/ContractPreview.tsx:226:10" data-visual-edit-component="p" data-visual-edit-editable="false">EL CONTRATISTA ejecutarÃ¡ los servicios con la debida diligencia, calidad profesional y en los plazos pactados. EL CLIENTE se obliga a brindar la informaciÃ³n y facilidades necesarias, asÃ­ como a cumplir con los pagos en los tÃ©rminos acordados.</p>
+                </div>
+                <div class="mb-4 text-justify" data-visual-edit-loc="src/components/ContractPreview.tsx:222:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <h2 class="mb-1 font-bold text-navy-700" data-visual-edit-loc="src/components/ContractPreview.tsx:223:10" data-visual-edit-component="h2" data-visual-edit-editable="false">ClÃ¡usula Quinta: Confidencialidad</h2>
+                  <p data-visual-edit-loc="src/components/ContractPreview.tsx:226:10" data-visual-edit-component="p" data-visual-edit-editable="false">Ambas partes se comprometen a mantener estricta confidencialidad sobre la informaciÃ³n intercambiada con motivo del presente contrato, incluso con posterioridad a la finalizaciÃ³n del mismo.</p>
+                </div>
+                <div class="mb-4 text-justify" data-visual-edit-loc="src/components/ContractPreview.tsx:222:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <h2 class="mb-1 font-bold text-navy-700" data-visual-edit-loc="src/components/ContractPreview.tsx:223:10" data-visual-edit-component="h2" data-visual-edit-editable="false">ClÃ¡usula Sexta: Propiedad intelectual</h2>
+                  <p data-visual-edit-loc="src/components/ContractPreview.tsx:226:10" data-visual-edit-component="p" data-visual-edit-editable="false"><span class="doc-var" data-visual-edit-loc="src/components/ContractPreview.tsx:27:2" data-visual-edit-component="span" data-visual-edit-editable="false">Los derechos de autor de los entregables se transfieren a EL CLIENTE una vez completado el pago total del importe acordado.</span></p>
+                </div>
+                <p class="mb-10 mt-6 text-justify" data-visual-edit-loc="src/components/ContractPreview.tsx:230:6" data-visual-edit-component="p" data-visual-edit-editable="true">En seÃ±al de conformidad, las partes suscriben el presente documento en dos ejemplares de igual valor.</p>
+                <div class="mt-14 grid grid-cols-2 gap-10 text-center text-xs" data-visual-edit-loc="src/components/ContractPreview.tsx:235:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div data-visual-edit-loc="src/components/ContractPreview.tsx:257:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="flex h-16 items-end justify-center" data-visual-edit-loc="src/components/ContractPreview.tsx:258:6" data-visual-edit-component="div" data-visual-edit-editable="false"></div>
+                    <div class="mb-2 border-t border-navy-950/60 pt-2 font-semibold" data-visual-edit-loc="src/components/ContractPreview.tsx:263:6" data-visual-edit-component="div" data-visual-edit-editable="false">Estudio Creativo Nova S.L.</div>
+                    <div class="font-bold uppercase tracking-wide text-navy-700" data-visual-edit-loc="src/components/ContractPreview.tsx:266:6" data-visual-edit-component="div" data-visual-edit-editable="false">EL CONTRATISTA</div>
+                    <div class="mt-0.5 text-navy-800/60" data-visual-edit-loc="src/components/ContractPreview.tsx:267:22" data-visual-edit-component="div" data-visual-edit-editable="false">hola@estudionova.com</div>
+                  </div>
+                  <div data-visual-edit-loc="src/components/ContractPreview.tsx:257:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="flex h-16 items-end justify-center" data-visual-edit-loc="src/components/ContractPreview.tsx:258:6" data-visual-edit-component="div" data-visual-edit-editable="false"></div>
+                    <div class="mb-2 border-t border-navy-950/60 pt-2 font-semibold" data-visual-edit-loc="src/components/ContractPreview.tsx:263:6" data-visual-edit-component="div" data-visual-edit-editable="false">Comercial Vega S.A.</div>
+                    <div class="font-bold uppercase tracking-wide text-navy-700" data-visual-edit-loc="src/components/ContractPreview.tsx:266:6" data-visual-edit-component="div" data-visual-edit-editable="false">EL CLIENTE</div>
+                    <div class="mt-0.5 text-navy-800/60" data-visual-edit-loc="src/components/ContractPreview.tsx:267:22" data-visual-edit-component="div" data-visual-edit-editable="false">compras@comercialvega.com</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function registrarLead(event) {
+      event.preventDefault();
+      
+      const emailInput = document.getElementById('input-correo');
+      if (!emailInput) return;
+      
+      const email = emailInput.value;
+      if (!email) return;
+
+      // Reemplaza esta URL con la URL final de tu Web App de Google Apps Script
+      const scriptURL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email })
+      })
+      .then(() => {
+        console.log('Lead registrado con Ã©xito.');
+      })
+      .catch(error => {
+        console.error('Error al registrar el lead:', error);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnEnviar = document.getElementById('btn-enviar-lead');
+      if (btnEnviar) {
+        const leadForm = btnEnviar.closest('form');
+        if (leadForm) {
+          leadForm.addEventListener('submit', registrarLead);
+        } else {
+          btnEnviar.addEventListener('click', registrarLead);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

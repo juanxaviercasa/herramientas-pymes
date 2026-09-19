@@ -1,0 +1,1119 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <title>Guiones para Manejo de Objeciones</title>
+  
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/content/location/location.js" id="eppiocemhmnlbhjplcgkofciiegomcon"></script>
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script>
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script>
+  
+  <script type="module" crossorigin="" src="./js/guiones-manejo-objeciones.js"></script>
+  <link rel="stylesheet" crossorigin="" href="./css/guiones-manejo-objeciones.css">
+
+  <script>
+    (() => {
+      let e = new URLSearchParams(window.location.search).get("sgv");
+      if (!e) return;
+      function t(t) {
+        try {
+          if (!t) return t;
+          let n = window.location.origin, r = new URL(String(t), n);
+          return r.origin === n && r.searchParams.get("sgv") !== e ? (r.searchParams.set("sgv", e), r.href) : t;
+        } catch {
+          return t;
+        }
+      }
+      let n = window.open;
+      window.open = function(...e) {
+        return e[0] &&= t(e[0]), n.apply(this, e);
+      };
+      let r = window.location.assign.bind(window.location);
+      window.location.assign = function(e) {
+        r(t(e));
+      };
+      let i = window.location.replace.bind(window.location);
+      window.location.replace = function(e) {
+        i(t(e));
+      };
+      let a = history.pushState;
+      history.pushState = function(...e) {
+        return e[2] &&= t(e[2]), a.apply(this, e);
+      };
+      let o = history.replaceState;
+      history.replaceState = function(...e) {
+        return e[2] &&= t(e[2]), o.apply(this, e);
+      }, document.addEventListener("click", (e) => {
+        let n = e.target?.closest("a");
+        if (!n || !n.href || n.href.startsWith("mailto:") || n.href.startsWith("tel:") || n.href.startsWith("javascript:")) return;
+        let r = t(n.href), i = typeof r == "string" ? r : String(r);
+        n.href !== i && (n.href = i);
+      }, !0), document.addEventListener("submit", (t) => {
+        let n = t.target;
+        if (!n) return;
+        let r = n.querySelector("input[name=\"sgv\"]");
+        r || (r = document.createElement("input"), r.type = "hidden", r.name = "sgv", n.appendChild(r)), r.value = e;
+      });
+      let s = () => {
+        document.querySelectorAll("a").forEach((e) => {
+          if (e.href && !e.href.startsWith("javascript")) {
+            let n = t(e.href);
+            e.href = typeof n == "string" ? n : String(n);
+          }
+        });
+      };
+      document.readyState === "complete" || document.readyState === "interactive" ? s() : document.addEventListener("DOMContentLoaded", s);
+    })();
+  </script>
+  
+  <script type="text/javascript" charset="utf-8" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/200.js"></script>
+  <script type="text/javascript" charset="utf-8" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/101.js"></script>
+
+  <script>window.__SG_PREVIEW_ROUTES = {"isSPA":true,"routes":["/"]};</script>
+</head>
+<body>
+  <div id="root">
+    <div class="min-h-screen" data-visual-edit-loc="src/pages/Home.tsx:105:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+      <header class="border-b border-white/5 bg-navy-900" data-visual-edit-loc="src/pages/Home.tsx:106:6" data-visual-edit-component="header" data-visual-edit-editable="false">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4" data-visual-edit-loc="src/pages/Home.tsx:107:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+          <div class="flex items-center gap-2" data-visual-edit-loc="src/pages/Home.tsx:108:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target h-5 w-5 text-flame-500" data-visual-edit-loc="src/pages/Home.tsx:109:12" data-visual-edit-component="Target" data-visual-edit-editable="false">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+            <span class="font-display text-base font-bold text-ink-100" data-visual-edit-loc="src/pages/Home.tsx:110:12" data-visual-edit-component="span" data-visual-edit-editable="true">ObjeciÃ³nPro</span>
+          </div>
+          <div class="flex items-center gap-2" data-visual-edit-loc="src/pages/Home.tsx:112:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+            <button class="hidden items-center gap-1.5 rounded-lg bg-navy-800 px-3.5 py-2 text-sm font-semibold text-ink-200 transition-colors hover:bg-navy-700 sm:inline-flex" data-visual-edit-loc="src/pages/Home.tsx:113:12" data-visual-edit-component="button" data-visual-edit-editable="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus h-4 w-4" data-visual-edit-loc="src/pages/Home.tsx:117:14" data-visual-edit-component="PlusCircle" data-visual-edit-editable="false">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M8 12h8"></path>
+                <path d="M12 8v8"></path>
+              </svg>
+              Aportar script
+            </button>
+            <a class="inline-flex items-center gap-1.5 rounded-lg border border-flame-500/40 px-3.5 py-2 text-sm font-semibold text-flame-400 transition-colors hover:bg-flame-500 hover:text-white" data-visual-edit-loc="src/pages/Home.tsx:120:12" data-visual-edit-component="Link" data-visual-edit-editable="true" href="/admin">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check h-4 w-4" data-visual-edit-loc="src/pages/Home.tsx:124:14" data-visual-edit-component="ShieldCheck" data-visual-edit-editable="false">
+                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+              AdministraciÃ³n
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <section class="border-b border-white/5 bg-navy-900" data-visual-edit-loc="src/pages/Home.tsx:132:6" data-visual-edit-component="section" data-visual-edit-editable="false">
+        <div class="mx-auto max-w-6xl px-5 pb-14 pt-14 sm:pt-16" data-visual-edit-loc="src/pages/Home.tsx:133:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+          <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-navy-800 px-3 py-1 text-xs font-medium text-brand-300" data-visual-edit-loc="src/pages/Home.tsx:134:10" data-visual-edit-component="span" data-visual-edit-editable="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles h-3.5 w-3.5" data-visual-edit-loc="src/pages/Home.tsx:135:12" data-visual-edit-component="Sparkles" data-visual-edit-editable="false">
+              <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+              <path d="M20 3v4"></path>
+              <path d="M22 5h-4"></path>
+              <path d="M4 17v2"></path>
+              <path d="M5 18H3"></path>
+            </svg>
+            Base de datos de respuestas de ventas
+          </span>
+          <h1 class="mt-5 max-w-3xl font-display text-4xl font-bold leading-[1.05] text-ink-100 sm:text-5xl md:text-6xl" data-visual-edit-loc="src/pages/Home.tsx:138:10" data-visual-edit-component="h1" data-visual-edit-editable="false">
+            Los mejores scripts para <span class="text-flame-500" data-visual-edit-loc="src/pages/Home.tsx:140:12" data-visual-edit-component="span" data-visual-edit-editable="true">manejar cualquier objeciÃ³n.</span>
+          </h1>
+          <p class="mt-5 max-w-2xl text-base leading-relaxed text-ink-300 sm:text-lg" data-visual-edit-loc="src/pages/Home.tsx:142:10" data-visual-edit-component="p" data-visual-edit-editable="true">
+            Encuentra quÃ© decir y por quÃ© funciona, practica el tono en voz alta, recupera el Ã¡rbol de decisiÃ³n y presenta sin distracciones con el Modo Zen.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-6" data-visual-edit-loc="src/pages/Home.tsx:147:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+            <div data-visual-edit-loc="src/pages/Home.tsx:275:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <div class="font-display text-3xl font-bold text-brand-400" data-visual-edit-loc="src/pages/Home.tsx:276:6" data-visual-edit-component="div" data-visual-edit-editable="false">15</div>
+              <div class="text-sm text-ink-400" data-visual-edit-loc="src/pages/Home.tsx:277:6" data-visual-edit-component="div" data-visual-edit-editable="false">Scripts disponibles</div>
+            </div>
+            <div data-visual-edit-loc="src/pages/Home.tsx:275:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <div class="font-display text-3xl font-bold text-brand-400" data-visual-edit-loc="src/pages/Home.tsx:276:6" data-visual-edit-component="div" data-visual-edit-editable="false">6</div>
+              <div class="text-sm text-ink-400" data-visual-edit-loc="src/pages/Home.tsx:277:6" data-visual-edit-component="div" data-visual-edit-editable="false">Tipos de objeciÃ³n</div>
+            </div>
+            <div data-visual-edit-loc="src/pages/Home.tsx:275:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+              <div class="font-display text-3xl font-bold text-brand-400" data-visual-edit-loc="src/pages/Home.tsx:276:6" data-visual-edit-component="div" data-visual-edit-editable="false">4</div>
+              <div class="text-sm text-ink-400" data-visual-edit-loc="src/pages/Home.tsx:277:6" data-visual-edit-component="div" data-visual-edit-editable="false">Perfiles de cliente</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main class="mx-auto max-w-6xl px-5 py-10" data-visual-edit-loc="src/pages/Home.tsx:155:6" data-visual-edit-component="main" data-visual-edit-editable="false">
+        <div class="mb-8 flex flex-wrap items-center justify-between gap-4" data-visual-edit-loc="src/pages/Home.tsx:156:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+          <div class="flex flex-wrap gap-1 rounded-xl bg-navy-900 p-1" data-visual-edit-loc="src/pages/Home.tsx:157:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+            <button class="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all bg-navy-700 text-ink-100" data-visual-edit-loc="src/pages/Home.tsx:294:4" data-visual-edit-component="button" data-visual-edit-editable="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-4 w-4" data-visual-edit-loc="src/pages/Home.tsx:158:82" data-visual-edit-component="Search" data-visual-edit-editable="false">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg>
+              Explorador
+            </button>
+            <button class="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all text-ink-400 hover:text-ink-100" data-visual-edit-loc="src/pages/Home.tsx:294:4" data-visual-edit-component="button" data-visual-edit-editable="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-workflow h-4 w-4" data-visual-edit-loc="src/pages/Home.tsx:159:84" data-visual-edit-component="Workflow" data-visual-edit-editable="false">
+                <rect width="8" height="8" x="3" y="3" rx="2"></rect>
+                <path d="M7 11v4a2 2 0 0 0 2 2h4"></path>
+                <rect width="8" height="8" x="13" y="13" rx="2"></rect>
+              </svg>
+              Modo ConversaciÃ³n
+            </button>
+            <button class="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all text-ink-400 hover:text-ink-100" data-visual-edit-loc="src/pages/Home.tsx:294:4" data-visual-edit-component="button" data-visual-edit-editable="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy h-4 w-4" data-visual-edit-loc="src/pages/Home.tsx:160:90" data-visual-edit-component="Trophy" data-visual-edit-editable="false">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                <path d="M4 22h16"></path>
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+              </svg>
+              CategorÃ­a
+            </button>
+            <button class="inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all text-ink-400 hover:text-ink-100" data-visual-edit-loc="src/pages/Home.tsx:294:4" data-visual-edit-component="button" data-visual-edit-editable="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-4 w-4" data-visual-edit-loc="src/pages/Home.tsx:161:94" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+              </svg>
+              Errores de guion (0)
+            </button>
+          </div>
+          <div class="flex gap-2" data-visual-edit-loc="src/pages/Home.tsx:163:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+            <button class="inline-flex items-center gap-1.5 rounded-lg bg-flame-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame-600 disabled:opacity-50" data-visual-edit-loc="src/pages/Home.tsx:165:14" data-visual-edit-component="button" data-visual-edit-editable="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize h-4 w-4" data-visual-edit-loc="src/pages/Home.tsx:170:16" data-visual-edit-component="Maximize" data-visual-edit-editable="false">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
+                <path d="M21 8V5a2 2 0 0 0-2-2h-3"></path>
+                <path d="M3 16v3a2 2 0 0 0 2 2h3"></path>
+                <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
+              </svg>
+              Modo Zen
+            </button>
+            <button class="inline-flex items-center gap-1.5 rounded-lg bg-navy-800 px-4 py-2.5 text-sm font-semibold text-ink-200 transition-colors hover:bg-navy-700 sm:hidden" data-visual-edit-loc="src/pages/Home.tsx:174:12" data-visual-edit-component="button" data-visual-edit-editable="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus h-4 w-4" data-visual-edit-loc="src/pages/Home.tsx:178:14" data-visual-edit-component="PlusCircle" data-visual-edit-editable="false">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M8 12h8"></path>
+                <path d="M12 8v8"></path>
+              </svg>
+              Aportar
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-8 flex flex-col gap-4 rounded-card border border-flame-500/20 bg-navy-900 p-5 sm:flex-row sm:items-center sm:justify-between" data-visual-edit-loc="src/pages/Home.tsx:201:14" data-visual-edit-component="div" data-visual-edit-editable="false">
+          <div data-visual-edit-loc="src/pages/Home.tsx:202:16" data-visual-edit-component="div" data-visual-edit-editable="false">
+            <p class="font-display text-lg font-semibold text-ink-100" data-visual-edit-loc="src/pages/Home.tsx:203:18" data-visual-edit-component="p" data-visual-edit-editable="false">8 scripts premium bloqueados</p>
+            <p class="text-sm text-ink-400" data-visual-edit-loc="src/pages/Home.tsx:206:18" data-visual-edit-component="p" data-visual-edit-editable="true">RegÃ­strate gratis y accede a toda la biblioteca al instante.</p>
+          </div>
+          <form class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+            <input id="input-correo" type="email" required placeholder="tu@correo.com" class="w-full rounded-lg border border-white/10 bg-navy-800 px-4 py-2.5 text-sm text-ink-100 placeholder:text-ink-400 outline-none transition-colors focus:border-flame-500 focus:ring-1 focus:ring-flame-500 sm:w-64">
+            <button id="btn-enviar-lead" type="submit" class="shrink-0 rounded-lg bg-flame-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900" data-visual-edit-loc="src/pages/Home.tsx:210:16" data-visual-edit-component="button" data-visual-edit-editable="true">Desbloquear gratis</button>
+          </form>
+        </div>
+
+        <div class="flex flex-wrap gap-2.5" data-visual-edit-loc="src/components/FilterBar.tsx:13:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+          <button aria-pressed="true" class="group inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 bg-flame-500 text-white shadow-lg shadow-flame-500/25" data-visual-edit-loc="src/components/FilterBar.tsx:18:10" data-visual-edit-component="button" data-visual-edit-editable="false">
+            <span data-visual-edit-loc="src/components/FilterBar.tsx:28:12" data-visual-edit-component="span" data-visual-edit-editable="false">Todas</span>
+            <span class="rounded-full px-1.5 py-0.5 text-[11px] font-semibold tabular-nums bg-white/25 text-white" data-visual-edit-loc="src/components/FilterBar.tsx:29:12" data-visual-edit-component="span" data-visual-edit-editable="false">15</span>
+          </button>
+          <button aria-pressed="false" class="group inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 bg-navy-800 text-ink-300 hover:bg-navy-700 hover:text-ink-100" data-visual-edit-loc="src/components/FilterBar.tsx:18:10" data-visual-edit-component="button" data-visual-edit-editable="false">
+            <span data-visual-edit-loc="src/components/FilterBar.tsx:28:12" data-visual-edit-component="span" data-visual-edit-editable="false">Es muy caro</span>
+            <span class="rounded-full px-1.5 py-0.5 text-[11px] font-semibold tabular-nums bg-navy-950/60 text-ink-400" data-visual-edit-loc="src/components/FilterBar.tsx:29:12" data-visual-edit-component="span" data-visual-edit-editable="false">3</span>
+          </button>
+          <button aria-pressed="false" class="group inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 bg-navy-800 text-ink-300 hover:bg-navy-700 hover:text-ink-100" data-visual-edit-loc="src/components/FilterBar.tsx:18:10" data-visual-edit-component="button" data-visual-edit-editable="false">
+            <span data-visual-edit-loc="src/components/FilterBar.tsx:28:12" data-visual-edit-component="span" data-visual-edit-editable="false">DÃ©jame pensarlo</span>
+            <span class="rounded-full px-1.5 py-0.5 text-[11px] font-semibold tabular-nums bg-navy-950/60 text-ink-400" data-visual-edit-loc="src/components/FilterBar.tsx:29:12" data-visual-edit-component="span" data-visual-edit-editable="false">3</span>
+          </button>
+          <button aria-pressed="false" class="group inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 bg-navy-800 text-ink-300 hover:bg-navy-700 hover:text-ink-100" data-visual-edit-loc="src/components/FilterBar.tsx:18:10" data-visual-edit-component="button" data-visual-edit-editable="false">
+            <span data-visual-edit-loc="src/components/FilterBar.tsx:28:12" data-visual-edit-component="span" data-visual-edit-editable="false">No tengo tiempo</span>
+            <span class="rounded-full px-1.5 py-0.5 text-[11px] font-semibold tabular-nums bg-navy-950/60 text-ink-400" data-visual-edit-loc="src/components/FilterBar.tsx:29:12" data-visual-edit-component="span" data-visual-edit-editable="false">2</span>
+          </button>
+          <button aria-pressed="false" class="group inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 bg-navy-800 text-ink-300 hover:bg-navy-700 hover:text-ink-100" data-visual-edit-loc="src/components/FilterBar.tsx:18:10" data-visual-edit-component="button" data-visual-edit-editable="false">
+            <span data-visual-edit-loc="src/components/FilterBar.tsx:28:12" data-visual-edit-component="span" data-visual-edit-editable="false">No me interesa</span>
+            <span class="rounded-full px-1.5 py-0.5 text-[11px] font-semibold tabular-nums bg-navy-950/60 text-ink-400" data-visual-edit-loc="src/components/FilterBar.tsx:29:12" data-visual-edit-component="span" data-visual-edit-editable="false">2</span>
+          </button>
+          <button aria-pressed="false" class="group inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-950 bg-navy-800 text-ink-300 hover:bg-navy-700 hover:text-ink-100" data-visual-edit-loc="src/components/FilterBar.tsx:18:10" data-visual-edit-component="button" data-visual-edit-editable="false">
+            <span data-visual-edit-loc="src/components/FilterBar.tsx:28:12" data-visual-edit-component="span" data-visual-edit-editable="false">Ya trabajo con otro</span>
+            <span class="rounded-full px-1.5 py-0.5 text-[11px] font-semibold tabular-nums bg-navy-950/60 text-ink-400" data-visual-edit-loc="src/components/FilterBar.tsx:29:12" data-visual-edit-component="span" data-visual-edit-editable="false">2</span>
+          </button>
+        </div>
+
+        <div class="mt-8" data-visual-edit-loc="src/pages/Home.tsx:221:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3" data-visual-edit-loc="src/pages/Home.tsx:239:16" data-visual-edit-component="div" data-visual-edit-editable="false">
+            
+            <!-- TARJETA 1 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 0ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">Es muy caro</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">Reencuadre de costo de inversiÃ³n</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                      <button aria-pressed="false" class="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900 bg-flame-500/15 text-flame-400 hover:bg-flame-500 hover:text-white" data-visual-edit-loc="src/components/AudioButton.tsx:48:4" data-visual-edit-component="button" data-visual-edit-editable="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume2 h-3.5 w-3.5" data-visual-edit-loc="src/components/AudioButton.tsx:57:55" data-visual-edit-component="Volume2" data-visual-edit-editable="false">
+                          <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path>
+                          <path d="M16 9a5 5 0 0 1 0 6"></path>
+                          <path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path>
+                        </svg>
+                        Escuchar
+                      </button>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Entiendo perfectamente. Antes de hablar de precio, Â¿te parece si comparamos el costo de resolver esto hoy contra lo que te estÃ¡ costando NO resolverlo cada mes? Muchos clientes descubren que el problema ya les cuesta mÃ¡s que la soluciÃ³n.</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">Desplaza la conversaciÃ³n del gasto puntual al costo de la inacciÃ³n. El cliente analÃ­tico responde a comparaciones cuantificables, no a presiÃ³n emocional.</p>
+                  </div>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-brand-300 border-brand-300/30 bg-brand-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente AnalÃ­tico</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 2 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 55ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">Es muy caro</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">Aislar la objeciÃ³n real</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Cuando dices que es caro, Â¿es que no ves el valor todavÃ­a, o es un tema de que no encaja en el presupuesto de este mes? Te lo pregunto porque para cada caso tengo una salida distinta.</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">Separa la objeciÃ³n de valor de la de presupuesto. Sin este diagnÃ³stico, terminas rebajando el precio cuando el problema real era otro.</p>
+                  </div>
+                </div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-navy-900/80 p-6 text-center backdrop-blur-md" data-visual-edit-loc="src/components/ScriptCard.tsx:75:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-flame-500/15 text-flame-500" data-visual-edit-loc="src/components/ScriptCard.tsx:76:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock h-6 w-6" data-visual-edit-loc="src/components/ScriptCard.tsx:77:14" data-visual-edit-component="Lock" data-visual-edit-editable="false">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <p class="max-w-[15rem] text-sm text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:79:12" data-visual-edit-component="p" data-visual-edit-editable="true">Prima de guiÃ³n. RegÃ­strate gratis para desbloquear toda la biblioteca.</p>
+                  <button class="rounded-lg bg-flame-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900" data-visual-edit-loc="src/components/ScriptCard.tsx:82:12" data-visual-edit-component="button" data-visual-edit-editable="true">Desbloquear scripts</button>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-brand-300 border-brand-300/30 bg-brand-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente EscÃ©ptico</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 3 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 110ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">Es muy caro</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">Anclaje de la mejor opciÃ³n</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Tienes razÃ³n en que no es la opciÃ³n mÃ¡s barata; es la que menos veces vas a tener que volver a comprar. Lo barato sale caro dos veces. Â¿Prefieres pagar una vez bien o varias veces mal?</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">El anclaje contrasta el dolor de repetir la compra contra el precio actual. Funciona con perfiles impulsivos que deciden por sensaciÃ³n de acierto.</p>
+                  </div>
+                </div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-navy-900/80 p-6 text-center backdrop-blur-md" data-visual-edit-loc="src/components/ScriptCard.tsx:75:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-flame-500/15 text-flame-500" data-visual-edit-loc="src/components/ScriptCard.tsx:76:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock h-6 w-6" data-visual-edit-loc="src/components/ScriptCard.tsx:77:14" data-visual-edit-component="Lock" data-visual-edit-editable="false">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <p class="max-w-[15rem] text-sm text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:79:12" data-visual-edit-component="p" data-visual-edit-editable="true">Prima de guiÃ³n. RegÃ­strate gratis para desbloquear toda la biblioteca.</p>
+                  <button class="rounded-lg bg-flame-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900" data-visual-edit-loc="src/components/ScriptCard.tsx:82:12" data-visual-edit-component="button" data-visual-edit-editable="true">Desbloquear scripts</button>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-flame-400 border-flame-400/30 bg-flame-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente Impulsivo</span>
+                  <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:107:12" data-visual-edit-component="span" data-visual-edit-editable="true">De primera calidad</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 4 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 165ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">DÃ©jame pensarlo</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">Concretar el pensamiento</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                      <button aria-pressed="false" class="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900 bg-flame-500/15 text-flame-400 hover:bg-flame-500 hover:text-white" data-visual-edit-loc="src/components/AudioButton.tsx:48:4" data-visual-edit-component="button" data-visual-edit-editable="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume2 h-3.5 w-3.5" data-visual-edit-loc="src/components/AudioButton.tsx:57:55" data-visual-edit-component="Volume2" data-visual-edit-editable="false">
+                          <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path>
+                          <path d="M16 9a5 5 0 0 1 0 6"></path>
+                          <path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path>
+                        </svg>
+                        Escuchar
+                      </button>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Claro, es una buena decisiÃ³n pensarla. Solo para ayudarte a pensar mejor: Â¿quÃ© es exactamente lo que necesitas resolver en tu cabeza para tomar la decisiÃ³n? AsÃ­ te doy justo esa informaciÃ³n y no te hago perder tiempo.</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">"DÃ©jame pensarlo" suele ocultar una duda concreta. Al pedir el criterio de decisiÃ³n, transforma una evasiva vaga en un punto accionable.</p>
+                  </div>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-flame-400 border-flame-400/30 bg-flame-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente ocupado</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 5 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 220ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">DÃ©jame pensarlo</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">El cierre del pro y contra</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Perfecto. Para que tu anÃ¡lisis sea completo, hagÃ¡moslo juntos 30 segundos: en la columna de a favor tienes X, Y y Z. Â¿QuÃ© pondrÃ­as tÃº en la columna de en contra? Trabajemos esa parte.</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">Involucra al cliente analÃ­tico en su propio proceso lÃ³gico y hace visibles las objeciones ocultas para poder resolverlas en el momento.</p>
+                  </div>
+                </div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-navy-900/80 p-6 text-center backdrop-blur-md" data-visual-edit-loc="src/components/ScriptCard.tsx:75:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-flame-500/15 text-flame-500" data-visual-edit-loc="src/components/ScriptCard.tsx:76:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock h-6 w-6" data-visual-edit-loc="src/components/ScriptCard.tsx:77:14" data-visual-edit-component="Lock" data-visual-edit-editable="false">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <p class="max-w-[15rem] text-sm text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:79:12" data-visual-edit-component="p" data-visual-edit-editable="true">Prima de guiÃ³n. RegÃ­strate gratis para desbloquear toda la biblioteca.</p>
+                  <button class="rounded-lg bg-flame-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900" data-visual-edit-loc="src/components/ScriptCard.tsx:82:12" data-visual-edit-component="button" data-visual-edit-editable="true">Desbloquear scripts</button>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-brand-300 border-brand-300/30 bg-brand-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente AnalÃ­tico</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 6 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 275ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">DÃ©jame pensarlo</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">Costo de posponer</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Me parece bien. Solo ten en cuenta una cosa: pensarlo no es gratis. Mientras decide, el problema sigue ahÃ­. Â¿QuÃ© tendrÃ­a que pasar para que valga la pena empezar hoy en lugar de dentro de un mes?</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">Introducir urgencia legÃ­tima sin manipular. El escÃ©ptico valora que reconozcas su derecho a decidir mientras cuantificas el costo de esperar.</p>
+                  </div>
+                </div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-navy-900/80 p-6 text-center backdrop-blur-md" data-visual-edit-loc="src/components/ScriptCard.tsx:75:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-flame-500/15 text-flame-500" data-visual-edit-loc="src/components/ScriptCard.tsx:76:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock h-6 w-6" data-visual-edit-loc="src/components/ScriptCard.tsx:77:14" data-visual-edit-component="Lock" data-visual-edit-editable="false">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <p class="max-w-[15rem] text-sm text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:79:12" data-visual-edit-component="p" data-visual-edit-editable="true">Prima de guiÃ³n. RegÃ­strate gratis para desbloquear toda la biblioteca.</p>
+                  <button class="rounded-lg bg-flame-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900" data-visual-edit-loc="src/components/ScriptCard.tsx:82:12" data-visual-edit-component="button" data-visual-edit-editable="true">Desbloquear scripts</button>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-flame-400 border-flame-400/30 bg-flame-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente Impulsivo</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 7 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 330ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">No tengo tiempo</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">Respetar y microcomprometer</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Justo por eso te llamo: porque sÃ© que tu tiempo es lo mÃ¡s valioso. No te pido 30 minutos, te pido 4. Si en esos 4 minutos no ves algo que te ahorre tiempo, cuelgo y no vuelvo a insistir. Â¿Trato hecho?</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">Reduce el compromiso a un mÃ­nimo asumible y usa la escasez de tiempo del cliente como argumento a tu favor, no en tu contra.</p>
+                  </div>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-brand-300 border-brand-300/30 bg-brand-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente ocupado</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 8 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 400ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">Ya trabajo con otro</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">El segundo par de ojos</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Me alegra que ya tengas un proveedor, significa que valoras esto. No te pido que cambies. Te propongo ser tu segunda opiniÃ³n: si algÃºn dÃ­a tu proveedor falla o sube precios, ya me conoces. Â¿QuÃ© pierdes con tenerme en el radar?</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">Elimina la amenaza inmediata de cambio y se posiciona como plan B de bajo riesgo, ideal para clientes que temen equivocarse al cambiar.</p>
+                  </div>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-brand-300 border-brand-300/30 bg-brand-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente AnalÃ­tico</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 9 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 400ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">No me interesa</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">Validar y girar</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Lo entiendo, y tiene todo el sentido no interesarte por algo que aÃºn no sabes cÃ³mo te ayuda. La mayorÃ­a de mis mejores clientes me dijeron exactamente eso al principio. Â¿Puedo hacerte una sola pregunta antes de que decidas?</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">No pelea la objeciÃ³n, la valida. La prueba social de "mis mejores clientes decÃ­an lo mismo" reabre la puerta sin sonar insistente.</p>
+                  </div>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-brand-300 border-brand-300/30 bg-brand-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente EscÃ©ptico</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 10 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 400ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">No me interesa</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">El gancho de curiosidad</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Problema de pecado. Solo por curiosidad, Â¿quÃ© usamos hoy para resolver [problema]? Lo pregunto porque quienes usan lo mismo que tÃº suelen estar perdiendo cerca de un 20% que ni notan. Si ya lo tienes cubierto, mejor para ti.</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">Planta una semilla de duda cuantificada y le da al analÃ­tico una salida digna, lo que paradÃ³jicamente aumenta su interÃ©s.</p>
+                  </div>
+                </div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-navy-900/80 p-6 text-center backdrop-blur-md" data-visual-edit-loc="src/components/ScriptCard.tsx:75:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-flame-500/15 text-flame-500" data-visual-edit-loc="src/components/ScriptCard.tsx:76:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock h-6 w-6" data-visual-edit-loc="src/components/ScriptCard.tsx:77:14" data-visual-edit-component="Lock" data-visual-edit-editable="false">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <p class="max-w-[15rem] text-sm text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:79:12" data-visual-edit-component="p" data-visual-edit-editable="true">Prima de guiÃ³n. RegÃ­strate gratis para desbloquear toda la biblioteca.</p>
+                  <button class="rounded-lg bg-flame-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900" data-visual-edit-loc="src/components/ScriptCard.tsx:82:12" data-visual-edit-component="button" data-visual-edit-editable="true">Desbloquear scripts</button>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-brand-300 border-brand-300/30 bg-brand-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente AnalÃ­tico</span>
+                  <span class="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:101:10" data-visual-edit-component="span" data-visual-edit-editable="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:102:12" data-visual-edit-component="Users" data-visual-edit-editable="false">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Comunidad
+                  </span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 11 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 400ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">Tengo que consultarlo</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">Preparar al mensajero</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Muy bien. Para que la conversaciÃ³n con esa persona sea fÃ¡cil, diez centavos: Â¿quÃ© es lo que mÃ¡s le importarÃ­a a ella? AsÃ­ te preparas justo ese argumento y llegas con la lista de respuestas antes de que te la pregunte.</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">Convierte al prospecto en tu vendedor interno y anticipa las objeciones del tercero ausente que suelen frenar el cierre.</p>
+                  </div>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-flame-400 border-flame-400/30 bg-flame-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente ocupado</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 12 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 400ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">Tengo que consultarlo</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">Cierre condicional</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Perfecto. Entonces, si por ti fuera y no tuvieras que consultarlo, Â¿esto es un sÃ­? Te lo pregunto para saber si el freno soy yo o es solo la logÃ­stica de la consulta.</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">AÃ­sla si la consulta es real o una cortina de humo. Si dice que por Ã©l serÃ­a un sÃ­, ya cerraste el fondo y solo queda la forma.</p>
+                  </div>
+                </div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-navy-900/80 p-6 text-center backdrop-blur-md" data-visual-edit-loc="src/components/ScriptCard.tsx:75:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-flame-500/15 text-flame-500" data-visual-edit-loc="src/components/ScriptCard.tsx:76:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock h-6 w-6" data-visual-edit-loc="src/components/ScriptCard.tsx:77:14" data-visual-edit-component="Lock" data-visual-edit-editable="false">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <p class="max-w-[15rem] text-sm text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:79:12" data-visual-edit-component="p" data-visual-edit-editable="true">Prima de guiÃ³n. RegÃ­strate gratis para desbloquear toda la biblioteca.</p>
+                  <button class="rounded-lg bg-flame-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900" data-visual-edit-loc="src/components/ScriptCard.tsx:82:12" data-visual-edit-component="button" data-visual-edit-editable="true">Desbloquear scripts</button>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-brand-300 border-brand-300/30 bg-brand-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente AnalÃ­tico</span>
+                  <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:107:12" data-visual-edit-component="span" data-visual-edit-editable="true">De primera calidad</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 13 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 400ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">Tengo que consultarlo</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">Reserva con reversa</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Genial, consÃºltalo con calma. Mientras tanto, te aparto las condiciones de hoy por 48 horas sin ningÃºn compromiso. Si tras hablarlo no te encaja, no pasa absolutamente nada. Â¿Te reserva el lugar?</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">Da al impulsivo la sensaciÃ³n de asegurar la oportunidad con reversa total, manteniendo el impulso sin forzar la decisiÃ³n final.</p>
+                  </div>
+                </div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-navy-900/80 p-6 text-center backdrop-blur-md" data-visual-edit-loc="src/components/ScriptCard.tsx:75:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-flame-500/15 text-flame-500" data-visual-edit-loc="src/components/ScriptCard.tsx:76:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock h-6 w-6" data-visual-edit-loc="src/components/ScriptCard.tsx:77:14" data-visual-edit-component="Lock" data-visual-edit-editable="false">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <p class="max-w-[15rem] text-sm text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:79:12" data-visual-edit-component="p" data-visual-edit-editable="true">Prima de guiÃ³n. RegÃ­strate gratis para desbloquear toda la biblioteca.</p>
+                  <button class="rounded-lg bg-flame-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900" data-visual-edit-loc="src/components/ScriptCard.tsx:82:12" data-visual-edit-component="button" data-visual-edit-editable="true">Desbloquear scripts</button>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-flame-400 border-flame-400/30 bg-flame-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente Impulsivo</span>
+                  <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:107:12" data-visual-edit-component="span" data-visual-edit-editable="true">De primera calidad</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 14 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 400ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">Ya trabajo con otro</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">La auditorÃ­a gratuita</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Excelente, asÃ­ valoras el servicio. No te pido que cambies. Te ofrezco una auditorÃ­a gratuita: revisa lo que ya tienes y te digo con datos si estÃ¡s bien cubierto. Si lo estÃ¡s, te vas tranquilo. Â¿QuÃ© pierdes?</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">Ofrece valor sin riesgo ni compromiso y se posiciona como experto imparcial, abriendo la puerta con datos en vez de con presiÃ³n.</p>
+                  </div>
+                </div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-navy-900/80 p-6 text-center backdrop-blur-md" data-visual-edit-loc="src/components/ScriptCard.tsx:75:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-flame-500/15 text-flame-500" data-visual-edit-loc="src/components/ScriptCard.tsx:76:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock h-6 w-6" data-visual-edit-loc="src/components/ScriptCard.tsx:77:14" data-visual-edit-component="Lock" data-visual-edit-editable="false">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <p class="max-w-[15rem] text-sm text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:79:12" data-visual-edit-component="p" data-visual-edit-editable="true">Prima de guiÃ³n. RegÃ­strate gratis para desbloquear toda la biblioteca.</p>
+                  <button class="rounded-lg bg-flame-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900" data-visual-edit-loc="src/components/ScriptCard.tsx:82:12" data-visual-edit-component="button" data-visual-edit-editable="true">Desbloquear scripts</button>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-brand-300 border-brand-300/30 bg-brand-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente AnalÃ­tico</span>
+                  <span class="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:101:10" data-visual-edit-component="span" data-visual-edit-editable="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:102:12" data-visual-edit-component="Users" data-visual-edit-editable="false">
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Comunidad
+                  </span>
+                </div>
+              </article>
+            </div>
+
+            <!-- TARJETA 15 -->
+            <div class="animate-card-in" data-visual-edit-loc="src/pages/Home.tsx:241:20" data-visual-edit-component="div" data-visual-edit-editable="false" style="animation-delay: 400ms;">
+              <article class="group relative flex h-full flex-col overflow-hidden rounded-card border border-white/5 bg-navy-900 transition-colors duration-300 hover:border-brand-500/40" data-visual-edit-loc="src/components/ScriptCard.tsx:28:4" data-visual-edit-component="article" data-visual-edit-editable="false">
+                <div class="flex items-start justify-between gap-3 border-b border-white/5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:29:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex flex-col gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:30:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:31:10" data-visual-edit-component="span" data-visual-edit-editable="false">No tengo tiempo</span>
+                    <h3 class="font-display text-lg font-semibold leading-tight text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:34:10" data-visual-edit-component="h3" data-visual-edit-editable="false">El costo de no verlo</h3>
+                  </div>
+                  <button aria-label="Guardar en favoritos" aria-pressed="false" class="shrink-0 rounded-full p-2 transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:38:8" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-5 w-5 transition-all text-ink-400 group-hover:text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:44:10" data-visual-edit-component="Star" data-visual-edit-editable="false">
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="relative flex flex-1 flex-col gap-5 p-5" data-visual-edit-loc="src/components/ScriptCard.tsx:54:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="border-l-2 border-brand-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:55:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center justify-between gap-2" data-visual-edit-loc="src/components/ScriptCard.tsx:56:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                      <div class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-brand-300" data-visual-edit-loc="src/components/ScriptCard.tsx:57:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square-quote h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:58:14" data-visual-edit-component="MessageSquareQuote" data-visual-edit-editable="false">
+                          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          <path d="M8 12a2 2 0 0 0 2-2V8H8"></path>
+                          <path d="M14 12a2 2 0 0 0 2-2V8h-2"></path>
+                        </svg>
+                        QuÃ© decir
+                      </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-100" data-visual-edit-loc="src/components/ScriptCard.tsx:63:10" data-visual-edit-component="p" data-visual-edit-editable="false">Entiendo que vas a tope. Justo por eso: lo que te voy a mostrar existe para devolverte horas cada semana. Â¿CuÃ¡nto vale para ti recuperar una tarde completa? Dame 5 minutos y te enseÃ±o cÃ³mo.</p>
+                  </div>
+                  <div class="border-l-2 border-flame-500 pl-4" data-visual-edit-loc="src/components/ScriptCard.tsx:66:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <div class="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-flame-400" data-visual-edit-loc="src/components/ScriptCard.tsx:67:10" data-visual-edit-component="div" data-visual-edit-editable="true">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb h-3.5 w-3.5" data-visual-edit-loc="src/components/ScriptCard.tsx:68:12" data-visual-edit-component="Lightbulb" data-visual-edit-editable="false">
+                        <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                        <path d="M9 18h6"></path>
+                        <path d="M10 22h4"></path>
+                      </svg>
+                      Por quÃ© funciona
+                    </div>
+                    <p class="text-sm leading-relaxed text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:71:10" data-visual-edit-component="p" data-visual-edit-editable="false">Convierte la falta de tiempo (la objeciÃ³n) en la razÃ³n principal para escuchar, prometiendo devolver ese mismo recurso escaso.</p>
+                  </div>
+                </div>
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-navy-900/80 p-6 text-center backdrop-blur-md" data-visual-edit-loc="src/components/ScriptCard.tsx:75:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-full bg-flame-500/15 text-flame-500" data-visual-edit-loc="src/components/ScriptCard.tsx:76:12" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock h-6 w-6" data-visual-edit-loc="src/components/ScriptCard.tsx:77:14" data-visual-edit-component="Lock" data-visual-edit-editable="false">
+                      <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                  </div>
+                  <p class="max-w-[15rem] text-sm text-ink-300" data-visual-edit-loc="src/components/ScriptCard.tsx:79:12" data-visual-edit-component="p" data-visual-edit-editable="true">Prima de guiÃ³n. RegÃ­strate gratis para desbloquear toda la biblioteca.</p>
+                  <button class="rounded-lg bg-flame-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-flame-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900" data-visual-edit-loc="src/components/ScriptCard.tsx:82:12" data-visual-edit-component="button" data-visual-edit-editable="true">Desbloquear scripts</button>
+                </div>
+                <div class="mt-auto flex items-center justify-between gap-2 border-t border-white/5 px-5 py-3" data-visual-edit-loc="src/components/ScriptCard.tsx:92:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <span class="rounded-full border px-2.5 py-1 text-xs font-medium text-brand-300 border-brand-300/30 bg-brand-500/10" data-visual-edit-loc="src/components/ScriptCard.tsx:93:8" data-visual-edit-component="span" data-visual-edit-editable="false">Cliente AnalÃ­tico</span>
+                </div>
+              </article>
+            </div>
+
+          </div> <!-- Cierre del grid -->
+        </div> <!-- Cierre de mt-8 -->
+      </main>
+      
+      <!-- Footer -->
+      <footer class="border-t border-white/5 py-8 text-center text-sm text-ink-400" data-visual-edit-loc="src/pages/Home.tsx:262:6" data-visual-edit-component="footer" data-visual-edit-editable="true">
+        Generador de Scripts para Manejo de Objeciones
+      </footer>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE CAPTURA DE LEADS -->
+  <script>
+    function registrarLead(event) {
+      event.preventDefault();
+      
+      const emailInput = document.getElementById('input-correo');
+      if (!emailInput) return;
+      
+      const email = emailInput.value;
+      if (!email) return;
+
+      // Reemplaza esta URL con la URL final de tu Web App de Google Apps Script
+      const scriptURL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email })
+      })
+      .then(() => {
+        console.log('Lead registrado con Ã©xito.');
+        // Opcional: mostrar mensaje de confirmaciÃ³n
+      })
+      .catch(error => {
+        console.error('Error al registrar el lead:', error);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnEnviar = document.getElementById('btn-enviar-lead');
+      if (btnEnviar) {
+        const leadForm = btnEnviar.closest('form');
+        if (leadForm) {
+          leadForm.addEventListener('submit', registrarLead);
+        } else {
+          // Fallback por si el botÃ³n estÃ¡ suelto
+          btnEnviar.addEventListener('click', registrarLead);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

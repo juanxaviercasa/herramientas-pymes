@@ -1,0 +1,60 @@
+{
+  "name": "Nube para Pymes — Portal de Herramientas",
+  "short_name": "NubeParaPymes",
+  "description": "Portal integral con 22 herramientas gratuitas para potenciar y administrar tu Pyme.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0B132B",
+  "theme_color": "#1E3A8A",
+  "orientation": "any",
+  "categories": [
+    "business",
+    "productivity",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Analizador de Titulares",
+      "short_name": "Titulares",
+      "description": "Optimiza y evalúa el impacto de tus titulares.",
+      "url": "./analizador-titulares.html",
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Calculadora de Descuentos",
+      "short_name": "Descuentos",
+      "description": "Calcula márgenes y promociones para tus productos.",
+      "url": "./calculadora-descuentos-promociones.html",
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Creador de Facturas Proforma",
+      "short_name": "Facturas",
+      "description": "Emite facturas proforma profesionales al instante.",
+      "url": "./creador-facturas-proforma.html",
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Generador de Cotizaciones",
+      "short_name": "Cotizaciones",
+      "description": "Elabora presupuestos y cotizaciones para tus clientes.",
+      "url": "./generador-cotizaciones.html",
+      "icons": [{ "src": "favicon.png", "sizes": "192x192" }]
+    }
+  ]
+}

@@ -1,0 +1,498 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <title>Analizador de Titulares</title>
+  <script type="module" crossorigin="" src="./js/analizador-titulares.js"></script>
+  <link rel="stylesheet" crossorigin="" href="./css/analizador-titulares.css">
+</head>
+<body>
+  <div id="root">
+    <div class="min-h-screen">
+      <div class="pointer-events-none fixed inset-0 panel-grid" aria-hidden="true"></div>
+      
+      <div class="relative mx-auto max-w-5xl px-4 py-10 sm:py-14">
+        
+        <!-- Header -->
+        <header class="text-center">
+          <span class="inline-flex items-center gap-2 rounded-full border border-navy-700 bg-navy-900/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-blue-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge">
+              <path d="m12 14 4-4"></path>
+              <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+            </svg>
+            Motor analÃ­tico de titulares
+          </span>
+          <h1 class="mt-5 font-display text-4xl font-bold leading-tight text-white sm:text-5xl">
+            Analizador de <span class="text-signal">Titulares</span>
+          </h1>
+          <p class="mx-auto mt-4 max-w-xl text-base text-sky-300/70">
+            Puntaje en vivo, huella emocional NLP, previsualizaciÃ³n pixel-perfect y test A/B bayesiano para decidir con datos.
+          </p>
+        </header>
+
+        <!-- NavegaciÃ³n Interna -->
+        <div class="mt-8 flex justify-center">
+          <div class="flex gap-1 rounded-xl border border-navy-700 bg-navy-900/60 p-1">
+            <button class="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition bg-blue-500 text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge">
+                <path d="m12 14 4-4"></path>
+                <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+              </svg>
+              Analizador
+            </button>
+            <button class="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition text-sky-300/70 hover:text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-compare">
+                <circle cx="18" cy="18" r="3"></circle>
+                <circle cx="6" cy="6" r="3"></circle>
+                <path d="M13 6h3a2 2 0 0 1 2 2v7"></path>
+                <path d="M11 18H8a2 2 0 0 1-2-2V9"></path>
+              </svg>
+              Prueba A/B
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-8 space-y-8">
+          
+          <!-- Editor Section -->
+          <section class="rounded-2xl border border-navy-700/70 bg-navy-900/50 p-5 sm:p-7">
+            <label for="headline" class="flex items-center gap-2 text-sm font-medium text-sky-300/70">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line text-signal">
+                <path d="M12 20h9"></path>
+                <path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"></path>
+              </svg>
+              Escribe tu titular
+            </label>
+            <div class="mt-3">
+              <div contenteditable="true" role="textbox" aria-multiline="false" data-placeholder="Ej: 7 secretos definitivos para escribir titulares irresistibles" class="heatmap-editor min-h-[3.5rem] w-full rounded-xl border border-navy-700 bg-navy-950/70 px-5 py-4 font-display text-xl text-white transition focus:border-blue-500 sm:text-2xl"></div>
+            </div>
+            
+            <div class="mt-3 flex flex-wrap items-center gap-4">
+              <span class="inline-flex items-center gap-1.5 text-xs text-sky-300/60">
+                <span class="inline-block h-3 w-3 rounded" style="background-color: color-mix(in oklab, var(--color-gauge-high) 45%, transparent);"></span>
+                Palabra poderosa
+              </span>
+              <span class="inline-flex items-center gap-1.5 text-xs text-sky-300/60">
+                <span class="inline-block h-3 w-3 rounded" style="background-color: color-mix(in oklab, var(--color-signal) 45%, transparent);"></span>
+                Palabra dÃ©bil / relleno
+              </span>
+            </div>
+            
+            <div class="mt-3 flex flex-wrap items-center gap-2">
+              <span class="text-xs text-sky-300/50">Prueba:</span>
+              <button class="rounded-full border border-navy-700 bg-navy-800/50 px-3 py-1 text-xs text-sky-300/80 transition hover:border-blue-500 hover:text-white">7 secretos definitivos para escribir mejor</button>
+              <button class="rounded-full border border-navy-700 bg-navy-800/50 px-3 py-1 text-xs text-sky-300/80 transition hover:border-blue-500 hover:text-white">La guÃ­a gratis para duplicar tus clientes.</button>
+              <button class="rounded-full border border-navy-700 bg-navy-800/50 px-3 py-1 text-xs text-sky-300/80 transition hover:border-blue-500 hover:text-white">Evita este error urgente antes de que sea tarde</button>
+            </div>
+          </section>
+
+          <!-- Score & Metrics Grid -->
+          <section class="grid gap-6 lg:grid-cols-[280px_1fr]">
+            
+            <!-- Radial Score -->
+            <div class="flex flex-col items-center justify-center rounded-2xl border border-navy-700/70 bg-navy-900/50 p-6">
+              <div class="relative grid place-items-center" style="width: 240px; height: 240px;">
+                <svg width="240" height="240" class="-rotate-90">
+                  <circle cx="120" cy="120" r="112" fill="none" stroke="var(--color-navy-800)" stroke-width="16"></circle>
+                  <line x1="218" y1="120" x2="222" y2="120" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="216.79" y1="135.33" x2="220.74" y2="135.95" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="213.20" y1="150.28" x2="217.00" y2="151.51" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="207.31" y1="164.49" x2="210.88" y2="166.30" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="199.28" y1="177.60" x2="202.51" y2="179.95" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="189.29" y1="189.29" x2="192.12" y2="192.12" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="177.60" y1="199.28" x2="179.95" y2="202.51" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="164.49" y1="207.31" x2="166.30" y2="210.88" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="150.28" y1="213.20" x2="151.51" y2="217.00" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="135.33" y1="216.79" x2="135.95" y2="220.74" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="120" y1="218" x2="120" y2="222" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="104.66" y1="216.79" x2="104.04" y2="220.74" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="89.71" y1="213.20" x2="88.48" y2="217.00" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="75.50" y1="207.31" x2="73.69" y2="210.88" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="62.39" y1="199.28" x2="60.04" y2="202.51" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="50.70" y1="189.29" x2="47.87" y2="192.12" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="40.71" y1="177.60" x2="37.48" y2="179.95" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="32.68" y1="164.49" x2="29.11" y2="166.30" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="26.79" y1="150.28" x2="22.99" y2="151.51" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="23.20" y1="135.33" x2="19.25" y2="135.95" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="22" y1="120" x2="18" y2="120" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="23.20" y1="104.66" x2="19.25" y2="104.04" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="26.79" y1="89.71" x2="22.99" y2="88.48" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="32.68" y1="75.50" x2="29.11" y2="73.69" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="40.71" y1="62.39" x2="37.48" y2="60.04" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="50.70" y1="50.70" x2="47.87" y2="47.87" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="62.39" y1="40.71" x2="60.04" y2="37.48" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="75.50" y1="32.68" x2="73.69" y2="29.11" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="89.71" y1="26.79" x2="88.48" y2="22.99" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="104.66" y1="23.20" x2="104.04" y2="19.25" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="120" y1="22" x2="120" y2="18" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="135.33" y1="23.20" x2="135.95" y2="19.25" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="150.28" y1="26.79" x2="151.51" y2="22.99" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="164.49" y1="32.68" x2="166.30" y2="29.11" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="177.60" y1="40.71" x2="179.95" y2="37.48" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="189.29" y1="50.70" x2="192.12" y2="47.87" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="199.28" y1="62.39" x2="202.51" y2="60.04" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="207.31" y1="75.50" x2="210.88" y2="73.69" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="213.20" y1="89.71" x2="217.00" y2="88.48" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <line x1="216.79" y1="104.66" x2="220.74" y2="104.04" stroke="var(--color-navy-700)" stroke-width="1.5"></line>
+                  <circle cx="120" cy="120" r="112" fill="none" stroke="var(--color-navy-700)" stroke-width="16" stroke-linecap="round" stroke-dasharray="703.7167544041137" stroke-dashoffset="703.7167544041137" style="transition: stroke-dashoffset 0.6s cubic-bezier(0.22, 1, 0.36, 1), stroke 0.4s;"></circle>
+                </svg>
+                <div class="absolute flex flex-col items-center">
+                  <span class="font-mono text-6xl font-bold tabular-nums" style="color: var(--color-navy-700);">0</span>
+                  <span class="text-[10px] font-medium tracking-[0.25em] text-sky-300/60 uppercase">/ 100</span>
+                  <span class="mt-2 rounded-full px-3 py-0.5 text-xs font-semibold uppercase tracking-wider" style="color: var(--color-navy-700); background-color: color-mix(in oklab, var(--color-navy-700) 15%, transparent);">Esperando</span>
+                </div>
+              </div>
+              <p class="mt-4 text-center text-xs text-sky-300/50">Puntaje global de atractivo</p>
+            </div>
+
+            <!-- Metrics -->
+            <div class="space-y-6">
+              <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                
+                <div class="rounded-xl border border-navy-700/60 bg-navy-900/60 p-4">
+                  <div class="flex items-center gap-2 text-sky-300/60">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-type text-blue-500">
+                      <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                      <line x1="9" x2="15" y1="20" y2="20"></line>
+                      <line x1="12" x2="12" y1="4" y2="20"></line>
+                    </svg>
+                    <span class="text-xs font-medium uppercase tracking-wider">Caracteres</span>
+                  </div>
+                  <div class="mt-2 flex items-baseline gap-2">
+                    <span class="font-mono text-2xl font-bold text-white tabular-nums">0</span>
+                    <span class="text-xs text-sky-300/50">ideal 40â€“60</span>
+                  </div>
+                </div>
+
+                <div class="rounded-xl border border-navy-700/60 bg-navy-900/60 p-4">
+                  <div class="flex items-center gap-2 text-sky-300/60">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hash text-blue-500">
+                      <line x1="4" x2="20" y1="9" y2="9"></line>
+                      <line x1="4" x2="20" y1="15" y2="15"></line>
+                      <line x1="10" x2="8" y1="3" y2="21"></line>
+                      <line x1="16" x2="14" y1="3" y2="21"></line>
+                    </svg>
+                    <span class="text-xs font-medium uppercase tracking-wider">Palabras</span>
+                  </div>
+                  <div class="mt-2 flex items-baseline gap-2">
+                    <span class="font-mono text-2xl font-bold text-white tabular-nums">0</span>
+                    <span class="text-xs text-sky-300/50">ideal 6â€“12</span>
+                  </div>
+                </div>
+
+                <div class="rounded-xl border border-navy-700/60 bg-navy-900/60 p-4">
+                  <div class="flex items-center gap-2 text-sky-300/60">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap text-signal">
+                      <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+                    </svg>
+                    <span class="text-xs font-medium uppercase tracking-wider">Poderosas</span>
+                  </div>
+                  <div class="mt-2 flex items-baseline gap-2">
+                    <span class="font-mono text-2xl font-bold text-white tabular-nums">0</span>
+                  </div>
+                </div>
+
+                <div class="rounded-xl border border-navy-700/60 bg-navy-900/60 p-4">
+                  <div class="flex items-center gap-2 text-sky-300/60">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles text-blue-500">
+                      <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                      <path d="M20 3v4"></path>
+                      <path d="M22 5h-4"></path>
+                      <path d="M4 17v2"></path>
+                      <path d="M5 18H3"></path>
+                    </svg>
+                    <span class="text-xs font-medium uppercase tracking-wider">NÃºmero</span>
+                  </div>
+                  <div class="mt-2 flex items-baseline gap-2">
+                    <span class="font-mono text-2xl font-bold text-white tabular-nums">No</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Live Suggestions -->
+              <div>
+                <h2 class="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-sky-300/70">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles text-signal">
+                    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                    <path d="M20 3v4"></path>
+                    <path d="M22 5h-4"></path>
+                    <path d="M4 17v2"></path>
+                    <path d="M5 18H3"></path>
+                  </svg>
+                  Sugerencias en vivo
+                </h2>
+                <div class="flex items-center gap-3 rounded-xl border border-dashed border-navy-700 bg-navy-900/40 p-5 text-sky-300/60">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb text-blue-500">
+                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
+                    <path d="M9 18h6"></path>
+                    <path d="M10 22h4"></path>
+                  </svg>
+                  <span class="text-sm">Escribe un titular arriba para recibir sugerencias en vivo.</span>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- Emotion Footprint -->
+          <section class="grid gap-6 lg:grid-cols-[280px_1fr]">
+            <div class="flex flex-col items-center justify-center rounded-2xl border border-navy-700/70 bg-navy-900/50 p-6">
+              <h2 class="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-sky-300/70">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-radar text-signal">
+                  <path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"></path>
+                  <path d="M4 6h.01"></path>
+                  <path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"></path>
+                  <path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"></path>
+                  <path d="M12 18h.01"></path>
+                  <path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"></path>
+                  <circle cx="12" cy="12" r="2"></circle>
+                  <path d="m13.41 10.59 5.66-5.66"></path>
+                </svg>
+                Huella emocional
+              </h2>
+              <svg width="240" height="240" role="img" aria-label="Huella emocional">
+                <polygon points="120.0,100.0 140.0,120.0 120.0,140.0 100.0,120.0" fill="none" stroke="var(--color-navy-700)" stroke-width="1"></polygon>
+                <polygon points="120.0,80.0 160.0,120.0 120.0,160.0 80.0,120.0" fill="none" stroke="var(--color-navy-700)" stroke-width="1"></polygon>
+                <polygon points="120.0,60.0 180.0,120.0 120.0,180.0 60.0,120.0" fill="none" stroke="var(--color-navy-700)" stroke-width="1"></polygon>
+                <polygon points="120.0,40.0 200.0,120.0 120.0,200.0 40.0,120.0" fill="none" stroke="var(--color-navy-700)" stroke-width="1"></polygon>
+                <line x1="120" y1="120" x2="120" y2="40" stroke="var(--color-navy-700)" stroke-width="1"></line>
+                <line x1="120" y1="120" x2="200" y2="120" stroke="var(--color-navy-700)" stroke-width="1"></line>
+                <line x1="120" y1="120" x2="120" y2="200" stroke="var(--color-navy-700)" stroke-width="1"></line>
+                <line x1="120" y1="120" x2="40" y2="120" stroke="var(--color-navy-700)" stroke-width="1"></line>
+                <polygon points="120.0,120.0 120.0,120.0 120.0,120.0 120.0,120.0" fill="var(--color-signal)" fill-opacity="0.25" stroke="var(--color-signal)" stroke-width="2" style="transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);"></polygon>
+                <circle cx="120" cy="120" r="4" fill="var(--color-signal)" stroke="var(--color-navy-950)" stroke-width="2" style="cursor: pointer; transition: r 0.15s;"></circle>
+                <circle cx="120" cy="120" r="4" fill="var(--color-signal)" stroke="var(--color-navy-950)" stroke-width="2" style="cursor: pointer; transition: r 0.15s;"></circle>
+                <circle cx="120" cy="120" r="4" fill="var(--color-signal)" stroke="var(--color-navy-950)" stroke-width="2" style="cursor: pointer; transition: r 0.15s;"></circle>
+                <circle cx="120" cy="120" r="4" fill="var(--color-signal)" stroke="var(--color-navy-950)" stroke-width="2" style="cursor: pointer; transition: r 0.15s;"></circle>
+                <text x="120" y="18" text-anchor="middle" dominant-baseline="middle" font-size="11" font-weight="600" fill="var(--color-sky-300)" style="transition: fill 0.15s;">Urgencia<tspan x="120" dy="13" font-size="10" font-weight="700" fill="var(--color-blue-500)">0</tspan></text>
+                <text x="222" y="120" text-anchor="start" dominant-baseline="middle" font-size="11" font-weight="600" fill="var(--color-sky-300)" style="transition: fill 0.15s;">Curiosidad<tspan x="222" dy="13" font-size="10" font-weight="700" fill="var(--color-blue-500)">0</tspan></text>
+                <text x="120" y="222" text-anchor="middle" dominant-baseline="middle" font-size="11" font-weight="600" fill="var(--color-sky-300)" style="transition: fill 0.15s;">Miedo<tspan x="120" dy="13" font-size="10" font-weight="700" fill="var(--color-blue-500)">0</tspan></text>
+                <text x="18" y="120" text-anchor="end" dominant-baseline="middle" font-size="11" font-weight="600" fill="var(--color-sky-300)" style="transition: fill 0.15s;">AlegrÃ­a<tspan x="18" dy="13" font-size="10" font-weight="700" fill="var(--color-blue-500)">0</tspan></text>
+              </svg>
+              <p class="mt-3 text-center text-xs text-sky-300/50">Impacto psicolÃ³gico global: <span class="font-mono font-bold text-signal">0/100</span></p>
+            </div>
+            
+            <div class="space-y-3">
+              <div class="rounded-xl border border-navy-700/60 bg-navy-900/50 p-3.5">
+                <div class="flex items-center justify-between text-sm">
+                  <span class="font-medium text-white">Urgencia</span>
+                  <span class="font-mono font-bold text-signal">0</span>
+                </div>
+                <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-navy-800">
+                  <div class="h-full rounded-full bg-signal" style="width: 0%; transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);"></div>
+                </div>
+              </div>
+              <div class="rounded-xl border border-navy-700/60 bg-navy-900/50 p-3.5">
+                <div class="flex items-center justify-between text-sm">
+                  <span class="font-medium text-white">Curiosidad</span>
+                  <span class="font-mono font-bold text-signal">0</span>
+                </div>
+                <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-navy-800">
+                  <div class="h-full rounded-full bg-signal" style="width: 0%; transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);"></div>
+                </div>
+              </div>
+              <div class="rounded-xl border border-navy-700/60 bg-navy-900/50 p-3.5">
+                <div class="flex items-center justify-between text-sm">
+                  <span class="font-medium text-white">Miedo</span>
+                  <span class="font-mono font-bold text-signal">0</span>
+                </div>
+                <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-navy-800">
+                  <div class="h-full rounded-full bg-signal" style="width: 0%; transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);"></div>
+                </div>
+              </div>
+              <div class="rounded-xl border border-navy-700/60 bg-navy-900/50 p-3.5">
+                <div class="flex items-center justify-between text-sm">
+                  <span class="font-medium text-white">AlegrÃ­a</span>
+                  <span class="font-mono font-bold text-signal">0</span>
+                </div>
+                <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-navy-800">
+                  <div class="h-full rounded-full bg-signal" style="width: 0%; transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Tono de Marca -->
+          <div class="rounded-2xl border border-navy-700/70 bg-navy-900/50 p-5 sm:p-6">
+            <h2 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-sky-300/70">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag text-signal">
+                <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path>
+                <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle>
+              </svg>
+              Tono de marca
+            </h2>
+            <div class="mt-4 flex flex-wrap items-center gap-2">
+              <span class="rounded-full border border-navy-700 bg-navy-800 px-3 py-1.5 text-sm text-sky-300/60">Neutro</span>
+            </div>
+          </div>
+
+          <!-- SERP Preview -->
+          <div class="rounded-2xl border border-navy-700/70 bg-navy-900/50 p-5 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <h2 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-sky-300/70">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search text-blue-500">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                Vista previa en buscadores
+              </h2>
+              <div class="flex gap-1 rounded-lg border border-navy-700 bg-navy-950/60 p-1">
+                <button class="rounded-md px-3 py-1 text-xs font-medium transition bg-blue-500 text-white">Google</button>
+                <button class="rounded-md px-3 py-1 text-xs font-medium transition text-sky-300/70 hover:text-white">Facebook</button>
+                <button class="rounded-md px-3 py-1 text-xs font-medium transition text-sky-300/70 hover:text-white">X (Twitter)</button>
+              </div>
+            </div>
+            
+            <div class="mt-4 grid gap-3 sm:grid-cols-2">
+              <input placeholder="https://www.ejemplo.com" class="rounded-lg border border-navy-700 bg-navy-950/60 px-3 py-2 text-sm text-white placeholder:text-sky-300/40 outline-none focus:border-blue-500" value="">
+              <input placeholder="Meta descripciÃ³n (opcional)" class="rounded-lg border border-navy-700 bg-navy-950/60 px-3 py-2 text-sm text-white placeholder:text-sky-300/40 outline-none focus:border-blue-500" value="">
+            </div>
+            
+            <div class="mt-5">
+              <div class="mb-3 flex gap-1 rounded-lg border border-navy-700 bg-navy-950/60 p-1 w-fit">
+                <button class="inline-flex items-center gap-1.5 rounded-md px-3 py-1 text-xs font-medium transition bg-blue-500 text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor">
+                    <rect width="20" height="14" x="2" y="3" rx="2"></rect>
+                    <line x1="8" x2="16" y1="21" y2="21"></line>
+                    <line x1="12" x2="12" y1="17" y2="21"></line>
+                  </svg>
+                  Escritorio
+                </button>
+                <button class="inline-flex items-center gap-1.5 rounded-md px-3 py-1 text-xs font-medium transition text-sky-300/70 hover:text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone">
+                    <rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect>
+                    <path d="M12 18h.01"></path>
+                  </svg>
+                  MÃ³vil
+                </button>
+              </div>
+              <div class="rounded-xl bg-white p-4" style="font-family: Arial, sans-serif;">
+                <div class="flex items-center gap-2">
+                  <div class="grid h-6 w-6 place-items-center rounded-full border border-gray-200 text-[10px] font-bold text-gray-500">ej</div>
+                  <div class="leading-tight">
+                    <div class="text-[13px] text-gray-800">ejemplo.com</div>
+                    <div class="text-[12px] text-gray-500">https://ejemplo.com</div>
+                  </div>
+                </div>
+                <div class="mt-1">
+                  <span class="block" style="color: rgb(26, 13, 171); font-size: 20px; line-height: 1.3;">Tu titular aparecerÃ¡ aquÃ­</span>
+                </div>
+                <div class="mt-1" style="color: rgb(77, 81, 86); font-size: 14px; line-height: 1.45;">
+                  <span class="block">Escribe una meta descripciÃ³n para ver cÃ³mo se mostrarÃ¡ junto a tu titular en los resultados.</span>
+                </div>
+              </div>
+              <div class="mt-2 flex items-center gap-2 text-xs">
+                <span class="text-sky-300/50">LÃ­mite visible: </span>
+                <span class="text-sky-300/50">25 / 60 caracteres.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Report Button -->
+          <div class="flex justify-end">
+            <button class="inline-flex items-center gap-2 rounded-xl border border-navy-700 bg-navy-800 px-4 py-2.5 text-sm font-semibold text-white transition hover:border-blue-500">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy text-blue-500">
+                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+              </svg>
+              Copiar informe
+            </button>
+          </div>
+          
+          <!-- Lead Capture (Templates) -->
+          <section class="mt-8">
+            <div class="rounded-2xl border border-navy-700/70 bg-navy-800 p-6 sm:p-8">
+              <div>
+                <div class="flex items-center gap-3">
+                  <span class="grid h-11 w-11 place-items-center rounded-xl bg-signal/15 text-signal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gift">
+                      <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                      <path d="M12 8v13"></path>
+                      <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                      <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+                    </svg>
+                  </span>
+                  <div>
+                    <h2 class="font-display text-xl font-bold text-white">Recibe 50 plantillas de titulares</h2>
+                    <p class="text-sm text-sky-300/70">FÃ³rmulas probadas para escribir titulares que convierten.</p>
+                  </div>
+                </div>
+                <form id="lead-form" class="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <input id="input-correo" required="" placeholder="tucorreo@ejemplo.com" class="flex-1 rounded-xl border border-navy-700 bg-navy-950/60 px-4 py-3 text-white placeholder:text-sky-300/40 outline-none transition focus:border-signal focus:ring-2 focus:ring-signal/30" type="email" value="">
+                  <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl bg-signal px-6 py-3 font-semibold text-navy-950 transition hover:bg-signal-soft focus:outline-none focus:ring-2 focus:ring-signal/50 disabled:opacity-60">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send">
+                      <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
+                      <path d="m21.854 2.147-10.94 10.939"></path>
+                    </svg>
+                    Quiero las plantillas
+                  </button>
+                </form>
+              </div>
+            </div>
+          </section>
+
+        </div>
+        
+        <footer class="mt-12 text-center text-xs text-sky-300/40">
+          AnÃ¡lisis heurÃ­stico y PNL local Â· EstadÃ­stica bayesiana orientadora
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE CAPTURA DE LEADS -->
+  <script>
+    function registrarLeadTitulares(event) {
+      event.preventDefault();
+      
+      const emailInput = document.getElementById('input-correo');
+      if (!emailInput) return;
+      
+      const email = emailInput.value;
+      if (!email) {
+        console.warn('El correo es obligatorio.');
+        return;
+      }
+
+      // Reemplaza esta URL con la URL de tu Google Apps Script
+      const scriptURL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+
+      const payload = {
+        email: email,
+        origen: 'Analizador de Titulares - 50 Plantillas'
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        console.log('Lead registrado con Ã©xito. Enviando plantillas...');
+        event.target.reset();
+        // Opcional: mostrar un mensaje de Ã©xito o redirigir
+      })
+      .catch(error => {
+        console.error('Error al registrar el lead:', error);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const leadForm = document.getElementById('lead-form');
+      if (leadForm) {
+        leadForm.addEventListener('submit', registrarLeadTitulares);
+      }
+    });
+  </script>
+</body>
+</html>
+

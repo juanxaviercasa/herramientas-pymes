@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <title>Calculadora de Sobrecostos Laborales</title>
+    <script type="module" crossorigin="" src="./js/calculadora-sobrecostos-laborales.js"></script>
+    <link rel="stylesheet" crossorigin="" href="./css/calculadora-sobrecostos-laborales.css">
+</head>
+<body>
+    <div id="root">
+        <main class="min-h-screen w-full px-4 py-8 sm:py-12">
+            <div class="mx-auto max-w-6xl space-y-6">
+                <header class="space-y-4">
+                    <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                        <div>
+                            <div class="flex items-center gap-2.5">
+                                <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-dark text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard">
+                                        <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                                        <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                                        <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                                        <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                                    </svg>
+                                </span>
+                                <span class="font-mono text-xs uppercase tracking-[0.25em] text-blue-light">Ley Laboral Â· PerÃº</span>
+                            </div>
+                            <h1 class="mt-3 font-display text-2xl sm:text-3xl font-700 text-blue-dark">Dashboard de SimulaciÃ³n de Planillas</h1>
+                            <p class="mt-1 text-sm text-blue-mid">Simula el costo real de tu equipo con proyecciÃ³n mensual o anual.</p>
+                        </div>
+                        <button disabled="" class="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-accent-strong focus:outline-none focus:ring-2 focus:ring-accent/40 disabled:cursor-not-allowed disabled:opacity-50">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-down">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                <path d="M12 18v-6"></path>
+                                <path d="m9 15 3 3 3-3"></path>
+                            </svg>
+                            Descargar Reporte en PDF
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <div class="inline-flex rounded-lg border border-line bg-surface p-1">
+                            <button class="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition bg-accent text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar">
+                                    <path d="M8 2v4"></path>
+                                    <path d="M16 2v4"></path>
+                                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                    <path d="M3 10h18"></path>
+                                </svg>
+                                Vista Mensual
+                            </button>
+                            <button class="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition text-blue-mid hover:text-blue-dark">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-range">
+                                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                    <path d="M16 2v4"></path>
+                                    <path d="M3 10h18"></path>
+                                    <path d="M8 2v4"></path>
+                                    <path d="M17 14h-6"></path>
+                                    <path d="M13 18H7"></path>
+                                    <path d="M7 14h.01"></path>
+                                    <path d="M17 18h.01"></path>
+                                </svg>
+                                Vista Anual
+                            </button>
+                        </div>
+                        <div class="inline-flex rounded-lg border border-line bg-surface p-1">
+                            <button class="rounded-md px-3 py-1.5 text-sm font-medium transition bg-blue-dark text-white">Soles</button>
+                            <button class="rounded-md px-3 py-1.5 text-sm font-medium transition text-blue-mid hover:text-blue-dark">$ DÃ³lares</button>
+                        </div>
+                        <div class="inline-flex items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2 transition opacity-50" title="Tipo de cambio del dÃ­a (Soles por DÃ³lar)">
+                            <span class="text-xs font-medium uppercase tracking-wider text-blue-light">TC $1 =</span>
+                            <span class="text-sm text-blue-mid">S/</span>
+                            <input min="0" step="0.01" inputmode="decimal" class="w-16 bg-transparent font-mono text-sm text-blue-dark outline-none" type="number" value="3.75">
+                        </div>
+                    </div>
+                </header>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="rounded-xl border p-5 bg-blue-dark border-blue-dark">
+                        <div class="flex items-center gap-2">
+                            <span class="flex h-8 w-8 items-center justify-center rounded-md bg-accent text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wallet">
+                                    <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path>
+                                    <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>
+                                </svg>
+                            </span>
+                            <p class="text-xs font-medium uppercase tracking-wider text-blue-pale">Costo Total Empleador</p>
+                        </div>
+                        <p class="mt-3 font-mono text-2xl font-600 text-white">S/ 0.00</p>
+                    </div>
+                    <div class="rounded-xl border p-5 bg-surface border-line">
+                        <div class="flex items-center gap-2">
+                            <span class="flex h-8 w-8 items-center justify-center rounded-md bg-blue-pale text-blue-mid">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-coins">
+                                    <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"></path>
+                                    <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"></path>
+                                    <path d="m2 16 6 6"></path>
+                                    <circle cx="16" cy="9" r="2.9"></circle>
+                                    <circle cx="6" cy="5" r="3"></circle>
+                                </svg>
+                            </span>
+                            <p class="text-xs font-medium uppercase tracking-wider text-blue-light">Total Sueldos Netos</p>
+                        </div>
+                        <p class="mt-3 font-mono text-2xl font-600 text-blue-dark">S/ 0.00</p>
+                    </div>
+                    <div class="rounded-xl border p-5 bg-surface border-line">
+                        <div class="flex items-center gap-2">
+                            <span class="flex h-8 w-8 items-center justify-center rounded-md bg-blue-pale text-blue-mid">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-piggy-bank">
+                                    <path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"></path>
+                                    <path d="M2 9v1c0 1.1.9 2 2 2h1"></path>
+                                    <path d="M16 11h.01"></path>
+                                </svg>
+                            </span>
+                            <p class="text-xs font-medium uppercase tracking-wider text-blue-light">ProvisiÃ³n total</p>
+                        </div>
+                        <p class="mt-3 font-mono text-2xl font-600 text-blue-dark">S/ 0.00</p>
+                    </div>
+                </div>
+
+                <div class="rounded-xl bg-surface border border-line p-5 flex flex-wrap items-center gap-x-8 gap-y-2">
+                    <p class="text-sm text-blue-mid">Costo promedio por empleado: <span class="font-mono font-600 text-blue-dark">S/ 0.00</span></p>
+                    <p class="text-sm text-blue-mid">Renta total 5ta: <span class="font-mono font-600 text-blue-dark">S/ 0.00</span></p>
+                </div>
+
+                <section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div class="rounded-xl bg-surface border border-line p-5 sm:p-6 flex flex-col">
+                        <h2 class="font-display text-lg font-600 text-blue-dark mb-1">DistribuciÃ³n del costo total</h2>
+                        <p class="text-xs text-blue-light mb-4">ComposiciÃ³n del Costo Total Empleador</p>
+                        <div class="relative flex-1 min-h-[240px]">
+                            <canvas role="img" height="240" width="518" style="display: block; box-sizing: border-box; height: 240px; width: 518px;"></canvas>
+                        </div>
+                    </div>
+                    <div class="rounded-xl bg-surface border border-line p-5 sm:p-6 flex flex-col">
+                        <h2 class="font-display text-lg font-600 text-blue-dark mb-1">Costo por departamento</h2>
+                        <p class="text-xs text-blue-light mb-4">Comparativo del Costo Total Empleador por Ã¡rea</p>
+                        <div class="relative flex-1 min-h-[240px]">
+                            <div class="absolute inset-0 flex items-center justify-center text-sm text-blue-light">Sin datos para mostrar</div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <h2 class="font-display text-lg font-600 text-blue-dark">Empleados</h2>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <div class="inline-flex items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter text-blue-light">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                            </svg>
+                            <select class="bg-transparent text-sm font-medium text-blue-dark outline-none">
+                                <option value="Todos">Todos los departamentos</option>
+                                <option value="Ventas">Ventas</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Operaciones">Operaciones</option>
+                                <option value="AdministraciÃ³n">AdministraciÃ³n</option>
+                                <option value="TI">TI</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <input accept=".csv,text/csv" class="hidden" type="file">
+                            <button class="inline-flex items-center gap-2 rounded-lg border border-blue-mid bg-surface px-4 py-2.5 text-sm font-medium text-blue-dark transition hover:bg-blue-pale focus:outline-none focus:ring-2 focus:ring-blue-mid/30">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" x2="12" y1="3" y2="15"></line>
+                                </svg>
+                                Importar CSV
+                            </button>
+                            <button class="inline-flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-blue-mid transition hover:text-blue-dark">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-down">
+                                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                    <path d="M12 18v-6"></path>
+                                    <path d="m9 15 3 3 3-3"></path>
+                                </svg>
+                                Plantilla
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="rounded-xl bg-surface border p-5 sm:p-6 border-line">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="font-display text-lg font-600 text-blue-dark">Agregar empleado</h2>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium uppercase tracking-wider text-blue-light mb-1.5">Nombre del empleado</label>
+                            <input class="w-full rounded-lg bg-canvas border border-line px-3.5 py-2.5 text-blue-dark outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25" placeholder="Ej. Ana Torres" value="">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium uppercase tracking-wider text-blue-light mb-1.5">Cargo</label>
+                            <input class="w-full rounded-lg bg-canvas border border-line px-3.5 py-2.5 text-blue-dark outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25" placeholder="Ej. Analista" value="">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium uppercase tracking-wider text-blue-light mb-1.5">Departamento</label>
+                            <select class="w-full rounded-lg bg-canvas border border-line px-3.5 py-2.5 text-blue-dark outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25">
+                                <option value="Ventas">Ventas</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Operaciones">Operaciones</option>
+                                <option value="AdministraciÃ³n">AdministraciÃ³n</option>
+                                <option value="TI">TI</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium uppercase tracking-wider text-blue-light mb-1.5">Sueldo Bruto</label>
+                            <input min="0" step="0.01" inputmode="decimal" class="w-full rounded-lg bg-canvas border border-line px-3.5 py-2.5 text-blue-dark outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25 font-mono" placeholder="0.00" type="number" value="">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium uppercase tracking-wider text-blue-light mb-1.5">Tipo de Seguro</label>
+                            <select class="w-full rounded-lg bg-canvas border border-line px-3.5 py-2.5 text-blue-dark outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25">
+                                <option value="EsSalud">EsSalud</option>
+                                <option value="EPS">EPS</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium uppercase tracking-wider text-blue-light mb-1.5">Tipo de PensiÃ³n</label>
+                            <select class="w-full rounded-lg bg-canvas border border-line px-3.5 py-2.5 text-blue-dark outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25">
+                                <option value="ONP">ONP</option>
+                                <option value="AFP">AFP</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium uppercase tracking-wider text-blue-light mb-1.5">Horas Extras (mensuales)</label>
+                            <input min="0" step="0.5" inputmode="decimal" class="w-full rounded-lg bg-canvas border border-line px-3.5 py-2.5 text-blue-dark outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/25 font-mono" placeholder="0" type="number" value="">
+                        </div>
+                    </div>
+                    <div class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <label class="inline-flex items-center gap-2.5 cursor-pointer select-none">
+                            <input class="h-4 w-4 rounded border-line accent-[var(--color-accent)]" type="checkbox">
+                            <span class="text-sm text-blue-mid">AsignaciÃ³n familiar <span class="text-blue-light">(tiene hijos Â· S/ 113.00)</span></span>
+                        </label>
+                        <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-2.5 font-semibold text-white transition hover:bg-accent-strong focus:outline-none focus:ring-2 focus:ring-accent/40">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <line x1="19" x2="19" y1="8" y2="14"></line>
+                                <line x1="22" x2="16" y1="11" y2="11"></line>
+                            </svg>
+                            Agregar
+                        </button>
+                    </div>
+                </form>
+
+                <div class="rounded-xl bg-surface border border-line p-12 text-center">
+                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-pale text-blue-mid">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <p class="mt-4 font-display font-600 text-blue-dark">No hay empleados para mostrar</p>
+                    <p class="mt-1 text-sm text-blue-light">Agrega un empleado, ajusta el filtro o importa un archivo CSV.</p>
+                </div>
+                <p class="text-center text-xs text-blue-light">CÃ¡lculos referenciales segÃºn la legislaciÃ³n laboral peruana (RMV, UIT y tramos de renta). No constituye asesorÃ­a legal.</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+

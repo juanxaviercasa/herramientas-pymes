@@ -1,0 +1,563 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Creador de Facturas Proforma RÃ¡pidas</title>
+  <script type="module" crossorigin="" src="./js/creador-facturas-proforma.js"></script>
+  <link rel="stylesheet" crossorigin="" href="./css/creador-facturas-proforma.css">
+</head>
+<body>
+  <div id="root">
+    <div class="min-h-screen bg-navy-950">
+      
+      <!-- Header Superior -->
+      <header class="sticky top-0 z-40 border-b border-blue-500/10 bg-navy-950/90 backdrop-blur">
+        <div class="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-3">
+          <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt h-5 w-5 text-white">
+                <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path>
+                <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                <path d="M12 17.5v-11"></path>
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-sm font-bold text-white sm:text-base">Creador de Facturas Proforma</h1>
+              <p class="text-[11px] text-blue-300">Recibo no fiscal Â· CRM Â· Dashboard</p>
+            </div>
+          </div>
+          
+          <!-- Botones de NavegaciÃ³n -->
+          <div class="ml-auto flex flex-wrap items-center gap-2">
+            <button class="inline-flex items-center gap-1.5 rounded-lg border border-blue-500/25 bg-navy-900/60 px-3 py-2 text-xs font-medium text-blue-200 transition hover:border-blue-400 hover:bg-blue-500/10">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus2 h-4 w-4">
+                <path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"></path>
+                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                <path d="M3 15h6"></path>
+                <path d="M6 12v6"></path>
+              </svg>
+              Nueva
+            </button>
+            <button class="inline-flex items-center gap-1.5 rounded-lg border border-blue-500/25 bg-navy-900/60 px-3 py-2 text-xs font-medium text-blue-200 transition hover:border-blue-400 hover:bg-blue-500/10">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save h-4 w-4">
+                <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"></path>
+                <path d="M7 3v4a1 1 0 0 0 1 1h7"></path>
+              </svg>
+              Guardar
+            </button>
+            <button class="inline-flex items-center gap-1.5 rounded-lg border border-blue-500/25 bg-navy-900/60 px-3 py-2 text-xs font-medium text-blue-200 transition hover:border-blue-400 hover:bg-blue-500/10">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history h-4 w-4">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+                <path d="M12 7v5l4 2"></path>
+              </svg>
+              Historial
+            </button>
+            <button class="inline-flex items-center gap-1.5 rounded-lg border border-blue-500/25 bg-navy-900/60 px-3 py-2 text-xs font-medium text-blue-200 transition hover:border-blue-400 hover:bg-blue-500/10">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users h-4 w-4">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              Clientes
+            </button>
+            <button class="inline-flex items-center gap-1.5 rounded-lg border border-blue-500/25 bg-navy-900/60 px-3 py-2 text-xs font-medium text-blue-200 transition hover:border-blue-400 hover:bg-blue-500/10">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package h-4 w-4">
+                <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path>
+                <path d="M12 22V12"></path>
+                <polyline points="3.29 7 12 12 20.71 7"></polyline>
+                <path d="m7.5 4.27 9 5.15"></path>
+              </svg>
+              CatÃ¡logo
+            </button>
+            <button class="inline-flex items-center gap-1.5 rounded-lg border border-blue-500/25 bg-navy-900/60 px-3 py-2 text-xs font-medium text-blue-200 transition hover:border-blue-400 hover:bg-blue-500/10">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database h-4 w-4">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M3 5V19A9 3 0 0 0 21 19V5"></path>
+                <path d="M3 12A9 3 0 0 0 21 12"></path>
+              </svg>
+              Respaldo
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Contenedor Principal -->
+      <main class="mx-auto grid max-w-7xl gap-6 px-4 py-6 lg:grid-cols-2">
+        <div class="space-y-5">
+          
+          <!-- Datos del Emisor -->
+          <section class="rounded-[14px] border border-blue-500/15 bg-navy-900/50 p-5 shadow-lg shadow-navy-950/40">
+            <div class="mb-4 flex items-center justify-between gap-2">
+              <h2 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2 h-4 w-4">
+                  <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
+                  <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+                  <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
+                  <path d="M10 6h4"></path>
+                  <path d="M10 10h4"></path>
+                  <path d="M10 14h4"></path>
+                  <path d="M10 18h4"></path>
+                </svg>
+                Datos del Emisor
+              </h2>
+            </div>
+            
+            <div class="mb-4 flex items-center gap-4">
+              <div class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-blue-500/20 bg-navy-950">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-plus h-6 w-6 text-slate-600">
+                  <path d="M16 5h6"></path>
+                  <path d="M19 2v6"></path>
+                  <path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5"></path>
+                  <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                  <circle cx="9" cy="9" r="2"></circle>
+                </svg>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <button type="button" class="rounded-lg border border-blue-400/40 px-3 py-1.5 text-xs font-medium text-blue-300 transition hover:bg-blue-500/10">Subir Logotipo</button>
+                <input accept="image/*" class="hidden" type="file">
+              </div>
+            </div>
+            
+            <div class="grid gap-3 sm:grid-cols-2">
+              <label class="block sm:col-span-2">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">Nombre / Empresa</span>
+                <input class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" placeholder="Mi Empresa SAC" value="">
+              </label>
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">RUC / IdentificaciÃ³n</span>
+                <input class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" placeholder="20123456789" value="">
+              </label>
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">TelÃ©fono</span>
+                <input class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" placeholder="+51 999 999 999" value="">
+              </label>
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">Correo</span>
+                <input class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" placeholder="hola@empresa.com" value="">
+              </label>
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">DirecciÃ³n</span>
+                <input class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" placeholder="Av. Principal 123" value="">
+              </label>
+            </div>
+          </section>
+
+          <!-- Datos del Cliente -->
+          <section class="rounded-[14px] border border-blue-500/15 bg-navy-900/50 p-5 shadow-lg shadow-navy-950/40">
+            <div class="mb-4 flex items-center justify-between gap-2">
+              <h2 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user h-4 w-4">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                Datos del Cliente
+              </h2>
+              <button class="inline-flex items-center gap-1.5 rounded-lg border border-orange-500/40 px-2.5 py-1.5 text-xs font-medium text-orange-400 transition hover:bg-orange-500/10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save h-3.5 w-3.5">
+                  <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                  <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"></path>
+                  <path d="M7 3v4a1 1 0 0 0 1 1h7"></path>
+                </svg>
+                Guardar
+              </button>
+            </div>
+            
+            <label class="block mb-3">
+              <span class="mb-1.5 block text-xs font-medium text-slate-400">Cliente (busca en frecuentes)</span>
+              <div class="relative">
+                <input class="w-full rounded-md bg-navy-950/60 border border-blue-500/20 px-2.5 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-1 focus:ring-blue-500/40" placeholder="Escribe o selecciona un cliente" value="">
+              </div>
+            </label>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">RUC / IdentificaciÃ³n</span>
+                <input class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" placeholder="10987654321" value="">
+              </label>
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">Correo del cliente</span>
+                <input id="input-correo" type="email" class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" placeholder="cliente@correo.com" value="">
+              </label>
+              <label class="block sm:col-span-2">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">DirecciÃ³n</span>
+                <input class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" placeholder="Jr. Comercio 456" value="">
+              </label>
+            </div>
+          </section>
+
+          <!-- Detalles del Documento -->
+          <section class="rounded-[14px] border border-blue-500/15 bg-navy-900/50 p-5 shadow-lg shadow-navy-950/40">
+            <div class="mb-4 flex items-center justify-between gap-2">
+              <h2 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings2 h-4 w-4">
+                  <path d="M20 7h-9"></path>
+                  <path d="M14 17H5"></path>
+                  <circle cx="17" cy="17" r="3"></circle>
+                  <circle cx="7" cy="7" r="3"></circle>
+                </svg>
+                Detalles del Documento
+              </h2>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">N.Âº de Proforma</span>
+                <input class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" placeholder="0001" value="0001">
+              </label>
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">Fecha</span>
+                <input class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" type="date" value="2026-07-26">
+              </label>
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">Moneda</span>
+                <select class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30">
+                  <option value="$" class="bg-navy-900">$ DÃ³lar</option>
+                  <option value="â‚¬" class="bg-navy-900">â‚¬ Euro</option>
+                  <option value="S/" class="bg-navy-900">S/ Sol</option>
+                </select>
+              </label>
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">Impuesto (%)</span>
+                <input min="0" max="100" step="0.1" inputmode="decimal" class="no-spin w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" placeholder="0" type="number" value="">
+              </label>
+            </div>
+          </section>
+
+          <!-- Conversor de Divisas -->
+          <section class="rounded-[14px] border border-blue-500/15 bg-navy-900/50 p-5 shadow-lg shadow-navy-950/40">
+            <div class="mb-4 flex items-center justify-between gap-2">
+              <h2 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right h-4 w-4 text-orange-400">
+                  <path d="M8 3 4 7l4 4"></path>
+                  <path d="M4 7h16"></path>
+                  <path d="m16 21 4-4-4-4"></path>
+                  <path d="M20 17H4"></path>
+                </svg>
+                Conversor de Divisas
+              </h2>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">Segunda moneda</span>
+                <select class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30">
+                  <option value="none" class="bg-navy-900">Sin conversiÃ³n</option>
+                  <option value="$" class="bg-navy-900">$ DÃ³lar</option>
+                  <option value="â‚¬" class="bg-navy-900">â‚¬ Euro</option>
+                  <option value="S/" class="bg-navy-900">S/ Sol</option>
+                </select>
+              </label>
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">Tipo de cambio (1 $ = ?)</span>
+                <input min="0" step="0.0001" inputmode="decimal" disabled="" class="no-spin w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30 disabled:opacity-50" placeholder="0.00" type="number" value="">
+              </label>
+            </div>
+          </section>
+
+          <!-- Elementos / Tabla de Conceptos -->
+          <section class="rounded-[14px] border border-blue-500/15 bg-navy-900/50 p-5 shadow-lg shadow-navy-950/40">
+            <div class="mb-4 flex items-center justify-between gap-2">
+              <h2 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4">
+                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                  <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                  <path d="M10 9H8"></path>
+                  <path d="M16 13H8"></path>
+                  <path d="M16 17H8"></path>
+                </svg>
+                Elementos
+              </h2>
+            </div>
+            <div>
+              <div class="hidden grid-cols-12 gap-2 px-1 pb-2 text-[11px] font-semibold uppercase tracking-wide text-slate-500 sm:grid">
+                <span class="col-span-4">Concepto</span>
+                <span class="col-span-2 text-right">Cantidad</span>
+                <span class="col-span-2 text-right">P. Unitario</span>
+                <span class="col-span-2 text-right">Total parcial</span>
+                <span class="col-span-2"></span>
+              </div>
+              <div class="space-y-3 sm:space-y-2">
+                <div class="row-in grid grid-cols-12 items-start gap-2 rounded-lg border border-blue-500/10 p-2 sm:border-0 sm:p-0">
+                  <div class="col-span-12 sm:col-span-4">
+                    <div class="relative">
+                      <input class="w-full rounded-md bg-navy-950/60 border border-blue-500/20 px-2.5 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-1 focus:ring-blue-500/40" placeholder="Concepto (busca en catÃ¡logo)" value="">
+                    </div>
+                  </div>
+                  <input min="0" step="1" inputmode="decimal" aria-label="Cantidad" class="no-spin col-span-3 text-right sm:col-span-2 w-full rounded-md bg-navy-950/60 border border-blue-500/20 px-2.5 py-2 text-sm text-slate-100 outline-none transition focus:border-blue-400 focus:ring-1 focus:ring-blue-500/40" placeholder="0" type="number" value="1">
+                  <input min="0" step="0.01" inputmode="decimal" aria-label="Precio unitario" class="no-spin col-span-3 text-right sm:col-span-2 w-full rounded-md bg-navy-950/60 border border-blue-500/20 px-2.5 py-2 text-sm text-slate-100 outline-none transition focus:border-blue-400 focus:ring-1 focus:ring-blue-500/40" placeholder="0.00" type="number" value="">
+                  <span class="col-span-4 self-center truncate text-right text-sm font-semibold text-blue-300 sm:col-span-2">$ 0.00</span>
+                  <div class="col-span-2 flex items-center justify-end gap-1">
+                    <button type="button" aria-label="Guardar en catÃ¡logo" title="Guardar en catÃ¡logo" class="flex items-center justify-center rounded-md p-2 text-slate-500 transition hover:bg-orange-500/10 hover:text-orange-400">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-plus h-4 w-4">
+                        <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
+                        <line x1="12" x2="12" y1="7" y2="13"></line>
+                        <line x1="15" x2="9" y1="10" y2="10"></line>
+                      </svg>
+                    </button>
+                    <button type="button" aria-label="Eliminar elemento" class="flex items-center justify-center rounded-md p-2 text-slate-500 transition hover:bg-red-500/10 hover:text-red-400">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-4 w-4">
+                        <path d="M3 6h18"></path>
+                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                        <line x1="10" x2="10" y1="11" y2="17"></line>
+                        <line x1="14" x2="14" y1="11" y2="17"></line>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="mt-3 inline-flex items-center gap-2 rounded-lg border border-dashed border-blue-400/40 px-3.5 py-2 text-sm font-medium text-blue-300 transition hover:border-blue-400 hover:bg-blue-500/10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-4 w-4">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5v14"></path>
+                </svg>
+                Agregar fila
+              </button>
+            </div>
+          </section>
+
+          <!-- Pago rÃ¡pido -->
+          <section class="rounded-[14px] border border-blue-500/15 bg-navy-900/50 p-5 shadow-lg shadow-navy-950/40">
+            <div class="mb-4 flex items-center justify-between gap-2">
+              <h2 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-qr-code h-4 w-4 text-orange-400">
+                  <rect width="5" height="5" x="3" y="3" rx="1"></rect>
+                  <rect width="5" height="5" x="16" y="3" rx="1"></rect>
+                  <rect width="5" height="5" x="3" y="16" rx="1"></rect>
+                  <path d="M21 16h-3a2 2 0 0 0-2 2v3"></path>
+                  <path d="M21 21v.01"></path>
+                  <path d="M12 7v3a2 2 0 0 1-2 2H7"></path>
+                  <path d="M3 12h.01"></path>
+                  <path d="M12 3h.01"></path>
+                  <path d="M12 16v.01"></path>
+                  <path d="M16 12h1"></path>
+                  <path d="M21 12v.01"></path>
+                  <path d="M12 21v-1"></path>
+                </svg>
+                Pago rÃ¡pido (CÃ³digo QR)
+              </h2>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">MÃ©todo de pago</span>
+                <select class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30">
+                  <option value="PayPal" class="bg-navy-900">PayPal</option>
+                  <option value="Yape" class="bg-navy-900">Yape</option>
+                  <option value="Plin" class="bg-navy-900">PlÃ­n</option>
+                  <option value="Otro" class="bg-navy-900">Otro</option>
+                </select>
+              </label>
+              <label class="block">
+                <span class="mb-1.5 block text-xs font-medium text-slate-400">Enlace de PayPal o nÃºmero (Yape/Plin)</span>
+                <input class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30" placeholder="paypal.me/miempresa o 987654321" value="">
+              </label>
+            </div>
+          </section>
+
+          <!-- DiseÃ±o de Plantilla -->
+          <section class="rounded-[14px] border border-blue-500/15 bg-navy-900/50 p-5 shadow-lg shadow-navy-950/40">
+            <div class="mb-4 flex items-center justify-between gap-2">
+              <h2 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette h-4 w-4">
+                  <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+                  <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                  <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                  <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path>
+                </svg>
+                DiseÃ±o de Plantilla
+              </h2>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <button type="button" class="rounded-lg border p-3 text-left transition border-orange-500 bg-orange-500/10">
+                <p class="text-sm font-semibold text-orange-400">Minimalista</p>
+                <p class="text-[11px] text-slate-500">Cabecera azul oscuro</p>
+              </button>
+              <button type="button" class="rounded-lg border p-3 text-left transition border-blue-500/20 bg-navy-950/40 hover:border-blue-400">
+                <p class="text-sm font-semibold text-slate-200">Corporativo</p>
+                <p class="text-[11px] text-slate-500">Tabla de dos colores</p>
+              </button>
+            </div>
+            <div class="mt-4 flex items-center gap-4">
+              <div class="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-blue-500/20 bg-navy-950">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-plus h-5 w-5 text-slate-600">
+                  <path d="M16 5h6"></path>
+                  <path d="M19 2v6"></path>
+                  <path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5"></path>
+                  <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                  <circle cx="9" cy="9" r="2"></circle>
+                </svg>
+              </div>
+              <div>
+                <p class="mb-1.5 text-xs font-medium text-slate-400">Marca de agua (semitransparente en el PDF)</p>
+                <div class="flex flex-wrap gap-2">
+                  <button type="button" class="rounded-lg border border-orange-500/40 px-3 py-1.5 text-xs font-medium text-orange-400 transition hover:bg-orange-500/10">Subir imagen</button>
+                  <input accept="image/*" class="hidden" type="file">
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Notas -->
+          <section class="rounded-[14px] border border-blue-500/15 bg-navy-900/50 p-5 shadow-lg shadow-navy-950/40">
+            <div class="mb-4 flex items-center justify-between gap-2">
+              <h2 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-blue-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sticky-note h-4 w-4">
+                  <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8Z"></path>
+                  <path d="M15 3v4a2 2 0 0 0 2 2h4"></path>
+                </svg>
+                Notas
+              </h2>
+            </div>
+            <textarea class="w-full rounded-lg bg-navy-900/70 border border-blue-500/20 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-500/30 min-h-[80px] resize-y" placeholder="Condiciones de pago, validez de la proforma, etc."></textarea>
+          </section>
+        </div>
+
+        <!-- Columna Derecha (Preview & Totals) -->
+        <div class="lg:sticky lg:top-20 lg:self-start">
+          <div class="space-y-4">
+            
+            <div class="rounded-[14px] border border-blue-500/15 bg-navy-900/50 p-4">
+              <div class="mb-3 flex items-center justify-between">
+                <span class="text-sm text-slate-400">Total de la factura</span>
+                <div class="text-right">
+                  <p class="text-2xl font-extrabold text-orange-400">$ 0.00</p>
+                </div>
+              </div>
+              <div class="grid gap-2 sm:grid-cols-2">
+                <button class="flex items-center justify-center gap-2 rounded-xl bg-orange-500 px-5 py-4 text-sm font-bold text-white transition hover:bg-orange-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-5 w-5">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" x2="12" y1="15" y2="3"></line>
+                  </svg>
+                  Descargar PDF
+                </button>
+                <button id="btn-enviar-lead" class="flex items-center justify-center gap-2 rounded-xl border-2 border-orange-500 px-5 py-4 text-sm font-bold text-orange-400 transition hover:bg-orange-500/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send h-5 w-5">
+                    <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
+                    <path d="m21.854 2.147-10.94 10.939"></path>
+                  </svg>
+                  Enviar al Cliente
+                </button>
+              </div>
+            </div>
+
+            <div class="max-h-[70vh] overflow-y-auto thin-scroll rounded-[14px]">
+              <div class="relative overflow-hidden rounded-[14px] bg-paper text-ink shadow-2xl shadow-navy-950/60 ring-1 ring-black/5">
+                <div class="flex items-start justify-between gap-4 bg-navy-950 px-6 py-5 text-white">
+                  <div class="flex items-center gap-3">
+                    <div>
+                      <p class="text-lg font-bold leading-tight">Tu Empresa</p>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-xl font-extrabold tracking-tight">PROFORMA</p>
+                    <p class="text-[11px] text-blue-300">N.Âº 0001</p>
+                    <p class="text-[11px] text-blue-300">Fecha: 2026-07-26</p>
+                  </div>
+                </div>
+                <div class="relative z-10 grid grid-cols-2 gap-4 px-6 py-5">
+                  <div>
+                    <p class="mb-1 text-[10px] font-bold uppercase tracking-wider text-orange-500">Emisor</p>
+                    <p class="text-xs italic text-slate-400">Sin datos</p>
+                  </div>
+                  <div>
+                    <p class="mb-1 text-[10px] font-bold uppercase tracking-wider text-orange-500">Cliente</p>
+                    <p class="text-xs italic text-slate-400">Sin datos</p>
+                  </div>
+                </div>
+                <div class="relative z-10 px-6">
+                  <div class="overflow-hidden rounded-lg border border-slate-200">
+                    <div class="grid grid-cols-12 px-3 py-2 text-[10px] font-bold uppercase tracking-wide text-white bg-navy-700">
+                      <span class="col-span-6">Concepto</span>
+                      <span class="col-span-2 text-right">Cant.</span>
+                      <span class="col-span-2 text-right">P. Unit.</span>
+                      <span class="col-span-2 text-right">Total</span>
+                    </div>
+                    <div class="grid grid-cols-12 px-3 py-2 text-xs bg-slate-50">
+                      <span class="col-span-6 break-words pr-2 text-ink">-</span>
+                      <span class="col-span-2 text-right text-slatey">1</span>
+                      <span class="col-span-2 text-right text-slatey">$ 0.00</span>
+                      <span class="col-span-2 text-right font-semibold text-ink">$ 0.00</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="relative z-10 flex items-end justify-between gap-4 px-6 py-5">
+                  <span></span>
+                  <div class="w-60 space-y-2">
+                    <div class="flex justify-between text-xs text-slatey">
+                      <span>Total parcial</span>
+                      <span class="font-medium text-ink">$ 0.00</span>
+                    </div>
+                    <div class="flex items-center justify-between rounded-lg px-3 py-2.5 bg-orange-500 text-white">
+                      <span class="text-sm font-bold uppercase">Total</span>
+                      <span class="text-base font-extrabold">$ 0.00</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="relative z-10 border-t border-slate-100 px-6 py-3 text-center text-[10px] text-slate-400">
+                  Documento no fiscal Â· Proforma sin valor tributario
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE CAPTURA DE LEADS -->
+  <script>
+    function registrarLead(event) {
+      // Evita recargar si se hace submit de un form (aunque aquÃ­ es un botÃ³n en un div)
+      event.preventDefault();
+      
+      const emailInput = document.getElementById('input-correo');
+      if (!emailInput) return;
+      
+      const email = emailInput.value;
+      if (!email) {
+        // Opcional: mostrar advertencia si el correo estÃ¡ vacÃ­o
+        console.warn('El correo estÃ¡ vacÃ­o, no se puede registrar el lead.');
+        return;
+      }
+
+      // Reemplaza esta URL con la URL final de tu Web App de Google Apps Script
+      const scriptURL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email })
+      })
+      .then(() => {
+        console.log('Lead de proforma registrado con Ã©xito.');
+        // Opcional: alert('Enviado correctamente'); o lÃ³gica para enviar realmente el correo.
+      })
+      .catch(error => {
+        console.error('Error al registrar el lead:', error);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnEnviar = document.getElementById('btn-enviar-lead');
+      if (btnEnviar) {
+        // En este diseÃ±o "Enviar al Cliente" es un botÃ³n normal (no de submit en form)
+        btnEnviar.addEventListener('click', registrarLead);
+      }
+    });
+  </script>
+</body>
+</html>
+

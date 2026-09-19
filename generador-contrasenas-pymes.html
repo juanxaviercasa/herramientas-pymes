@@ -1,0 +1,459 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>SecuKey · Generador de Contraseñas para Pymes</title>
+  <script type="module" crossorigin="" src="./js/generador-contrasenas-pymes.js"></script>
+  <link rel="stylesheet" crossorigin="" href="./css/generador-contrasenas-pymes.css">
+</head>
+<body>
+  <div id="root">
+    <div class="min-h-screen">
+      
+      <!-- Lead Capture Modal -->
+      <!-- Nota: Puedes controlar su visibilidad con JavaScript añadiendo/quitar la clase 'hidden' -->
+      <div class="fixed inset-0 z-50 flex items-center justify-center p-4" id="lead-modal">
+        <div class="absolute inset-0 bg-navy-950/80 backdrop-blur-sm" aria-hidden="true"></div>
+        <div role="dialog" aria-modal="true" aria-labelledby="lead-title" class="relative w-full max-w-md animate-pop overflow-hidden rounded-panel border border-navy-700 bg-navy-900 shadow-2xl">
+          <div class="h-1.5 w-full bg-orange-500"></div>
+          <button type="button" aria-label="Cerrar" class="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-lg text-blue-300/50 transition-colors hover:bg-navy-800 hover:text-blue-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+          <div class="p-8">
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500/15">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check text-orange-400">
+                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+            </div>
+            <h2 id="lead-title" class="text-xl font-bold leading-snug text-blue-50">
+              Recibe una Guía de Ciberseguridad para Pymes
+            </h2>
+            <p class="mt-2 text-sm leading-relaxed text-blue-300/70">
+              Buenas prácticas de contraseñas, gestión de accesos y protección de tu equipo. Sin coste.
+            </p>
+            
+            <form id="lead-form" class="mt-6 space-y-3">
+              <input id="email" required="" placeholder="tu@empresa.com" type="email" class="w-full rounded-xl border border-navy-800 bg-navy-950 px-4 py-3 text-sm text-blue-100 placeholder:text-blue-300/30 focus:border-blue-500">
+              <input id="company" placeholder="Nombre de tu empresa (opcional)" type="text" class="w-full rounded-xl border border-navy-800 bg-navy-950 px-4 py-3 text-sm text-blue-100 placeholder:text-blue-300/30 focus:border-blue-500">
+              <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 px-6 py-3.5 text-sm font-bold text-navy-950 transition-all hover:bg-orange-400 disabled:opacity-60">
+                Quiero mi guía gratuita
+              </button>
+            </form>
+            
+            <button class="mt-4 w-full text-center text-xs text-blue-300/40 transition-colors hover:text-blue-300/70">
+              Ahora no, ir al generador
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenido Principal -->
+      <div class="relative mx-auto max-w-5xl px-5 py-10 sm:py-14">
+        
+        <header class="mb-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/15 ring-1 ring-blue-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-key-round text-blue-300">
+                <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path>
+                <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-xl font-bold tracking-tight text-blue-50">SecuKey</h1>
+              <p class="text-xs text-blue-300/60">Contraseñas seguras para equipos Pyme</p>
+            </div>
+          </div>
+          <button class="inline-flex items-center gap-2 self-start rounded-lg border border-navy-800 bg-navy-900/60 px-4 py-2 text-sm font-medium text-blue-200 transition-colors hover:border-orange-500/50 hover:text-orange-300 sm:self-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check">
+              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+            Guía de ciberseguridad
+          </button>
+        </header>
+
+        <div class="mb-8 flex flex-wrap gap-2">
+          <button class="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors sm:px-5 bg-blue-500 text-navy-950">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wand-sparkles">
+              <path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"></path>
+              <path d="m14 7 3 3"></path>
+              <path d="M5 6v4"></path>
+              <path d="M19 14v4"></path>
+              <path d="M10 2v2"></path>
+              <path d="M7 8H3"></path>
+              <path d="M21 16h-4"></path>
+              <path d="M11 3H9"></path>
+            </svg>
+            Generador
+          </button>
+          <button class="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors sm:px-5 bg-navy-850/60 text-blue-300/70 hover:text-blue-100">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-lock">
+              <rect width="8" height="5" x="14" y="17" rx="1"></rect>
+              <path d="M10 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v2.5"></path>
+              <path d="M20 17v-2a2 2 0 1 0-4 0v2"></path>
+            </svg>
+            Importar Bóveda
+          </button>
+          <button class="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors sm:px-5 bg-navy-850/60 text-blue-300/70 hover:text-blue-100">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text">
+              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+              <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+              <path d="M10 9H8"></path>
+              <path d="M16 13H8"></path>
+              <path d="M16 17H8"></path>
+            </svg>
+            Kit de Emergencia
+          </button>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-5">
+          <section class="rounded-panel border border-navy-800 bg-navy-850/60 p-6 lg:col-span-3">
+            <div class="space-y-4">
+              <div class="rounded-xl border border-navy-800 bg-navy-950 px-5 py-5">
+                <div class="flex items-center gap-4">
+                  <p class="min-h-8 flex-1 break-all font-mono text-lg font-medium tracking-wide text-blue-100 animate-fade-up sm:text-xl">
+                    <span class="text-blue-300/30">Pulsa generar…</span>
+                  </p>
+                  <button type="button" disabled="" aria-label="Copiar contraseña" class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-navy-800 bg-navy-900 text-blue-300 transition-colors hover:border-blue-500 hover:text-blue-100 disabled:opacity-40">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy">
+                      <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="group flex w-full items-center justify-center gap-2.5 rounded-xl bg-orange-500 px-6 py-4 text-base font-bold text-navy-950 shadow-lg shadow-orange-500/20 transition-all hover:bg-orange-400 hover:shadow-orange-500/30 active:scale-[0.99]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-refresh-cw transition-transform group-hover:rotate-180">
+                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                  <path d="M21 3v5h-5"></path>
+                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                  <path d="M8 16H3v5"></path>
+                </svg>
+                Generar contraseña segura
+              </button>
+            </div>
+
+            <div class="mt-6">
+              <div class="space-y-5">
+                <div>
+                  <div class="mb-2 flex items-center justify-between text-xs font-medium uppercase tracking-wider">
+                    <span class="text-blue-300/70">Fortaleza</span>
+                    <span class="font-semibold text-strong">Fuerte · 105 bits de entropía</span>
+                  </div>
+                  <div class="flex gap-1.5">
+                    <div class="h-2 flex-1 overflow-hidden rounded-full bg-navy-800/60">
+                      <div class="h-full rounded-full transition-all duration-500 bg-strong" style="width: 100%;"></div>
+                    </div>
+                    <div class="h-2 flex-1 overflow-hidden rounded-full bg-navy-800/60">
+                      <div class="h-full rounded-full transition-all duration-500 bg-strong" style="width: 100%;"></div>
+                    </div>
+                    <div class="h-2 flex-1 overflow-hidden rounded-full bg-navy-800/60">
+                      <div class="h-full rounded-full transition-all duration-500 bg-strong" style="width: 100%;"></div>
+                    </div>
+                    <div class="h-2 flex-1 overflow-hidden rounded-full bg-navy-800/60">
+                      <div class="h-full rounded-full transition-all duration-500 bg-strong" style="width: 100%;"></div>
+                    </div>
+                    <div class="h-2 flex-1 overflow-hidden rounded-full bg-navy-800/60">
+                      <div class="h-full rounded-full transition-all duration-500" style="width: 0%;"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rounded-xl border border-navy-800 bg-navy-950 p-5">
+                  <div class="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-blue-300/60">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    Tiempo estimado para descifrar
+                  </div>
+                  <p class="mt-1.5 font-mono text-3xl font-bold text-strong">7.0e+9 milenios</p>
+                  <p class="mt-1 text-xs text-blue-300/40">Bajo un ataque de fuerza bruta con GPU offline (10¹¹ intentos/s)</p>
+                </div>
+
+                <div>
+                  <div class="mb-2.5 flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-blue-300/60">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cpu">
+                      <rect width="16" height="16" x="4" y="4" rx="2"></rect>
+                      <rect width="6" height="6" x="9" y="9" rx="1"></rect>
+                      <path d="M15 2v2"></path>
+                      <path d="M15 20v2"></path>
+                      <path d="M2 15h2"></path>
+                      <path d="M2 9h2"></path>
+                      <path d="M20 15h2"></path>
+                      <path d="M20 9h2"></path>
+                      <path d="M9 2v2"></path>
+                      <path d="M9 20v2"></path>
+                    </svg>
+                    Simulación de tipo de atacante
+                  </div>
+                  <div class="space-y-1.5">
+                    <div class="flex items-center justify-between rounded-lg border border-navy-800/70 bg-navy-900/50 px-4 py-2.5">
+                      <span class="text-sm text-blue-200/80">Ataque en línea</span>
+                      <span class="font-mono text-sm font-semibold text-strong">7.0e+17 milenios</span>
+                    </div>
+                    <div class="flex items-center justify-between rounded-lg border border-navy-800/70 bg-navy-900/50 px-4 py-2.5">
+                      <span class="text-sm text-blue-200/80">Fuerza bruta con GPU offline</span>
+                      <span class="font-mono text-sm font-semibold text-strong">7.0e+9 milenios</span>
+                    </div>
+                    <div class="flex items-center justify-between rounded-lg border border-navy-800/70 bg-navy-900/50 px-4 py-2.5">
+                      <span class="text-sm text-blue-200/80">Supercomputadora / botnet</span>
+                      <span class="font-mono text-sm font-semibold text-strong">697.339 milenios</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="space-y-6 lg:col-span-2">
+            <section class="rounded-panel border border-navy-800 bg-navy-850/60 p-6">
+              <div class="space-y-7">
+                <div>
+                  <div class="mb-3 flex items-baseline justify-between">
+                    <label for="len" class="flex items-center gap-1.5 text-sm font-medium text-blue-300/80">Longitud</label>
+                    <span class="font-mono text-2xl font-bold text-orange-400">16</span>
+                  </div>
+                  <input id="len" min="8" max="32" type="range" value="16" style="background: linear-gradient(to right, var(--color-orange-500) 33.333%, var(--color-navy-800) 33.333%);">
+                  <div class="mt-1.5 flex justify-between font-mono text-[11px] text-blue-300/40">
+                    <span>8</span>
+                    <span>32</span>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="mb-3 flex items-center gap-1.5 text-sm font-medium text-blue-300/80">Incluir</p>
+                  <div class="grid grid-cols-2 gap-3">
+                    <button type="button" aria-pressed="true" class="group flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all border-blue-500 bg-blue-500/10 text-blue-200">
+                      <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors bg-blue-500 text-navy-950">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-case-lower">
+                          <circle cx="7" cy="12" r="3"></circle>
+                          <path d="M10 9v6"></path>
+                          <circle cx="17" cy="12" r="3"></circle>
+                          <path d="M14 7v8"></path>
+                        </svg>
+                      </span>
+                      <span class="text-sm font-medium">Minúsculas</span>
+                    </button>
+                    <button type="button" aria-pressed="true" class="group flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all border-blue-500 bg-blue-500/10 text-blue-200">
+                      <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors bg-blue-500 text-navy-950">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-case-upper">
+                          <path d="m3 15 4-8 4 8"></path>
+                          <path d="M4 13h6"></path>
+                          <path d="M15 11h4.5a2 2 0 0 1 0 4H15V7h4a2 2 0 0 1 0 4"></path>
+                        </svg>
+                      </span>
+                      <span class="text-sm font-medium">Mayúsculas</span>
+                    </button>
+                    <button type="button" aria-pressed="true" class="group flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all border-blue-500 bg-blue-500/10 text-blue-200">
+                      <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors bg-blue-500 text-navy-950">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hash">
+                          <line x1="4" x2="20" y1="9" y2="9"></line>
+                          <line x1="4" x2="20" y1="15" y2="15"></line>
+                          <line x1="10" x2="8" y1="3" y2="21"></line>
+                          <line x1="16" x2="14" y1="3" y2="21"></line>
+                        </svg>
+                      </span>
+                      <span class="text-sm font-medium">Números</span>
+                    </button>
+                    <button type="button" aria-pressed="true" class="group flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all border-blue-500 bg-blue-500/10 text-blue-200">
+                      <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors bg-blue-500 text-navy-950">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-asterisk">
+                          <path d="M12 6v12"></path>
+                          <path d="M17.196 9 6.804 15"></path>
+                          <path d="m6.804 9 10.392 6"></path>
+                        </svg>
+                      </span>
+                      <span class="text-sm font-medium">Símbolos</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="mb-3 text-sm font-medium text-blue-300/80">Higiene visual</p>
+                  <button type="button" role="switch" aria-checked="false" class="flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all border-navy-800 bg-navy-900/40 hover:border-navy-700">
+                    <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors bg-navy-800 text-blue-300/40">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off">
+                        <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"></path>
+                        <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"></path>
+                        <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"></path>
+                        <path d="m2 2 20 20"></path>
+                      </svg>
+                    </span>
+                    <span class="flex-1">
+                      <span class="block text-sm font-medium text-blue-200">Excluir caracteres ambiguos</span>
+                      <span class="block text-xs text-blue-300/50">Eliminar l · I · 1 · O · 0</span>
+                    </span>
+                    <span class="relative h-6 w-11 shrink-0 rounded-full transition-colors bg-navy-800">
+                      <span class="absolute top-1 h-4 w-4 rounded-full bg-navy-950 transition-transform translate-x-1"></span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <div class="rounded-panel border p-6 transition-colors border-navy-800 bg-navy-850/60">
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex items-start gap-3">
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy-800 text-blue-300/60">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2">
+                      <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
+                      <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+                      <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
+                      <path d="M10 6h4"></path>
+                      <path d="M10 10h4"></path>
+                      <path d="M10 14h4"></path>
+                      <path d="M10 18h4"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-semibold text-blue-100">Modo Corporativo</h3>
+                    <p class="mt-0.5 text-xs text-blue-300/60">Aplicación de políticas de contraseña inmutables para toda la empresa.</p>
+                  </div>
+                </div>
+                <button type="button" role="switch" aria-checked="false" aria-label="Activar modo corporativo" class="relative h-7 w-12 shrink-0 rounded-full transition-colors bg-navy-800">
+                  <span class="absolute top-1 h-5 w-5 rounded-full bg-navy-950 transition-transform translate-x-1"></span>
+                </button>
+              </div>
+            </div>
+
+            <div class="rounded-panel border border-navy-800 bg-navy-850/60 p-6">
+              <div class="mb-4 flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone text-blue-400">
+                  <rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect>
+                  <path d="M12 18h.01"></path>
+                </svg>
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-blue-200">Simulador 2FA (TOTP)</h3>
+              </div>
+              <div class="flex items-center gap-5">
+                <span class="relative inline-flex items-center justify-center" style="width: 64px; height: 64px;">
+                  <svg width="64" height="64" class="-rotate-90">
+                    <circle cx="32" cy="32" r="29.5" fill="none" stroke-width="5" class="stroke-navy-800"></circle>
+                    <circle cx="32" cy="32" r="29.5" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="185.3539665617978" stroke-dashoffset="12.35693110411985" class="text-orange-400 transition-[stroke-dashoffset] duration-1000 ease-linear" stroke="currentColor"></circle>
+                  </svg>
+                  <span class="absolute inset-0 flex items-center justify-center">
+                    <span class="font-mono text-sm font-bold text-orange-400">28</span>
+                  </span>
+                </span>
+                <div>
+                  <p class="font-mono text-3xl font-bold tracking-[0.2em] text-blue-100">557 600</p>
+                  <p class="mt-1 text-xs text-blue-300/50">Se renueva cada 30 segundos</p>
+                </div>
+              </div>
+              <p class="mt-4 border-t border-navy-800 pt-3 text-xs leading-relaxed text-blue-300/50">
+                Demostración educativa de cómo un autenticador (Google Authenticator, Authy) rota códigos. Activa siempre 2FA en las cuentas críticas de tu Pyme.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <section class="rounded-panel border border-navy-800 bg-navy-850/60 p-6">
+            <div class="mb-4 flex items-center gap-2.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history text-blue-400">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+                <path d="M12 7v5l4 2"></path>
+              </svg>
+              <h2 class="text-sm font-semibold uppercase tracking-wider text-blue-200">Historial de sesión</h2>
+              <span class="ml-auto font-mono text-xs text-blue-300/40">0</span>
+              <button type="button" disabled="" class="inline-flex items-center gap-1.5 rounded-lg bg-orange-500 px-3.5 py-1.5 text-xs font-bold text-navy-950 transition-colors hover:bg-orange-400 disabled:cursor-not-allowed disabled:bg-navy-800 disabled:text-blue-300/40">
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock">
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                Exportar CSV
+              </button>
+            </div>
+            <p class="py-8 text-center text-sm text-blue-300/40">Las contraseñas generadas aparecerán aquí. Se borrarán al cerrar la pestaña.</p>
+          </section>
+        </div>
+
+        <footer class="mt-10 flex items-center justify-center gap-2 text-center text-xs text-blue-300/40">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          Cifrado AES-GCM 256 · Procesamiento 100% local · El historial se borra al cerrar la sesión
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE CAPTURA DE LEADS (GUÍA DE CIBERSEGURIDAD) -->
+  <script>
+    function registrarLeadSecuKey(event) {
+      event.preventDefault();
+      
+      const emailInput = document.getElementById('email');
+      const companyInput = document.getElementById('company');
+      
+      if (!emailInput) return;
+      
+      const email = emailInput.value;
+      const company = companyInput ? companyInput.value : '';
+      
+      if (!email) {
+        console.warn('El correo es obligatorio.');
+        return;
+      }
+
+      // Reemplaza esta URL con la URL final de tu Web App de Google Apps Script
+      const scriptURL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+
+      const payload = {
+        email: email,
+        company: company,
+        origen: 'SecuKey - Guía Ciberseguridad'
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        console.log('Lead de SecuKey registrado con éxito.');
+        event.target.reset();
+        
+        // Opcional: ocultar el modal automáticamente al tener éxito
+        const modal = document.getElementById('lead-modal');
+        if(modal) modal.classList.add('hidden');
+      })
+      .catch(error => {
+        console.error('Error al registrar el lead:', error);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const leadForm = document.getElementById('lead-form');
+      if (leadForm) {
+        leadForm.addEventListener('submit', registrarLeadSecuKey);
+      }
+      
+      // Control básico para el botón de "Ahora no, ir al generador"
+      const closeButtons = document.querySelectorAll('button[aria-label="Cerrar"], button:contains("Ahora no")');
+      const modal = document.getElementById('lead-modal');
+      
+      closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if(modal) modal.classList.add('hidden');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+

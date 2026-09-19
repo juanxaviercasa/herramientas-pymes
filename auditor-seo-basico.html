@@ -1,0 +1,938 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Auditor BÃ¡sico de SEO On-Page</title>
+  <script type="module" crossorigin="" src="./js/auditor-seo-basico.js"></script>
+  <link rel="stylesheet" crossorigin="" href="./css/auditor-seo-basico.css">
+</head>
+<body>
+  <div id="root">
+    <div class="console-grid min-h-screen">
+      
+      <!-- Encabezado Fijo -->
+      <header class="sticky top-0 z-30 border-b border-line/60 bg-navy/85 backdrop-blur">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
+          <div class="flex items-center gap-2.5">
+            <span class="grid h-9 w-9 place-items-center rounded-lg bg-brand-500 text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg>
+            </span>
+            <div class="leading-tight">
+              <div class="font-bold text-white">Auditor SEO On-Page</div>
+              <div class="text-xs text-brand-200/50">Suite de anÃ¡lisis de metaetiquetas</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="flex items-center gap-2 rounded-lg border border-brand-500/50 bg-brand-500/10 px-3.5 py-2 text-sm font-semibold text-brand-200 transition-colors hover:bg-brand-500 hover:text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save">
+                <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"></path>
+                <path d="M7 3v4a1 1 0 0 0 1 1h7"></path>
+              </svg>
+              <span class="hidden sm:inline">Guardar</span>
+            </button>
+            <button class="flex items-center gap-2 rounded-lg border border-accent/50 bg-accent/10 px-3.5 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white disabled:opacity-60">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-down">
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                <path d="M12 18v-6"></path>
+                <path d="m9 15 3 3 3-3"></path>
+              </svg>
+              <span class="hidden sm:inline">Exportar PDF</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Principal -->
+      <main class="mx-auto max-w-6xl space-y-6 px-5 py-8">
+        
+        <section class="text-center">
+          <h1 class="mx-auto max-w-2xl text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+            Analiza tu SEO On-Page como los <span class="text-brand-500">profesionales</span>
+          </h1>
+          <p class="mx-auto mt-3 max-w-xl text-sm text-brand-200/60">
+            Extrae metaetiquetas, previsualiza en buscadores y redes, compara competidores, registra la evoluciÃ³n y exporta informes completos.
+          </p>
+        </section>
+
+        <!-- NavegaciÃ³n interna de la herramienta -->
+        <div class="flex justify-center">
+          <div class="flex rounded-xl border border-line bg-navy-800 p-1">
+            <button class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-colors bg-brand-500 text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge">
+                <path d="m12 14 4-4"></path>
+                <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+              </svg> 
+              Auditor
+            </button>
+            <button class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-colors text-brand-200/60 hover:text-brand-200">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column">
+                <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                <path d="M18 17V9"></path>
+                <path d="M13 17V5"></path>
+                <path d="M8 17v-3"></path>
+              </svg> 
+              Historial
+            </button>
+          </div>
+        </div>
+
+        <!-- URL Fetch Bar -->
+        <div class="rounded-panel border border-brand-500/40 bg-navy-800 p-6">
+          <div class="mb-3 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wand-sparkles text-accent">
+              <path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"></path>
+              <path d="m14 7 3 3"></path>
+              <path d="M5 6v4"></path>
+              <path d="M19 14v4"></path>
+              <path d="M10 2v2"></path>
+              <path d="M7 8H3"></path>
+              <path d="M21 16h-4"></path>
+              <path d="M11 3H9"></path>
+            </svg>
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-brand-200">ExtracciÃ³n automÃ¡tica</h2>
+          </div>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <div class="relative flex-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2 pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-200/40">
+                <path d="M9 17H7A5 5 0 0 1 7 7h2"></path>
+                <path d="M15 7h2a5 5 0 1 1 0 10h-2"></path>
+                <line x1="8" x2="16" y1="12" y2="12"></line>
+              </svg>
+              <input placeholder="https://ejemplo.com/mi-articulo" class="w-full rounded-lg border border-line bg-navy py-2.5 pl-10 pr-3.5 text-sm text-white placeholder:text-brand-200/30 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30" value="">
+            </div>
+            <button class="flex items-center justify-center gap-2 rounded-lg bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-900 disabled:opacity-60">
+              Analizar URL
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-6 bg-navy">
+          
+          <!-- Dashboard de PuntuaciÃ³n -->
+          <div class="rounded-panel border border-line bg-navy-800 p-6">
+            <div class="mb-5 flex items-center justify-between">
+              <div>
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-brand-200/70">PuntuaciÃ³n global</h2>
+                <p class="mt-0.5 text-xs text-brand-200/50">Calculada a partir de los criterios cumplidos en tiempo real</p>
+              </div>
+              <div class="text-right">
+                <div class="text-2xl font-extrabold text-white tabular-nums">
+                  26/100<span class="text-sm text-brand-200/50"></span>
+                </div>
+                <div class="text-[10px] uppercase tracking-wider text-brand-200/50">PuntuaciÃ³n General</div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+              <div class="flex flex-col items-center">
+                <div class="relative" style="width: 132px; height: 132px;">
+                  <svg width="132" height="132" class="-rotate-90">
+                    <circle cx="66" cy="66" r="60.5" fill="none" stroke="#1c3a63" stroke-width="11"></circle>
+                    <circle cx="66" cy="66" r="60.5" fill="none" stroke="#f97316" stroke-width="11" stroke-linecap="round" stroke-dasharray="380.132711084365" stroke-dashoffset="380.132711084365" style="transition: stroke-dashoffset 0.9s cubic-bezier(0.16, 1, 0.3, 1);"></circle>
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span class="text-3xl font-extrabold text-white tabular-nums">0</span>
+                    <span class="text-[10px] font-medium uppercase tracking-wider text-accent">CrÃ­tico</span>
+                  </div>
+                </div>
+                <span class="mt-2 text-sm font-semibold text-brand-200">SEO</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="relative" style="width: 132px; height: 132px;">
+                  <svg width="132" height="132" class="-rotate-90">
+                    <circle cx="66" cy="66" r="60.5" fill="none" stroke="#1c3a63" stroke-width="11"></circle>
+                    <circle cx="66" cy="66" r="60.5" fill="none" stroke="#f97316" stroke-width="11" stroke-linecap="round" stroke-dasharray="380.132711084365" stroke-dashoffset="315.5101502000229" style="transition: stroke-dashoffset 0.9s cubic-bezier(0.16, 1, 0.3, 1);"></circle>
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span class="text-3xl font-extrabold text-white tabular-nums">15</span>
+                    <span class="text-[10px] font-medium uppercase tracking-wider text-accent">CrÃ­tico</span>
+                  </div>
+                </div>
+                <span class="mt-2 text-sm font-semibold text-brand-200">Accesibilidad</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="relative" style="width: 132px; height: 132px;">
+                  <svg width="132" height="132" class="-rotate-90">
+                    <circle cx="66" cy="66" r="60.5" fill="none" stroke="#1c3a63" stroke-width="11"></circle>
+                    <circle cx="66" cy="66" r="60.5" fill="none" stroke="#f97316" stroke-width="11" stroke-linecap="round" stroke-dasharray="380.132711084365" stroke-dashoffset="152.053084433746" style="transition: stroke-dashoffset 0.9s cubic-bezier(0.16, 1, 0.3, 1);"></circle>
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span class="text-3xl font-extrabold text-white tabular-nums">55</span>
+                    <span class="text-[10px] font-medium uppercase tracking-wider text-accent">Mejorable</span>
+                  </div>
+                </div>
+                <span class="mt-2 text-sm font-semibold text-brand-200">Rendimiento</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid gap-6 lg:grid-cols-[1fr_1.05fr]">
+            
+            <!-- EdiciÃ³n de Metaetiquetas -->
+            <div class="space-y-5 rounded-panel border border-line bg-navy-800 p-6">
+              <h2 class="text-sm font-semibold uppercase tracking-wide text-brand-200/70">Metaetiquetas principales</h2>
+              
+              <div>
+                <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                  <label class="text-sm font-semibold text-brand-200">URL de la pÃ¡gina</label>
+                  <span class="font-mono text-xs tabular-nums text-ok">12 / 75</span>
+                </div>
+                <input placeholder="tu-sitio.com/pagina" class="w-full rounded-lg border border-line bg-navy px-3.5 py-2.5 text-sm text-white placeholder:text-brand-200/30 outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30" value="tu-sitio.com">
+                <div class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-line/60">
+                  <div class="h-full rounded-full transition-all duration-300 bg-ok" style="width: 16%;"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                  <label class="text-sm font-semibold text-brand-200">Palabra clave objetivo</label>
+                  <span class="font-mono text-xs tabular-nums text-brand-200/50">0 / 40</span>
+                </div>
+                <input placeholder="ej. zapatillas para correr" class="w-full rounded-lg border border-line bg-navy px-3.5 py-2.5 text-sm text-white placeholder:text-brand-200/30 outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30" value="">
+                <div class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-line/60">
+                  <div class="h-full rounded-full transition-all duration-300 bg-line" style="width: 0%;"></div>
+                </div>
+                <p class="mt-1.5 text-xs text-brand-200/50">Se resalta en la vista previa y en las comprobaciones.</p>
+              </div>
+
+              <div>
+                <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                  <label class="text-sm font-semibold text-brand-200">TÃ­tulo meta</label>
+                  <span class="font-mono text-xs tabular-nums text-brand-200/50">0 / 60</span>
+                </div>
+                <input placeholder="TÃ­tulo optimizado para buscadores" class="w-full rounded-lg border border-line bg-navy px-3.5 py-2.5 text-sm text-white placeholder:text-brand-200/30 outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30" value="">
+                <div class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-line/60">
+                  <div class="h-full rounded-full transition-all duration-300 bg-line" style="width: 0%;"></div>
+                </div>
+                <p class="mt-1.5 text-xs text-brand-200/50">Ã“ptimo: 30â€“60 caracteres.</p>
+              </div>
+
+              <div>
+                <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                  <label class="text-sm font-semibold text-brand-200">Meta descripciÃ³n</label>
+                  <span class="font-mono text-xs tabular-nums text-brand-200/50">0 / 160</span>
+                </div>
+                <textarea placeholder="DescripciÃ³n persuasiva que invita al clicâ€¦" rows="3" class="w-full resize-none rounded-lg border border-line bg-navy px-3.5 py-2.5 text-sm text-white placeholder:text-brand-200/30 outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30"></textarea>
+                <div class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-line/60">
+                  <div class="h-full rounded-full transition-all duration-300 bg-line" style="width: 0%;"></div>
+                </div>
+                <p class="mt-1.5 text-xs text-brand-200/50">Ã“ptimo: 70â€“160 caracteres.</p>
+              </div>
+
+              <div>
+                <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                  <label class="text-sm font-semibold text-brand-200">Encabezado H1</label>
+                  <span class="font-mono text-xs tabular-nums text-brand-200/50">0 / 70</span>
+                </div>
+                <input placeholder="TÃ­tulo principal visible en la pÃ¡gina" class="w-full rounded-lg border border-line bg-navy px-3.5 py-2.5 text-sm text-white placeholder:text-brand-200/30 outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30" value="">
+                <div class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-line/60">
+                  <div class="h-full rounded-full transition-all duration-300 bg-line" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="border-t border-line pt-5">
+                <div class="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-brand-200/70">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share2">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
+                    <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
+                  </svg>
+                  Open Graph / Social
+                </div>
+                <div class="space-y-5">
+                  <div>
+                    <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                      <label class="text-sm font-semibold text-brand-200">og:title</label>
+                      <span class="font-mono text-xs tabular-nums text-brand-200/50">0 / 60</span>
+                    </div>
+                    <input placeholder="TÃ­tulo al compartir (si difiere del tÃ­tulo meta)" class="w-full rounded-lg border border-line bg-navy px-3.5 py-2.5 text-sm text-white placeholder:text-brand-200/30 outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30" value="">
+                    <div class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-line/60">
+                      <div class="h-full rounded-full transition-all duration-300 bg-line" style="width: 0%;"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                      <label class="text-sm font-semibold text-brand-200">og:description</label>
+                      <span class="font-mono text-xs tabular-nums text-brand-200/50">0 / 200</span>
+                    </div>
+                    <textarea placeholder="DescripciÃ³n al compartir en redes" rows="3" class="w-full resize-none rounded-lg border border-line bg-navy px-3.5 py-2.5 text-sm text-white placeholder:text-brand-200/30 outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30"></textarea>
+                    <div class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-line/60">
+                      <div class="h-full rounded-full transition-all duration-300 bg-line" style="width: 0%;"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="mb-1.5 block text-sm font-semibold text-brand-200">og:image (URL)</label>
+                    <div class="relative">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-200/40">
+                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                        <circle cx="9" cy="9" r="2"></circle>
+                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+                      </svg>
+                      <input placeholder="https://tu-sitio.com/imagen.jpg" class="w-full rounded-lg border border-line bg-navy py-2.5 pl-10 pr-3.5 text-sm text-white placeholder:text-brand-200/30 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30" value="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vistas Previas y Salud SEO -->
+            <div class="space-y-6">
+              
+              <!-- SERP Preview -->
+              <div class="rounded-panel border border-line bg-navy-800 p-6">
+                <div>
+                  <div class="mb-3 flex items-center justify-between">
+                    <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-200/70">Vista previa en Google</h3>
+                    <div class="flex rounded-lg border border-line p-0.5">
+                      <button aria-pressed="true" class="flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition-colors bg-brand-500 text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor">
+                          <rect width="20" height="14" x="2" y="3" rx="2"></rect>
+                          <line x1="8" x2="16" y1="21" y2="21"></line>
+                          <line x1="12" x2="12" y1="17" y2="21"></line>
+                        </svg>
+                        Escritorio
+                      </button>
+                      <button aria-pressed="false" class="flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition-colors text-brand-200/60 hover:text-brand-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone">
+                          <rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect>
+                          <path d="M12 18h.01"></path>
+                        </svg>
+                        MÃ³vil
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex justify-center rounded-panel bg-white p-5 shadow-2xl shadow-black/40">
+                    <div class="w-full font-[Arial,sans-serif] max-w-[600px]">
+                      <div class="flex items-center gap-2.5">
+                        <div class="flex h-7 w-7 items-center justify-center rounded-full border border-[#dadce0] bg-[#f8f9fa]">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe text-[#5f6368]">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                            <path d="M2 12h20"></path>
+                          </svg>
+                        </div>
+                        <div class="leading-tight">
+                          <div class="text-[14px] text-[#202124]">tu-sitio.com</div>
+                          <div class="flex items-center text-[12px] text-[#4d5156]">
+                            <span class="truncate">https://tu-sitio.com</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical ml-1 shrink-0 text-[#4d5156]">
+                              <circle cx="12" cy="12" r="1"></circle>
+                              <circle cx="12" cy="5" r="1"></circle>
+                              <circle cx="12" cy="19" r="1"></circle>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <h4 class="mt-1 cursor-pointer text-[#1a0dab] hover:underline text-[20px] leading-snug">TÃ­tulo de tu pÃ¡gina â€” vista previa</h4>
+                      <p class="mt-1 text-[14px] leading-[1.58] text-[#4d5156]">AquÃ­ aparecerÃ¡ tu meta descripciÃ³n. Escribe una descripciÃ³n atractiva para mejorar el CTR en los resultados de bÃºsqueda.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Social Preview -->
+              <div class="rounded-panel border border-line bg-navy-800 p-6">
+                <div>
+                  <div class="mb-3 flex items-center justify-between">
+                    <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-200/70">Vista previa al compartir</h3>
+                    <div class="flex rounded-lg border border-line p-0.5">
+                      <button aria-pressed="true" class="flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition-colors bg-accent text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook">
+                          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg> 
+                        Facebook
+                      </button>
+                      <button aria-pressed="false" class="flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition-colors text-brand-200/60 hover:text-brand-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin">
+                          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                          <rect width="4" height="12" x="2" y="9"></rect>
+                          <circle cx="4" cy="4" r="2"></circle>
+                        </svg> 
+                        LinkedIn
+                      </button>
+                      <button aria-pressed="false" class="flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-medium transition-colors text-brand-200/60 hover:text-brand-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter">
+                          <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                        </svg> 
+                        Twitter
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex justify-center">
+                    <div class="w-full max-w-[500px] overflow-hidden rounded-lg border border-[#dddfe2] bg-white font-[Helvetica,Arial,sans-serif] shadow-md shadow-black/20">
+                      <div class="flex h-44 w-full flex-col items-center justify-center bg-[#e4e6eb] text-[#9ca3af]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-off">
+                          <line x1="2" x2="22" y1="2" y2="22"></line>
+                          <path d="M10.41 10.41a2 2 0 1 1-2.83-2.83"></path>
+                          <line x1="13.5" x2="6" y1="13.5" y2="21"></line>
+                          <line x1="18" x2="21" y1="12" y2="15"></line>
+                          <path d="M3.59 3.59A1.99 1.99 0 0 0 3 5v14a2 2 0 0 0 2 2h14c.55 0 1.052-.22 1.41-.59"></path>
+                          <path d="M21 15V5a2 2 0 0 0-2-2H9"></path>
+                        </svg>
+                        <span class="mt-1 text-xs">Sin og:image</span>
+                      </div>
+                      <div class="border-t border-[#dddfe2] bg-[#f2f3f5] px-3 py-2.5">
+                        <div class="text-[11px] uppercase tracking-wide text-[#606770]">tu-sitio.com</div>
+                        <div class="mt-0.5 line-clamp-2 text-[15px] font-semibold leading-tight text-[#1d2129]">TÃ­tulo de tu enlace compartido</div>
+                        <div class="mt-1 line-clamp-1 text-[13px] text-[#606770]">DescripciÃ³n que aparecerÃ¡ cuando compartas este enlace en redes sociales.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Health Checklist -->
+              <div class="rounded-panel border border-line bg-navy-800 p-6">
+                <div>
+                  <div class="mb-4 flex items-center justify-between">
+                    <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-200/70">Salud SEO</h3>
+                    <div class="rounded-full px-3 py-1 text-sm font-bold text-white bg-bad">0/100</div>
+                  </div>
+                  <ul class="space-y-2">
+                    <li class="flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm transition-colors border-bad/25 bg-bad/5 text-brand-200/80">
+                      <span class="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-bad text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+                          <path d="M18 6 6 18"></path>
+                          <path d="m6 6 12 12"></path>
+                        </svg>
+                      </span>
+                      <span class="leading-tight">MetatÃ­tulo entre 30 y 60 caracteres</span>
+                    </li>
+                    <li class="flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm transition-colors border-bad/25 bg-bad/5 text-brand-200/80">
+                      <span class="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-bad text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+                          <path d="M18 6 6 18"></path>
+                          <path d="m6 6 12 12"></path>
+                        </svg>
+                      </span>
+                      <span class="leading-tight">Meta descripciÃ³n entre 70 y 160 caracteres</span>
+                    </li>
+                    <li class="flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm transition-colors border-bad/25 bg-bad/5 text-brand-200/80">
+                      <span class="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-bad text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+                          <path d="M18 6 6 18"></path>
+                          <path d="m6 6 12 12"></path>
+                        </svg>
+                      </span>
+                      <span class="leading-tight">Existe un encabezado H1</span>
+                    </li>
+                    <li class="flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm transition-colors border-bad/25 bg-bad/5 text-brand-200/80">
+                      <span class="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-bad text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+                          <path d="M18 6 6 18"></path>
+                          <path d="m6 6 12 12"></path>
+                        </svg>
+                      </span>
+                      <span class="leading-tight">Palabra clave objetivo definida</span>
+                    </li>
+                    <li class="flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm transition-colors border-bad/25 bg-bad/5 text-brand-200/80">
+                      <span class="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-bad text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+                          <path d="M18 6 6 18"></path>
+                          <path d="m6 6 12 12"></path>
+                        </svg>
+                      </span>
+                      <span class="leading-tight">La palabra clave aparece en el Meta TÃ­tulo</span>
+                    </li>
+                    <li class="flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm transition-colors border-bad/25 bg-bad/5 text-brand-200/80">
+                      <span class="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-bad text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+                          <path d="M18 6 6 18"></path>
+                          <path d="m6 6 12 12"></path>
+                        </svg>
+                      </span>
+                      <span class="leading-tight">La palabra clave aparece en la Meta DescripciÃ³n</span>
+                    </li>
+                    <li class="flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm transition-colors border-bad/25 bg-bad/5 text-brand-200/80">
+                      <span class="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-bad text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+                          <path d="M18 6 6 18"></path>
+                          <path d="m6 6 12 12"></path>
+                        </svg>
+                      </span>
+                      <span class="leading-tight">La palabra clave aparece en el H1</span>
+                    </li>
+                  </ul>
+                  <div class="mt-4">
+                    <button class="flex w-full items-center justify-center gap-2 rounded-lg border border-accent/50 bg-accent/10 py-2.5 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles">
+                        <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path>
+                        <path d="M20 3v4"></path>
+                        <path d="M22 5h-4"></path>
+                        <path d="M4 17v2"></path>
+                        <path d="M5 18H3"></path>
+                      </svg>
+                      Mejorar con IA
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Todo List -->
+          <div class="rounded-panel border border-line bg-navy-800 p-6">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list text-accent">
+                  <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                  <path d="M12 11h4"></path>
+                  <path d="M12 16h4"></path>
+                  <path d="M8 11h.01"></path>
+                  <path d="M8 16h.01"></path>
+                </svg>
+                <h2 class="text-sm font-semibold uppercase tracking-wide text-brand-200">Lista de tareas accionable para tu programador</h2>
+              </div>
+              <div class="flex gap-2">
+                <button class="flex items-center gap-1.5 rounded-lg border border-accent/50 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent transition-colors hover:bg-accent hover:text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                    <path d="M10 9H8"></path>
+                    <path d="M16 13H8"></path>
+                    <path d="M16 17H8"></path>
+                  </svg>
+                  TXT
+                </button>
+                <button class="flex items-center gap-1.5 rounded-lg border border-accent/50 bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent transition-colors hover:bg-accent hover:text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-down">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                    <path d="M12 18v-6"></path>
+                    <path d="m9 15 3 3 3-3"></path>
+                  </svg>
+                  PDF
+                </button>
+              </div>
+            </div>
+            <div class="mb-4">
+              <div class="mb-1.5 flex justify-between text-xs text-brand-200/70">
+                <span>0 de 14 tareas completadas</span>
+                <span class="font-semibold text-accent">0 %</span>
+              </div>
+              <div class="h-2 w-full overflow-hidden rounded-full bg-line/60">
+                <div class="h-full rounded-full bg-accent transition-all duration-300" style="width: 0%;"></div>
+              </div>
+            </div>
+            
+            <div class="space-y-5">
+              <div>
+                <h3 class="mb-2 text-xs font-semibold uppercase tracking-wide text-brand-500">SEO</h3>
+                <ul class="space-y-2">
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Ajustar la longitud del Meta TÃ­tulo</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Reescribe el tÃ­tulo para que tenga entre 30 y 60 caracteres, incluyendo la palabra clave al inicio.</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Ajustar la longitud de la Meta DescripciÃ³n</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Redacta una descripciÃ³n de 70 a 160 caracteres, atractiva y con llamada a la acciÃ³n.</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Agregar un encabezado H1</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Inserte una Ãºnica etiqueta &lt;h1&gt; descriptiva que resume el contenido de la pÃ¡gina.</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Definir la palabra clave objetivo</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Selecciona la palabra clave principal por la que quieres posicionar esta pÃ¡gina.</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Incluir la palabra clave en el Meta TÃ­tulo</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Integra de forma natural la palabra clave objetivo dentro del tÃ­tulo.</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Incluir la palabra clave en la Meta DescripciÃ³n</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Mencione la palabra clave objetivo en la meta descripciÃ³n sin forzar la lectura.</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Incluir la palabra clave en el H1</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">AsegÃºrese de que el encabezado principal contenga la palabra clave objetivo.</span>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 class="mb-2 text-xs font-semibold uppercase tracking-wide text-brand-200">Accesibilidad</h3>
+                <ul class="space-y-2">
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Garantizar un H1 para lectores de pantalla</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Los lectores de pantalla usan el H1 para orientar al usuario. Agregue uno claro y Ãºnico.</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Escribir un tÃ­tulo de pÃ¡gina descriptivo</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Usa un &lt;title&gt; de al menos 10 caracteres que describa con precisiÃ³n la pÃ¡gina.</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Agregar una Meta DescripciÃ³n</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Incluye una meta descripciÃ³n para mejorar la comprensiÃ³n del contenido en resultados.</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Definir la imagen social (og:image)</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Agregue una etiqueta og:image (1200x630) para vistas previas accesibles al compartir.</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Analizar el contenido textual</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Pegue el contenido del artÃ­culo para evaluar la densidad de palabras y legibilidad.</span>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 class="mb-2 text-xs font-semibold uppercase tracking-wide text-accent">Rendimiento</h3>
+                <ul class="space-y-2">
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Agregar etiquetas Open Graph</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Configura og:title y og:description para una carga social rica y consistente.</span>
+                      </span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="flex w-full items-start gap-3 rounded-lg border border-line bg-navy px-3.5 py-2.5 text-left transition-colors hover:border-accent/50">
+                      <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors border-brand-200/40"></span>
+                      <span class="min-w-0">
+                        <span class="block text-sm font-medium text-white">Ampliar la extensiÃ³n del contenido</span>
+                        <span class="mt-0.5 block text-xs text-brand-200/60">Desarrolla el contenido hasta al menos 300 palabras para mejorar la relevancia temÃ¡tica.</span>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Density Analyzer -->
+          <div class="rounded-panel border border-line bg-navy-800 p-6">
+            <div class="mb-4 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text text-brand-500">
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                <path d="M10 9H8"></path>
+                <path d="M16 13H8"></path>
+                <path d="M16 17H8"></path>
+              </svg>
+              <h2 class="text-sm font-semibold uppercase tracking-wide text-brand-200">Densidad de palabras clave y legibilidad</h2>
+            </div>
+            <div class="grid gap-6 lg:grid-cols-2">
+              <div>
+                <label class="mb-1.5 block text-sm font-semibold text-brand-200">Texto del artÃ­culo</label>
+                <textarea rows="11" placeholder="Pega aquÃ­ el contenido de tu artÃ­culo para analizar la frecuencia de palabras y su legibilidadâ€¦" class="w-full resize-none rounded-lg border border-line bg-navy px-3.5 py-2.5 text-sm leading-relaxed text-white placeholder:text-brand-200/30 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30"></textarea>
+                <div class="mt-2 flex gap-4 text-xs text-brand-200/60">
+                  <span><b class="text-brand-200">0</b> palabras</span>
+                  <span><b class="text-brand-200">0</b> Ãºnicas</span>
+                  <span><b class="text-brand-200">0</b> frases</span>
+                </div>
+              </div>
+              <div class="space-y-4">
+                <div class="rounded-lg border p-4 border-bad/40 bg-bad/5">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2 text-sm font-semibold text-brand-200">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge">
+                        <path d="m12 14 4-4"></path>
+                        <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+                      </svg>
+                      PuntuaciÃ³n de legibilidad
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="h-2.5 w-2.5 rounded-full bg-bad"></span>
+                      <span class="h-2.5 w-2.5 rounded-full bg-line"></span>
+                      <span class="h-2.5 w-2.5 rounded-full bg-line"></span>
+                    </div>
+                  </div>
+                  <div class="mt-3 flex items-baseline gap-2">
+                    <span class="text-3xl font-extrabold text-bad">0</span>
+                    <span class="text-sm font-medium text-bad">DifÃ­cil de leer</span>
+                  </div>
+                </div>
+                <div class="rounded-lg border border-line bg-navy p-4">
+                  <h3 class="mb-3 text-xs font-semibold uppercase tracking-wide text-brand-200/70">Top 5 palabras</h3>
+                  <div class="w-full">
+                    <canvas width="485" height="54" style="width: 485px; height: 54px;"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Comparator -->
+          <div class="rounded-panel border border-line bg-navy-800 p-6">
+            <div class="mb-4 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-swords text-accent">
+                <polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"></polyline>
+                <line x1="13" x2="19" y1="19" y2="13"></line>
+                <line x1="16" x2="20" y1="16" y2="20"></line>
+                <line x1="19" x2="21" y1="21" y2="19"></line>
+                <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"></polyline>
+                <line x1="5" x2="9" y1="14" y2="18"></line>
+                <line x1="7" x2="4" y1="17" y2="20"></line>
+                <line x1="3" x2="5" y1="19" y2="21"></line>
+              </svg>
+              <h2 class="text-sm font-semibold uppercase tracking-wide text-brand-200">Comparador SEO de competidores</h2>
+            </div>
+            <div class="grid gap-6 lg:grid-cols-2">
+              <div class="space-y-3">
+                <div class="rounded-lg border border-line bg-navy p-4">
+                  <div class="mb-2 flex items-center gap-2">
+                    <span class="h-3 w-3 rounded-sm" style="background-color: rgb(59, 130, 246);"></span>
+                    <span class="text-sm font-semibold text-brand-200">Tu web</span>
+                  </div>
+                  <div class="flex gap-2">
+                    <div class="relative flex-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2 pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-brand-200/40">
+                        <path d="M9 17H7A5 5 0 0 1 7 7h2"></path>
+                        <path d="M15 7h2a5 5 0 1 1 0 10h-2"></path>
+                        <line x1="8" x2="16" y1="12" y2="12"></line>
+                      </svg>
+                      <input placeholder="https://ejemplo.com" class="w-full rounded-lg border border-line bg-navy-800 py-2 pl-9 pr-3 text-sm text-white placeholder:text-brand-200/30 outline-none focus:border-brand-500" value="tu-sitio.com">
+                    </div>
+                    <button class="rounded-lg bg-brand-500 px-3.5 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-900 disabled:opacity-60">Analizar</button>
+                  </div>
+                </div>
+                <div class="rounded-lg border border-line bg-navy p-4">
+                  <div class="mb-2 flex items-center gap-2">
+                    <span class="h-3 w-3 rounded-sm" style="background-color: rgb(249, 115, 22);"></span>
+                    <span class="text-sm font-semibold text-brand-200">Competidor</span>
+                  </div>
+                  <div class="flex gap-2">
+                    <div class="relative flex-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2 pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-brand-200/40">
+                        <path d="M9 17H7A5 5 0 0 1 7 7h2"></path>
+                        <path d="M15 7h2a5 5 0 1 1 0 10h-2"></path>
+                        <line x1="8" x2="16" y1="12" y2="12"></line>
+                      </svg>
+                      <input placeholder="https://ejemplo.com" class="w-full rounded-lg border border-line bg-navy-800 py-2 pl-9 pr-3 text-sm text-white placeholder:text-brand-200/30 outline-none focus:border-brand-500" value="">
+                    </div>
+                    <button class="rounded-lg bg-brand-500 px-3.5 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-900 disabled:opacity-60">Analizar</button>
+                  </div>
+                </div>
+                <div class="overflow-hidden rounded-lg border border-line">
+                  <table class="w-full text-sm">
+                    <thead>
+                      <tr class="bg-navy text-xs uppercase tracking-wide text-brand-200/60">
+                        <th class="px-3 py-2 text-left font-semibold">MÃ©trica</th>
+                        <th class="px-3 py-2 text-right font-semibold" style="color: rgb(59, 130, 246);">Tu web</th>
+                        <th class="px-3 py-2 text-right font-semibold" style="color: rgb(249, 115, 22);">Competidor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-t border-line">
+                        <td class="px-3 py-2 text-brand-200">TÃ­tulos</td>
+                        <td class="px-3 py-2 text-right font-semibold tabular-nums text-brand-200">0</td>
+                        <td class="px-3 py-2 text-right font-semibold tabular-nums text-brand-200">â€”</td>
+                      </tr>
+                      <tr class="border-t border-line">
+                        <td class="px-3 py-2 text-brand-200">Descripciones</td>
+                        <td class="px-3 py-2 text-right font-semibold tabular-nums text-brand-200">0</td>
+                        <td class="px-3 py-2 text-right font-semibold tabular-nums text-brand-200">â€”</td>
+                      </tr>
+                      <tr class="border-t border-line">
+                        <td class="px-3 py-2 text-brand-200">Legibilidad</td>
+                        <td class="px-3 py-2 text-right font-semibold tabular-nums text-brand-200">0</td>
+                        <td class="px-3 py-2 text-right font-semibold tabular-nums text-brand-200">â€”</td>
+                      </tr>
+                      <tr class="border-t border-line">
+                        <td class="px-3 py-2 text-brand-200">Keywords</td>
+                        <td class="px-3 py-2 text-right font-semibold tabular-nums text-brand-200">0</td>
+                        <td class="px-3 py-2 text-right font-semibold tabular-nums text-brand-200">â€”</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div>
+                <div class="relative">
+                  <svg viewBox="0 0 320 320" class="mx-auto w-full max-w-sm">
+                    <polygon points="160,133 187,160 160,187 133,160" fill="none" stroke="#1c3a63" stroke-width="1"></polygon>
+                    <polygon points="160,106 214,160 160,214 106,160" fill="none" stroke="#1c3a63" stroke-width="1"></polygon>
+                    <polygon points="160,79 241,160 160,241 79,160" fill="none" stroke="#1c3a63" stroke-width="1"></polygon>
+                    <polygon points="160,52 268,160 160,268 52,160" fill="none" stroke="#1c3a63" stroke-width="1"></polygon>
+                    <g>
+                      <line x1="160" y1="160" x2="160" y2="52" stroke="#1c3a63" stroke-width="1"></line>
+                      <text x="160" y="28.24" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="600" fill="#93c5fd">TÃ­tulos</text>
+                    </g>
+                    <g>
+                      <line x1="160" y1="160" x2="268" y2="160" stroke="#1c3a63" stroke-width="1"></line>
+                      <text x="291.76" y="160" text-anchor="start" dominant-baseline="middle" font-size="12" font-weight="600" fill="#93c5fd">Descripciones</text>
+                    </g>
+                    <g>
+                      <line x1="160" y1="160" x2="160" y2="268" stroke="#1c3a63" stroke-width="1"></line>
+                      <text x="160" y="291.76" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="600" fill="#93c5fd">Legibilidad</text>
+                    </g>
+                    <g>
+                      <line x1="160" y1="160" x2="52" y2="160" stroke="#1c3a63" stroke-width="1"></line>
+                      <text x="28.24" y="160" text-anchor="end" dominant-baseline="middle" font-size="12" font-weight="600" fill="#93c5fd">Keywords</text>
+                    </g>
+                    <polygon points="160,160 160,160 160,160 160,160" fill="#3b82f6" fill-opacity="0.18" stroke="#3b82f6" stroke-width="2"></polygon>
+                    <circle cx="160" cy="160" r="4.5" fill="#3b82f6" stroke="#0a192f" stroke-width="1.5" class="cursor-pointer"></circle>
+                    <circle cx="160" cy="160" r="4.5" fill="#3b82f6" stroke="#0a192f" stroke-width="1.5" class="cursor-pointer"></circle>
+                    <circle cx="160" cy="160" r="4.5" fill="#3b82f6" stroke="#0a192f" stroke-width="1.5" class="cursor-pointer"></circle>
+                    <circle cx="160" cy="160" r="4.5" fill="#3b82f6" stroke="#0a192f" stroke-width="1.5" class="cursor-pointer"></circle>
+                  </svg>
+                </div>
+                <div class="mt-2 flex items-center justify-center gap-5 text-xs">
+                  <span class="flex items-center gap-1.5 text-brand-200">
+                    <span class="h-2.5 w-2.5 rounded-sm" style="background-color: rgb(59, 130, 246);"></span>Tu web
+                  </span>
+                  <span class="flex items-center gap-1.5 text-brand-200">
+                    <span class="h-2.5 w-2.5 rounded-sm" style="background-color: rgb(249, 115, 22);"></span>Competidor
+                  </span>
+                </div>
+                <p class="mt-3 text-center text-xs text-brand-200/50">Analice una URL de la competencia para superponer su perfil en el radar.</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+        <!-- Upsell / Lead Capture Section -->
+        <div class="rounded-panel border border-accent/40 bg-navy-700 p-7 text-center">
+          <h3 class="text-xl font-bold text-white">Â¿Quieres el anÃ¡lisis completo?</h3>
+          <p class="mx-auto mt-2 max-w-lg text-sm text-brand-200/60">
+            Recibe un informe con velocidad real, enlaces internos, datos estructurados, backlinks y un plan de acciÃ³n priorizado para tu web.
+          </p>
+          
+          <form id="lead-form" class="mx-auto mt-5 flex max-w-md flex-col items-center gap-3 sm:flex-row">
+            <input id="input-correo" type="email" required placeholder="tu@correo.com" class="w-full rounded-lg border border-line bg-navy px-4 py-3 text-sm text-white placeholder:text-brand-200/30 outline-none transition-colors focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30">
+            <button type="submit" id="btn-enviar-lead" class="flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 font-semibold text-white transition-colors hover:bg-accent-600 shrink-0 sm:w-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rocket">
+                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+              </svg>
+              Obtener gratis
+            </button>
+          </form>
+        </div>
+
+      </main>
+
+      <footer class="border-t border-line/60 py-6 text-center text-xs text-brand-200/40">
+        Auditor BÃ¡sico de SEO On-Page â€” verifica, corrige y posiciona.
+      </footer>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE CAPTURA DE LEADS -->
+  <script>
+    function registrarLeadAuditor(event) {
+      event.preventDefault();
+      
+      const emailInput = document.getElementById('input-correo');
+      if (!emailInput) return;
+      
+      const email = emailInput.value;
+      if (!email) {
+        console.warn('El correo estÃ¡ vacÃ­o.');
+        return;
+      }
+
+      // Reemplaza esta URL con la URL final de tu Web App de Google Apps Script
+      const scriptURL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+
+      const payload = {
+        email: email,
+        origen: 'Auditor SEO On-Page'
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        console.log('Lead de AuditorÃ­a SEO registrado con Ã©xito.');
+        event.target.reset();
+        // Opcional: mostrar un mensaje de agradecimiento al usuario.
+      })
+      .catch(error => {
+        console.error('Error al registrar el lead:', error);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const leadForm = document.getElementById('lead-form');
+      if (leadForm) {
+        leadForm.addEventListener('submit', registrarLeadAuditor);
+      }
+    });
+  </script>
+</body>
+</html>
+

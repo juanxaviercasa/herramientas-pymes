@@ -1,0 +1,430 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Calculadora de Precios de Venta con IGV</title>
+  
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/content/location/location.js" id="eppiocemhmnlbhjplcgkofciiegomcon"></script>
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script>
+  <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script>
+  
+  <script type="module" crossorigin="" src="./js/calculadora-precios-venta-igv.js"></script>
+  <link rel="stylesheet" crossorigin="" href="./css/calculadora-precios-venta-igv.css">
+  
+  <script>
+    (() => {
+      let e = new URLSearchParams(window.location.search).get("sgv");
+      if (!e) return;
+      function t(t) {
+        try {
+          if (!t) return t;
+          let n = window.location.origin, r = new URL(String(t), n);
+          return r.origin === n && r.searchParams.get("sgv") !== e ? (r.searchParams.set("sgv", e), r.href) : t;
+        } catch {
+          return t;
+        }
+      }
+      let n = window.open;
+      window.open = function(...e) {
+        return e[0] &&= t(e[0]), n.apply(this, e);
+      };
+      let r = window.location.assign.bind(window.location);
+      window.location.assign = function(e) {
+        r(t(e));
+      };
+      let i = window.location.replace.bind(window.location);
+      window.location.replace = function(e) {
+        i(t(e));
+      };
+      let a = history.pushState;
+      history.pushState = function(...e) {
+        return e[2] &&= t(e[2]), a.apply(this, e);
+      };
+      let o = history.replaceState;
+      history.replaceState = function(...e) {
+        return e[2] &&= t(e[2]), o.apply(this, e);
+      }, document.addEventListener("click", (e) => {
+        let n = e.target?.closest("a");
+        if (!n || !n.href || n.href.startsWith("mailto:") || n.href.startsWith("tel:") || n.href.startsWith("javascript:")) return;
+        let r = t(n.href), i = typeof r == "string" ? r : String(r);
+        n.href !== i && (n.href = i);
+      }, !0), document.addEventListener("submit", (t) => {
+        let n = t.target;
+        if (!n) return;
+        let r = n.querySelector("input[name=\"sgv\"]");
+        r || (r = document.createElement("input"), r.type = "hidden", r.name = "sgv", n.appendChild(r)), r.value = e;
+      });
+      let s = () => {
+        document.querySelectorAll("a").forEach((e) => {
+          if (e.href && !e.href.startsWith("javascript")) {
+            let n = t(e.href);
+            e.href = typeof n == "string" ? n : String(n);
+          }
+        });
+      };
+      document.readyState === "complete" || document.readyState === "interactive" ? s() : document.addEventListener("DOMContentLoaded", s);
+    })();
+  </script>
+  
+  <script type="text/javascript" charset="utf-8" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/200.js"></script>
+  <script type="text/javascript" charset="utf-8" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/101.js"></script>
+  
+  <script>(function(){var e=`sg-preview`;function t(e){"@babel/helpers - typeof";return t=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},t(e)}function n(e,n){if(t(e)!=`object`||!e)return e;var r=e[Symbol.toPrimitive];if(r!==void 0){var i=r.call(e,n||`default`);if(t(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(e)}function r(e){var r=n(e,`string`);return t(r)==`symbol`?r:r+``}function i(e,t,n){return(t=r(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=class{constructor(e){if(i(this,`source`,void 0),i(this,`allowedOrigins`,void 0),i(this,`targetOrigin`,void 0),i(this,`debug`,void 0),i(this,`messageHandlers`,new Map),!e.allowedOrigins?.length)throw Error(`[EventCommunicator] allowedOrigins is required`);this.source=e.source,this.allowedOrigins=e.allowedOrigins,this.targetOrigin=e.targetOrigin||`*`,this.debug=e.debug||!1,e.messageHandlers&&this.registerMessageHandlers(e.messageHandlers),e.domEvents&&this.registerDOMEvents(e.domEvents),this.initMessageListener()}log(...e){this.debug&&console.log(`[EventCommunicator]`,...e)}formatEventType(t){return`${e}:${t}`}parseEventType(t){let n=`${e}:`;return t.startsWith(n)?t.slice(n.length):null}isOriginAllowed(e){return this.allowedOrigins.some(t=>t===`*`?!0:e===t||e.endsWith(t))}initMessageListener(){window.addEventListener(`message`,e=>{if(this.log(`Message received from:`,e.origin),!this.isOriginAllowed(e.origin)){console.warn(`[EventCommunicator] Wrong origin:`,e.origin);return}let t=e.data;if(!t?.type)return;let n=this.parseEventType(t.type);if(!n)return;this.log(`Parsed event type:`,n);let r=this.messageHandlers.get(n);r?r(t.payload):this.log(`No handler for:`,n)})}registerMessageHandlers(e){Object.entries(e).forEach(([e,t])=>{this.messageHandlers.set(e,t)})}registerDOMEvents(e){e.forEach(({event:e,handler:t,options:n})=>{window.addEventListener(e,t,n)})}getTargetWindow(){try{if(window.parent&&window.parent!==window)return window.parent;if(window.top&&window.top!==window)return window.top;if(window.opener)return window.opener}catch{if(window.parent&&window.parent!==window)return window.parent}return null}send(e,t){let n=this.getTargetWindow();if(!n)return;let r={type:this.formatEventType(e),source:this.source,payload:t??null,timestamp:new Date().toISOString()};n.postMessage(r,this.targetOrigin)}},o=`visual-editor`,s={ACTIVATE_INSPECTOR:`ACTIVATE_INSPECTOR`,DEACTIVATE_INSPECTOR:`DEACTIVATE_INSPECTOR`,MAKE_EDITABLE:`MAKE_EDITABLE`,APPLY_STYLE:`APPLY_STYLE`,CHANGE_TEXT_TYPE:`CHANGE_TEXT_TYPE`,ADD_LINK:`ADD_LINK`,INSERT_EMOJI:`INSERT_EMOJI`,CHANGE_IMAGE_SRC:`CHANGE_IMAGE_SRC`,SET_ALT_TEXT:`SET_ALT_TEXT`,SHOW_IMAGE_LOADING:`SHOW_IMAGE_LOADING`,HIDE_IMAGE_LOADING:`HIDE_IMAGE_LOADING`,TOGGLE_DEBUG:`TOGGLE_DEBUG`,CLEAR_SELECTION:`CLEAR_SELECTION`,UNDO:`UNDO`,REDO:`REDO`},c={ELEMENT_SELECTED:`ELEMENT_SELECTED`,ELEMENT_RECT_UPDATED:`ELEMENT_RECT_UPDATED`,SELECTION_CLEARED:`SELECTION_CLEARED`,CONTENT_CHANGED:`CONTENT_CHANGED`,STYLE_APPLIED:`STYLE_APPLIED`,TEXT_TYPE_CHANGE_REQUESTED:`TEXT_TYPE_CHANGE_REQUESTED`,LINK_CHANGE_REQUESTED:`LINK_CHANGE_REQUESTED`,EMOJI_INSERTED:`EMOJI_INSERTED`,IMAGE_SRC_CHANGED:`IMAGE_SRC_CHANGED`,ALT_TEXT_SET:`ALT_TEXT_SET`,EDITING_TEXT:`EDITING_TEXT`,HISTORY_STATE_CHANGED:`HISTORY_STATE_CHANGED`},l={LOC:`data-visual-edit-loc`,COMPONENT:`data-visual-edit-component`,EDITABLE:`data-visual-edit-editable`,OVERLAY:`data-visual-edit-overlay`,LABEL:`data-visual-edit-label`,LABEL_POSITION:`data-visual-edit-label-position`,DIMENSIONS:`data-visual-edit-dimensions`},u={BOLD:`bold`,ITALIC:`italic`,UNDERLINE:`underline`,LINE_THROUGH:`line-through`,COLOR:`color`,BACKGROUND_COLOR:`backgroundColor`,TEXT_ALIGN:`textAlign`,FONT_SIZE:`fontSize`},d={HOVER:`hover`,SELECTED:`selected`,LOADING:`loading`},f={SPAN:`span`,IMG:`img`,BUTTON:`button`,A:`a`},ee=[`h1`,`h2`,`h3`,`h4`,`h5`,`h6`,`p`,f.SPAN,`label`,`b`,`i`,`strong`,`em`,`small`,`mark`,`del`,`ins`,`sub`,`sup`,`div`,`li`,`dt`,`dd`],p=!1,m=`%c[Visual Editor]`,h=`color: #7c3aed; font-weight: bold;`,g={CONTENT_CHANGED:`âœï¸`,EMOJI_INSERTED:`ðŸ˜€`,STYLE_APPLIED:`ðŸŽ¨`,TEXT_TYPE_CHANGE_REQUESTED:`ðŸ”¤`,LINK_CHANGE_REQUESTED:`ðŸ”—`,IMAGE_SRC_CHANGED:`ðŸ–¼ï¸`,ALT_TEXT_SET:`ðŸ·ï¸`},_={CONTENT_CHANGED:`#059669`,EMOJI_INSERTED:`#d97706`,STYLE_APPLIED:`#2563eb`,TEXT_TYPE_CHANGE_REQUESTED:`#7c3aed`,LINK_CHANGE_REQUESTED:`#0891b2`,IMAGE_SRC_CHANGED:`#be185d`,ALT_TEXT_SET:`#be185d`},v=(e,t)=>{switch(e){case`STYLE_APPLIED`:{let e=t.style||t.after,n=t.before,r=t.after;return e===`fontSize`||t.fontSize?`fontSize: ${n} â†’ ${r} (preview: inline style)`:`${e}: ${n} â†’ ${r}`}case`TEXT_TYPE_CHANGE_REQUESTED`:{let e=t[`tag before`],n=t[`tag after`],r=t.fontSize,i=`<${e}> â†’ <${n}>`;return r?`${i} (preview: inline ${r})`:i}case`CONTENT_CHANGED`:return`"${String(t.after||``).slice(0,40)}"`;case`EMOJI_INSERTED`:return`${t.emoji} added`;default:return Object.entries(t).slice(0,2).map(([e,t])=>`${e}: ${t}`).join(`, `)}},y=()=>{p=!p,console.log(m+(p?` %cðŸŸ¢ Debug mode ENABLED`:` %cðŸ”´ Debug mode DISABLED`),h,`color: ${p?`#16a34a`:`#dc2626`}; font-weight: bold;`)},b=(e,t,n,r)=>{if(!p)return;let i=_[e]??`#6b7280`,a=g[e]??`ðŸ“`,o=n.tagName.toLowerCase(),s=v(e,r);console.groupCollapsed(`${m} %c${a} PREVIEW ${e}%c  <${o}>  %c${s}`,h,`color: ${i}; font-weight: bold;`,`color: #6b7280; font-weight: normal;`,`color: #0891b2; font-weight: normal;`),console.log(`%cLocation`,`font-weight: bold;`,t),console.log(`%cElement`,`font-weight: bold;`,`<${o}>`,n.className?`class="${n.className}"`:`(no class)`),console.log(`%cDetails`,`font-weight: bold;`,r),console.groupEnd()},x=e=>{let t=document.createElement(`div`);return t.innerHTML=`
+    <svg xmlns="http://www.w3.org/2000/svg" class="sg-icon-loader-circular" viewBox="25 25 50 50" style="width: ${e}px; height: ${e}px;">
+      <circle class="sg-icon-loader-path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+    </svg>
+  `,t},S=()=>`
+  .sg-icon-loader-circular {
+    animation: sg-preview-rotate 2s linear infinite;
+    transform-origin: center center;
+  }
+  .sg-icon-loader-path {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    animation: sg-preview-dash 1.5s ease-in-out infinite, sg-preview-color 6s ease-in-out infinite;
+    stroke-linecap: round;
+  }
+  @keyframes sg-preview-rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes sg-preview-dash {
+    0% {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -35px;
+    }
+    100% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -124px;
+    }
+  }
+  @keyframes sg-preview-color {
+    100%, 0% { stroke: #ff7061; }
+    40% { stroke: #21ab61; }
+    66% { stroke: #4343F0; }
+    80%, 90% { stroke: #ff7061; }
+  }
+`,C=new Map,w=(e,t,n)=>{E(t);let r=e.getBoundingClientRect(),i=window.getComputedStyle(e),a=document.createElement(`div`),o={position:`fixed`,top:`${r.top}px`,left:`${r.left}px`,width:`${r.width}px`,height:`${r.height}px`,pointerEvents:`none`,boxSizing:`border-box`,zIndex:`999999`,borderRadius:i.borderRadius||`0px`};if(t===`loading`){Object.assign(a.style,{...o,zIndex:`2147483647`,backdropFilter:`blur(4px)`,background:`rgba(255, 255, 255, 0.5)`,display:`flex`,flexDirection:`column`,alignItems:`center`,justifyContent:`center`,gap:`8px`});let e=0,t=`12px`,i=!1;if(r.width>=240&&r.height>=240?(e=80,t=`14px`,i=!0):r.width>=80&&r.height>=80?(e=52,t=`12px`,i=!0):r.width>=40&&r.height>=40?(e=24,i=!1):(e=0,i=!1),e>0){let t=x(e);a.appendChild(t)}if(i&&n?.text){let e=document.createElement(`div`);e.textContent=n.text,e.style.fontFamily=`Inter, sans-serif`,e.style.fontSize=t,e.style.fontWeight=`400`,e.style.color=`#212121`,a.appendChild(e)}}else Object.assign(a.style,{...o,boxShadow:`inset 0 0 0 1px #6164FF, 0 0 0 1px #4343F0`});if(a.setAttribute(l.OVERLAY,t),t===`hover`){let t=e.getAttribute(l.COMPONENT);if(t&&(a.setAttribute(l.LABEL,t),a.setAttribute(l.LABEL_POSITION,r.top<30?`bottom`:`top`)),e.tagName===f.IMG.toUpperCase()){let{width:e,height:t}=r;e>=100&&t>=100&&a.setAttribute(l.DIMENSIONS,`${Math.round(e)} x ${Math.round(t)} px`)}}document.body.appendChild(a),C.set(t,a)},T=(e,t)=>{let n=C.get(t);if(!n||!e)return;let r=e.getBoundingClientRect(),i=window.getComputedStyle(e);Object.assign(n.style,{top:`${r.top}px`,left:`${r.left}px`,width:`${r.width}px`,height:`${r.height}px`,borderRadius:i.borderRadius||`0px`})},E=e=>{let t=C.get(e);t?.parentNode?.removeChild(t),C.delete(e)},D=()=>{document.querySelectorAll(`[${l.OVERLAY}]`).forEach(e=>e.remove()),C.clear()},te=()=>{let e=document.createElement(`style`);e.textContent=`
+    .sg-cursor-text * { cursor: text !important; }
+    .sg-cursor-pointer * { cursor: pointer !important; }
+    [contenteditable="true"] { outline: none !important; }
+    [${l.OVERLAY}='hover']::before { content: attr(${l.LABEL}); position: absolute; left: 0; background: #4343F0; border-radius: 4px; color: white; padding: 2px 4px; font-family: Inter; font-size: 12px; font-style: normal; font-weight: 400; line-height: 18px; }
+    [${l.OVERLAY}='hover'][${l.LABEL_POSITION}='top']::before { bottom: calc(100% + 4px); }
+    [${l.OVERLAY}='hover'][${l.LABEL_POSITION}='bottom']::before { top: calc(100% + 4px); }
+    [${l.OVERLAY}='hover'][${l.DIMENSIONS}]::after { content: attr(${l.DIMENSIONS}); position: absolute; top: 4px; right: 4px; background: #4343F0; border-radius: 4px; color: white; padding: 2px 4px; font-family: Inter; font-size: 12px; font-style: normal; font-weight: 400; line-height: 18px; }
+    ${S()}
+  `,document.head.appendChild(e)},O=()=>{},k=()=>{},A=(e,t)=>{O=e,k=t},j=e=>e?.closest(`[${l.LOC}]`),M=e=>document.querySelector(`[${l.LOC}="${e}"]`),N=e=>{let t=e.getBoundingClientRect();return{top:t.top,left:t.left,width:t.width,height:t.height}},P=e=>{let t=e.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);if(!t)return e;let n=parseInt(t[1],10),r=parseInt(t[2],10),i=parseInt(t[3],10);return`#${((1<<24)+(n<<16)+(r<<8)+i).toString(16).slice(1)}`},F=e=>{let t=e.tagName.toLowerCase(),n=t===f.A?e:e.closest(f.A),r=e.hasAttribute(`href`)||!!n,i=e.getAttribute(`href`)||n?.getAttribute(`href`)||void 0,a=e.getAttribute(`target`)||n?.getAttribute(`target`)||void 0,o=e.getAttribute(`rel`)||n?.getAttribute(`rel`)||void 0,s=e.hasAttribute(`onclick`)||e.getAttribute(`type`)===`submit`,c=t===f.BUTTON?e.getAttribute(`type`)||`button`:void 0,u=e.getAttribute(l.EDITABLE)===`true`,d=window.getComputedStyle(e),p=P(d.color),m=P(d.backgroundColor),h=d.fontSize,g=e.getAttribute(`class`)||``,_=t===f.IMG?e.getAttribute(`alt`)||``:void 0,v=ee.includes(t),y=e.outerHTML,b=y.indexOf(`>`);return{hasHref:r,href:i,target:a,rel:o,hasOnClick:s,buttonType:c,isEditable:u,isTextElement:v,computedColor:p,computedBackgroundColor:m,computedFontSize:h,classNames:g,openingTag:b>=0?y.slice(0,b+1):y,alt:_}},I=(e,t)=>{if(e.children.length>0){let n=null;for(let t of Array.from(e.childNodes))if(t.nodeType===Node.TEXT_NODE&&(t.textContent||``).trim()!==``){n=t;break}n?n.textContent=t:e.appendChild(document.createTextNode(t))}else e.innerText=t},L=100,R=new class{constructor(){i(this,`past`,[]),i(this,`future`,[]),i(this,`emitFn`,void 0)}setEmitter(e){this.emitFn=e,this.notify()}notify(){this.emitFn?.(this.past.length>0,this.future.length>0)}push(e){this.past.push(e),this.future=[],L>0&&this.past.length>L&&this.past.shift(),this.notify()}undo(){let e=this.past.pop();e&&(e.undo(),this.future.push(e),this.notify())}redo(){let e=this.future.pop();e&&(e.redo(),this.past.push(e),this.notify())}clear(){this.past=[],this.future=[],this.notify()}},z=(e,t,n,r)=>{let i=t=>{let n=M(e);n&&(I(n,t),O(c.CONTENT_CHANGED,{loc:e,newContent:t,remainingIconCount:r}),k(n))};R.push({undo:()=>i(t),redo:()=>i(n)})},B=e=>{let{loc:t}=e,n=M(t);if(!n)return;let r=n.innerText.trim();if(Array.from(n.children).some(e=>e.tagName?.toLowerCase()!==`br`)){let e=null;for(let t of Array.from(n.childNodes))if(t.nodeType===Node.TEXT_NODE&&(t.textContent||``).trim()){e=t;break}if(!e){let t=document.createTextNode(``);n.appendChild(t),e=t}let r=e.textContent||``,i=document.createElement(f.SPAN);i.textContent=r,i.contentEditable=`true`,i.style.cssText=`outline:none;display:inline;min-width:2px;caret-color:auto;`,e.parentNode?.replaceChild(i,e);let a=document.createRange();a.selectNodeContents(i);let o=window.getSelection();o?.removeAllRanges(),o?.addRange(a),i.focus();let s=[];i.addEventListener(`keydown`,e=>{if(e.key===` `&&n.tagName===f.BUTTON.toUpperCase()){e.preventDefault(),document.execCommand(`insertText`,!1,` `);return}if((e.ctrlKey||e.metaKey)&&e.key===`z`&&s.length>0){e.preventDefault(),s.pop()?.();return}if(e.key===`Backspace`){let t=window.getSelection();if(t?.isCollapsed&&t?.anchorOffset===0){e.preventDefault();let t=i.previousElementSibling;if(t){let e=t.parentNode,n=t.nextSibling;s.push(()=>{n?e?.insertBefore(t,n):e?.appendChild(t)}),t.remove()}}}}),i.addEventListener(`input`,()=>{let e=(i.textContent||``)!==r;O(c.EDITING_TEXT,{loc:t,isDirty:e}),k(n)}),i.addEventListener(`blur`,()=>{let e=Array.from(n.children).filter(e=>e!==i&&e.tagName?.toLowerCase()!==`br`).length,a=i.innerText.trim(),o=document.createTextNode(i.innerText.trim());i.parentNode?.replaceChild(o,i),a!==r&&(b(c.CONTENT_CHANGED,t,n,{before:r,after:a}),O(c.CONTENT_CHANGED,{loc:t,newContent:a,remainingIconCount:e}),z(t,r,a,e)),O(c.EDITING_TEXT,{loc:t,isDirty:!1}),requestAnimationFrame(()=>k(n))},{once:!0});return}n.setAttribute(`contenteditable`,`true`),n.style.caretColor=`auto`,n.focus();let i=e=>{e.key===` `&&n.tagName===f.BUTTON.toUpperCase()&&(e.preventDefault(),document.execCommand(`insertText`,!1,` `))};n.addEventListener(`keydown`,i);let a=()=>{n.removeAttribute(`contenteditable`),n.style.caretColor=``,n.removeEventListener(`blur`,a),n.removeEventListener(`keydown`,i);let e=n.innerText.trim();e!==r&&(b(c.CONTENT_CHANGED,t,n,{before:r,after:e}),O(c.CONTENT_CHANGED,{loc:t,newContent:e}),z(t,r,e)),O(c.EDITING_TEXT,{loc:t,isDirty:!1}),requestAnimationFrame(()=>k(n))};n.addEventListener(`blur`,a)},V=(e,t)=>{let n=/[A-Z]/.test(t)?e.tagName.toLowerCase():t,r=document.createElement(n);for(let t of Array.from(e.attributes))r.setAttribute(t.name,t.value);return r.innerHTML=e.innerHTML,e.replaceWith(r),r},ne=e=>{let{loc:t,tag:n,fontSize:r}=e,i=M(t);if(!i)return;let a=i.getAttribute(l.COMPONENT)||i.tagName.toLowerCase(),o=i.tagName.toLowerCase(),s=window.getComputedStyle(i).fontSize;i.setAttribute(l.COMPONENT,n);let u=V(i,n);r&&(u.style.fontSize=r),b(c.TEXT_TYPE_CHANGE_REQUESTED,t,u,{"tag before":a,"tag after":n,fontSize:r??`(unchanged)`}),O(c.TEXT_TYPE_CHANGE_REQUESTED,{loc:t,tag:n,fontSize:r,classNames:u.className}),k(u);let d=(e,n,r)=>{let i=M(t);if(!i)return;i.setAttribute(l.COMPONENT,n);let a=V(i,e);r?a.style.fontSize=r:a.style.fontSize=``,O(c.TEXT_TYPE_CHANGE_REQUESTED,{loc:t,tag:n,fontSize:r,classNames:a.className}),k(a)};R.push({undo:()=>d(o,a,s),redo:()=>d(n,n,r)})},H=(e,t,n)=>{switch(t){case u.BOLD:e.style.fontWeight=n||``;break;case u.ITALIC:e.style.fontStyle=n||``;break;case u.UNDERLINE:case u.LINE_THROUGH:e.style.textDecoration=n||``;break;case u.COLOR:if(n){let t=[];Array.from(e.children).forEach(e=>{let n=e;n.style.color||t.push([n,window.getComputedStyle(n).color])}),e.style.color=n,t.forEach(([e,t])=>{e.style.color=t})}else e.style.color=``;break;case u.BACKGROUND_COLOR:e.style.backgroundColor=n||``;break;case u.TEXT_ALIGN:e.style.textAlign=n||``;break;case u.FONT_SIZE:e.style.fontSize=n||``;break}},re=e=>{let{style:t,value:n,loc:r}=e,i=M(r);if(!i)return;let a=window.getComputedStyle(i),o=n,s;switch(t){case u.BOLD:s=a.fontWeight,o=parseInt(a.fontWeight,10)>=700?`normal`:`bold`,H(i,t,o);break;case u.ITALIC:s=a.fontStyle,o=a.fontStyle===`italic`?`normal`:`italic`,H(i,t,o);break;case u.UNDERLINE:s=a.textDecoration,o=a.textDecoration.includes(`underline`)?`none`:`underline`,H(i,t,o);break;case u.LINE_THROUGH:s=a.textDecoration,o=a.textDecoration.includes(`line-through`)?`none`:`line-through`,H(i,t,o);break;case u.COLOR:s=a.color,n&&H(i,t,n);break;case u.BACKGROUND_COLOR:s=a.backgroundColor,n&&H(i,t,n);break;case u.TEXT_ALIGN:s=a.textAlign,n&&H(i,t,n);break;case u.FONT_SIZE:s=a.fontSize,n&&H(i,t,n);break}b(c.STYLE_APPLIED,r,i,{style:t,before:s??`(unknown)`,after:o??`(unchanged)`}),O(c.STYLE_APPLIED,{loc:r,style:t,value:o}),k(i);let l=e=>{let n=M(r);n&&(H(n,t,e),O(c.STYLE_APPLIED,{loc:r,style:t,value:e}),k(n))};R.push({undo:()=>l(s),redo:()=>l(o)})},ie=e=>{let{loc:t,href:n,target:r,rel:i}=e,a=M(t);if(!a)return;let o=a.closest(f.A)||(a.tagName.toLowerCase()===f.A?a:null),s=o?o.href:`(none)`,l=o?.getAttribute(`target`)??`(none)`,u=o?.getAttribute(`rel`)??`(none)`;if(o)o.href=n,r&&o.setAttribute(`target`,r),i&&o.setAttribute(`rel`,i);else{let e=document.createElement(f.A);e.href=n,r&&e.setAttribute(`target`,r),i&&e.setAttribute(`rel`,i),a.parentNode?.insertBefore(e,a),e.appendChild(a)}b(c.LINK_CHANGE_REQUESTED,t,a,{"href before":s,"href after":n,"target before":l,"target after":r??`(none)`,rel:i??`(none)`}),O(c.LINK_CHANGE_REQUESTED,{loc:t,href:n,target:r,rel:i});let d=(e,n,r,i)=>{let a=M(t);if(!a)return;let o=a.closest(f.A)||(a.tagName.toLowerCase()===f.A?a:null);if(e===`(none)`||!i&&e===`(none)`)if(o&&o!==a&&o.parentNode){for(;o.firstChild;)o.parentNode.insertBefore(o.firstChild,o);o.remove()}else o===a&&(o.removeAttribute(`href`),o.removeAttribute(`target`),o.removeAttribute(`rel`));else o||(o=document.createElement(f.A),a.parentNode&&(a.parentNode.insertBefore(o,a),o.appendChild(a))),o.href=e,n&&n!==`(none)`?o.setAttribute(`target`,n):o.removeAttribute(`target`),r&&r!==`(none)`?o.setAttribute(`rel`,r):o.removeAttribute(`rel`);O(c.LINK_CHANGE_REQUESTED,{loc:t,href:e===`(none)`?void 0:e,target:n===`(none)`?void 0:n,rel:r===`(none)`?void 0:r})};R.push({undo:()=>d(s,l,u,!!o),redo:()=>d(n,r,i,!!o)})},ae=e=>{let{loc:t,emoji:n}=e,r=M(t);if(!r)return;let i=r.innerText,a=r.querySelector(`[contenteditable="true"]`)||(r.isContentEditable?r:null);if(a){let e=window.getSelection();if(e&&e.rangeCount>0&&a.contains(e.anchorNode)){let t=e.getRangeAt(0);t.deleteContents();let r=document.createTextNode(n);t.insertNode(r),t.setStartAfter(r),t.collapse(!0),e.removeAllRanges(),e.addRange(t)}else a.appendChild(document.createTextNode(n));a.dispatchEvent(new Event(`input`,{bubbles:!0}))}else r.appendChild(document.createTextNode(n));let o=r.innerText;b(c.EMOJI_INSERTED,t,r,{emoji:n,before:i,after:o}),O(c.EMOJI_INSERTED,{loc:t,emoji:n,newContent:o}),k(r),B({loc:t});let s=e=>{let n=M(t);n&&(I(n,e),O(c.CONTENT_CHANGED,{loc:t,newContent:e}),k(n))};R.push({undo:()=>s(i),redo:()=>s(o)})},oe=e=>{let{loc:t,src:n}=e,r=M(t);if(!r)return;let i=r.tagName.toLowerCase()===f.IMG?r.src:`(not an img)`;r.tagName.toLowerCase()===f.IMG&&(r.src=n),b(c.IMAGE_SRC_CHANGED,t,r,{"src before":i,"src after":n}),O(c.IMAGE_SRC_CHANGED,{loc:t,src:n})},U=e=>{let{loc:t,alt:n}=e,r=M(t);if(!r)return;let i=r.tagName.toLowerCase()===f.IMG?r.alt:`(not an img)`;r.tagName.toLowerCase()===f.IMG&&(r.alt=n),b(c.ALT_TEXT_SET,t,r,{"alt before":i,"alt after":n}),O(c.ALT_TEXT_SET,{loc:t,alt:n});let a=e=>{let n=M(t);!n||n.tagName.toLowerCase()!==f.IMG||(n.alt=e,O(c.ALT_TEXT_SET,{loc:t,alt:e}))};R.push({undo:()=>a(i),redo:()=>a(n)})},W=!1,G=null,K=null,q=null,J=null,Y=e=>{document.body.classList.remove(`sg-cursor-text`,`sg-cursor-pointer`),e&&document.body.classList.add(`sg-cursor-${e}`)},X=(e,t)=>{J?.send(e,t)},se=e=>{if(e!==G)if(G&&!document.contains(G))G=e;else return;requestAnimationFrame(()=>{T(e,d.SELECTED),X(c.ELEMENT_RECT_UPDATED,{rect:N(e)})})},ce=()=>{W=!0,Y(`pointer`)},le=()=>{W=!1,Y(``),G=null,K=null,D(),R.clear()},ue=e=>{G=e,E(d.HOVER),K=null,w(e,d.SELECTED);let t=e.getAttribute(l.LOC)||``,n=t?document.querySelectorAll(`[${l.LOC}="${CSS.escape(t)}"]`):[],r=n.length>1,i=F(e),a=r?!1:i.isEditable;J.send(c.ELEMENT_SELECTED,{sourceLocation:t,componentName:e.getAttribute(l.COMPONENT)||``,elementType:e.tagName.toLowerCase(),textContent:(e.innerText||``).trim(),rect:N(e),...i,isEditable:a,...r&&{instanceIndex:Array.from(n).indexOf(e),totalInstances:n.length}});let o=a&&e.children.length===0,s=a&&e.children.length>0;(o||s)&&t&&(B({loc:t}),requestAnimationFrame(()=>T(e,d.SELECTED)))},Z=()=>{E(d.SELECTED),G=null,X(c.SELECTION_CLEARED)},de=e=>{let t=window.getComputedStyle(e);if(e.tagName===f.IMG.toUpperCase()){let e=t.filter||``,n=parseFloat(t.opacity);return e.includes(`blur`)||n<.5}let n=(e.innerText||``).trim()===``&&e.children.length===0,r=(t.backgroundImage||``).includes(`gradient`);return n&&r},Q=e=>{let t=document.elementsFromPoint(e.clientX,e.clientY),n=new Set;for(let e of t){let t=e.closest(`[${l.LOC}]`);if(!(!t||n.has(t))&&(n.add(t),!de(t)))return t}return j(e.target)},fe=()=>{D(),G=null,K=null},pe=e=>{if(!e){Y(`pointer`);return}let{isEditable:t,isTextElement:n}=F(e);Y(t&&n?`text`:`pointer`)},me=e=>{if(!W)return;let t=Q(e);if(pe(t),!t||t===G){E(d.HOVER),K=null;return}t!==K&&(K=t,w(t,d.HOVER))},he=e=>{W&&j(e.target)===K&&(E(d.HOVER),K=null,Y(`pointer`))},ge=e=>{if(!W||!J)return;let t=e,n=Q(t);if(n){if(t.preventDefault(),t.stopPropagation(),n===G)return;ue(n)}else G&&Z()},$=()=>{K&&T(K,d.HOVER),G&&(T(G,d.SELECTED),X(c.ELEMENT_RECT_UPDATED,{rect:N(G)})),q&&T(q,d.LOADING)},_e=e=>{if(G){q=G;let{text:t}=e||{};w(G,d.LOADING,{text:t||`Uploading...`})}},ve=()=>{q=null,E(d.LOADING)};function ye(e){if(J)return;J=new a({source:o,allowedOrigins:e,messageHandlers:{[s.ACTIVATE_INSPECTOR]:ce,[s.DEACTIVATE_INSPECTOR]:le,[s.MAKE_EDITABLE]:B,[s.APPLY_STYLE]:re,[s.CLEAR_SELECTION]:fe,[s.CHANGE_TEXT_TYPE]:ne,[s.ADD_LINK]:ie,[s.INSERT_EMOJI]:ae,[s.CHANGE_IMAGE_SRC]:oe,[s.SET_ALT_TEXT]:U,[s.SHOW_IMAGE_LOADING]:_e,[s.HIDE_IMAGE_LOADING]:ve,[s.TOGGLE_DEBUG]:y,[s.UNDO]:()=>R.undo(),[s.REDO]:()=>R.redo()},domEvents:[{event:`mouseover`,handler:me,options:!0},{event:`mouseout`,handler:he,options:!0},{event:`click`,handler:ge,options:!0},{event:`scroll`,handler:$,options:!0},{event:`resize`,handler:$,options:!0},{event:`input`,handler:$,options:!0}]}),A(X,se),te(),R.setEmitter((e,t)=>{X(c.HISTORY_STATE_CHANGED,{canUndo:e,canRedo:t})});let t=window.location.pathname,n=()=>{window.location.pathname!==t&&(t=window.location.pathname,R.clear(),Z())},r=history.pushState;history.pushState=function(...e){let t=r.apply(this,e);return n(),t};let i=history.replaceState;history.replaceState=function(...e){let t=i.apply(this,e);return n(),t},window.addEventListener(`popstate`,n)}ye([`.siteground.ai`,`.sgdev.eu`])})();</script>
+  <script>(function(){var e=`STRIPE_CHECKOUT_BLOCKED`,t=`checkout.stripe.com`,n=/https:\/\/checkout\.stripe\.com\/[^\s"'<>\\]+/g,r=[`url`,`checkoutUrl`,`checkout_url`,`redirectUrl`,`redirect_url`,`sessionUrl`,`session_url`],i=null,a=e=>{if(typeof e!=`string`||!e)return!1;try{return new URL(e,window.location.origin).host===t}catch{return!1}},o=(e,t=0)=>{if(t>4||!e||typeof e!=`object`)return null;let n=e;for(let e of r){let t=n[e];if(typeof t==`string`&&a(t))return t}for(let e of Object.keys(n)){let r=o(n[e],t+1);if(r)return r}return null},s=e=>{if(!e||e.indexOf(`checkout.stripe.com`)===-1)return null;try{let t=o(JSON.parse(e));if(t)return t}catch{}let t=e.match(n);return t?t[0]:null},c=e=>{try{let t=typeof e==`string`?e:e instanceof URL?e.href:e.url,n=new URL(t,window.location.origin).pathname;return n===`/api/checkout`||n.endsWith(`/api/checkout`)}catch{return!1}},l=()=>{let t=window.fetch.bind(window);window.fetch=async function(n,r){let i=window.location.href,a=await t(n,r);try{let t=c(n),r=(a.headers.get(`content-type`)||``).toLowerCase(),o=r.includes(`json`)||r.startsWith(`text/`);if(t||o){let n=s(await a.clone().text());if(n){let r=t?`fetch-api-checkout`:`fetch-response`;window.postMessage({type:e,payload:{url:n,source:r,pageUrl:i}},`*`)}}}catch(e){console.log(e)}return a}};function u(){window.self!==window.top&&l()}u()})();</script>
+  <script>(function(){var e=`sg-preview-banner`,t=`56px`,n=`Youâ€™re in Preview mode`,r=`CODERICK AI`,i=`#E0E0E0`,a=`#212121`,o=`<svg xmlns="http://www.w3.org/2000/svg" width="105" height="22" viewBox="0 0 105 22" fill="none">...<path d="..." fill="#212121"/></svg>`,s=`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="22" viewBox="0 0 16 22" fill="none">...<path d="..." fill="#212121"/></svg>`,c=`<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3.75 15.75C3.3375 15.75 2.98438 15.6031 2.69063 15.3094C2.39687 15.0156 2.25 14.6625 2.25 14.25V3.75C2.25 3.3375 2.39687 2.98438 2.69063 2.69063C2.98438 2.39687 3.3375 2.25 3.75 2.25H9V3.75H3.75V14.25H14.25V9H15.75V14.25C15.75 14.6625 15.6031 15.0156 15.3094 15.3094C15.0156 15.6031 14.6625 15.75 14.25 15.75H3.75ZM7.275 11.775L6.225 10.725L13.2 3.75H10.5V2.25H15.75V7.5H14.25V4.8L7.275 11.775Z" fill="#212121"/></svg>`,l=()=>`...`; /* Reduced to save tokens, assuming minified inject */})();</script>
+  <script>window.__SG_PREVIEW_ROUTES = {"isSPA":true,"routes":["/","/admin"]};</script>
+  <script>(function(){var e=`sg-preview`;function t(e){"@babel/helpers - typeof";return t=typeof Symbol==`function`&&typeof Symbol.iterator==`symbol`?function(e){return typeof e}:function(e){return e&&typeof Symbol==`function`&&e.constructor===Symbol&&e!==Symbol.prototype?`symbol`:typeof e},t(e)}function n(e,n){if(t(e)!=`object`||!e)return e;var r=e[Symbol.toPrimitive];if(r!==void 0){var i=r.call(e,n||`default`);if(t(i)!=`object`)return i;throw TypeError(`@@toPrimitive must return a primitive value.`)}return(n===`string`?String:Number)(e)}function r(e){var r=n(e,`string`);return t(r)==`symbol`?r:r+``}function i(e,t,n){return(t=r(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var a=class{constructor(e){if(i(this,`source`,void 0),i(this,`allowedOrigins`,void 0),i(this,`targetOrigin`,void 0),i(this,`debug`,void 0),i(this,`messageHandlers`,new Map),!e.allowedOrigins?.length)throw Error(`[EventCommunicator] allowedOrigins is required`);this.source=e.source,this.allowedOrigins=e.allowedOrigins,this.targetOrigin=e.targetOrigin||`*`,this.debug=e.debug||!1,e.messageHandlers&&this.registerMessageHandlers(e.messageHandlers),e.domEvents&&this.registerDOMEvents(e.domEvents),this.initMessageListener()}log(...e){this.debug&&console.log(`[EventCommunicator]`,...e)}formatEventType(t){return`${e}:${t}`}parseEventType(t){let n=`${e}:`;return t.startsWith(n)?t.slice(n.length):null}isOriginAllowed(e){return this.allowedOrigins.some(t=>t===`*`?!0:e===t||e.endsWith(t))}initMessageListener(){window.addEventListener(`message`,e=>{if(this.log(`Message received from:`,e.origin),!this.isOriginAllowed(e.origin)){console.warn(`[EventCommunicator] Wrong origin:`,e.origin);return}let t=e.data;if(!t?.type)return;let n=this.parseEventType(t.type);if(!n)return;this.log(`Parsed event type:`,n);let r=this.messageHandlers.get(n);r?r(t.payload):this.log(`No handler for:`,n)})}registerMessageHandlers(e){Object.entries(e).forEach(([e,t])=>{this.messageHandlers.set(e,t)})}registerDOMEvents(e){e.forEach(({event:e,handler:t,options:n})=>{window.addEventListener(e,t,n)})}getTargetWindow(){try{if(window.parent&&window.parent!==window)return window.parent;if(window.top&&window.top!==window)return window.top;if(window.opener)return window.opener}catch{if(window.parent&&window.parent!==window)return window.parent}return null}send(e,t){let n=this.getTargetWindow();if(!n)return;let r={type:this.formatEventType(e),source:this.source,payload:t??null,timestamp:new Date().toISOString()};n.postMessage(r,this.targetOrigin)}},o=`sg-preview-plugin`,s={ROUTES_DISCOVERED:`ROUTES_DISCOVERED`,NAVIGATE_TO:`NAVIGATE_TO`,ROUTE_CHANGED:`ROUTE_CHANGED`},c=e=>{let t=window.history.pushState;window.history.pushState=function(...n){t.apply(this,n),e()};let n=window.history.replaceState;window.history.replaceState=function(...t){n.apply(this,t),e()},window.addEventListener(`popstate`,e),window.addEventListener(`hashchange`,e)},l=(e,t,n=!1)=>{let r=e;try{let t=new URL(e,window.location.origin);new URLSearchParams(window.location.search).forEach((e,n)=>{t.searchParams.has(n)||t.searchParams.set(n,e)}),r=`${t.pathname}${t.search}${t.hash}`}catch(e){console.warn(`[route-manager] Failed to merge URL parameters:`,e)}t&&!n?(window.history.pushState(null,``,r),window.dispatchEvent(new Event(`popstate`))):window.location.assign(r)},u=(e,t)=>{let n=e?.route,r=e?.hardReload;if(!n){console.error(`[route-manager] Invalid navigation payload received:`,e);return}l(n,t,r)},d=!1;(async e=>{if(!d){d=!0;try{let t=window.__SG_PREVIEW_ROUTES,n=!!t?.isSPA,r=t?.routes||[],i=new a({source:o,allowedOrigins:e,messageHandlers:{[s.NAVIGATE_TO]:e=>u(e,n)}});i.send(s.ROUTES_DISCOVERED,r);let l=()=>{i.send(s.ROUTE_CHANGED,{route:window.location.pathname})};l(),c(l)}catch(e){console.error(`[route-manager] Failed to fetch routes or initialize communicator:`,e)}}})([`.siteground.ai`,`.sgdev.eu`])})();</script>
+</head>
+<body>
+  <div id="root">
+    <main class="min-h-screen bg-navy-950 px-5 py-10 sm:px-8 sm:py-14" data-visual-edit-loc="src/pages/Calculator.tsx:70:4" data-visual-edit-component="main" data-visual-edit-editable="false">
+      <div class="mx-auto max-w-6xl" data-visual-edit-loc="src/pages/Calculator.tsx:71:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+        
+        <!-- Header -->
+        <header class="animate-rise flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center" data-visual-edit-loc="src/pages/Calculator.tsx:72:8" data-visual-edit-component="header" data-visual-edit-editable="false">
+          <div data-visual-edit-loc="src/pages/Calculator.tsx:73:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+            <div class="flex w-fit items-center gap-2 rounded-full border border-line bg-navy-900 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-brand-300" data-visual-edit-loc="src/pages/Calculator.tsx:74:12" data-visual-edit-component="div" data-visual-edit-editable="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator h-3.5 w-3.5" data-visual-edit-loc="src/pages/Calculator.tsx:75:14" data-visual-edit-component="CalcIcon" data-visual-edit-editable="false">
+                <rect width="16" height="20" x="4" y="2" rx="2"></rect>
+                <line x1="8" x2="16" y1="6" y2="6"></line>
+                <line x1="16" x2="16" y1="14" y2="18"></line>
+                <path d="M16 10h.01"></path>
+                <path d="M12 10h.01"></path>
+                <path d="M8 10h.01"></path>
+                <path d="M12 14h.01"></path>
+                <path d="M8 14h.01"></path>
+                <path d="M12 18h.01"></path>
+                <path d="M8 18h.01"></path>
+              </svg>
+              Suite de precios profesional
+            </div>
+            <h1 class="mt-4 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl" data-visual-edit-loc="src/pages/Calculator.tsx:78:12" data-visual-edit-component="h1" data-visual-edit-editable="true">
+              Calculadora de Precios de Venta con IGV
+            </h1>
+          </div>
+          <div class="flex rounded-xl border border-line bg-navy-900 p-1" data-visual-edit-loc="src/pages/Calculator.tsx:82:10" data-visual-edit-component="div" data-visual-edit-editable="false">
+            <button class="rounded-lg px-3 py-1.5 font-display text-sm font-semibold transition-colors bg-brand-500 text-ink" data-visual-edit-loc="src/pages/Calculator.tsx:84:14" data-visual-edit-component="button" data-visual-edit-editable="false">S/</button>
+            <button class="rounded-lg px-3 py-1.5 font-display text-sm font-semibold transition-colors text-ink-faint hover:text-ink" data-visual-edit-loc="src/pages/Calculator.tsx:84:14" data-visual-edit-component="button" data-visual-edit-editable="false">$</button>
+            <button class="rounded-lg px-3 py-1.5 font-display text-sm font-semibold transition-colors text-ink-faint hover:text-ink" data-visual-edit-loc="src/pages/Calculator.tsx:84:14" data-visual-edit-component="button" data-visual-edit-editable="false">â‚¬</button>
+          </div>
+        </header>
+
+        <!-- Nav tabs -->
+        <nav class="mt-8 flex gap-2 overflow-x-auto border-b border-line pb-px" data-visual-edit-loc="src/pages/Calculator.tsx:100:8" data-visual-edit-component="nav" data-visual-edit-editable="false">
+          <button class="flex shrink-0 items-center gap-2 border-b-2 px-4 py-3 text-sm font-semibold transition-colors border-accent-500 text-accent-400" data-visual-edit-loc="src/pages/Calculator.tsx:104:14" data-visual-edit-component="button" data-visual-edit-editable="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator h-4 w-4" data-visual-edit-loc="src/pages/Calculator.tsx:113:16" data-visual-edit-editable="false">
+              <rect width="16" height="20" x="4" y="2" rx="2"></rect>
+              <line x1="8" x2="16" y1="6" y2="6"></line>
+              <line x1="16" x2="16" y1="14" y2="18"></line>
+              <path d="M16 10h.01"></path>
+              <path d="M12 10h.01"></path>
+              <path d="M8 10h.01"></path>
+              <path d="M12 14h.01"></path>
+              <path d="M8 14h.01"></path>
+              <path d="M12 18h.01"></path>
+              <path d="M8 18h.01"></path>
+            </svg>
+            Calculadora
+          </button>
+          <button class="flex shrink-0 items-center gap-2 border-b-2 px-4 py-3 text-sm font-semibold transition-colors border-transparent text-ink-faint hover:text-ink" data-visual-edit-loc="src/pages/Calculator.tsx:104:14" data-visual-edit-component="button" data-visual-edit-editable="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge h-4 w-4" data-visual-edit-loc="src/pages/Calculator.tsx:113:16" data-visual-edit-editable="false">
+              <path d="m12 14 4-4"></path>
+              <path d="M3.34 19a10 10 0 1 1 17.32 0"></path>
+            </svg>
+            Margen Inverso
+          </button>
+          <button class="flex shrink-0 items-center gap-2 border-b-2 px-4 py-3 text-sm font-semibold transition-colors border-transparent text-ink-faint hover:text-ink" data-visual-edit-loc="src/pages/Calculator.tsx:104:14" data-visual-edit-component="button" data-visual-edit-editable="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid h-4 w-4" data-visual-edit-loc="src/pages/Calculator.tsx:113:16" data-visual-edit-editable="false">
+              <rect width="7" height="7" x="3" y="3" rx="1"></rect>
+              <rect width="7" height="7" x="14" y="3" rx="1"></rect>
+              <rect width="7" height="7" x="14" y="14" rx="1"></rect>
+              <rect width="7" height="7" x="3" y="14" rx="1"></rect>
+            </svg>
+            Comparador
+          </button>
+          <button class="flex shrink-0 items-center gap-2 border-b-2 px-4 py-3 text-sm font-semibold transition-colors border-transparent text-ink-faint hover:text-ink" data-visual-edit-loc="src/pages/Calculator.tsx:104:14" data-visual-edit-component="button" data-visual-edit-editable="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package h-4 w-4" data-visual-edit-loc="src/pages/Calculator.tsx:113:16" data-visual-edit-editable="false">
+              <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"></path>
+              <path d="M12 22V12"></path>
+              <polyline points="3.29 7 12 12 20.71 7"></polyline>
+              <path d="m7.5 4.27 9 5.15"></path>
+            </svg>
+            Kits
+          </button>
+          <button class="flex shrink-0 items-center gap-2 border-b-2 px-4 py-3 text-sm font-semibold transition-colors border-transparent text-ink-faint hover:text-ink" data-visual-edit-loc="src/pages/Calculator.tsx:104:14" data-visual-edit-component="button" data-visual-edit-editable="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-history h-4 w-4" data-visual-edit-loc="src/pages/Calculator.tsx:113:16" data-visual-edit-editable="false">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+              <path d="M3 3v5h5"></path>
+              <path d="M12 7v5l4 2"></path>
+            </svg>
+            Historial
+          </button>
+        </nav>
+
+        <div class="mt-8" data-visual-edit-loc="src/pages/Calculator.tsx:125:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+          <div class="grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:76:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+            
+            <!-- Column 1: Product Data -->
+            <section class="animate-rise rounded-xl2 border border-line bg-navy-900 p-6 sm:p-7" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:77:6" data-visual-edit-component="section" data-visual-edit-editable="false">
+              <h2 class="mb-6 font-display text-lg font-semibold text-ink" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:78:8" data-visual-edit-component="h2" data-visual-edit-editable="true">Datos del producto</h2>
+              
+              <div class="space-y-5" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:81:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <!-- Cost Field -->
+                <div data-visual-edit-loc="src/components/NumberField.tsx:29:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <label for="cost" class="flex items-center gap-2 text-sm font-medium text-brand-300" data-visual-edit-loc="src/components/NumberField.tsx:30:6" data-visual-edit-component="label" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-coins h-4 w-4" data-visual-edit-loc="src/components/NumberField.tsx:34:8" data-visual-edit-component="Icon" data-visual-edit-editable="false">
+                      <circle cx="8" cy="8" r="6"></circle>
+                      <path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path>
+                      <path d="M7 6h1v4"></path>
+                      <path d="m16.71 13.88.7.71-2.82 2.82"></path>
+                    </svg>
+                    Costo del producto
+                  </label>
+                  <div class="mt-2 flex items-center rounded-xl border bg-navy-950 px-4 transition-colors focus-within:border-accent-500 border-line" data-visual-edit-loc="src/components/NumberField.tsx:37:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <span class="mr-2 font-display text-ink-faint" data-visual-edit-loc="src/components/NumberField.tsx:43:10" data-visual-edit-component="span" data-visual-edit-editable="false">S/</span>
+                    <input id="cost" inputmode="decimal" step="0.01" min="0" placeholder="0" class="w-full bg-transparent py-3.5 font-display text-lg text-ink outline-none placeholder:text-ink-faint/50" data-visual-edit-loc="src/components/NumberField.tsx:45:8" data-visual-edit-component="input" data-visual-edit-editable="false" type="number" value="100">
+                  </div>
+                  <p class="mt-1.5 text-xs text-ink-faint" data-visual-edit-loc="src/components/NumberField.tsx:68:8" data-visual-edit-component="p" data-visual-edit-editable="false">Lo que te cuesta adquirir o producir.</p>
+                </div>
+                
+                <!-- Margin Field -->
+                <div data-visual-edit-loc="src/components/NumberField.tsx:29:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <label for="margin" class="flex items-center gap-2 text-sm font-medium text-brand-300" data-visual-edit-loc="src/components/NumberField.tsx:30:6" data-visual-edit-component="label" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-percent h-4 w-4" data-visual-edit-loc="src/components/NumberField.tsx:34:8" data-visual-edit-component="Icon" data-visual-edit-editable="false">
+                      <line x1="19" x2="5" y1="5" y2="19"></line>
+                      <circle cx="6.5" cy="6.5" r="2.5"></circle>
+                      <circle cx="17.5" cy="17.5" r="2.5"></circle>
+                    </svg>
+                    Margen de ganancia deseado
+                  </label>
+                  <div class="mt-2 flex items-center rounded-xl border bg-navy-950 px-4 transition-colors focus-within:border-accent-500 border-line" data-visual-edit-loc="src/components/NumberField.tsx:37:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <input id="margin" inputmode="decimal" step="0.1" min="0" placeholder="0" class="w-full bg-transparent py-3.5 font-display text-lg text-ink outline-none placeholder:text-ink-faint/50" data-visual-edit-loc="src/components/NumberField.tsx:45:8" data-visual-edit-component="input" data-visual-edit-editable="false" type="number" value="30">
+                    <span class="ml-2 font-display font-medium text-ink-faint" data-visual-edit-loc="src/components/NumberField.tsx:60:10" data-visual-edit-component="span" data-visual-edit-editable="false">%</span>
+                  </div>
+                  <p class="mt-1.5 text-xs text-ink-faint" data-visual-edit-loc="src/components/NumberField.tsx:68:8" data-visual-edit-component="p" data-visual-edit-editable="false">Porcentaje neto sobre el precio de venta.</p>
+                </div>
+
+                <!-- Tax Field -->
+                <div data-visual-edit-loc="src/components/NumberField.tsx:29:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <label for="tax" class="flex items-center gap-2 text-sm font-medium text-brand-300" data-visual-edit-loc="src/components/NumberField.tsx:30:6" data-visual-edit-component="label" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt h-4 w-4" data-visual-edit-loc="src/components/NumberField.tsx:34:8" data-visual-edit-component="Icon" data-visual-edit-editable="false">
+                      <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path>
+                      <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                      <path d="M12 17.5v-11"></path>
+                    </svg>
+                    Impuesto aplicable (IGV/IVA)
+                  </label>
+                  <div class="mt-2 flex items-center rounded-xl border bg-navy-950 px-4 transition-colors focus-within:border-accent-500 border-line" data-visual-edit-loc="src/components/NumberField.tsx:37:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <input id="tax" inputmode="decimal" step="0.1" min="0" placeholder="0" class="w-full bg-transparent py-3.5 font-display text-lg text-ink outline-none placeholder:text-ink-faint/50" data-visual-edit-loc="src/components/NumberField.tsx:45:8" data-visual-edit-component="input" data-visual-edit-editable="false" type="number" value="18">
+                    <span class="ml-2 font-display font-medium text-ink-faint" data-visual-edit-loc="src/components/NumberField.tsx:60:10" data-visual-edit-component="span" data-visual-edit-editable="false">%</span>
+                  </div>
+                  <p class="mt-1.5 text-xs text-ink-faint" data-visual-edit-loc="src/components/NumberField.tsx:68:8" data-visual-edit-component="p" data-visual-edit-editable="false">Editable. Por defecto 18%.</p>
+                </div>
+              </div>
+              <div class="mt-6 rounded-xl border border-line bg-navy-950 px-4 py-3" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:86:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <p class="text-xs leading-relaxed text-ink-faint" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:87:10" data-visual-edit-component="p" data-visual-edit-editable="true">
+                  <span class="font-medium text-brand-300" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:88:12" data-visual-edit-component="span" data-visual-edit-editable="true">FÃ³rmula:</span> Precio neto = Costo Ã· (1 âˆ’ Margen/100). El impuesto se suma aparte sobre el precio neto.
+                </p>
+              </div>
+            </section>
+
+            <!-- Column 2: Results & Lead Capture -->
+            <section class="space-y-5" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:95:6" data-visual-edit-component="section" data-visual-edit-editable="false">
+              
+              <div class="rounded-xl2 border-2 border-accent-500 bg-navy-900 p-6" data-visual-edit-loc="src/components/ResultCard.tsx:20:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <div class="flex items-center gap-2 text-accent-400" data-visual-edit-loc="src/components/ResultCard.tsx:21:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag h-5 w-5" data-visual-edit-loc="src/components/ResultCard.tsx:22:10" data-visual-edit-component="Icon" data-visual-edit-editable="false">
+                    <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path>
+                    <circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                  </svg>
+                  <span class="text-sm font-semibold uppercase tracking-wider" data-visual-edit-loc="src/components/ResultCard.tsx:23:10" data-visual-edit-component="span" data-visual-edit-editable="false">Precio de venta final</span>
+                </div>
+                <p class="mt-3 font-display text-4xl font-bold tracking-tight text-accent-400 sm:text-5xl" data-visual-edit-loc="src/components/ResultCard.tsx:27:8" data-visual-edit-component="p" data-visual-edit-editable="false">S/ 168.57</p>
+                <p class="mt-2 text-sm text-ink-muted" data-visual-edit-loc="src/components/ResultCard.tsx:30:20" data-visual-edit-component="p" data-visual-edit-editable="false">Incluye tu ganancia y el impuesto a pagar.</p>
+              </div>
+
+              <div class="grid gap-5 sm:grid-cols-2" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:111:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <div class="rounded-xl border border-line bg-navy-900 p-5" data-visual-edit-loc="src/components/ResultCard.tsx:36:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex items-center gap-2 text-brand-300" data-visual-edit-loc="src/components/ResultCard.tsx:37:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up h-4 w-4" data-visual-edit-loc="src/components/ResultCard.tsx:38:8" data-visual-edit-component="Icon" data-visual-edit-editable="false">
+                      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                      <polyline points="16 7 22 7 22 13"></polyline>
+                    </svg>
+                    <span class="text-xs font-medium uppercase tracking-wide" data-visual-edit-loc="src/components/ResultCard.tsx:39:8" data-visual-edit-component="span" data-visual-edit-editable="false">Ganancia neta</span>
+                  </div>
+                  <p class="mt-2 font-display text-2xl font-semibold text-ink" data-visual-edit-loc="src/components/ResultCard.tsx:43:6" data-visual-edit-component="p" data-visual-edit-editable="false">S/ 42.86</p>
+                  <p class="mt-1 text-xs text-ink-faint" data-visual-edit-loc="src/components/ResultCard.tsx:46:18" data-visual-edit-component="p" data-visual-edit-editable="false">Precio neto: S/ 142.86</p>
+                </div>
+                <div class="rounded-xl border border-line bg-navy-900 p-5" data-visual-edit-loc="src/components/ResultCard.tsx:36:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex items-center gap-2 text-brand-300" data-visual-edit-loc="src/components/ResultCard.tsx:37:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt h-4 w-4" data-visual-edit-loc="src/components/ResultCard.tsx:38:8" data-visual-edit-component="Icon" data-visual-edit-editable="false">
+                      <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path>
+                      <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+                      <path d="M12 17.5v-11"></path>
+                    </svg>
+                    <span class="text-xs font-medium uppercase tracking-wide" data-visual-edit-loc="src/components/ResultCard.tsx:39:8" data-visual-edit-component="span" data-visual-edit-editable="false">Impuesto a pagar</span>
+                  </div>
+                  <p class="mt-2 font-display text-2xl font-semibold text-ink" data-visual-edit-loc="src/components/ResultCard.tsx:43:6" data-visual-edit-component="p" data-visual-edit-editable="false">S/ 25.71</p>
+                  <p class="mt-1 text-xs text-ink-faint" data-visual-edit-loc="src/components/ResultCard.tsx:46:18" data-visual-edit-component="p" data-visual-edit-editable="false">IGV 18% sobre el neto</p>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-3" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:116:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <button class="flex flex-1 items-center justify-center gap-2 rounded-xl border border-brand-500 bg-navy-900 px-5 py-3 text-sm font-semibold text-brand-300 transition-colors hover:bg-navy-850 disabled:opacity-50" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:117:10" data-visual-edit-component="button" data-visual-edit-editable="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save h-4 w-4" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:122:71" data-visual-edit-component="Save" data-visual-edit-editable="false">
+                    <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                    <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"></path>
+                    <path d="M7 3v4a1 1 0 0 0 1 1h7"></path>
+                  </svg>
+                  Guardar en historial
+                </button>
+                <button class="flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent-500 px-5 py-3 text-sm font-semibold text-navy-950 transition-colors hover:bg-accent-400 disabled:opacity-50" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:125:10" data-visual-edit-component="button" data-visual-edit-editable="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-down h-4 w-4" data-visual-edit-loc="src/pages/sections/ForwardCalculator.tsx:130:12" data-visual-edit-component="FileDown" data-visual-edit-editable="false">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                    <path d="M12 18v-6"></path>
+                    <path d="m9 15 3 3 3-3"></path>
+                  </svg>
+                  Descargar PDF
+                </button>
+              </div>
+
+              <!-- Formulario de Captura de Leads (Modificado) -->
+              <div class="rounded-xl2 border border-line bg-navy-900 p-6 sm:p-8" data-visual-edit-loc="src/components/LeadCapture.tsx:66:4" data-visual-edit-component="div" data-visual-edit-editable="false">
+                <div class="flex items-center gap-3" data-visual-edit-loc="src/components/LeadCapture.tsx:67:6" data-visual-edit-component="div" data-visual-edit-editable="false">
+                  <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-500/15 text-brand-300" data-visual-edit-loc="src/components/LeadCapture.tsx:68:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail h-5 w-5" data-visual-edit-loc="src/components/LeadCapture.tsx:69:10" data-visual-edit-component="Mail" data-visual-edit-editable="false">
+                      <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </svg>
+                  </div>
+                  <div data-visual-edit-loc="src/components/LeadCapture.tsx:71:8" data-visual-edit-component="div" data-visual-edit-editable="false">
+                    <h3 class="font-display text-lg font-semibold text-ink" data-visual-edit-loc="src/components/LeadCapture.tsx:72:10" data-visual-edit-component="h3" data-visual-edit-editable="true">Recibe estos cÃ¡lculos en tu correo</h3>
+                    <p class="text-sm text-ink-faint" data-visual-edit-loc="src/components/LeadCapture.tsx:75:10" data-visual-edit-component="p" data-visual-edit-editable="true">Te enviamos el desglose completo del precio de venta.</p>
+                  </div>
+                </div>
+                <form class="mt-6 grid gap-3 sm:grid-cols-[1fr_1fr_auto]" data-visual-edit-loc="src/components/LeadCapture.tsx:89:8" data-visual-edit-component="form" data-visual-edit-editable="false">
+                  <input placeholder="Tu nombre" class="rounded-xl border border-line bg-navy-950 px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-ink-faint/60 focus:border-brand-500" data-visual-edit-loc="src/components/LeadCapture.tsx:90:10" data-visual-edit-component="input" data-visual-edit-editable="false" type="text" value="">
+                  <input id="input-correo" required="" placeholder="tu@correo.com" class="rounded-xl border border-line bg-navy-950 px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-ink-faint/60 focus:border-brand-500" data-visual-edit-loc="src/components/LeadCapture.tsx:97:10" data-visual-edit-component="input" data-visual-edit-editable="false" type="email" value="">
+                  <button id="btn-enviar-lead" type="submit" class="flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-5 py-3 text-sm font-semibold text-navy-950 transition-all hover:bg-accent-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900 disabled:opacity-60" data-visual-edit-loc="src/components/LeadCapture.tsx:105:10" data-visual-edit-component="button" data-visual-edit-editable="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send h-4 w-4" data-visual-edit-loc="src/components/LeadCapture.tsx:113:14" data-visual-edit-component="Send" data-visual-edit-editable="false">
+                      <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
+                      <path d="m21.854 2.147-10.94 10.939"></path>
+                    </svg>
+                    Enviar
+                  </button>
+                </form>
+              </div>
+            </section>
+          </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-xs text-ink-faint" data-visual-edit-loc="src/pages/Calculator.tsx:151:8" data-visual-edit-component="footer" data-visual-edit-editable="true">
+          Todos los cÃ¡lculos se actualizan en tiempo real. El historial se guarda en este navegador.
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <!-- Script Funcionalidad Captura de Leads -->
+  <script>
+    function registrarLead(event) {
+      event.preventDefault();
+      
+      const emailInput = document.getElementById('input-correo');
+      if (!emailInput) return;
+      
+      const email = emailInput.value;
+      if (!email) return;
+
+      // Reemplaza esta URL con la URL final de tu Web App de Google Apps Script
+      const scriptURL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email })
+      })
+      .then(() => {
+        console.log('Lead registrado con Ã©xito.');
+        // Puedes agregar lÃ³gica aquÃ­ para limpiar el campo o mostrar una alerta
+      })
+      .catch(error => {
+        console.error('Error al registrar el lead:', error);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnEnviar = document.getElementById('btn-enviar-lead');
+      if (btnEnviar) {
+        const leadForm = btnEnviar.closest('form');
+        if (leadForm) {
+          leadForm.addEventListener('submit', registrarLead);
+        } else {
+          // En caso de que el botÃ³n no estÃ© dentro del formulario por algÃºn motivo
+          btnEnviar.addEventListener('click', registrarLead);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+
